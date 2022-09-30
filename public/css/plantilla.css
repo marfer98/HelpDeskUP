@@ -1,0 +1,9 @@
+
+/* Set a background image by replacing the URL below */
+body {
+    background: url('../img/fondo_web.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
