@@ -193,7 +193,7 @@
             $query->close();
             return $respuesta;
         }
-        
+
         public function cambioEstatusUsuario($idUsuario, $estatus){
             $conexion = Conexion::conectar();
             if ($estatus ==1) {
@@ -211,5 +211,6 @@
             $query->close();
             return $respuesta;
         }
+        
     }
 ?>
