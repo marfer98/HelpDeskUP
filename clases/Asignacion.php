@@ -4,48 +4,65 @@
     class Asignacion extends Conexion{
         public function agregarAsignacion($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
-            $sql ="INSERT INTO t_asignacion (id_oficina, 
-                                            id_equipo,
-                                            nombreEquipoA,
-                                            rotulado, 
-                                            marca, 
-                                            modelo, 
-                                            numeroSerie, 
-                                            descripcion, 
-                                            memoria, 
-                                            tipo_ram,
-                                            disco_duro, 
-                                            procesador,
-                                            sistema_operativo)
-                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-            $query = $conexion->prepare($sql);
-            $query->bind_param('iisssssssssss',$datos['idOficina'], //VIENE DEL PROCESO asignar.php
-                                                $datos['idEquipo'],
-                                                $datos['nombreEquipoA'],
-                                                $datos['rotulado'],
-                                                $datos['marca'],
-                                                $datos['modelo'],
-                                                $datos['numeroSerie'],
-                                                $datos['descripcion'],
-                                                $datos['memoria'],
-                                                $datos['tipoRam'],
-                                                $datos['discoDuro'],
-                                                $datos['procesador'],
-                                                $datos['sistemaOperativo']);
-            $respuesta = $query->execute();
-            $query->close();
+            $sql ="
+                INSERT INTO t_asignacion (
+                    id_oficina, 
+                    id_equipo,
+                    nombreEquipoA,
+                    rotulado, 
+                    marca, 
+                    modelo, 
+                    numeroSerie, 
+                    descripcion, 
+                    memoria, 
+                    tipo_ram,
+                    disco_duro, 
+                    procesador,
+                    sistema_operativo)
+                VALUES (
+                    :id_oficina, 
+                    :id_equipo,
+                    :nombreEquipoA,
+                    :rotulado, 
+                    :marca, 
+                    :modelo, 
+                    :numeroSerie, 
+                    :descripcion, 
+                    :memoria, 
+                    :tipo_ram,
+                    :disco_duro, 
+                    :procesador,
+                    :sistema_operativo)";
+     
+            //VIENE DEL PROCESO asignar.php
+            $respuesta = Conexion::select($sql,[
+                ':idOficina'            => $datos['idOficina'], 
+                ':idEquipo'             => $datos['idEquipo'],
+                ':nombreEquipoA'        => $datos['nombreEquipoA'],
+                ':rotulado'             => $datos['rotulado'],
+                ':marca'                => $datos['marca'],
+                ':modelo'               => $datos['modelo'],
+                ':numeroSerie'          => $datos['numeroSerie'],
+                ':descripcion'          => $datos['descripcion'],
+                ':memoria'              => $datos['memoria'],
+                ':tipoRam'              => $datos['tipoRam'],
+                ':discoDuro'            => $datos['discoDuro'],
+                ':procesador'           => $datos['procesador'],
+                ':sistemaOperativo'     => $datos['sistemaOperativo']
+
+            ]);
             return $respuesta;
         }
 
         public function eliminarAsignacion($idAsignacion){
             $conexion = Conexion::conectar(); //traemos la conexion
-            $sql =" DELETE FROM t_asignacion 
-                    WHERE id_asignacion = ?";
+            $sql = "DELETE FROM t_asignacion 
+                    WHERE id_asignacion = :id_asignacion";
+            
+            $respuesta = Conexion::execute($sql,[
+                ':idAsignacion' => $idAsignacion
+            ]);
 
-            $query = $conexion->prepare($sql);
-            $query->bind_param('i', $idAsignacion);
-            $respuesta = $query->execute();
-            $query->close();
             return $respuesta;
         }
     }
