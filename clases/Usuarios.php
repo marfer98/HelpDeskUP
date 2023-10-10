@@ -104,9 +104,13 @@
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                         INNER JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
-                    AND usuarios.id_usuario= '$idUsuario'";//obtener todos los datos del usuario
-            $respuesta = mysqli_query($conexion,$sql);
-            $usuario = mysqli_fetch_array($respuesta);
+                    AND usuarios.id_usuario = :idUsuario";// Obtener todos los datos del usuario
+            $respuesta = Conexion::select($sql,[
+                ':idUsuario' => $idUsuario
+            ]);
+
+            // MTX: Falta validación
+            $usuario = $respuesta[0];
 
             $datos = array( //ARRAY DE POST QUE SE ENVIAN
                 'idUsuario'      => $usuario['idUsuario'],
@@ -120,26 +124,28 @@
                 'telefono'       => $usuario['telefono'],
                 'correo'         => $usuario['correo']
             );
+
             return $datos;
         }
 
         public function actualizarUsuario($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             //hace referencia a que se actualizo con exito 
-            $exitoOficina= self::actualizarOficina($datos); // exito al actualizar
+            $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
             if ($exitoOficina){
-                $sql ="UPDATE t_usuarios SET id_rol    =?,
-                                             usuario   =?,
-                                             ubicacion =? 
-                       WHERE id_usuario = ?"  ;
-                $query = $conexion->prepare($sql);
-                $query->bind_param('issi', $datos['idRol'],
-                                           $datos['nombreUsuario'],
-                                           $datos['ubicacion'],
-                                           $datos['idUsuario']);
-                $respuesta = $query->execute();
-                $query->close();
+                $sql = "UPDATE t_usuarios SET id_rol   = :idRol,
+                                             usuario   = :nombreUsuario,
+                                             ubicacion = :ubicacion 
+                        WHERE id_usuario = :idUsuario";                     
+                                           
+                $respuesta = Conexion::select($sql,[
+                    ':idRol'            => $datos['idRol'],
+                    ':nombreUsuario'    => $datos['nombreUsuario'],
+                    ':ubicacion'        => $datos['ubicacion'],
+                    ':idUsuario'        => $datos['idUsuario']
+                ]);
+
                 return $respuesta;
             }else{
                 return 0;
@@ -149,17 +155,18 @@
         public function actualizarOficina ($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             $idOficina = self::obtenerIdOficina($datos['idUsuario']);
-            $sql = "UPDATE t_oficina SET  nombre    = ?,
-                                          telefono  = ?,
-                                          correo    = ? 
-                                          WHERE id_oficina = ?";
-            $query = $conexion->prepare($sql);
-            $query->bind_param('sssi',$datos['nombre'],
-                                      $datos['telefono'],
-                                      $datos['correo'],
-                                      $idOficina);
-            $respuesta = $query->execute();
-            $query->close();
+            $sql = "UPDATE t_oficina SET  nombre    = :nombre,
+                                          telefono  = :telefono,
+                                          correo    = :correo 
+                                          WHERE id_oficina = :id_oficina";
+            
+            $respuesta = Conexion::select($sql,[
+                ':nombre'       => $datos['nombre'],
+                ':telefono'     => $datos['telefono'],
+                ':correo'       => $datos['correo'],
+                ':id_oficina'   => $idOficina
+            ]);
+
             return $respuesta;
         }
 
@@ -173,44 +180,45 @@
                     INNER JOIN 
                         t_oficina as oficina 
                         ON usuarios.id_oficina = oficina.id_oficina 
-                        AND usuarios.id_usuario = '$idUsuario'";
-            $respuesta = mysqli_query($conexion,$sql);
-            $idOficina = mysqli_fetch_array($respuesta)['idOficina'];
+                        AND usuarios.id_usuario = :idUsuario";
+            $respuesta = Conexion::select($sql,[
+                ':idUsuario' => $idUsuario
+            ]);
 
-            return $idOficina;
+            return $respuesta[0]['idOficina'];
         }
 
         public function resetPassword($datos){
             $conexion = Conexion::conectar(); 
             $sql = "UPDATE t_usuarios
-                    SET password = ?
-                    WHERE id_usuario = ?";
-            $query = $conexion->prepare($sql);
-            $query->bind_param('si',$datos['password'],
-                                    $datos['idUsuario']);
+                    SET password = :password
+                    WHERE id_usuario = :idUsuario";
             
-            $respuesta = $query->execute();
-            $query->close();
+            $respuesta = Conexion::select($sql,[
+                ':password'     => $datos['password'],
+                ':idUsuario'    => $datos['idUsuario']
+            ]);
+
             return $respuesta;
         }
 
         public function cambioEstatusUsuario($idUsuario, $estatus){
             $conexion = Conexion::conectar();
-            if ($estatus ==1) {
-                $estatus = 0;
-            }else {
-                $estatus = 1;
-            }
-           $sql = "UPDATE t_usuarios
-                    SET activo = ?
-                    WHERE id_usuario = ?";
+            $estatus = ($estatus == 1) ? 0 : 1;
+                
+            $sql = "UPDATE t_usuarios
+                    SET activo = :estatus
+                    WHERE id_usuario = :idUsuario";
                        
             $query = $conexion->prepare($sql);
-            $query->bind_param('ii', $estatus, $idUsuario);
-            $respuesta = $query->execute();
-            $query->close();
+            $query->bind_param('ii', );
+            $respuesta = Conexion::select($sql,[
+                ':estatus'      => $estatus, 
+                ':idUsuario'    => $idUsuario
+            ]);
+
             return $respuesta;
         }
-        
+
     }
 ?>
