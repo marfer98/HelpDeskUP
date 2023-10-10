@@ -4,19 +4,19 @@
     class Usuarios extends Conexion{
         public function loginUsuario($usuario,$password){
             $conexion = Conexion::conectar(); //traemos la conexion
-            $sql ="SELECT * FROM t_usuarios 
+            $sql = "SELECT * FROM t_usuarios 
                 WHERE usuario = '$usuario' AND password = '$password'";//condicion para el ingreso desde la base de datos
 
-                $respuesta = mysqli_query($conexion,$sql);//respuesta de la base de datos
-            
+                $respuesta = Conexion::select($sql);//respuesta de la base de datos
 
-            if (mysqli_num_rows($respuesta)>0) { //si retorta un respuesta la bd
-                $datosUsuario = mysqli_fetch_array ($respuesta);
-                //crear una sesion del usuario
+            if (count($respuesta)>0) { // Si retorta un respuesta la bd
+                $datosUsuario = ($respuesta[0]);
+                
+                // Crear una sesion del usuario
                 if ($datosUsuario['activo']==1) {
-                    $_SESSION['usuario']['nombre']  = $datosUsuario['usuario']; //toma el usuario
-                    $_SESSION['usuario']['id']      = $datosUsuario['id_usuario']; //toma el id del usuario
-                    $_SESSION['usuario']['rol']     = $datosUsuario['id_rol']; //toma el rol del usuario
+                    $_SESSION['usuario']['nombre']  = $datosUsuario['usuario']; // toma el usuario
+                    $_SESSION['usuario']['id']      = $datosUsuario['id_usuario']; // toma el id del usuario
+                    $_SESSION['usuario']['rol']     = $datosUsuario['id_rol']; // toma el rol del usuario
                     return 1; 
                 }else{
                     return 0; 
@@ -26,24 +26,34 @@
             }
 
         }
+
         public function agregaNuevoUsuario($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             $idOficina = self::agregarOficina($datos);
             
             if ($idOficina > 0) {
-                $sql ="INSERT INTO t_usuarios ( id_rol,
-                                                id_oficina,
-                                                usuario,
-                                                password,
-                                                ubicacion)
-                        VALUES (?,?,?,?,?)";
-                $query = $conexion->prepare($sql);
-                $query->bind_param("iisss", $datos['idRol'],
-                                            $idOficina,
-                                            $datos['nombreUsuario'],
-                                            $datos['password'],
-                                            $datos['ubicacion']);
-                $respuesta = $query->execute();
+                $sql ="INSERT INTO t_usuarios ( 
+                            id_rol,
+                            id_oficina,
+                            usuario,
+                            password,
+                            ubicacion)
+                        VALUES (
+                            :id_rol,
+                            :id_oficina,
+                            :usuario,
+                            :password,
+                            :ubicacion
+                        )";                                       
+                                  
+                $respuesta = Conexion::select($sql,[
+                    ':id_rol'       => $datos['idRol'],
+                    ':id_oficina'   => $idOficina,
+                    ':usuario'      => $datos['nombreUsuario'],
+                    ':password'     => $datos['password'],
+                    ':ubicacion'    => $datos['ubicacion']
+                ]);
+                
                 return $respuesta;
             }else {
                 return 0;
@@ -52,37 +62,42 @@
             //insertamos datos en la tabla usuarios
  
         }
+
         public function agregarOficina($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
-            //insertamos datos en la tabla oficina
-            $sql ="INSERT INTO t_oficina (  nombre,
-                                            telefono,
-                                            correo)
-                    VALUES (?, ?, ?)";//Preparadas para el insert
-                    $query = $conexion->prepare($sql);
-                    $query->bind_param("sss", $datos['nombre'],
-                                              $datos['telefono'],
-                                              $datos['correo']);
-        $respuesta = $query->execute();
-    
-       $idOficina = mysqli_insert_id($conexion);
-        $query->close();
-        return $idOficina;
-        
+            // Insertamos datos en la tabla oficina
+            $sql = "INSERT INTO t_oficina (  
+                        nombre,
+                        telefono,
+                        correo)
+                    VALUES (
+                        :nombre,
+                        :telefono,
+                        :correo
+                    )";
+                    
+            $idOficina = Conexion::execute_id($sql,[
+                ':nombre'   => $datos['nombre'],
+                ':telefono' => $datos['telefono'],
+                ':correo'   => $datos['correo']
+            ]);
+
+            return $idOficina;
         }
+
         public function obtenerDatosUsuario($idUsuario){
             $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "SELECT 
-                    usuarios.id_usuario AS idUsuario,
-                    usuarios.usuario as nombreUsuario,
-                    roles.nombre as rol,
-                    usuarios.id_rol AS id_rol,
-                    usuarios.ubicacion as ubicacion,
-                    usuarios.activo as estatus,
-                    usuarios.id_oficina as idOficina,
-                    oficina.nombre AS nombreOficina,
-                    oficina.telefono AS telefono,
-                    oficina.correo AS correo
+                        usuarios.id_usuario AS idUsuario,
+                        usuarios.usuario as nombreUsuario,
+                        roles.nombre as rol,
+                        usuarios.id_rol AS id_rol,
+                        usuarios.ubicacion as ubicacion,
+                        usuarios.activo as estatus,
+                        usuarios.id_oficina as idOficina,
+                        oficina.nombre AS nombreOficina,
+                        oficina.telefono AS telefono,
+                        oficina.correo AS correo
                     FROM
                     t_usuarios AS usuarios
                         INNER JOIN
@@ -107,6 +122,7 @@
             );
             return $datos;
         }
+
         public function actualizarUsuario($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             //hace referencia a que se actualizo con exito 
@@ -129,6 +145,7 @@
                 return 0;
             }
         }
+
         public function actualizarOficina ($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             $idOficina = self::obtenerIdOficina($datos['idUsuario']);
@@ -146,7 +163,7 @@
             return $respuesta;
         }
 
-  public function obtenerIdOficina($idUsuario){
+        public function obtenerIdOficina($idUsuario){
             $conexion = Conexion::conectar(); //traemos la conexion
             //obtener el id 
             $sql = "SELECT 
@@ -162,6 +179,7 @@
 
             return $idOficina;
         }
+
         public function resetPassword($datos){
             $conexion = Conexion::conectar(); 
             $sql = "UPDATE t_usuarios
@@ -175,6 +193,7 @@
             $query->close();
             return $respuesta;
         }
+        
         public function cambioEstatusUsuario($idUsuario, $estatus){
             $conexion = Conexion::conectar();
             if ($estatus ==1) {
