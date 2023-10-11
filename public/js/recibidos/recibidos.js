@@ -18,6 +18,11 @@ function agregarNuevaRecepcion(){
             }else{
                 Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;
@@ -49,6 +54,11 @@ function eliminarRecibido(idRecepcion){//la funcion trae un id de reporte
                         Swal.fire(":(","Error al Eliminar" + respuesta,"error");
         
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    console.error(errorThrown);
                 }
             });
         }
@@ -72,6 +82,11 @@ function obtenerDatosRecebido(idRecepcion){
            $('#estado').val(respuesta['estado']); 
            $('#tecnico').val(respuesta['tecnico']); 
            $('#informeTecnico').val(respuesta['informeTecnico']); 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
 }
@@ -90,6 +105,11 @@ function obtenerDatosRecebido(idRecepcion){
                 Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
             }
 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;

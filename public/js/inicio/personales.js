@@ -9,6 +9,11 @@ function datosPersonalesInicio(idUsuario){
             $('#nombre').text(respuesta['nombreUsuario']);
             $('#telefono').text(respuesta['telefono']);
             $('#correo').text(respuesta['correo']);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
 }

@@ -18,6 +18,11 @@ function agregarNuevoReporte(){
             }else{
                 Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;
@@ -47,6 +52,11 @@ function eliminarReporteCliente(idReporte){//la funcion trae un id de reporte
                         Swal.fire(":(","Error al Eliminar" + respuesta,"error");
         
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    console.error(errorThrown);
                 }
             });
         }

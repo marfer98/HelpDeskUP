@@ -1,4 +1,5 @@
 <?php //conexion de la base de datos 
+
 class Conexion {
     public static function conectar(){
         $host   = "sql110.ezyro.com"; 

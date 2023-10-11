@@ -19,6 +19,11 @@ function agregarNuevoUsuario(){
             }else{
                 Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;
@@ -42,6 +47,11 @@ function obtenerDatosUsuario(idUsuario){
             $('#ubicacionu').val(respuesta['ubicacion']);
 
 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
 }
@@ -52,15 +62,20 @@ function actualizarUsuario(){
         data: $('#frmActualizarUsuario').serialize(),
         url: "../../procesos/usuarios/crud/actualizarUsuario.php",
         success:function(respuesta){
-       // console.log(respuesta);
-        respuesta = respuesta.trim();
-        if(respuesta == 1){
-            $("#tablaUsuariosLoad").load("usuarios/tablaUsuarios.php");//recarga del formulario
-            $('#modalActualizarUsuarios').modal('hide');
-            Swal.fire(":D","Actualizado con EXITO","success");
-        }else{
-            Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); //sweet aler 2
-        }
+            // console.log(respuesta);
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                $("#tablaUsuariosLoad").load("usuarios/tablaUsuarios.php");//recarga del formulario
+                $('#modalActualizarUsuarios').modal('hide');
+                Swal.fire(":D","Actualizado con EXITO","success");
+            }else{
+                Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); //sweet aler 2
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;
@@ -84,6 +99,11 @@ function resetPassword(){
             }else{
                 Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); 
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;
@@ -102,6 +122,11 @@ function cambioEstatusUsuario(idUsuario, estatus){
             }else{
                 Swal.fire(":(","ERROR AL CAMBIAR ESTADO" + respuesta, "error"); 
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }  
     });
 }
