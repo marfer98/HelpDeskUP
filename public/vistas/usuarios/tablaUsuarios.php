@@ -18,7 +18,7 @@
             t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                 INNER JOIN
             t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina";
-            $respuesta = mysqli_query ($conexion,$sql);
+            $respuesta = Conexion::select($sql);
 ?>
 <table class="table table-sm dt-responsive nowrap" id="tablaUsuariosDataTable" style="width:100%">
     <thead>
@@ -37,7 +37,7 @@
         <th>Eliminar</th>
     </thead>
     <tbody>
-        <?php while ($mostrar = mysqli_fetch_array($respuesta)){
+        <?php foreach ($respuesta as $mostrar){
     ?>
         <tr>
             <th>

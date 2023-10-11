@@ -1,10 +1,10 @@
 <?php //conexion de la base de datos 
 class Conexion {
     public static function conectar(){
-        $host   = "sql113.infinityfree.com"; 
-        $bbdd   = "if0_35201982_helpdesk"; 
-        $user   = "if0_35201982";
-        $pass   = 'AekICPUBtsF8';
+        $host   = "sql110.ezyro.com"; 
+        $bbdd   = "ezyro_35208593_helpdesk"; 
+        $user   = "ezyro_35208593";
+        $pass   = '7ae22595a4b9';
         $puerto = '3306';
         $opcionesPDO = [];
         $driver = 'mysql';

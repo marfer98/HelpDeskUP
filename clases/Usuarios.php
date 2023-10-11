@@ -111,7 +111,7 @@
 
             // MTX: Falta validación
             $usuario = $respuesta[0];
-
+            
             $datos = array( //ARRAY DE POST QUE SE ENVIAN
                 'idUsuario'      => $usuario['idUsuario'],
                 'nombreUsuario'  => $usuario['nombreUsuario'],
@@ -125,6 +125,7 @@
                 'correo'         => $usuario['correo']
             );
 
+            var_dump($datos);
             return $datos;
         }
 

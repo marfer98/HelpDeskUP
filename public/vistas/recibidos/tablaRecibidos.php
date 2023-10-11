@@ -25,7 +25,7 @@
             INNER JOIN t_cat_equipos AS equipo
             ON
                 recepcion.id_equipo = equipo.id_equipo";
-    $respuesta = mysqli_query ($conexion,$sql);
+    $respuesta = Conexion::select($sql);
 
 ?>
 <table class="table table-sm table-bordered dt-responsive nowrap" 
@@ -52,7 +52,7 @@
     </thead>
     <tbody>
         <?php
-            while($mostrar = mysqli_fetch_array($respuesta)){
+            foreach ($respuesta as $mostrar){
         ?>
         <tr>
             <th>
