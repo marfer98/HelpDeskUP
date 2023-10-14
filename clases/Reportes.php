@@ -2,7 +2,6 @@
     require_once "Conexion.php"; //se incluye la conexion a la bd
     class Reportes extends Conexion{
         public function agregarReporteCliente($datos){
-            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "INSERT INTO t_reportes (id_usuario,
                                             id_equipo,
                                             descripcion_problema)
@@ -16,7 +15,6 @@
             return $respuesta;
         }
             public function eliminarReporteCliente($idReporte){
-                $conexion = Conexion::conectar(); //traemos la conexion
                 $sql = "DELETE FROM t_reportes WHERE id_reporte = ?";
                 $query = $conexion->prepare($sql);
                 $query->bind_param('i', $idReporte);
@@ -25,7 +23,6 @@
                 return $respuesta;
             }
             public function obtenerSolucion($idReporte){
-                $conexion = Conexion::conectar(); //traemos la conexion
                 $sql = "SELECT solucion_problema, estatus, usuario_tecnico
                  FROM t_reportes WHERE id_reporte ='$idReporte'";
                 $respuesta = mysqli_query($conexion,$sql);
@@ -41,7 +38,6 @@
                 return $datos;
             }
             public function actualizarSolucion($datos){ //ESTO ES UN METODO
-                $conexion = Conexion::conectar(); //traemos la conexion
                 $sql ="UPDATE
                             t_reportes
                         SET
