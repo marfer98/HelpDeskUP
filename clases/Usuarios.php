@@ -134,7 +134,7 @@
                                              ubicacion = :ubicacion 
                         WHERE id_usuario = :idUsuario";                     
                                            
-                $respuesta = Conexion::select($sql,[
+                $respuesta = Conexion::execute($sql,[
                     ':idRol'            => $datos['idRol'],
                     ':nombreUsuario'    => $datos['nombreUsuario'],
                     ':ubicacion'        => $datos['ubicacion'],
@@ -155,7 +155,7 @@
                                           correo    = :correo 
                                           WHERE id_oficina = :id_oficina";
             
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ':nombre'       => $datos['nombre'],
                 ':telefono'     => $datos['telefono'],
                 ':correo'       => $datos['correo'],
