@@ -93,20 +93,24 @@
                         usuarios.id_oficina as idOficina,
                         oficina.nombre AS nombreOficina,
                         oficina.telefono AS telefono,
-                        oficina.correo AS correo
+                        oficina.correo AS correo,
+                        s.descripcion as sucursal
                     FROM
                     t_usuarios AS usuarios
                         INNER JOIN
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                         INNER JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
+                        INNER JOIN
+                    t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
                     AND usuarios.id_usuario = :idUsuario";// Obtener todos los datos del usuario
             $respuesta = Conexion::select($sql,[
                 ':idUsuario' => $idUsuario
             ]);
 
-            $usuario = $respuesta[0];
-            
+
+             $usuario = $respuesta[0];
+
             $datos = array( //ARRAY DE POST QUE SE ENVIAN
                 'idUsuario'      => $usuario['idUsuario'],
                 'nombreUsuario'  => $usuario['nombreUsuario'],
@@ -123,7 +127,36 @@
             return $datos;
         }
 
-        public function actualizarUsuario($datos){
+        public function obtenerDatosUsuarios(){
+            $sql = "SELECT 
+                        usuarios.id_usuario AS idUsuario,
+                        usuarios.usuario as nombreUsuario,
+                        roles.nombre as rol,
+                        usuarios.id_rol AS id_rol,
+                        usuarios.ubicacion as ubicacion,
+                        usuarios.activo as estatus,
+                        usuarios.id_oficina as idOficina,
+                        oficina.nombre AS nombreOficina,
+                        oficina.telefono AS telefono,
+                        oficina.correo AS correo,
+                        s.descripcion as sucursal
+                    FROM
+                    t_usuarios AS usuarios
+                        INNER JOIN
+                    t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
+                        INNER JOIN
+                    t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
+                        INNER JOIN
+                    t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
+                    ";// Obtener todos los datos del usuario
+        $respuesta = Conexion::select($sql,[
+            //':idUsuario' => $idUsuario
+        ]);
+
+        return $respuesta;
+    }
+
+        public function actualizarUsuarios($datos){
             //hace referencia a que se actualizo con exito
             $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 

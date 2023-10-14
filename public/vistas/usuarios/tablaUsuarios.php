@@ -1,24 +1,7 @@
 <?php
-    require_once "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
-    $con = new Conexion();
-    $conexion = $con->conectar();
-    $sql ="SELECT 
-            usuarios.id_usuario AS idUsuario,
-            usuarios.usuario as nombreUsuario,
-            roles.nombre as rol,
-            usuarios.ubicacion as ubicacion,
-            usuarios.activo as estatus,
-            usuarios.id_oficina as idOficina,
-            oficina.nombre AS nombreOficina,
-            oficina.telefono AS telefono,
-            oficina.correo AS correo
-        FROM
-            t_usuarios AS usuarios
-                INNER JOIN
-            t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
-                INNER JOIN
-            t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina";
-            $respuesta = Conexion::select($sql);
+    require_once '../../../clases/Usuarios.php';
+    $usuario = new Usuarios;
+    $respuesta = $usuario->obtenerDatosUsuarios();
 ?>
 <table class="table table-sm dt-responsive nowrap" id="tablaUsuariosDataTable" style="width:100%">
     <thead>
@@ -27,6 +10,7 @@
         <th>Telefono</th>
         <th>Correo</th>
         <th>Usuario</th>
+        <th>Sucursal</th>
         <th>Ubicacion</th>
         <th>Nombre Rol</th>
         <th>Reset Password</th>
@@ -54,6 +38,9 @@
             </th>
             <th>
                 <?php echo $mostrar ['nombreUsuario']; ?>
+            </th>
+            <th>
+                <?php echo $mostrar ['sucursal']; ?>
             </th>
             <th>
                 <?php echo $mostrar ['ubicacion']; ?>

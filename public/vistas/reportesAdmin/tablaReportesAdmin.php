@@ -1,32 +1,10 @@
 <?php
     session_start();
-    require_once "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
+    require_once "../../../clases/Reportes.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
     $contador = 1;//suma los reportes de auno
-    $idUsuario = $_SESSION['usuario']['id'];//pasa el id usuario que inicio sesion 
-    $sql = "    SELECT
-                    reporte.id_reporte AS idReporte,
-                    reporte.id_usuario AS idUsuario,
-                    oficina.nombre AS nombreOficina,
-                    equipo.id_equipo AS idEquipo,
-                    equipo.nombre AS nombreEquipo,
-                    reporte.usuario_tecnico AS usuarioTecnico,
-                    reporte.descripcion_problema AS problema ,
-                    reporte.solucion_problema AS solucion,
-                    reporte.estatus AS estatus,
-                    reporte.fecha AS fecha 
-                FROM
-                    t_reportes AS reporte
-                INNER JOIN t_usuarios AS usuario
-                ON
-                    reporte.id_usuario = usuario.id_usuario
-                INNER JOIN t_oficina AS oficina
-                ON
-                    usuario.id_oficina = oficina.id_oficina
-                INNER JOIN t_cat_equipos AS equipo
-                ON
-                    reporte.id_equipo = equipo.id_equipo 
-                    ORDER BY reporte.fecha DESC";
-    $respuesta = Conexion::select($sql);
+    $idUsuario = $_SESSION['usuario']['id'];//pasa el id usuario que inicio sesion
+    $reporte = new Reportes();
+    $respuesta = $reporte->obtenerDatosReportes();
 ?>
 
 
