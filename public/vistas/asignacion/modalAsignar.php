@@ -17,7 +17,7 @@
                             <?php //agarra el ID de la oficina 
                                 $sql = "SELECT id_oficina, nombre
                                 FROM t_oficina ORDER BY nombre";
-                                $respuesta = mysqli_query($conexion,$sql)
+                                $respuesta = Conexion::select($sql)
                             ?>
 
                             <select name="idOficina" id="idOficina" class="form-control" required>
@@ -32,11 +32,11 @@
                             <?php //agarra el ID de la oficina 
                                 $sql = "SELECT  id_equipo, nombre
                                 FROM t_cat_equipos ORDER BY nombre";
-                                $respuesta = mysqli_query($conexion,$sql)
+                                $respuesta = Conexion::select($sql)
                             ?>
                             <select name="idEquipo" id="idEquipo" class="form-control" required>
                                 <option value="">Seleccione una opción</option>
-                                <?php while($mostrar = mysqli_fetch_array($respuesta)){?>
+                                <?php foreach($respuesta as $mostrar){?>
                                     <option value="<?php echo $mostrar['id_equipo'];?>"><?php echo $mostrar ['nombre'];?></option>
                                     <?php }?><!-- Cierre del while -->
                             </select>

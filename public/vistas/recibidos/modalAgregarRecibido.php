@@ -20,11 +20,11 @@
                                     t_cat_equipos.nombre AS tipoEquipo
                               FROM
                                     t_cat_equipos";
-                        $respuesta = mysqli_query ($conexion,$sql);
+                        $respuesta = Conexion::select($sql);
                     ?>
                     <select name="idEquipo" id="idEquipo" class="form-control" required>
                     <option value="">Seleciona un dispositivo</option>
-                        <?php while ($mostrar = mysqli_fetch_array($respuesta)){?>
+                        <?php foreach ($respuesta as $mostrar ){?>
                             <option value="<?php echo $mostrar ['idEquipo'];?>"><?php echo $mostrar ['tipoEquipo']; ?></option>
                         <?php }?>
                     </select>

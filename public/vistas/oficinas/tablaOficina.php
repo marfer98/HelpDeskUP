@@ -1,14 +1,12 @@
 <?php
     include "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
-    $con = new Conexion();
-    $conexion = $con->conectar();
     $sql ="    SELECT 
                     t_oficina.nombre as nombreOficina, 
                     t_oficina.telefono as telefonoOficina, 
                     t_oficina.correo as correoOficina 
     
                  FROM t_oficina";
-    $respuesta = mysqli_query ($conexion,$sql);
+    $respuesta = Conexion::select($sql);
 ?>
 <table class="table table-sm dt-responsive nowrap" id="tablaOficinaDataTable" style="width:100%">
     <thead>
@@ -20,7 +18,7 @@
         <th>Eliminar</th>
     </thead>
     <tbody>
-        <?php while ($mostrar = mysqli_fetch_array($respuesta)){
+        <?php foreach ($respuesta as $mostrar){
     ?>
         <tr>
             <th>

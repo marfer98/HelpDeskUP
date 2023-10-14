@@ -1,11 +1,9 @@
 <?php
     session_start();
     include "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
-    $con = new Conexion();
-    $conexion = $con->conectar();
     $contador = 1;//suma los reportes de auno
     $idUsuario = $_SESSION['usuario']['id'];//pasa el id usuario que inicio sesion 
-    $sql ="    SELECT
+    $sql = "    SELECT
                     reporte.id_reporte AS idReporte,
                     reporte.id_usuario AS idUsuario,
                     oficina.nombre AS nombreOficina,
@@ -15,7 +13,6 @@
                     reporte.descripcion_problema AS problema ,
                     reporte.solucion_problema AS solucion,
                     reporte.estatus AS estatus,
-                    
                     reporte.fecha AS fecha 
                 FROM
                     t_reportes AS reporte
@@ -29,7 +26,7 @@
                 ON
                     reporte.id_equipo = equipo.id_equipo 
                     ORDER BY reporte.fecha DESC";
-    $respuesta = mysqli_query ($conexion,$sql);
+    $respuesta = Conexion::select($sql);
 ?>
 
 
@@ -48,7 +45,7 @@
     </thead>
     <tbody>
         
-        <?php while ($mostrar = mysqli_fetch_array($respuesta)){?>
+        <?php foreach ($respuesta as $mostrar){?>
         <tr>
             <th>
                 <?php echo $contador++; ?>

@@ -26,6 +26,11 @@ $(document).ready(function(){
                         Swal.fire(":(","Error al Eliminar" + respuesta,"error");
         
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    console.error(errorThrown);
                 }
             });
         }
@@ -48,6 +53,11 @@ function obtenerDatosSolucion(idReporte){
            $('#solucion').val(respuesta['solucion']); //referencia del archivo Reportes.php del array de la funcion obtenerSolucion         
            $('#usuarioTecnico').val(respuesta['usuarioTecnico']);
            $('#estatus').val(respuesta['estatus']);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
 }
@@ -84,6 +94,11 @@ function agregarSolucionReporte(){
                 Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
             }
 
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;

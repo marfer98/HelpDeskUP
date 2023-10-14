@@ -1,155 +1,96 @@
 <?php //conexion de la base de datos 
-    class Conexion {
-        public function conectar(){
-            $servidor = "localhost";
-            $usuario  = "root";
-            $password = "";
-            $bd       = "helpdesk";
-            $conexion = mysqli_connect ($servidor,$usuario,$password,$bd);
-            return $conexion;
-        }
 
-        function sc_sql_conexion($host, $bbdd, $user, $pass, $puerto = '3306', $opcionesPDO = [], $driver='mysql'){
-            try {
-                $dsn = "$driver:host=$host;dbname=$bbdd;port=$puerto";
-                $dbh = new PDO($dsn, $user, $pass, $opcionesPDO);
+class Conexion {
+    public static function conectar(){
+        $host   = "sql110.ezyro.com"; 
+        $bbdd   = "ezyro_35208593_helpdesk"; 
+        $user   = "ezyro_35208593";
+        $pass   = '7ae22595a4b9';
+        $puerto = '3306';
+        $opcionesPDO = [];
+        $driver = 'mysql';
+        $dbh    = false;
 
+        try {
+            $dsn = "$driver:host=$host;dbname=$bbdd;port=$puerto";
+            $dbh = new PDO($dsn, $user, $pass, $opcionesPDO);
+
+            if(!$dbh){
                 $dbh->setAttribute(PDO::ATTRR_ERRMODE, PDO::ERRMODE_SILENT);
                 $dbh->setAttribute(PDO::ATTRR_ERRMODE, PDO::ERRMODE_WARNING);
                 $dbh->setAttribute(PDO::ATTRR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+                
                 return $dbh;
 
-            } catch (PDOException $e){
-                echo $e->getMessage();
-            }
-
-        }
-
-        function sc_sql_select($conexion, $sql, $parametros = [], $tipoPDOFech = PDO::FETCH_ASSOC, $depurar = false){
-            $query = $conexion->prepare($sql);
-
-            try {
-                $sqlResult = $query->execute($parametros);
-
-                if ($sqlResult) {
-                    $sqlResult = $query->fetchAll($tipoPDOFech);
-                    $sqlResult = count($sqlResult) > 0 ? $sqlResult : false;
-
-                }else{
-                    $sqlResult = false;
-                }
-
-                if ($depurar){
-                    sc_echo('Debug de sc_sql_secure_lookup (4):');
-                    sc_var_dump($sql);
-                    sc_var_dump($parametros);
-                    sc_var_dump($tipoPDOFech);
-                    sc_var_dump($sqlResult);
-                }
-
-                return $sqlResult;
-
-            } catch (Exception $e) {
-                sc_var_dump('Hubo un error: ');
-                sc_var_dump($e);
-                return false;
-            }
-        }
-
-        function sc_sql_execute($conexion, $sql, $parametros = null, $depurar = false){
-            $query = $conexion->prepare($sql);
-
-            try {
-                $execResult = $query->execute($parametros);
-
-                if ($depurar){
-                    sc_echo('Debug de sc_sql_secure_lookup (4):');
-                    sc_var_dump($sql);
-                    sc_var_dump($parametros);
-                    sc_var_dump($execResult);
-                }
-
-                return !!( $execResult );
-
-            } catch (Exception $e) {
-                sc_var_dump('Hubo un error: ');
-                sc_var_dump($e);
-                return false;
-            }
-
-        }
-
-//Falta corregir
-    function sc_sql_lookup($sql){
-        global $pdoLibreria;
-        $query = $pdoLibreria->prepare($sql);
-
-        try {
-            $sqlResult = $query->execute(array());
-
-            if ($sqlResult) {
-                $sqlResult = $query->fetchAll(PDO::FETCH_ASSOC);
-                return $sqlResult;
             }else{
-                return false;
+                echo 'No se ha podido conectar';
+                die();
             }
-        } catch (Exception $e) {
-            return '<p class="alert-danger">No funcionó</p>';
+    
+        } catch (PDOException $e){
+            echo $e->getMessage();
+            die();
         }
+
+        return $dbh;
     }
-
-    function sc_sql_secure_lookup($sql,$array=null,$depurar=false){
-        global $pdoLibreria;
-        $query     = $pdoLibreria->prepare($sql);
-        $sqlResult = false;
-
+    
+    public static function select($sql, $parametros = [], $tipoPDOFech = PDO::FETCH_ASSOC){
+        $conexion = Conexion::conectar();
+        $query = $conexion->prepare($sql);
+       
         try {
-            $sqlResult = $query->execute($array);
-
+            $sqlResult = $query->execute($parametros);
+    
             if ($sqlResult) {
-                $sqlResult = $query->fetchAll(PDO::FETCH_ASSOC);
-                $query = null;
-
-                if ($depurar){
-                    sc_echo('Debug de sc_sql_secure_lookup (3):');
-                    sc_var_dump($sql);
-                    sc_var_dump($array);
-                    sc_var_dump($sqlResult);
-                }
-
-                if (count($sqlResult)==0){
-                    foreach ($array as &$valor){
-                        $valor = htmlentities($valor);
-                    }
-                }
-
-                return count($sqlResult) != 0 ? $sqlResult:false;
+                $sqlResult = $query->fetchAll($tipoPDOFech);
+                $sqlResult = count($sqlResult) > 0 ? $sqlResult : false;
+    
             }else{
-                return $datos[0][0] = false;
+                $sqlResult = false;
             }
+    
+            return $sqlResult;
+    
         } catch (Exception $e) {
-            sc_var_dump('Hubo un error: ');
-            sc_var_dump($e);
+            var_dump('Hubo un error: ');
+            var_dump($e);
             return false;
         }
     }
 
-    function sc_sql_exec_sql($sql,$array=null){
-        global $pdoLibreria;
-        $query = $pdoLibreria->prepare($sql);
-
-        foreach ( $array as &$valor){
-            $valor = (is_string($valor)) ? nl2br( htmlentities($valor) ) : $valor;
-        }
-
+    public static function execute($sql, $parametros = null){
+        $conexion = Conexion::conectar();
+        $query = $conexion->prepare($sql);
+    
         try {
-            return $query->execute($array);
-        } catch (Exception $exception) {
-            echo $exception;
+            $execResult = $query->execute($parametros);
+        
+            return !!( $execResult );
+    
+        } catch (Exception $e) {
+            echo('Hubo un error: ');
+            var_dump($e);
+            return false;
+        }
+    
+    }
+
+
+    public static function execute_id($sql, $parametros = [], $tipoPDOFech = PDO::FETCH_ASSOC){
+        $conexion = Conexion::conectar();
+        $query = $conexion->prepare($sql);
+    
+        try {
+            $execResult = $query->execute($parametros);
+        
+            return $execResult ? $conexion->lastInsertId() : false;
+    
+        } catch (Exception $e) {
+            echo('Hubo un error: ');
+            var_dump($e);
             return false;
         }
     }
-
 
 }

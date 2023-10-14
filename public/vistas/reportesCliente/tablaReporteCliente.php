@@ -27,7 +27,7 @@
                 INNER JOIN t_cat_equipos AS equipo
                 ON
                     reporte.id_equipo = equipo.id_equipo AND reporte.id_usuario = '$idUsuario'";
-    $respuesta = mysqli_query ($conexion,$sql);
+    $respuesta = Conexion::select($sql);
 ?>
 
 
@@ -45,7 +45,7 @@
 
     </thead>
     <tbody>
-        <?php while ($mostrar = mysqli_fetch_array($respuesta)){?>
+        <?php foreach ($respuesta as $mostrar){?>
         <tr>
             <th>
                 <?php echo $contador++; ?>

@@ -20,6 +20,11 @@ function asignarEquipo(){
                 Swal.fire(":(","Error al asignar" + respuesta,"error");
 
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false //para que no recargue la función 
@@ -50,6 +55,11 @@ function eliminarAsignacion(idAsignacion){ //sweetalert con confirmación
                         Swal.fire(":(","Error al Eliminar" + respuesta,"error");
         
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    console.error(errorThrown);
                 }
             });
         }

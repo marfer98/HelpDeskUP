@@ -10,6 +10,7 @@
             <h1 class="fw_light">Administrar Oficinas</h1>
             <p class="lead">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarOficina">
+                    <i class="fas fa-plus-circle"></i>
                     Agregar Oficinas
                 </button>
                 <hr>

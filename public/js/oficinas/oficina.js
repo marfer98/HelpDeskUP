@@ -19,6 +19,11 @@ function agregarNuevaOficina(){
             }else{
                 Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
         
     });

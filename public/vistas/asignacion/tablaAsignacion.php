@@ -1,7 +1,5 @@
 <?php
     include "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
-    $con = new Conexion();
-    $conexion = $con->conectar();
     $sql ="    SELECT
                     oficina.id_oficina AS idOficina,
                     oficina.nombre AS nombreOficina,
@@ -27,7 +25,7 @@
                 INNER JOIN t_cat_equipos AS equipo
                 ON
                     asignacion.id_equipo = equipo.id_equipo";
-    $respuesta = mysqli_query ($conexion,$sql);
+    $respuesta = Conexion::select($sql);
 ?>
 <table class="table table-sm table-bordered dt-responsive nowrap"
         id="tablaAsignacionDataTable" style="width:100%">
@@ -50,7 +48,7 @@
         <th>Eliminar</th>
     </thead>
     <tbody>
-    <?php while($mostrar = mysqli_fetch_array($respuesta)){?>
+    <?php foreach ($respuesta as $mostrar ){?>
         <tr>
             <td>
                 <?php echo $mostrar ['nombreOficina']; ?>

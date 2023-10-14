@@ -11,6 +11,11 @@ function loginUsuario(){
             }else{
                 Swal.fire(":(","ERROR AL INGRESAR " + respuesta, "error"); //sweet aler 2
             }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
         }
     });
     return false;
