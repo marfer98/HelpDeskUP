@@ -1,5 +1,5 @@
 <?php
-    include "Conexion.php";
+    require_once "Conexion.php";
 
     class Asignacion extends Conexion{
         public function agregarAsignacion($datos){

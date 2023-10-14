@@ -1,7 +1,7 @@
 <?php  
   include "header.php";//entra el header
   if (isset ($_SESSION ['usuario']) && $_SESSION ['usuario']['rol']==2){//validación de inicio de sesión - admin
-    include "../../clases/Conexion.php"; 
+    require_once "../../clases/Conexion.php";
     $con = new Conexion();
     $conexion =$con->conectar();
 

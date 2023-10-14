@@ -1,5 +1,5 @@
 <?php
-    include "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
+    require_once "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
     $sql ="    SELECT 
                     t_oficina.nombre as nombreOficina, 
                     t_oficina.telefono as telefonoOficina, 

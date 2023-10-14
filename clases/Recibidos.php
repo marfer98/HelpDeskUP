@@ -1,5 +1,5 @@
 <?php 
-    include "Conexion.php"; //se incluye la conexion a la bd
+    require_once "Conexion.php"; //se incluye la conexion a la bd
     class Recibidos extends Conexion{
 
         public function agregarNuevaRecepcion($datos){

@@ -1,5 +1,5 @@
 <?php 
-    include "Conexion.php"; //se incluye la conexion a la bd
+    require_once "Conexion.php"; //se incluye la conexion a la bd
     class Reportes extends Conexion{
         public function agregarReporteCliente($datos){
             $conexion = Conexion::conectar(); //traemos la conexion

@@ -1,7 +1,7 @@
 <?php  //validación de inicio de sesión
   include "header.php"; 
   if (isset ($_SESSION ['usuario']) && $_SESSION['usuario']['rol']== 1){
-      include "../../clases/Conexion.php";
+      require_once "../../clases/Conexion.php";
       $con = new Conexion();
       $conexion =$con->conectar();
   ?>

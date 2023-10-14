@@ -1,9 +1,8 @@
-<?php 
-    include "Conexion.php"; //se incluye la conexion a la bd
+<?php
+    require_once "Conexion.php"; //se incluye la conexion a la bd
     
-    class Usuarios extends Conexion{
+    class Usuarios{
         public function loginUsuario($usuario,$password){
-            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "SELECT * FROM t_usuarios 
                 WHERE usuario = '$usuario' AND password = '$password'";//condicion para el ingreso desde la base de datos
 
@@ -28,7 +27,6 @@
         }
 
         public function agregaNuevoUsuario($datos){
-            $conexion = Conexion::conectar(); //traemos la conexion
             $idOficina = self::agregarOficina($datos);
             
             if ($idOficina > 0) {
@@ -64,7 +62,6 @@
         }
 
         public function agregarOficina($datos){
-            $conexion = Conexion::conectar(); //traemos la conexion
             // Insertamos datos en la tabla oficina
             $sql = "INSERT INTO t_oficina (  
                         nombre,
@@ -86,7 +83,6 @@
         }
 
         public function obtenerDatosUsuario($idUsuario){
-            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "SELECT 
                         usuarios.id_usuario AS idUsuario,
                         usuarios.usuario as nombreUsuario,
@@ -109,7 +105,6 @@
                 ':idUsuario' => $idUsuario
             ]);
 
-            // MTX: Falta validación
             $usuario = $respuesta[0];
             
             $datos = array( //ARRAY DE POST QUE SE ENVIAN
@@ -125,12 +120,11 @@
                 'correo'         => $usuario['correo']
             );
 
-            var_dump($datos);
             return $datos;
         }
 
         public function actualizarUsuario($datos){
-            $conexion = Conexion::conectar(); //traemos la conexion
+            
             //hace referencia a que se actualizo con exito 
             $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
@@ -154,7 +148,7 @@
         }
 
         public function actualizarOficina ($datos){
-            $conexion = Conexion::conectar(); //traemos la conexion
+            
             $idOficina = self::obtenerIdOficina($datos['idUsuario']);
             $sql = "UPDATE t_oficina SET  nombre    = :nombre,
                                           telefono  = :telefono,
@@ -172,7 +166,7 @@
         }
 
         public function obtenerIdOficina($idUsuario){
-            $conexion = Conexion::conectar(); //traemos la conexion
+            
             //obtener el id 
             $sql = "SELECT 
                         oficina.id_oficina as idOficina 
@@ -190,7 +184,7 @@
         }
 
         public function resetPassword($datos){
-            $conexion = Conexion::conectar(); 
+            
             $sql = "UPDATE t_usuarios
                     SET password = :password
                     WHERE id_usuario = :idUsuario";
@@ -204,7 +198,6 @@
         }
 
         public function cambioEstatusUsuario($idUsuario, $estatus){
-            $conexion = Conexion::conectar();
             $estatus = ($estatus == 1) ? 0 : 1;
                 
             $sql = "UPDATE t_usuarios
