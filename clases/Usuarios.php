@@ -6,7 +6,7 @@
             $sql = "SELECT * FROM t_usuarios 
                 WHERE usuario = '$usuario' AND password = '$password'";//condicion para el ingreso desde la base de datos
 
-                $respuesta = Conexion::select($sql);//respuesta de la base de datos
+            $respuesta = Conexion::select($sql);//respuesta de la base de datos
 
             if (count($respuesta)>0) { // Si retorta un respuesta la bd
                 $datosUsuario = ($respuesta[0]);
@@ -124,8 +124,7 @@
         }
 
         public function actualizarUsuario($datos){
-            
-            //hace referencia a que se actualizo con exito 
+            //hace referencia a que se actualizo con exito
             $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
             if ($exitoOficina){
@@ -148,7 +147,6 @@
         }
 
         public function actualizarOficina ($datos){
-            
             $idOficina = self::obtenerIdOficina($datos['idUsuario']);
             $sql = "UPDATE t_oficina SET  nombre    = :nombre,
                                           telefono  = :telefono,
@@ -166,8 +164,7 @@
         }
 
         public function obtenerIdOficina($idUsuario){
-            
-            //obtener el id 
+            //obtener el id
             $sql = "SELECT 
                         oficina.id_oficina as idOficina 
                     FROM 
