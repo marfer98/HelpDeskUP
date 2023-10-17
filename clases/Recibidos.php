@@ -3,6 +3,7 @@
     class Recibidos extends Conexion{
 
         public function agregarNuevaRecepcion($datos){
+            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "INSERT INTO t_recepcion (   id_equipo,
                                                 nombre_equipo,
                                                 rotulado,
@@ -33,6 +34,7 @@
 
         } 
         public function eliminarRecibido($idRecepcion){
+            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "DELETE FROM t_recepcion WHERE id_recepcion = ?";
             $query = $conexion->prepare($sql);
             $query->bind_param('i', $idRecepcion);
@@ -41,6 +43,7 @@
             return $respuesta;
         }
         public function obtenerDatosRecepcion($idRecepcion){
+            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "SELECT descripcion_solucion, estatus, fecha_entrega, nombre_tecnico, informe_tecnico
                     FROM   t_recepcion
                     WHERE  id_recepcion ='$idRecepcion'";
@@ -59,6 +62,7 @@
             return $datos;
         } 
         public function actualizarRecepcion($datos){
+            $conexion = Conexion::conectar(); //traemos la conexion
             $sql ="UPDATE t_recepcion
                    SET  
                         descripcion_solucion = ?,

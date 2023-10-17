@@ -3,6 +3,7 @@
 
     class Asignacion extends Conexion{
         public function agregarAsignacion($datos){
+            $conexion = Conexion::conectar(); //traemos la conexion
             $sql ="
                 INSERT INTO t_asignacion (
                     id_oficina, 
@@ -54,6 +55,7 @@
         }
 
         public function eliminarAsignacion($idAsignacion){
+            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "DELETE FROM t_asignacion 
                     WHERE id_asignacion = :id_asignacion";
             
@@ -66,4 +68,3 @@
     }
 
 ?>
-

@@ -3,6 +3,7 @@
     class Oficinas extends Conexion{
 
         public function agregarNuevaOficina($datos){
+            $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "INSERT INTO t_oficina (
                         nombre, 
                         telefono, 

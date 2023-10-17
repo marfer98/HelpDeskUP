@@ -6,7 +6,7 @@
             $sql = "SELECT * FROM t_usuarios 
                 WHERE usuario = '$usuario' AND password = '$password'";//condicion para el ingreso desde la base de datos
 
-            $respuesta = Conexion::select($sql);//respuesta de la base de datos
+                $respuesta = Conexion::select($sql);//respuesta de la base de datos
 
             if (count($respuesta)>0) { // Si retorta un respuesta la bd
                 $datosUsuario = ($respuesta[0]);
@@ -93,24 +93,20 @@
                         usuarios.id_oficina as idOficina,
                         oficina.nombre AS nombreOficina,
                         oficina.telefono AS telefono,
-                        oficina.correo AS correo,
-                        s.descripcion as sucursal
+                        oficina.correo AS correo
                     FROM
                     t_usuarios AS usuarios
                         INNER JOIN
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                         INNER JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
-                        INNER JOIN
-                    t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
                     AND usuarios.id_usuario = :idUsuario";// Obtener todos los datos del usuario
             $respuesta = Conexion::select($sql,[
                 ':idUsuario' => $idUsuario
             ]);
 
-
-             $usuario = $respuesta[0];
-
+            $usuario = $respuesta[0];
+            
             $datos = array( //ARRAY DE POST QUE SE ENVIAN
                 'idUsuario'      => $usuario['idUsuario'],
                 'nombreUsuario'  => $usuario['nombreUsuario'],
@@ -127,37 +123,9 @@
             return $datos;
         }
 
-        public function obtenerDatosUsuarios(){
-            $sql = "SELECT 
-                        usuarios.id_usuario AS idUsuario,
-                        usuarios.usuario as nombreUsuario,
-                        roles.nombre as rol,
-                        usuarios.id_rol AS id_rol,
-                        usuarios.ubicacion as ubicacion,
-                        usuarios.activo as estatus,
-                        usuarios.id_oficina as idOficina,
-                        oficina.nombre AS nombreOficina,
-                        oficina.telefono AS telefono,
-                        oficina.correo AS correo,
-                        s.descripcion as sucursal
-                    FROM
-                    t_usuarios AS usuarios
-                        INNER JOIN
-                    t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
-                        INNER JOIN
-                    t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
-                        INNER JOIN
-                    t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
-                    ";// Obtener todos los datos del usuario
-        $respuesta = Conexion::select($sql,[
-            //':idUsuario' => $idUsuario
-        ]);
-
-        return $respuesta;
-    }
-
-        public function actualizarUsuarios($datos){
-            //hace referencia a que se actualizo con exito
+        public function actualizarUsuario($datos){
+            
+            //hace referencia a que se actualizo con exito 
             $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
             if ($exitoOficina){
@@ -166,7 +134,7 @@
                                              ubicacion = :ubicacion 
                         WHERE id_usuario = :idUsuario";                     
                                            
-                $respuesta = Conexion::execute($sql,[
+                $respuesta = Conexion::select($sql,[
                     ':idRol'            => $datos['idRol'],
                     ':nombreUsuario'    => $datos['nombreUsuario'],
                     ':ubicacion'        => $datos['ubicacion'],
@@ -180,13 +148,14 @@
         }
 
         public function actualizarOficina ($datos){
+            
             $idOficina = self::obtenerIdOficina($datos['idUsuario']);
             $sql = "UPDATE t_oficina SET  nombre    = :nombre,
                                           telefono  = :telefono,
                                           correo    = :correo 
                                           WHERE id_oficina = :id_oficina";
             
-            $respuesta = Conexion::execute($sql,[
+            $respuesta = Conexion::select($sql,[
                 ':nombre'       => $datos['nombre'],
                 ':telefono'     => $datos['telefono'],
                 ':correo'       => $datos['correo'],
@@ -197,7 +166,8 @@
         }
 
         public function obtenerIdOficina($idUsuario){
-            //obtener el id
+            
+            //obtener el id 
             $sql = "SELECT 
                         oficina.id_oficina as idOficina 
                     FROM 
