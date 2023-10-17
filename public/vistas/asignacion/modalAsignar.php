@@ -22,7 +22,7 @@
 
                             <select name="idOficina" id="idOficina" class="form-control" required>
                                 <option value="">Seleccione una opción</option>
-                                <?php while($mostrar = mysqli_fetch_array($respuesta)){?>
+                                <?php foreach($respuesta as $mostrar){?>
                                     <option value="<?php echo $mostrar['id_oficina'];?>"><?php echo $mostrar ['nombre'];?></option>
                                     <?php }?><!-- Cierre del while -->
                             </select>

@@ -14,8 +14,8 @@
                     INNER JOIN
                 t_oficina AS oficina ON usuario.id_oficina = oficina.id_oficina
                     AND usuario.id_usuario = '$idUsuario'";
-        $respuesta= mysqli_query($conexion,$sql);
-        $idOficina = mysqli_fetch_array($respuesta)[0];
+        $respuesta= Conexion::select($sql);
+        $idOficina = $respuesta[0];
     $sql =" SELECT
                 oficina.id_oficina AS idOficina,
                 oficina.nombre AS nombreOficina,
@@ -40,7 +40,7 @@
             ON
                 asignacion.id_equipo = equipo.id_equipo AND asignacion.id_oficina = '$idOficina'";
 
-        $respuesta= mysqli_query($conexion,$sql);
+        $respuesta= Conexion::select($sql);
   ?>
 
 <!-- Page Content -->
@@ -50,7 +50,7 @@
             <h1 class="fw_light">Mis Dispositivos</h1>
             <p class="lead">
                 <div class="row">
-                    <?php while ($mostrar = mysqli_fetch_array($respuesta)){?>
+                    <?php foreach($respuesta as $mostrar ){?>
                     <div class="col-sm-4">
                     <div class="card">
                         <div class="card-body"> <!--muestra los equipos asignados-->
