@@ -9,9 +9,9 @@
                         telefono, 
                         correo)
                     VALUES (
-                        :nombre
-                        :telefono
-                        :correo
+                        :nombreOficina
+                        :telefonoOficina
+                        :correoOficina
                     )";
   
             //los datos traigo de agregarNuevaOficina.php 

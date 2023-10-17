@@ -9,7 +9,7 @@ function agregarNuevaSucursal(){
     $.ajax({
         type: "POST",
         data: $('#frmAgregarSucursal').serialize(),
-        url:"../../procesos/usuarios/crud/agregarNuevaSucursal.php",
+        url:"../../procesos/sucursales/crud/agregarNuevaSucursal.php",
         success:function(respuesta){
            // console.log(respuesta);
             respuesta = respuesta.trim();//trim para reiniciar el formulario

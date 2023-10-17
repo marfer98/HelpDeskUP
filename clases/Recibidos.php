@@ -1,54 +1,66 @@
 <?php 
     require_once "Conexion.php"; //se incluye la conexion a la bd
-    class Recibidos extends Conexion{
-
+    class Recibidos{
         public function agregarNuevaRecepcion($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
-            $sql = "INSERT INTO t_recepcion (   id_equipo,
-                                                nombre_equipo,
-                                                rotulado,
-                                                numero_serie,
-                                                ciudad,
-                                                procedencia,
-                                                descripcion_problema,
-                                                recibido,
-                                                responsable,
-                                                estatus)
-                    VALUES (?,?,?,?,?,?,?,?,?,?)";
-            $query = $conexion->prepare($sql);
-            $query->bind_param("isssssssss",
-                                        //los datos traigo de agregarNuevaRecepcion.php 
-                                        $datos['idEquipo'],
-                                        $datos['nombreEquipo'],
-                                        $datos['rotulado'],
-                                        $datos['numeroSerie'],
-                                        $datos['ciudad'],
-                                        $datos['procedencia'],
-                                        $datos['problema'],
-                                        $datos['recibido'],
-                                        $datos['responsable'],
-                                        $datos['estado']);
-            $respuesta = $query->execute();
-            $query->close();
+            $sql = "INSERT INTO t_recepcion (   
+                        id_equipo,
+                        nombre_equipo,
+                        rotulado,
+                        numero_serie,
+                        ciudad,
+                        procedencia,
+                        descripcion_problema,
+                        recibido,
+                        responsable,
+                        estatus)
+                    VALUES (
+                        :id_equipo,
+                        :nombre_equipo,
+                        :rotulado,
+                        :numero_serie,
+                        :ciudad,
+                        :procedencia,
+                        :descripcion_problema,
+                        :recibido,
+                        :responsable,
+                        :estatus
+                    )";
+            $respuesta = Conexion::execute($sql, [
+                                        ':id_equipo'            => $datos['idEquipo'],
+                                        ':nombre_equipo'        => $datos['nombreEquipo'],
+                                        ':rotulado'             => $datos['rotulado'],
+                                        ':numero_serie'         => $datos['numeroSerie'],
+                                        ':ciudad'               => $datos['ciudad'],
+                                        ':procedencia'          => $datos['procedencia'],
+                                        ':descripcion_problema' => $datos['problema'],
+                                        ':recibido'             => $datos['recibido'],
+                                        ':responsable'          => $datos['responsable'],
+                                        ':estatus'              => $datos['estado']
+                                    ]);
             return $respuesta;
 
         } 
+
         public function eliminarRecibido($idRecepcion){
             $conexion = Conexion::conectar(); //traemos la conexion
-            $sql = "DELETE FROM t_recepcion WHERE id_recepcion = ?";
-            $query = $conexion->prepare($sql);
-            $query->bind_param('i', $idRecepcion);
-            $respuesta = $query->execute();
-            $query->close(); 
+            $sql = "DELETE FROM t_recepcion WHERE id_recepcion = :idRecepcion";
+            $respuesta = Conexion::execute($sql,[
+                ':idRecepcion' => $idRecepcion
+            ]);
             return $respuesta;
         }
+
         public function obtenerDatosRecepcion($idRecepcion){
             $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "SELECT descripcion_solucion, estatus, fecha_entrega, nombre_tecnico, informe_tecnico
                     FROM   t_recepcion
-                    WHERE  id_recepcion ='$idRecepcion'";
-            $respuesta = mysqli_query($conexion,$sql);
-            $recepcion =  mysqli_fetch_array($respuesta);
+                    WHERE  id_recepcion = :idRecepcion";
+            $respuesta = Conexion::select($sql,[
+                ':idRecepcion' => $idRecepcion
+            ]);
+
+            $recepcion = $respuesta[0];
 
             $datos = array(
                 "idRecepcion"         => $idRecepcion,
@@ -61,27 +73,26 @@
             );
             return $datos;
         } 
+
         public function actualizarRecepcion($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             $sql ="UPDATE t_recepcion
                    SET  
-                        descripcion_solucion = ?,
-                        fecha_entrega = ?,
-                        estatus = ?,
-                        nombre_tecnico = ?,
-                        informe_tecnico =?
+                        descripcion_solucion    = :descripcionSolucion,
+                        fecha_entrega           = :fechaEntrega,
+                        estatus                 = :estado,
+                        nombre_tecnico          = :tecnico,
+                        informe_tecnico         = :informeTecnico
                     WHERE
-                        id_recepcion = ?";
-            $query = $conexion->prepare($sql);
-                                       
-            $query->bind_param('ssissi', $datos['descripcionSolucion'],
-                                        $datos['fechaEntrega'],
-                                        $datos['estado'],
-                                        $datos['tecnico'],
-                                        $datos['informeTecnico'],
-                                        $datos['idRecepcion']);
-            $respuesta = $query->execute();
-            $query->close();
+                        id_recepcion = :idRecepcion";
+           $respuesta = Conexion::execute($sql,[
+                                        ':descripcionSolucion'  => $datos['descripcionSolucion'],
+                                        ':fechaEntrega'         => $datos['fechaEntrega'],
+                                        ':estado'               => $datos['estado'],
+                                        ':tecnico'              => $datos['tecnico'],
+                                        ':informeTecnico'       => $datos['informeTecnico'],
+                                        ':idRecepcion'          => $datos['idRecepcion']
+                                    ]);
             return $respuesta;
         }
 
