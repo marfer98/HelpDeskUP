@@ -20,14 +20,8 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="telefonoSucursal"> Telefono</label>
-                            <input type="text" class="form-control" id="telefonoSucursal" name="telefonoSucursal" required>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <label for="correoSucursal"> Correo</label>
-                            <input type="mail" class="form-control" id="correoSucursal" name="correoSucursal" required>
+                            <label for="direccionSucursal"> Dirección</label>
+                            <input type="text" class="form-control" id="direccionSucursal" name="direccionSucursal" required>
                         </div>
                     </div>
                 </div>

@@ -2,17 +2,15 @@
     require_once "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
     
     $sql ="    SELECT 
-                    t_oficina.nombre as nombreOficina, 
-                    t_oficina.telefono as telefonoOficina, 
-                    t_oficina.correo as correoOficina 
-                 FROM t_oficina";
+                    descripcion,
+                    direccion
+                FROM t_sucursales s";
     $respuesta = Conexion::select($sql);
 ?>
-<table class="table table-sm dt-responsive nowrap" id="tablaOficinaDataTable" style="width:100%">
+<table class="table table-sm dt-responsive nowrap" id="tablaSucursalDataTable" style="width:100%">
     <thead>
         <th>Nombre</th>
-        <th>Telefono</th>
-        <th>Correo</th>
+        <th>Dirección</th>
         
         <th>Editar</th>
         <th>Eliminar</th>
@@ -22,14 +20,11 @@
     ?>
         <tr>
             <th>
-                <?php echo $mostrar ['nombreOficina']; ?>
+                <?php echo $mostrar ['descripcion']; ?>
             </th>
             <th>
-                <?php echo $mostrar ['telefonoOficina']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['correoOficina']; ?>
-            </th>        
+                <?php echo $mostrar ['direccion']; ?>
+            </th>      
             <th>
                 <button class="btn btn-warning btn-sm"> Editar</button>
             </th>
@@ -44,7 +39,7 @@
 <script>
     //datatable 
     $(document).ready(function () {
-        $('#tablaOficinaDataTable').DataTable({
+        $('#tablaSucursalDataTable').DataTable({
             language :{ //esto es una propiedad 
                 url: "../datatable/es_es.json"
             }

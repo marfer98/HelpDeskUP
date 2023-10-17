@@ -204,8 +204,6 @@
                     SET activo = :estatus
                     WHERE id_usuario = :idUsuario";
                        
-            $query = $conexion->prepare($sql);
-            $query->bind_param('ii', );
             $respuesta = Conexion::select($sql,[
                 ':estatus'      => $estatus, 
                 ':idUsuario'    => $idUsuario
