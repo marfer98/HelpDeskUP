@@ -1,4 +1,5 @@
-$(document).ready(function(){//JQUERY
+$(function() {
+    console.log('Se ha cargado funcion');
     $('#tablaSucursalesLoad').load("sucursales/tablaSucursal.php")//esa tabla esta en la vista de sucursal 
 });
 
