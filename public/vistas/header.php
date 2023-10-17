@@ -1,6 +1,5 @@
 <?php
     session_start(); //iniciar sesión 
-
 ?>
 
 
@@ -51,17 +50,17 @@
                     <?php }else if($_SESSION['usuario']['rol'] == 2){?> <!-- cierra el if de la vista del usuario -->
                         <!-- vista del administrador -->
                         <li class="nav-item dropdown" >
-                            <a style="color:red" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-building"></i> Direcciones y Oficinas
+                                <i class="fas fa-building"></i> Direcciones
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="oficinas.php">
+                                    <a class="dropdown-item" href="oficinas.php">
                                     <i class="fas fa-building"></i> Oficinas</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="oficinas.php">
+                                    <a class="dropdown-item" href="sucursales.php">
                                     <i class="fas fa-building"></i> Sucursales</a>
                                 </li>
                             </ul>
