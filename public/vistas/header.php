@@ -70,10 +70,23 @@
                             <a class="nav-link" href="usuarios.php">
                             <i class="fas fa-users"></i> Usuarios</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="asignacion.php">
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-building"></i> Articulos
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="asignacion.php">
                             <i class="fas fa-file-signature"></i> Asignación</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="adquisicion.php">
+                                    <i class="fas fa-building"></i> Adquisición</a>
+                                </li>
+                            </ul>
                         </li>
+                       
                         <li class="nav-item">
                             <a class="nav-link" href="recibidos.php">
                             <i class="fas fa-exchange-alt"></i> Recibidos</a>

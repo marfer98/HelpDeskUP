@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: sql110.ezyro.com
--- Tiempo de generación: 18-10-2023 a las 14:16:10
+-- Tiempo de generación: 18-10-2023 a las 14:31:34
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.2.22
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `t_articulos` (
   `id_articulo` int(11) NOT NULL,
   `id_equipo` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
   `nombreEquipoA` varchar(255) NOT NULL,
   `rotulado` varchar(255) DEFAULT NULL,
   `marca` varchar(255) DEFAULT NULL,
@@ -49,17 +50,17 @@ CREATE TABLE `t_articulos` (
 -- Volcado de datos para la tabla `t_articulos`
 --
 
-INSERT INTO `t_articulos` (`id_articulo`, `id_equipo`, `nombreEquipoA`, `rotulado`, `marca`, `modelo`, `numeroSerie`, `descripcion`, `memoria`, `tipo_ram`, `disco_duro`, `procesador`, `sistema_operativo`, `fecha_insert`) VALUES
-(4, 2, '', NULL, 'HP', 'gamer', 'verde', 'Aca va la descripción', '32gb', NULL, '1tb', 'i9', NULL, '2023-10-14 09:16:53'),
-(7, 9, '', NULL, 'EPSON', 'PRO', 'Blanco', 'Impresora tipo fotocopiadora ', '', NULL, '', '', NULL, '2023-10-14 09:16:53'),
-(10, 2, '', NULL, '1', 'GT547', NULL, 'descrip', 'RAM', NULL, 'DIS', 'PRO', NULL, '2023-10-14 09:16:53'),
-(12, 1, 'nombre equipo', NULL, 'Marca', 'Modelo', 'tag', 'Descripción', 'memoria', NULL, 'disco duro', 'procesador ', NULL, '2023-10-14 09:16:53'),
-(13, 1, 'APE2SE001', NULL, 'HP', '250g7', '4A185048W', 'Pc nueva', '8GB', NULL, '250GB', 'i3', NULL, '2023-10-14 09:16:53'),
-(15, 1, 'ETPC001', NULL, 'HP', 'HP All-in-One ', '4A185048X', '', '8GB', NULL, '500 GB', 'i3', NULL, '2023-10-14 09:16:53'),
-(16, 2, 'MDEPC001', NULL, 'DELL', 'AX800', 'AJRE1000', 'PC negro nuevo con mouse, teclado y un parlante ', '8GB', NULL, '250 gb', 'i3 8th', NULL, '2023-10-14 09:16:53'),
-(18, 9, 'APE2SE006', '', 'Marca', 'GT547', '4A185048W', '', '', '', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
-(19, 6, 'nombre equipo', 'ram', 'marca', 'modelo', 'tag', '', '', 'ram', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
-(20, 2, 'nombre equipo', 'DD4', 'CANNON', 'GT547', 'tag', '', '3GB', 'DD4', 'disco duro', 'i3', 'Windows 7 64 bits', '2023-10-14 09:16:53');
+INSERT INTO `t_articulos` (`id_articulo`, `id_equipo`, `id_proveedor`, `nombreEquipoA`, `rotulado`, `marca`, `modelo`, `numeroSerie`, `descripcion`, `memoria`, `tipo_ram`, `disco_duro`, `procesador`, `sistema_operativo`, `fecha_insert`) VALUES
+(4, 2, 0, '', NULL, 'HP', 'gamer', 'verde', 'Aca va la descripción', '32gb', NULL, '1tb', 'i9', NULL, '2023-10-14 09:16:53'),
+(7, 9, 0, '', NULL, 'EPSON', 'PRO', 'Blanco', 'Impresora tipo fotocopiadora ', '', NULL, '', '', NULL, '2023-10-14 09:16:53'),
+(10, 2, 0, '', NULL, '1', 'GT547', NULL, 'descrip', 'RAM', NULL, 'DIS', 'PRO', NULL, '2023-10-14 09:16:53'),
+(12, 1, 0, 'nombre equipo', NULL, 'Marca', 'Modelo', 'tag', 'Descripción', 'memoria', NULL, 'disco duro', 'procesador ', NULL, '2023-10-14 09:16:53'),
+(13, 1, 0, 'APE2SE001', NULL, 'HP', '250g7', '4A185048W', 'Pc nueva', '8GB', NULL, '250GB', 'i3', NULL, '2023-10-14 09:16:53'),
+(15, 1, 0, 'ETPC001', NULL, 'HP', 'HP All-in-One ', '4A185048X', '', '8GB', NULL, '500 GB', 'i3', NULL, '2023-10-14 09:16:53'),
+(16, 2, 0, 'MDEPC001', NULL, 'DELL', 'AX800', 'AJRE1000', 'PC negro nuevo con mouse, teclado y un parlante ', '8GB', NULL, '250 gb', 'i3 8th', NULL, '2023-10-14 09:16:53'),
+(18, 9, 0, 'APE2SE006', '', 'Marca', 'GT547', '4A185048W', '', '', '', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
+(19, 6, 0, 'nombre equipo', 'ram', 'marca', 'modelo', 'tag', '', '', 'ram', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
+(20, 2, 0, 'nombre equipo', 'DD4', 'CANNON', 'GT547', 'tag', '', '3GB', 'DD4', 'disco duro', 'i3', 'Windows 7 64 bits', '2023-10-14 09:16:53');
 
 -- --------------------------------------------------------
 
@@ -173,6 +174,20 @@ INSERT INTO `t_oficina` (`id_oficina`, `nombre`, `telefono`, `correo`, `fecha_in
 (18, 'Control Personal', '0986795392', 'controlpersonal@helpdesk.com', '2022-03-22 08:34:23'),
 (19, 'Oficina de Inspectoria', '0973303802', 'oficinadeinspectoria@helpdesk.com', '2022-03-22 08:34:38'),
 (20, 'Facilitadores Judiciales ', '0991386847', 'facilitadoresjudiciales@helpdesk.com', '2022-03-22 08:35:09');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_proveedores`
+--
+
+CREATE TABLE `t_proveedores` (
+  `id_proveedor` int(11) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
+  `direccion` varchar(200) NOT NULL,
+  `telefono` int(11) NOT NULL,
+  `fecha_insert` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -327,6 +342,12 @@ ALTER TABLE `t_oficina`
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
+-- Indices de la tabla `t_proveedores`
+--
+ALTER TABLE `t_proveedores`
+  ADD PRIMARY KEY (`id_proveedor`);
+
+--
 -- Indices de la tabla `t_recepcion`
 --
 ALTER TABLE `t_recepcion`
@@ -391,6 +412,12 @@ ALTER TABLE `t_cat_roles`
 --
 ALTER TABLE `t_oficina`
   MODIFY `id_oficina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT de la tabla `t_proveedores`
+--
+ALTER TABLE `t_proveedores`
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `t_recepcion`
