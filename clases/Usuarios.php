@@ -1,7 +1,8 @@
 <?php
-    require_once "Conexion.php"; //se incluye la conexion a la bd
+    require_once "Conexion.php";
+    require_once "Oficinas.php";
     
-    class Usuarios{
+    class Usuarios extends Oficinas{
         public function loginUsuario($usuario,$password){
             $sql = "SELECT * FROM t_usuarios 
                 WHERE usuario = '$usuario' AND password = '$password'";//condicion para el ingreso desde la base de datos
@@ -59,27 +60,6 @@
 
             //insertamos datos en la tabla usuarios
  
-        }
-
-        public function agregarOficina($datos){
-            // Insertamos datos en la tabla oficina
-            $sql = "INSERT INTO t_oficina (  
-                        nombre,
-                        telefono,
-                        correo)
-                    VALUES (
-                        :nombre,
-                        :telefono,
-                        :correo
-                    )";
-                    
-            $idOficina = Conexion::execute_id($sql,[
-                ':nombre'   => $datos['nombre'],
-                ':telefono' => $datos['telefono'],
-                ':correo'   => $datos['correo']
-            ]);
-
-            return $idOficina;
         }
 
         public function obtenerDatosUsuario($idUsuario){
@@ -145,42 +125,6 @@
             }else{
                 return 0;
             }
-        }
-
-        public function actualizarOficina ($datos){
-            
-            $idOficina = self::obtenerIdOficina($datos['idUsuario']);
-            $sql = "UPDATE t_oficina SET  nombre    = :nombre,
-                                          telefono  = :telefono,
-                                          correo    = :correo 
-                                          WHERE id_oficina = :id_oficina";
-            
-            $respuesta = Conexion::select($sql,[
-                ':nombre'       => $datos['nombre'],
-                ':telefono'     => $datos['telefono'],
-                ':correo'       => $datos['correo'],
-                ':id_oficina'   => $idOficina
-            ]);
-
-            return $respuesta;
-        }
-
-        public function obtenerIdOficina($idUsuario){
-            
-            //obtener el id 
-            $sql = "SELECT 
-                        oficina.id_oficina as idOficina 
-                    FROM 
-                        t_usuarios as usuarios 
-                    INNER JOIN 
-                        t_oficina as oficina 
-                        ON usuarios.id_oficina = oficina.id_oficina 
-                        AND usuarios.id_usuario = :idUsuario";
-            $respuesta = Conexion::select($sql,[
-                ':idUsuario' => $idUsuario
-            ]);
-
-            return $respuesta[0]['idOficina'];
         }
 
         public function resetPassword($datos){
