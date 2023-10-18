@@ -16,7 +16,7 @@
                     AND usuario.id_usuario = '$idUsuario'";
         $respuesta= Conexion::select($sql);
         $idOficina = $respuesta[0];
-    $sql =" SELECT
+    $sql = " SELECT
                 oficina.id_oficina AS idOficina,
                 oficina.nombre AS nombreOficina,
                 equipo.id_equipo AS idEquipo,
@@ -40,7 +40,7 @@
             ON
                 asignacion.id_equipo = equipo.id_equipo AND asignacion.id_oficina = '$idOficina'";
 
-        $respuesta= Conexion::select($sql);
+        $respuesta = Conexion::select($sql);
   ?>
 
 <!-- Page Content -->

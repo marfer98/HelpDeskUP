@@ -14,7 +14,7 @@
                     )";
   
             //los datos traigo de agregarNuevaOficina.php 
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ':nombreOficina'    => $datos['nombreOficina'],
                 ':telefonoOficina'  => $datos['telefonoOficina'],
                 ':correoOficina'    => $datos['correoOficina']
@@ -53,7 +53,7 @@
                                           correo    = :correo 
                                           WHERE id_oficina = :id_oficina";
             
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ':nombre'       => $datos['nombre'],
                 ':telefono'     => $datos['telefono'],
                 ':correo'       => $datos['correo'],

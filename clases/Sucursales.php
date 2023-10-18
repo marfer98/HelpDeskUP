@@ -1,7 +1,6 @@
 <?php 
     require_once "Conexion.php"; //se incluye la conexion a la bd
     class Sucursales {
-
         public function agregarNuevaSucursal($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "INSERT INTO t_sucursales(
@@ -18,6 +17,7 @@
             ]);
 
             return $respuesta;
-        }  
+        }
+        
 }
 ?>

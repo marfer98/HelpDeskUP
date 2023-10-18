@@ -104,7 +104,6 @@
         }
 
         public function actualizarUsuario($datos){
-            
             //hace referencia a que se actualizo con exito 
             $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
@@ -114,7 +113,7 @@
                                              ubicacion = :ubicacion 
                         WHERE id_usuario = :idUsuario";                     
                                            
-                $respuesta = Conexion::select($sql,[
+                $respuesta = Conexion::execute($sql,[
                     ':idRol'            => $datos['idRol'],
                     ':nombreUsuario'    => $datos['nombreUsuario'],
                     ':ubicacion'        => $datos['ubicacion'],
