@@ -4,18 +4,7 @@
 $datos = array(
     
     'idOficina'             => $_POST['idOficina'],
-    'idEquipo'              => $_POST['idEquipo'],
-    'nombreEquipoA'         => $_POST['nombreEquipoA'],
-    'rotulado'              => $_POST['rotulado'],
-    'marca'                 => $_POST['marca'],
-    'modelo'                => $_POST['modelo'],
-    'numeroSerie'           => $_POST['numeroSerie'],
-    'descripcion'           => $_POST['descripcion'],
-    'memoria'               => $_POST['memoria'],
-    'tipoRam'               => $_POST['tipoRam'],
-    'discoDuro'             => $_POST['discoDuro'],
-    'procesador'            => $_POST['procesador'],
-    'sistemaOperativo'      => $_POST['sistemaOperativo']
+    'id_articulo'           => $_POST['id_articulo'],
 );
 
 include "../../clases/Asignacion.php";

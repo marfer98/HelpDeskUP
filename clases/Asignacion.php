@@ -1,55 +1,23 @@
 <?php
+
     require_once "Conexion.php";
 
-    class Asignacion extends Conexion{
+    class Asignacion{
         public function agregarAsignacion($datos){
             $conexion = Conexion::conectar(); //traemos la conexion
             $sql ="
                 INSERT INTO t_asignacion (
                     id_oficina, 
-                    id_equipo,
-                    nombreEquipoA,
-                    rotulado, 
-                    marca, 
-                    modelo, 
-                    numeroSerie, 
-                    descripcion, 
-                    memoria, 
-                    tipo_ram,
-                    disco_duro, 
-                    procesador,
-                    sistema_operativo)
+                    id_articulo)
                 VALUES (
-                    :id_oficina, 
-                    :id_equipo,
-                    :nombreEquipoA,
-                    :rotulado, 
-                    :marca, 
-                    :modelo, 
-                    :numeroSerie, 
-                    :descripcion, 
-                    :memoria, 
-                    :tipo_ram,
-                    :disco_duro, 
-                    :procesador,
-                    :sistema_operativo)";
+                    :idOficina, 
+                    :id_articulo
+                    )";
      
             //VIENE DEL PROCESO asignar.php
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ':idOficina'            => $datos['idOficina'], 
-                ':idEquipo'             => $datos['idEquipo'],
-                ':nombreEquipoA'        => $datos['nombreEquipoA'],
-                ':rotulado'             => $datos['rotulado'],
-                ':marca'                => $datos['marca'],
-                ':modelo'               => $datos['modelo'],
-                ':numeroSerie'          => $datos['numeroSerie'],
-                ':descripcion'          => $datos['descripcion'],
-                ':memoria'              => $datos['memoria'],
-                ':tipoRam'              => $datos['tipoRam'],
-                ':discoDuro'            => $datos['discoDuro'],
-                ':procesador'           => $datos['procesador'],
-                ':sistemaOperativo'     => $datos['sistemaOperativo']
-
+                ':id_articulo'          => $datos['id_articulo'],
             ]);
             return $respuesta;
         }

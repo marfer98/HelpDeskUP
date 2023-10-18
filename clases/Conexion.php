@@ -1,4 +1,6 @@
 <?php //conexion de la base de datos 
+// ezyro
+
 
 class Conexion {
     public static function conectar(){
@@ -22,9 +24,6 @@ class Conexion {
                 
                 return $dbh;
 
-            }else{
-                echo 'No se ha podido conectar';
-                die();
             }
     
         } catch (PDOException $e){
@@ -53,7 +52,7 @@ class Conexion {
             return $sqlResult;
     
         } catch (Exception $e) {
-            var_dump('Hubo un error: ');
+            echo('<p>Hubo un error: '.$sql.': '.implode(',',$parametros).'</p>');
             var_dump($e);
             return false;
         }
@@ -62,10 +61,8 @@ class Conexion {
     public static function execute($sql, $parametros = null){
         $conexion = Conexion::conectar();
         $query = $conexion->prepare($sql);
-    
         try {
             $execResult = $query->execute($parametros);
-        
             return !!( $execResult );
     
         } catch (Exception $e) {

@@ -6,25 +6,30 @@
                     equipo.id_equipo AS idEquipo,
                     equipo.nombre AS nombreEquipo,
                     asignacion.id_asignacion AS idAsignacion,
-                    asignacion.nombreEquipoA AS nombreEquipoA,
-                    asignacion.rotulado AS rotulado,
-                    asignacion.marca AS marca,
-                    asignacion.modelo AS modelo,
-                    asignacion.numeroSerie AS numeroSerie,
-                    asignacion.descripcion AS descripcion,
-                    asignacion.memoria AS memoria,
-                    asignacion.tipo_ram AS tipoRam,  
-                    asignacion.disco_duro AS discoDuro,
-                    asignacion.procesador AS procesador,
-                    asignacion.sistema_operativo AS sistemaOperativo 
+                    a.nombreEquipoA AS nombreEquipoA,
+                    a.rotulado AS rotulado,
+                    a.marca AS marca,
+                    a.modelo AS modelo,
+                    a.numeroSerie AS numeroSerie,
+                    a.descripcion AS descripcion,
+                    a.memoria AS memoria,
+                    a.tipo_ram AS tipoRam,  
+                    a.disco_duro AS discoDuro,
+                    a.procesador AS procesador,
+                    a.sistema_operativo AS sistemaOperativo,
+                    a.id_articulo as idArticulo
                 FROM
                     t_asignacion AS asignacion
                 INNER JOIN t_oficina AS oficina
                 ON
                     asignacion.id_oficina = oficina.id_oficina
+                INNER JOIN t_articulos AS a
+                ON
+                    asignacion.id_articulo = a.id_articulo
                 INNER JOIN t_cat_equipos AS equipo
                 ON
-                    asignacion.id_equipo = equipo.id_equipo";
+                    a.id_equipo = equipo.id_equipo
+                ";
     $respuesta = Conexion::select($sql);
 ?>
 <table class="table table-sm table-bordered dt-responsive nowrap"
