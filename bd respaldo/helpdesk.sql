@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: sql110.ezyro.com
--- Tiempo de generación: 18-10-2023 a las 14:31:34
+-- Tiempo de generación: 18-10-2023 a las 16:52:05
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.2.22
 
@@ -159,8 +159,8 @@ CREATE TABLE `t_oficina` (
 --
 
 INSERT INTO `t_oficina` (`id_oficina`, `nombre`, `telefono`, `correo`, `fecha_insert`) VALUES
-(1, 'Informática', '0981288060', 'marferantonio@gmail.com', '2022-01-03 08:47:00'),
-(3, 'Apelación', '12454', 'apel@gmail.com', '2022-01-03 09:12:43'),
+(1, 'Informatica', '0981288060', 'marferantonio@gmail.com', '2022-01-03 08:47:00'),
+(3, 'ApelaciÃ³n', '12454', 'apel@gmail.com', '2022-01-03 09:12:43'),
 (4, 'Mesa de Entrada', '0962812685', 'mesadeentrada@helpdesk.com', '2022-01-03 09:19:17'),
 (5, 'telecentro', '0981288060', 'telecentrocsj@gmail.com', '2022-01-04 10:49:36'),
 (7, 'Mesa de Entrada', '4545445', 'MESA@GMAIL.COM', '2022-02-03 08:05:33'),
@@ -173,7 +173,9 @@ INSERT INTO `t_oficina` (`id_oficina`, `nombre`, `telefono`, `correo`, `fecha_in
 (17, 'Recursos Humanos', '0990700821', 'recursoshumanos@helpdesk.com', '2022-03-22 08:34:10'),
 (18, 'Control Personal', '0986795392', 'controlpersonal@helpdesk.com', '2022-03-22 08:34:23'),
 (19, 'Oficina de Inspectoria', '0973303802', 'oficinadeinspectoria@helpdesk.com', '2022-03-22 08:34:38'),
-(20, 'Facilitadores Judiciales ', '0991386847', 'facilitadoresjudiciales@helpdesk.com', '2022-03-22 08:35:09');
+(20, 'Facilitadores Judiciales ', '0991386847', 'facilitadoresjudiciales@helpdesk.com', '2022-03-22 08:35:09'),
+(21, 'Prueba', '0150515', 'ererer', '2023-10-18 14:43:20'),
+(23, 'Prueba', '0150515', 'ererer_', '2023-10-18 14:48:23');
 
 -- --------------------------------------------------------
 
@@ -301,7 +303,9 @@ INSERT INTO `t_usuarios` (`id_usuario`, `id_rol`, `id_oficina`, `usuario`, `nomb
 (1, 2, 1, 'admin', '', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Primer piso', 1, '2022-01-03 08:57:33', 1),
 (3, 2, 3, 'Rocio ', '', '011c945f30ce2cbafc452f39840f025693339c42', 'Tercer Piso', 1, '2022-01-03 09:19:17', 1),
 (5, 1, 7, 'MDE001', '', '6e6484c552ab654fe83a243bdf159a35bcd81dcb', 'Planta baja', 1, '2022-02-03 08:05:33', 1),
-(6, 1, 8, 'ESTA001', '', 'e8040662711125241cdab6e1da4f6b24587dd8a5', 'Planta baja', 1, '2022-02-03 08:07:45', 1);
+(6, 1, 8, 'ESTA001', '', 'e8040662711125241cdab6e1da4f6b24587dd8a5', 'Planta baja', 1, '2022-02-03 08:07:45', 1),
+(7, 2, 21, 'ererer', '', 'd4ccbc79af1c084468bbe0049c7085f2d7d55857', 'Lejos', 1, '2023-10-18 14:43:20', NULL),
+(8, 1, 23, 'ererer_', '', '666ae00902127bff9ae6440b9a044e6f7383e074', '', 1, '2023-10-18 14:48:23', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -411,7 +415,7 @@ ALTER TABLE `t_cat_roles`
 -- AUTO_INCREMENT de la tabla `t_oficina`
 --
 ALTER TABLE `t_oficina`
-  MODIFY `id_oficina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_oficina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `t_proveedores`
@@ -441,7 +445,7 @@ ALTER TABLE `t_sucursales`
 -- AUTO_INCREMENT de la tabla `t_usuarios`
 --
 ALTER TABLE `t_usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
