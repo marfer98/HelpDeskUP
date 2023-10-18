@@ -8,14 +8,13 @@
                         descripcion, 
                         direccion)
                     VALUES (
-                        :descripcion
+                        :descripcion,
                         :direccion
-                        :correo
                     )";
   
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ':descripcion'  => $datos['descripcion'],
-                ':direccion'    => $datos['telefonoOfdireccionicina'],
+                ':direccion'    => $datos['direccion'],
             ]);
 
             return $respuesta;

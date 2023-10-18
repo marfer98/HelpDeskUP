@@ -14,14 +14,14 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="nombreSucursal"> Nombre</label>
-                            <input type="text" class="form-control" id="nombreSucursal" name="nombreSucursal" required>
+                            <label for="descripcion"> Nombre</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="direccionSucursal"> Dirección</label>
-                            <input type="text" class="form-control" id="direccionSucursal" name="direccionSucursal" required>
+                            <label for="direccion"> Dirección</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion" required>
                         </div>
                     </div>
                 </div>
