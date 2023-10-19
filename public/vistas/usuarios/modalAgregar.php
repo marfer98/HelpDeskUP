@@ -46,7 +46,7 @@
                         <div class="col-sm-12">
                             <label for="idRol"> Rol usuario</label>
                             <select name="idRol" id="idRol" class="form-control" required>
-                                <option value=""></option>
+                                <option value="">Seleccione un </option>
                                 <option value="1">Cliente</option>
                                 <option value="2">Administrador</option>
                             </select>
