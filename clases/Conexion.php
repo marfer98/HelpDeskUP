@@ -26,8 +26,8 @@ class Conexion {
 
             }
     
-        } catch (PDOException $e){
-            echo $e->getMessage();
+        } catch (PDOException $exception){
+            echo $exception->getMessage();
             die();
         }
 
@@ -51,12 +51,11 @@ class Conexion {
     
             return $sqlResult;
     
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             echo('<p>Hubo un error: '.$sql.': '.implode(',',$parametros).'</p>');
             print_r([
                 'error' => $exception->getMessage(),
-                'query' => $exception->getTrace()[0]['args'][0],
-                'params' => $exception->getTrace()[0]['args'][1],
+                'query' => $exception->getTrace()[0]['args'],
             ]);
             return false;
         }
@@ -69,12 +68,11 @@ class Conexion {
             $execResult = $query->execute($parametros);
             return !!( $execResult );
     
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             echo('Hubo un error: ');
             print_r([
                 'error' => $exception->getMessage(),
-                'query' => $exception->getTrace()[0]['args'][0],
-                'params' => $exception->getTrace()[0]['args'][1],
+                'query' => $exception->getTrace()[0]['args']
             ]);
             return false;
         }
@@ -91,12 +89,11 @@ class Conexion {
         
             return $execResult ? $conexion->lastInsertId() : false;
     
-        } catch (Exception $e) {
+        } catch (Exception $exception) {
             echo('Hubo un error: ');
             print_r([
                 'error' => $exception->getMessage(),
-                'query' => $exception->getTrace()[0]['args'][0],
-                'params' => $exception->getTrace()[0]['args'][1],
+                'query' => $exception->getTrace()[0]['args']
             ]);
             return false;
         }

@@ -1,6 +1,6 @@
 <!-- Modal -->
 <!-- onsubmit es para recargar el campo y este en blanco-->
-<form id="frmAgregarUsuario" method="POST" onsubmit="return agregarNuevoUsuario()" class="needs-validation" novalidate>
+<form id="frmAgregarUsuario" method="POST" onsubmit="return agregarNuevoUsuario()">
     <div class="modal fade" id="modalAgregarUsuarios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -21,13 +21,13 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="telefono"> Telefono</label>
-                            <input type="numeric" class="form-control" id="telefono" name="telefono" required>
+                            <input type="number" class="form-control" id="telefono" name="telefono" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="correo"> Correo</label>
-                            <input type="mail" class="form-control" id="correo" name="correo" required>
+                            <input type="email" class="form-control" id="correo" name="correo" required>
                         </div>
                     </div>
                     <div class="row">

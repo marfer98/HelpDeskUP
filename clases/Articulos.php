@@ -54,19 +54,19 @@
                 :sistema_operativo
             )';
             $datos = [
-              ':id_equipo' => $datos['id_equipo'],
-              ':id_proveedor' => $datos['id_proveedor'],
-              ':nombreEquipoA' => $datos['nombreEquipoA'],
-              ':rotulado' => $datos['rotulado'],
-              ':marca' => $datos['marca'],
-              ':modelo' => $datos['modelo'],
-              ':numeroSerie' => $datos['numeroSerie'],
-              ':descripcion' => $datos['descripcion'],
-              ':memoria' => $datos['memoria'],
-              ':tipo_ram' => $datos['tipo_ram'],
-              ':disco_duro' => $datos['disco_duro'],
-              ':procesador' => $datos['procesador'],
-              ':sistema_operativo' => $datos['sistema_operativo']
+                ':id_equipo' => $datos['id_equipo'],
+                ':id_proveedor' => $datos['id_proveedor'],
+                ':nombreEquipoA' => $datos['nombreEquipoA'],
+                ':rotulado' => $datos['rotulado'],
+                ':marca' => $datos['marca'],
+                ':modelo' => $datos['modelo'],
+                ':numeroSerie' => $datos['numeroSerie'],
+                ':descripcion' => $datos['descripcion'],
+                ':memoria' => $datos['memoria'],
+                ':tipo_ram' => $datos['tipo_ram'],
+                ':disco_duro' => $datos['disco_duro'],
+                ':procesador' => $datos['procesador'],
+                ':sistema_operativo' => $datos['sistema_operativo']
             ];
             return Conexion::execute($sql,$datos);
         }
@@ -75,35 +75,35 @@
             $sql = '
             UPDATE articulos 
             SET 
-              id_equipo = :id_equipo,
-              id_proveedor = :id_proveedor,
-              nombreEquipoA = :nombreEquipoA,
-              rotulado = :rotulado,
-              marca = :marca,
-              modelo = :modelo,
-              numeroSerie = :numeroSerie,
-              descripcion = :descripcion,
-              memoria = :memoria,
-              tipo_ram = :tipo_ram,
-              disco_duro = :disco_duro,
-              procesador = :procesador,
-              sistema_operativo = :sistema_operativo 
+                id_equipo = :id_equipo,
+                id_proveedor = :id_proveedor,
+                nombreEquipoA = :nombreEquipoA,
+                rotulado = :rotulado,
+                marca = :marca,
+                modelo = :modelo,
+                numeroSerie = :numeroSerie,
+                descripcion = :descripcion,
+                memoria = :memoria,
+                tipo_ram = :tipo_ram,
+                disco_duro = :disco_duro,
+                procesador = :procesador,
+                sistema_operativo = :sistema_operativo 
             WHERE id_articulos = :id_articulos';
             $datos = [
-              ':id_equipo' => $datos['id_equipo'],
-              ':id_proveedor' => $datos['id_proveedor'],
-              ':nombreEquipoA' => $datos['nombreEquipoA'],
-              ':rotulado' => $datos['rotulado'],
-              ':marca' => $datos['marca'],
-              ':modelo' => $datos['modelo'],
-              ':numeroSerie' => $datos['numeroSerie'],
-              ':descripcion' => $datos['descripcion'],
-              ':memoria' => $datos['memoria'],
-              ':tipo_ram' => $datos['tipo_ram'],
-              ':disco_duro' => $datos['disco_duro'],
-              ':procesador' => $datos['procesador'],
-              ':sistema_operativo' => $datos['sistema_operativo'],
-              ':id_articulos' => $datos['id_articulos']
+                ':id_equipo' => $datos['id_equipo'],
+                ':id_proveedor' => $datos['id_proveedor'],
+                ':nombreEquipoA' => $datos['nombreEquipoA'],
+                ':rotulado' => $datos['rotulado'],
+                ':marca' => $datos['marca'],
+                ':modelo' => $datos['modelo'],
+                ':numeroSerie' => $datos['numeroSerie'],
+                ':descripcion' => $datos['descripcion'],
+                ':memoria' => $datos['memoria'],
+                ':tipo_ram' => $datos['tipo_ram'],
+                ':disco_duro' => $datos['disco_duro'],
+                ':procesador' => $datos['procesador'],
+                ':sistema_operativo' => $datos['sistema_operativo'],
+                ':id_articulos' => $datos['id_articulos']
             ];
             return Conexion::execute($sql,$datos);
         }
@@ -113,7 +113,7 @@
             DELETE FROM articulos
             WHERE id_articulos = :id_articulos';
             $datos = [
-            ':id_articulos' => $id
+                ':id_articulos' => $id
             ];
             return Conexion::execute($sql,$datos);
         }

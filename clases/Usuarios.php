@@ -13,7 +13,7 @@
 
                 $respuesta = Conexion::select($sql);//respuesta de la base de datos
 
-            if (count($respuesta)>0) { // Si retorta un respuesta la bd
+            if ($respuesta && count($respuesta)>0) { // Si retorta un respuesta la bd
                 $datosUsuario = ($respuesta[0]);
                 
                 // Crear una sesion del usuario

@@ -28,6 +28,7 @@ function agregarNuevoUsuario(){
     });
     return false;
 }
+
 function obtenerDatosUsuario(idUsuario){
   // alert(idUsuario);
     $.ajax({

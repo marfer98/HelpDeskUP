@@ -78,8 +78,9 @@
         </div>
     </div>
 </div>
-
-
+<?php
+include "footer.php"; 
+?>  
 
 <?php include "footer.php"; 
     }else{//FIN DEL IF
