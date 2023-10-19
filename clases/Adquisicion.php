@@ -3,35 +3,61 @@
     require_once "Conexion.php";
 
     class Adquisicion{
-        public function agregarAdquisicion($datos){
-            $conexion = Conexion::conectar(); //traemos la conexion
-            $sql ="
-                INSERT INTO t_adquisicion (
-                    id_oficina, 
-                    id_articulo)
-                VALUES (
-                    :idOficina, 
-                    :id_articulo
-                    )";
-     
-            //VIENE DEL PROCESO asignar.php
-            $respuesta = Conexion::execute($sql,[
-                ':idOficina'            => $datos['idOficina'], 
-                ':id_articulo'          => $datos['id_articulo'],
-            ]);
-            return $respuesta;
+        public function obtenerDatosAdquisiciones($where=null){
+            $sql = '
+            SELECT 
+              id_articulo,
+              id_proveedor,
+              cantidad
+            FROM adquisiciones
+            '.$where;
+            return Conexion::select($sql); 
         }
-
-        public function eliminarAdquisicion($idAdquisicion){
-            $conexion = Conexion::conectar(); //traemos la conexion
-            $sql = "DELETE FROM t_adquisicion 
-                    WHERE id_adquisicion = :id_adquisicion";
-            
-            $respuesta = Conexion::execute($sql,[
-                ':idAdquisicion' => $idAdquisicion
-            ]);
-
-            return $respuesta;
+      
+        public function agregarNuevaAdquisicion($datos){
+            $sql = '
+            INSERT INTO adquisiciones (
+                id_articulo, 
+                id_proveedor, 
+                cantidad
+            ) VALUES (
+                :id_articulo, 
+                :id_proveedor, 
+                :cantidad
+            )';
+            $datos = [
+              ':id_articulo' => $datos['id_articulo'],
+              ':id_proveedor' => $datos['id_proveedor'],
+              ':cantidad' => $datos['cantidad']
+            ];
+            return Conexion::execute($sql,$datos);
+        }
+      
+        public function actualizarAdquisicion($datos){
+            $sql = '
+            UPDATE adquisiciones 
+            SET 
+                id_articulo = :id_articulo,
+                id_proveedor = :id_proveedor,
+                cantidad = :cantidad 
+            WHERE id_adquisiciones = :id_adquisiciones';
+            $datos = [
+                ':id_articulo' => $datos['id_articulo'],
+                ':id_proveedor' => $datos['id_proveedor'],
+                ':cantidad' => $datos['cantidad'],
+                ':id_adquisiciones' => $datos['id_adquisiciones']
+            ];
+            return Conexion::execute($sql,$datos);
+        }
+      
+        public function eliminarAdquisicion($id){
+            $sql = '
+            DELETE FROM adquisiciones
+            WHERE id_adquisiciones = :id_adquisiciones';
+            $datos = [
+                ':id_adquisiciones' => $id
+            ];
+            return Conexion::execute($sql,$datos);
         }
     }
 

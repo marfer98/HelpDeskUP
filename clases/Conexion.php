@@ -53,7 +53,11 @@ class Conexion {
     
         } catch (Exception $e) {
             echo('<p>Hubo un error: '.$sql.': '.implode(',',$parametros).'</p>');
-            var_dump($e);
+            print_r([
+                'error' => $exception->getMessage(),
+                'query' => $exception->getTrace()[0]['args'][0],
+                'params' => $exception->getTrace()[0]['args'][1],
+            ]);
             return false;
         }
     }
@@ -67,7 +71,11 @@ class Conexion {
     
         } catch (Exception $e) {
             echo('Hubo un error: ');
-            var_dump($e);
+            print_r([
+                'error' => $exception->getMessage(),
+                'query' => $exception->getTrace()[0]['args'][0],
+                'params' => $exception->getTrace()[0]['args'][1],
+            ]);
             return false;
         }
     
@@ -85,7 +93,11 @@ class Conexion {
     
         } catch (Exception $e) {
             echo('Hubo un error: ');
-            var_dump($e);
+            print_r([
+                'error' => $exception->getMessage(),
+                'query' => $exception->getTrace()[0]['args'][0],
+                'params' => $exception->getTrace()[0]['args'][1],
+            ]);
             return false;
         }
     }

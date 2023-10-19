@@ -1,95 +1,121 @@
 <?php 
     require_once "Conexion.php"; //se incluye la conexion a la bd
     class Reportes{
-        public function agregarReporteCliente($datos){
-            $sql = "INSERT INTO t_reportes (id_usuario,
-                                            id_equipo,
-                                            descripcion_problema)
-                    VALUES (
-                        :idUsuario,
-                        :idEquipo,
-                        :problema)";
-            $respuesta = Conexion::select($sql,[
-                ":idUsuario"    => $datos['idUsuario'],
-                ":idEquipo"     => $datos['idEquipo'],
-                ":problema"     => $datos['problema'],
-            ]);
-
-            return $respuesta;
+        public function obtenerDatosArticulos($where=null){
+            $sql = '
+                SELECT 
+                    id_equipo,
+                    id_proveedor,
+                    nombreEquipoA,
+                    rotulado,
+                    marca,
+                    modelo,
+                    numeroSerie,
+                    descripcion,
+                    memoria,
+                    tipo_ram,
+                    disco_duro,
+                    procesador,
+                    sistema_operativo
+                FROM articulos
+                '.$where;
+            return Conexion::select($sql); 
         }
-
-        public function eliminarReporteCliente($idReporte){
-            $sql = "DELETE FROM t_reportes WHERE id_reporte = :idReporte";
-            $respuesta = Conexion::execute($sql,[
-                ":idReporte" => $idReporte
-            ]);
-
-            return $respuesta;
+      
+        public function agregarNuevoArticulo($datos){
+            $sql = '
+            INSERT INTO articulos (
+                id_equipo, 
+                id_proveedor, 
+                nombreEquipoA, 
+                rotulado, 
+                marca, 
+                modelo, 
+                numeroSerie, 
+                descripcion, 
+                memoria, 
+                tipo_ram, 
+                disco_duro, 
+                procesador, 
+                sistema_operativo
+            ) VALUES (
+                :id_equipo, 
+                :id_proveedor, 
+                :nombreEquipoA, 
+                :rotulado, 
+                :marca, 
+                :modelo, 
+                :numeroSerie, 
+                :descripcion, 
+                :memoria, 
+                :tipo_ram, 
+                :disco_duro, 
+                :procesador, 
+                :sistema_operativo
+            )';
+            $datos = [
+              ':id_equipo' => $datos['id_equipo'],
+              ':id_proveedor' => $datos['id_proveedor'],
+              ':nombreEquipoA' => $datos['nombreEquipoA'],
+              ':rotulado' => $datos['rotulado'],
+              ':marca' => $datos['marca'],
+              ':modelo' => $datos['modelo'],
+              ':numeroSerie' => $datos['numeroSerie'],
+              ':descripcion' => $datos['descripcion'],
+              ':memoria' => $datos['memoria'],
+              ':tipo_ram' => $datos['tipo_ram'],
+              ':disco_duro' => $datos['disco_duro'],
+              ':procesador' => $datos['procesador'],
+              ':sistema_operativo' => $datos['sistema_operativo']
+            ];
+            return Conexion::execute($sql,$datos);
         }
-
-        public function obtenerSolucion($idReporte){
-            $sql = "SELECT solucion_problema, estatus, usuario_tecnico
-                FROM t_reportes WHERE id_reporte = ':idReporte'";
-            $reporte = Conexion::select($sql,[
-                ":idReporte" => $idReporte
-            ])[0];
-
-            $datos = array(
-                "idReporte"        => $idReporte,
-                "estatus"          => $reporte['estatus'],
-                "solucion"         => $reporte['solucion_problema'],
-                "usuarioTecnico"   => $reporte['usuario_tecnico']
-
-            );
-
-            return $datos;
+      
+        public function actualizarArticulo($datos){
+            $sql = '
+            UPDATE articulos 
+            SET 
+              id_equipo = :id_equipo,
+              id_proveedor = :id_proveedor,
+              nombreEquipoA = :nombreEquipoA,
+              rotulado = :rotulado,
+              marca = :marca,
+              modelo = :modelo,
+              numeroSerie = :numeroSerie,
+              descripcion = :descripcion,
+              memoria = :memoria,
+              tipo_ram = :tipo_ram,
+              disco_duro = :disco_duro,
+              procesador = :procesador,
+              sistema_operativo = :sistema_operativo 
+            WHERE id_articulos = :id_articulos';
+            $datos = [
+              ':id_equipo' => $datos['id_equipo'],
+              ':id_proveedor' => $datos['id_proveedor'],
+              ':nombreEquipoA' => $datos['nombreEquipoA'],
+              ':rotulado' => $datos['rotulado'],
+              ':marca' => $datos['marca'],
+              ':modelo' => $datos['modelo'],
+              ':numeroSerie' => $datos['numeroSerie'],
+              ':descripcion' => $datos['descripcion'],
+              ':memoria' => $datos['memoria'],
+              ':tipo_ram' => $datos['tipo_ram'],
+              ':disco_duro' => $datos['disco_duro'],
+              ':procesador' => $datos['procesador'],
+              ':sistema_operativo' => $datos['sistema_operativo'],
+              ':id_articulos' => $datos['id_articulos']
+            ];
+            return Conexion::execute($sql,$datos);
         }
-
-        public function actualizarSolucion($datos){ //ESTO ES UN METODO
-            $sql ="UPDATE
-                        t_reportes
-                    SET
-                        id_usuario_tecnico = :idUsuario,
-                        solucion_problema = :solucion,
-                        estatus = :estatus,
-                        usuario_tecnico = :usuarioTecnico
-                    WHERE
-                        id_reporte = :idReporte";
-
-            $respuesta = Conexion::execute($sql,[
-                ":idUsuario"        => $datos['idUsuario'],
-                ":solucion"         => $datos['solucion'],
-                ":estatus"          => $datos['estatus'],
-                ":usuarioTecnico"   => $datos['usuarioTecnico'],
-                ":idReporte"        => $datos['idReporte']
-            ]);
-            return $respuesta;
-        }
-
-        public function obtenerDatosReportes(){
-            $sql = "
-                SELECT reporte.id_reporte           AS idReporte,
-                        reporte.id_usuario           AS idUsuario,
-                        oficina.nombre               AS nombreOficina,
-                        equipo.id_equipo             AS idEquipo,
-                        equipo.nombre                AS nombreEquipo,
-                        reporte.usuario_tecnico      AS usuarioTecnico,
-                        reporte.descripcion_problema AS problema,
-                        reporte.solucion_problema    AS solucion,
-                        reporte.estatus              AS estatus,
-                        reporte.fecha                AS fecha
-                FROM   t_reportes AS reporte
-                        INNER JOIN t_usuarios AS usuario
-                                ON reporte.id_usuario = usuario.id_usuario
-                        INNER JOIN t_oficina AS oficina
-                                ON usuario.id_oficina = oficina.id_oficina
-                        INNER JOIN t_cat_equipos AS equipo
-                                ON reporte.id_equipo = equipo.id_equipo
-                        INNER JOIN t_cat_roles tcr
-                                ON tcr.id_rol = usuario.id_rol
-                ORDER  BY reporte.estatus DESC, tcr.prioridad DESC,
-                            reporte.fecha DESC";
-            return Conexion::select($sql);
+      
+        public function eliminarArticulo($id){
+            $sql = '
+            DELETE FROM articulos
+            WHERE id_articulos = :id_articulos';
+            $datos = [
+            ':id_articulos' => $id
+            ];
+            return Conexion::execute($sql,$datos);
         }
     }
 ?>
