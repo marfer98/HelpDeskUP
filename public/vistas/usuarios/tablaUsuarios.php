@@ -1,5 +1,6 @@
 <?php
     require_once '../../../clases/Usuarios.php';
+    require_once '../../../clases/Roles.php';
     $usuario = new Usuarios;
     $respuesta = $usuario->obtenerDatosUsuarios();
 ?>

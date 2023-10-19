@@ -1,3 +1,7 @@
+<?php
+    require_once '../../clases/Roles.php';
+?>
+
 <!-- Modal -->
 <!-- onsubmit es para recargar el campo y este en blanco-->
 <form id="frmAgregarUsuario" method="POST" onsubmit="return agregarNuevoUsuario()">
@@ -46,9 +50,14 @@
                         <div class="col-sm-12">
                             <label for="idRol"> Rol usuario</label>
                             <select name="idRol" id="idRol" class="form-control" required>
-                                <option value="">Seleccione un </option>
-                                <option value="1">Cliente</option>
-                                <option value="2">Administrador</option>
+                                <option value="">Seleccione un rol</option>
+                                <?php
+                                    $roles = new Roles;
+                                    $roles = $roles->obtenerDatosRoles();
+                                    foreach($roles as $rol){
+                                        echo "<option value='".$rol['id_rol']."'>".$rol['nombre']."</option>";
+                                    }
+                                ?>
                             </select>
                         </div>
                     </div>
