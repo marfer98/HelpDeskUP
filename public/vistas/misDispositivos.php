@@ -14,31 +14,35 @@
                     INNER JOIN
                 t_oficina AS oficina ON usuario.id_oficina = oficina.id_oficina
                     AND usuario.id_usuario = '$idUsuario'";
-        $respuesta= Conexion::select($sql);
-        $idOficina = $respuesta[0];
-    $sql = " SELECT
+        $respuesta = Conexion::select($sql);
+        $idOficina = $respuesta[0]['idOficina'];
+
+        $sql = " SELECT
                 oficina.id_oficina AS idOficina,
                 oficina.nombre AS nombreOficina,
                 equipo.id_equipo AS idEquipo,
                 equipo.nombre AS nombreEquipo,
                 asignacion.id_asignacion AS idAsignacion,
-                asignacion.nombreEquipoA AS nombreEquipoA,
-                asignacion.marca AS marca,
-                asignacion.modelo AS modelo,
-                asignacion.numeroSerie AS numeroSerie,
-                asignacion.descripcion AS descripcion,
-                asignacion.memoria AS memoria,
-                asignacion.disco_duro AS discoDuro,
-                asignacion.procesador AS procesador,
+                a.nombreEquipoA AS nombreEquipoA,
+                a.marca AS marca,
+                a.modelo AS modelo,
+                a.numeroSerie AS numeroSerie,
+                a.descripcion AS descripcion,
+                a.memoria AS memoria,
+                a.disco_duro AS discoDuro,
+                a.procesador AS procesador,
                 equipo.descripcion AS imagen
             FROM
                 t_asignacion AS asignacion
+            INNER JOIN t_articulos AS a
+            ON
+                asignacion.id_articulo = a.id_articulo
             INNER JOIN t_oficina AS oficina
             ON
                 asignacion.id_oficina = oficina.id_oficina
             INNER JOIN t_cat_equipos AS equipo
             ON
-                asignacion.id_equipo = equipo.id_equipo AND asignacion.id_oficina = '$idOficina'";
+                a.id_equipo = equipo.id_equipo AND asignacion.id_oficina = '$idOficina'";
 
         $respuesta = Conexion::select($sql);
   ?>
