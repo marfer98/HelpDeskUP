@@ -1,6 +1,6 @@
 <!-- Modal -->
 <?php
-require_once "../../../clases/Conexion.php";
+require_once "../../clases/Conexion.php";
 ?>
 <form id="frmAgregarAdquisiciones" method="POST" onsubmit="return agregarAdquisiciones()">
     <div class="modal fade" id="modalAgregarAdquisiciones" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -31,8 +31,8 @@ require_once "../../../clases/Conexion.php";
                         <div class="col-sm-6">
                             <label>Articulos</label>
                             <?php //agarra el ID de la oficina 
-                                $sql = "SELECT  id_equipo, nombre
-                                FROM t_cat_equipos ORDER BY nombre";
+                                $sql = "SELECT  id_equipo, nombreEquipoA
+                                FROM t_articulos ORDER BY nombreEquipoA";
                                 $respuesta = Conexion::select($sql)
                             ?>
                             <select name="id_articulo" id="id_articulo" class="form-control" required>
@@ -42,7 +42,6 @@ require_once "../../../clases/Conexion.php";
                                 <?php }?><!-- Cierre del while -->
                             </select>
                         </div>
-                    </div>	
                     <div class="col-sm-4">
                         <label for="nombreEquipoA">NombreEquipoA</label>
                         <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control" required>
@@ -131,23 +130,38 @@ require_once "../../../clases/Conexion.php";
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
-                    <div class="col-sm-4 d-none" >
-                    <label for="id_adquisiciones">id_adquisiciones</label>
-                    <input type="hidden" name="id_adquisiciones" id="id_adquisiciones" class="form-control" required="">
-                </div>
-    
-                    <div class="col-sm-4">
-                        <label for="id_articulo">Id articulo</label>
-                        <input type="text" name="id_articulo" id="id_articulo" class="form-control" required>
-                    </div>		
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>Tipo de Equipo</label>
+                        <?php //agarra el ID de la oficina 
+                            $sql = "SELECT  id_equipo, nombre
+                            FROM t_cat_equipos ORDER BY nombre";
+                            $respuesta = Conexion::select($sql)
+                        ?>
+                        <select name="id_equipo" id="id_equipo" class="form-control" required>
+                            <option value="">Seleccione una opción</option>
+                            <?php foreach($respuesta as $mostrar){?>
+                                <option value="<?php echo $mostrar['id_equipo'];?>"><?php echo $mostrar ['nombre'];?></option>
+                            <?php }?><!-- Cierre del while -->
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Articulos</label>
+                        <?php //agarra el ID de la oficina 
+                            $sql = "SELECT  id_equipo, nombre
+                            FROM t_cat_equipos ORDER BY nombre";
+                            $respuesta = Conexion::select($sql)
+                        ?>
+                        <select name="id_articulo" id="id_articulo" class="form-control" required>
+                            <option value="">Seleccione una opción</option>
+                            <?php foreach($respuesta as $mostrar){?>
+                                <option value="<?php echo $mostrar['id_articulo'];?>"><?php echo $mostrar ['nombreEquipoA'];?></option>
+                            <?php }?><!-- Cierre del while -->
+                        </select>
+                    </div>
                     <div class="col-sm-4">
                         <label for="nombreEquipoA">NombreEquipoA</label>
                         <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control" required>
-                    </div>		
-                    <div class="col-sm-4">
-                        <label for="id_equipo">Id equipo</label>
-                        <input type="text" name="id_equipo" id="id_equipo" class="form-control" required>
                     </div>		
                     <div class="col-sm-4">
                         <label for="id_proveedor">Id proveedor</label>
@@ -194,8 +208,18 @@ require_once "../../../clases/Conexion.php";
                         <input type="text" name="sistema_operativo" id="sistema_operativo" class="form-control" required>
                     </div>		
                     <div class="col-sm-4">
-                        <label for="nombre_equipo">Nombre equipo</label>
-                        <input type="text" name="nombre_equipo" id="nombre_equipo" class="form-control" required>
+                    <label>Articulos</label>
+                        <?php //agarra el ID de la oficina 
+                            $sql = "SELECT  id_proveedor, nombre
+                            FROM t_proveedores ORDER BY nombre";
+                            $respuesta = Conexion::select($sql)
+                        ?>
+                        <select name="id_proveedor" id="id_proveedor" class="form-control" required>
+                            <option value="">Seleccione una opción</option>
+                            <?php foreach($respuesta as $mostrar){?>
+                                <option value="<?php echo $mostrar['id_proveedor'];?>"><?php echo $mostrar ['id_proveedor'];?></option>
+                            <?php }?><!-- Cierre del while -->
+                        </select>
                     </div>		
                     <div class="col-sm-4">
                         <label for="cantidad">Cantidad</label>

@@ -23,7 +23,7 @@
 </div>
 
 <?php 
-include "adquisiciones/modalActualizarAdquisiciones.php"; 
+include "adquisiciones/modalAdquisiciones.php"; 
 include "footer.php"; 
 ?>    
 <script src="../js/adquisiciones/adquisiciones.js"></script>
