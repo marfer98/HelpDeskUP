@@ -10,7 +10,7 @@
         <div class="card-body p-5">
             <h1 class="fw_light">Administrar Sucursales</h1>
             <p class="lead">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarSucursal">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarSucursales">
                     <i class="fas fa-plus-circle"></i>
                     Agregar Sucursales
                 </button>
@@ -22,7 +22,7 @@
     </div>
 
 <?php 
-    include "sucursales/modalAgregarSucursal.php";
+    include "sucursales/modalAgregarSucursales.php";
     
     require_once "footer.php"; 
 ?>

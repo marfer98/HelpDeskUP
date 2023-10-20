@@ -36,27 +36,28 @@ function validar(form) {
   return false;
 }
 
+
 // Función para eliminar la palabra "return" y los paréntesis
 function eliminarReturn(texto) {
     let returnRegex = /return\s+([a-zA-Z0-9]+)\((.*)\)/;
     let parensRegex = /\((.*)\)/;
-  // Buscamos la palabra "return" y los paréntesis
-  const matches = returnRegex.exec(texto);
+    // Buscamos la palabra "return" y los paréntesis
+    const matches = returnRegex.exec(texto);
 
-  // Si encontramos una coincidencia
-  if (matches) {
-    // Eliminamos la coincidencia
-    let resultado = texto.replace(matches[0], matches[1]);
+    // Si encontramos una coincidencia
+    if (matches) {
+        // Eliminamos la coincidencia
+        let resultado = texto.replace(matches[0], matches[1]);
 
-    // Eliminamos los paréntesis
-    resultado = resultado.replace(parensRegex, "");
+        // Eliminamos los paréntesis
+        resultado = resultado.replace(parensRegex, "");
 
-    // Devolvemos el resultado
-    return resultado;
-  }
+        // Devolvemos el resultado
+        return resultado;
+    }
 
-  // Si no encontramos una coincidencia
-  return texto;
+    // Si no encontramos una coincidencia
+    return texto;
 }
 
 window.onload = (event) => {
@@ -74,14 +75,100 @@ const toCamelCase = (snakeCaseString) => {
      .join('');
  };
  
+function generarJS(tabla, campos) {
+  // Obtenemos los datos de la tabla
+  const nombreTabla = tabla.replace("t_", "");
+  const nombreTablaCamel = toCamelCase(nombreTabla)
+  const camposTitulo = convertirSnakeCaseAMayusculas(campos)
+  console.info(nombreTablaCamel+'.js')
+  // Generamos la tabla HTML
+  const tablaHTML = `
+  //jquery
+  $(document).ready(function(){
+      $("#tabla${nombreTablaCamel}Load").load("${nombreTablaCamel}/tabla${nombreTablaCamel}.php");
+  });
+  function agregar${nombreTablaCamel}(){
+    $.ajax({
+        type: "POST",
+        data: $('#frmAgregar${nombreTablaCamel}').serialize(),
+        url:"../../procesos/${nombreTablaCamel}/agregar${nombreTablaCamel}.php",
+        success:function(respuesta){
+           // console.log(respuesta);
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                $("#tabla${nombreTablaCamel}Load").load("${nombreTablaCamel}/tabla${nombreTablaCamel}.php");//recarga del formulario
+                $('#frmAgregar${nombreTablaCamel}')[0].reset();//reiniciar el formulario de agregado 
+                Swal.fire(":D","Agregado con EXITO","success");
+            }else{
+                Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
+        }
+    });
+    return false;
+  }
+  
+  function obtenerDatos${nombreTablaCamel}(id_${nombreTabla}){
+  // alert(id_${nombreTabla});
+    $.ajax({
+        type: "POST",
+        data: "id_${nombreTabla}=" + id_${nombreTabla},//mandar el id ${nombreTablaCamel}
+        url: "../../procesos/${nombreTablaCamel}/obtenerDatos${nombreTablaCamel}.php",
+        success:function(respuesta){
+            respuesta= jQuery.parseJSON(respuesta);//envio de respuesta valida
+            //console.log(respuesta);
+            ${campos.map(campo => `
+              $('#${campo}').val(respuesta['${campo}']);`).join("\t\t") 
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
+        }
+    });
+  }
+  
+  function actualizar${nombreTablaCamel}(){
+    $.ajax({
+        type: "POST",
+        data: $('#frmActualizar${nombreTablaCamel}').serialize(),
+        url: "../../procesos/${nombreTablaCamel}/id_${nombreTablaCamel}actualizar${nombreTablaCamel}.php",
+        success:function(respuesta){
+            // console.log(respuesta);
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                $("#tabla${nombreTablaCamel}Load").load("${nombreTablaCamel}/tabla${nombreTablaCamel}.php");//recarga del formulario
+                $('#modalActualizar${nombreTablaCamel}').modal('hide');
+                Swal.fire(":D","Actualizado con EXITO","success");
+            }else{
+                Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); //sweet aler 2
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
+        }
+    });
+    return false;
+  }`
+
+  console.log(tablaHTML); 
+}
+
  function convertirSnakeCaseAMayusculas(array) {
-   return array.map((valor) => {
-     // Convertimos el valor a mayúsculas en el primer caracter
-     const valorMayusculas = valor.charAt(0).toUpperCase() + valor.slice(1);
- 
-     // Reemplazamos los guiones bajos por espacios
-     return valorMayusculas.replace("_", " ");
-   });
+    return array.map((valor) => {
+      // Convertimos el valor a mayúsculas en el primer caracter
+      const valorMayusculas = valor.charAt(0).toUpperCase() + valor.slice(1);
+
+      // Reemplazamos los guiones bajos por espacios
+      return valorMayusculas.replace("_", " ");
+    });
  }
  
  function generarTablaHTML(tabla, campos) {
@@ -89,18 +176,37 @@ const toCamelCase = (snakeCaseString) => {
    const nombreTabla = tabla.replace("t_", "");
    const nombreTablaCamel = toCamelCase(nombreTabla)
    const camposTitulo = convertirSnakeCaseAMayusculas(campos)
+   console.info('tabla'+nombreTablaCamel+'.php')
    // Generamos la tabla HTML
    const tablaHTML = `
+      <?php
+        require_once "../../../clases/${nombreTablaCamel}.php";
+      
+        $respuesta = ${nombreTablaCamel}::obtenerDatos${nombreTablaCamel}();
+      ?>
      <table class="table table-sm table-bordered dt-responsive nowrap" id="tabla${nombreTablaCamel}DataTable" style="width:100%">
        <thead>
          <th>${camposTitulo.join("</th>\n\t\t<th>")}</th>
+         <th>Editar</th>
+         <th>Eliminar</th>
        </thead>
        <tbody>
          <?php foreach ($respuesta as $mostrar) { ?>
            <tr>
-             <?php foreach ($mostrar as $valor) { ?>
-               <td><?php echo $valor['${campos.join("']; ?></td>\n\t\t\t  <td><?php echo $valor['")}']; ?></td>
-             <?php } ?>
+                <td><?php echo $mostrar['${campos.join("']; ?></td>\n\t\t\t  <td><?php echo $mostrar['")}']; ?></td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-toggle="modal" 
+                        data-target="#modalActualizar${nombreTablaCamel}" 
+                        onclick= "obtenerDatos${nombreTablaCamel}(<?php echo $mostrar ['id_${nombreTablaCamel}']?>)"> 
+                        <i class=" fas fa-edit"></i>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-danger btn-sm"
+                    onclick= "eliminar${nombreTablaCamel}(<?php echo $mostrar ['id_${nombreTablaCamel}']?>)">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
+                </td>
            </tr>
          <?php } ?>
        </tbody>
@@ -110,26 +216,58 @@ const toCamelCase = (snakeCaseString) => {
    console.log(tablaHTML); 
  }
  
- function generarHtml(tabla, campos) {
-    campos = campos.map(campo => `
-     <div class="col-sm-4">
-         <label for="${campo}">Nombre del equipo</label>
-         <input type="text" name="${campo}" id="${campo}" class="form-control">
-     </div>`).join("\t\t") 
+ function generarModalAgregar(tabla, campos) {
+    const nombreTabla = tabla.replace("t_", "");
+    const nombreTablaCamel = toCamelCase(nombreTabla)
+    const camposTitulo = convertirSnakeCaseAMayusculas(campos)
+    console.info('modalAgregar'+nombreTablaCamel+'.php')
+    let html = `
+    <form id="frmAgregar${nombreTablaCamel}" method="POST" onsubmit="return agregar${nombreTablaCamel}()">
+    <div class="modal fade" id="modalAgregar${nombreTablaCamel}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus-circle"></i> Agregar Nuevo ${nombreTablaCamel}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+    `
+    i=0
+    html += campos.map(campo => `
+                  <div class="col-sm-4">
+                      <label for="${campo}">${camposTitulo[i++]}</label>
+                      <input type="text" name="${campo}" id="${campo}" class="form-control" required>
+                  </div>`).join("\t\t") 
+
+    html += `\n\t\t\t</div>
+                </div>
+                <div class="modal-footer">
+                    <span class="btn btn-danger" data-dismiss="modal">Cerrar</span>
+                    <button class="btn btn-success">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    `
    // Devolvemos las tres funciones
-     console.log(campos); 
+     console.log(html); 
  }
  
  function generarFunciones(tabla, campos) {
    // Obtenemos el nombre de la tabla en camelCase
    const nombreTabla = tabla.replace("t_", "");
    const nombreTablaCamel = toCamelCase(nombreTabla)
+   
    // Generamos la consulta SELECT
    const consultaSelect = `
-   public function obtenerDatos${nombreTablaCamel}($where=null){
+   public static function obtenerDatos${nombreTablaCamel}($where=null){
        $sql = '
-       SELECT \n\t\t${campos.join(",\n\t\t")}
-       FROM ${nombreTabla}
+       SELECT \n\t\t\tid_${nombreTabla},\n\t\t\t${campos.join(",\n\t\t\t")}
+       FROM ${tabla}
        '.$where;
        return Conexion::select($sql); 
    }`;
@@ -139,12 +277,12 @@ const toCamelCase = (snakeCaseString) => {
    };
    // Generamos la consulta INSERT
    const consultaInsert = `
-   public function agregarNuevo${nombreTablaCamel}($datos){
+   public static function agregar${nombreTablaCamel}($datos){
        $sql = '
-       INSERT INTO ${nombreTabla} (
-           ${campos.join(", \n\t\t  ")}
+       INSERT INTO ${tabla} (
+           ${campos.join(", \n\t\t\t  ")}
        ) VALUES (
-           ${campos.map(campo => ":" + campo).join(", \n\t\t  ")}
+           ${campos.map(campo => ":" + campo).join(", \n\t\t\t  ")}
        )';
        $datos = [
          ${campos.map(campo => "':"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")}
@@ -152,14 +290,14 @@ const toCamelCase = (snakeCaseString) => {
        return Conexion::execute($sql,$datos);
    }`;
    // Generamos la función INSERT
-   const agregarNuevo = () => {
+   const agregar = () => {
      return consultaInsert;
    };
    // Generamos la consulta UPDATE
    const consultaUpdate = `
-   public function actualizar${nombreTablaCamel}($datos){
+   public static function actualizar${nombreTablaCamel}($datos){
        $sql = '
-       UPDATE ${nombreTabla} 
+       UPDATE ${tabla} 
        SET 
          ${campos.map(campo => campo + " = :" + campo).join(",\n\t\t")} 
        WHERE id_${nombreTabla} = :id_${nombreTabla}';
@@ -174,7 +312,7 @@ const toCamelCase = (snakeCaseString) => {
      return consultaUpdate;
    };
    const consultaDelete = `
-   public function eliminar${nombreTablaCamel}($id){
+   public static function eliminar${nombreTablaCamel}($id){
         $sql = '
         DELETE FROM ${nombreTabla}
         WHERE id_${nombreTabla} = :id_${nombreTabla}';
@@ -187,16 +325,20 @@ const toCamelCase = (snakeCaseString) => {
   const eliminar = () => {
    return consultaDelete;
   };
- 
-     generarHtml(tabla, campos)
- 
-     generarTablaHTML(tabla, campos)
+
+      generarModalAgregar(tabla, campos)
+
+      generarTablaHTML(tabla, campos)
+
+      generarJS(tabla, campos)
+
+     
      
    // Devolvemos las tres funciones
-     console.log(obtenerDatos() +'\n' + agregarNuevo()+'\n' +actualizar()+'\n' +eliminar()); // UPDATE usuarios SET id_rol = :id_rol, id_oficina = :id_oficina, usuario = :usuario, nombre = :nombre, password = :password, ubicacion = :ubicacion, activo = :activo WHERE id = :id
+     console.log(obtenerDatos() +'\n' + agregar()+'\n' +actualizar()+'\n' +eliminar());
    return {
      obtenerDatos,
-     agregarNuevo,
+     agregar,
      actualizar,
         eliminar, 
    };
