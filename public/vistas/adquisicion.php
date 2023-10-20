@@ -13,7 +13,7 @@
         <div class="card-body p-5">
             <h1 class="fw_light">Adquisición de Equipos</h1>
             <p class="lead">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#modalAsignarEquipo">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#frmAgregarAdquisiciones">
                 <i class="fas fa-plus-circle"></i> Asignar Equipo</button>
                 <hr>
                 <div id="tablaAdquisicionesLoad"></div>
@@ -23,10 +23,10 @@
 </div>
 
 <?php 
-include "adquisicion/modalAsignar.php"; 
+include "adquisiciones/modalActualizarAdquisiciones.php"; 
 include "footer.php"; 
 ?>    
-<script src="../js/adquisicion/adquisicion.js"></script>
+<script src="../js/adquisiciones/adquisiciones.js"></script>
 
 <?php
     }else{//FIN DEL IF
