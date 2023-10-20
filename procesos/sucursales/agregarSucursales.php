@@ -1,8 +1,8 @@
 <?php
     // Insert Sucursales
     $datos = [
-        'descripcion' => $datos['descripcion'],
-        'direccion' => $datos['direccion']
+        'descripcion' => $_POST['descripcion'],
+        'direccion' => $_POST['direccion']
     ];
     include "../../clases/Sucursales.php";
     $Sucursales = new Sucursales();
