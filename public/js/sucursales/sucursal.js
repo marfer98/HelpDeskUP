@@ -72,3 +72,40 @@ function actualizarSucursales(){
   });
   return false;
 }
+
+function eliminarSucursales(id_sucursal){//la funcion trae un id de reporte
+    Swal.fire({
+        title: '¿Estas seguro de eliminar?',
+        text: "Una vez eliminado no podrá ser recuperado",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                data: "id_sucursal=" + id_sucursal,//manda,os como dato el id del reporte que queremos eliminar 
+                url: "../../procesos/sucursales/eliminarSucursales.php",
+                success:function(respuesta){
+                    //console.log(respuesta);
+                    if (respuesta ==1){
+                        $("#tablaSucursalesLoad").load("sucursales/tablaSucursales.php");
+                        Swal.fire(":D","Eliminado con exito","success");
+        
+                    }else{
+                        Swal.fire(":(","Error al Eliminar" + respuesta,"error");
+        
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    console.error(errorThrown);
+                }
+            });
+        }
+      })
+    return false //para que no recargue la función 
+  }

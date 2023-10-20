@@ -165,7 +165,45 @@ function generarJS(tabla, campos) {
         }
     });
     return false;
-  }`
+  }
+  
+  function eliminar${nombreTablaCamel}(id_${nombreTabla}){//la funcion trae un id de reporte
+    Swal.fire({
+        title: '¿Estas seguro de eliminar?',
+        text: "Una vez eliminado no podrá ser recuperado",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Eliminar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                data: "id_${nombreTabla}=" + id_${nombreTabla},//manda,os como dato el id del reporte que queremos eliminar 
+                url: "../../procesos/${nombreTablaCamel}/eliminar${nombreTablaCamel}.php",
+                success:function(respuesta){
+                    //console.log(respuesta);
+                    if (respuesta ==1){
+                        $("#tabla${nombreTablaCamel}Load").load("${nombreTablaCamel}/tabla${nombreTablaCamel}.php");
+                        Swal.fire(":D","Eliminado con exito","success");
+        
+                    }else{
+                        Swal.fire(":(","Error al Eliminar" + respuesta,"error");
+        
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error(jqXHR);
+                    console.error(textStatus);
+                    console.error(errorThrown);
+                }
+            });
+        }
+      })
+    return false //para que no recargue la función 
+  }
+  `
 
   console.log(tablaHTML); 
 }
@@ -363,7 +401,7 @@ function generarJS(tabla, campos) {
         DELETE FROM ${nombreTabla}
         WHERE id_${nombreTabla} = :id_${nombreTabla}';
         $datos = [
-         ':id_${nombreTabla}' => $id
+         ':id_${nombreTabla}' => $id['id_${nombreTabla}']
         ];
         return Conexion::execute($sql,$datos);
     }`;
@@ -416,7 +454,7 @@ function generarProcesos(tabla,campos){
         'id_${nombreTabla}' => $datos['id_${nombreTabla}']       
       ];
 
-      include "../../../clases/${nombreTablaCamel}.php";
+      include "../../clases/${nombreTablaCamel}.php";
       echo ${nombreTablaCamel}::actualizar${nombreTablaCamel}($datos);
   `
   php += `

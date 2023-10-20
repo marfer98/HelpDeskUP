@@ -54,7 +54,7 @@
             DELETE FROM proveedores
             WHERE id_proveedor = :id_proveedor';
             $datos = [
-                ':id_proveedor' => $id
+                ':id_proveedor' => $id['id_proveedor']
             ];
             return Conexion::execute($sql,$datos);
         }

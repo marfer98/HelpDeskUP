@@ -48,7 +48,7 @@
           DELETE FROM sucursales
           WHERE id_sucursal = :id_sucursal';
           $datos = [
-            ':id_sucursal' => $id
+            ':id_sucursal' => $id['id_sucursal']
           ];
           return Conexion::execute($sql,$datos);
       }
