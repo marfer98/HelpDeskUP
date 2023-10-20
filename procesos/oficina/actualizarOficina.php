@@ -4,7 +4,7 @@
         'nombre' => $_POST['nombre'],
         'telefono' => $_POST['telefono'],
         'correo' => $_POST['correo'],
-        'id_oficina' => $datos['id_oficina']       
+        'id_oficina' => $_POST['id_oficina']       
     ];
 
     include "../../clases/Oficinas.php";

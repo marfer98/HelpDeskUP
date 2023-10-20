@@ -38,10 +38,11 @@
         $sql = '
         UPDATE t_oficina 
         SET 
-        nombre = :nombre,
-        telefono = :telefono,
-        correo = :correo 
-        WHERE id_oficina = :id_oficina';
+            nombre = :nombre,
+            telefono = :telefono,
+            correo = :correo 
+        WHERE id_oficina = :id_oficina;
+        ';
         $datos = [
             ':nombre' => $datos['nombre'],
             ':telefono' => $datos['telefono'],

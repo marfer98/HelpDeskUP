@@ -398,10 +398,10 @@ function generarJS(tabla, campos) {
    const consultaDelete = `
    public static function eliminar${nombreTablaCamel}($id){
         $sql = '
-        DELETE FROM ${nombreTabla}
+        DELETE FROM ${tabla}
         WHERE id_${nombreTabla} = :id_${nombreTabla}';
         $datos = [
-         ':id_${nombreTabla}' => $id['id_${nombreTabla}']
+          ':id_${nombreTabla}' => $id['id_${nombreTabla}']
         ];
         return Conexion::execute($sql,$datos);
     }`;

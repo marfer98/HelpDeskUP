@@ -1,7 +1,7 @@
 <?php
     // Delete Sucursales
     $datos = [
-        'id_sucursal ' => $_POST['id_sucursal']
+        'id_sucursal' => $_POST['id_sucursal']
     ];
 
     include "../../clases/Sucursales.php";

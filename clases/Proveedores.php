@@ -51,7 +51,7 @@
      
         public static function eliminarProveedores($id){
             $sql = '
-            DELETE FROM proveedores
+            DELETE FROM t_proveedores
             WHERE id_proveedor = :id_proveedor';
             $datos = [
                 ':id_proveedor' => $id['id_proveedor']

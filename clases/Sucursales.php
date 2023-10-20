@@ -35,6 +35,7 @@
             descripcion = :descripcion,
             direccion = :direccion 
           WHERE id_sucursal = :id_sucursal';
+          
           $datos = [
             ':descripcion' => $datos['descripcion'],
             ':direccion' => $datos['direccion'],
@@ -45,7 +46,7 @@
   
       public static function eliminarSucursales($id){
           $sql = '
-          DELETE FROM sucursales
+          DELETE FROM t_sucursales
           WHERE id_sucursal = :id_sucursal';
           $datos = [
             ':id_sucursal' => $id['id_sucursal']
