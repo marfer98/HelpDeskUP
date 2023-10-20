@@ -34,9 +34,9 @@ function obtenerDatosSucursales(id_sucursal,elementoPadre){
       data: "id_sucursal=" + id_sucursal,//mandar el id Sucursales
       url: "../../procesos/sucursales/obtenerDatosSucursales.php",
       success:function(respuesta){
-          respuesta = jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
-          //console.log(respuesta);
-          
+            respuesta = jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
+            //console.log(respuesta);
+            $(elementoPadre + ' #id_sucursal').val(respuesta['id_sucursal']);
             $(elementoPadre + ' #descripcion').val(respuesta['descripcion']);		
             $(elementoPadre + ' #direccion').val(respuesta['direccion']);
       },

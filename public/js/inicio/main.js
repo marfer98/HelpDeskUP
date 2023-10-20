@@ -32,7 +32,7 @@ function validar(form) {
 
   // Todos los campos son válidos
   console.log(error)
-  eval($('form').attr('afterValidate'))();
+  eval($(form).attr('afterValidate'))();
   return false;
 }
 
@@ -60,11 +60,20 @@ function eliminarReturn(texto) {
 }
 
 window.onload = (event) => {
-  var funcion = $('form').attr('onsubmit')
-  $('form').attr('onsubmit',`return validar('#${$('form').attr('id')}')`)
-  $('form').attr('afterValidate',eliminarReturn(funcion),'')
-  var funcion = $('form').attr('onsubmit')
-  console.log(eliminarReturn(funcion))
+  // Obtenemos todos los formularios de la página
+  const formularios = document.querySelectorAll("form");
+
+  // Recorremos los formularios
+  for (const formulario of formularios) {
+    // Obtenemos la función de envío del formulario
+    const funcion = formulario.getAttribute("onsubmit");
+
+    // Actualizamos la función de envío del formulario
+    formulario.setAttribute("onsubmit", `return validar('#${formulario.id}')`);
+
+    // Agregamos la función de validación después del envío
+    formulario.setAttribute("afterValidate", eliminarReturn(funcion), "");
+  }
 };
 
 const toCamelCase = (snakeCaseString) => {
@@ -112,7 +121,7 @@ function generarJS(tabla, campos) {
   }
   
   function obtenerDatos${nombreTablaCamel}(id_${nombreTabla},elementoPadre='body'){
-  // alert(id_${nombreTabla});
+    // alert(id_${nombreTabla});
     $.ajax({
         type: "POST",
         data: "id_${nombreTabla}=" + id_${nombreTabla},//mandar el id ${nombreTablaCamel}
@@ -120,6 +129,7 @@ function generarJS(tabla, campos) {
         success:function(respuesta){
             respuesta= jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
             //console.log(respuesta);
+            $(elementoPadre+' #id_${nombreTabla}').val(respuesta['id_${nombreTabla}']);
             ${campos.map(campo => `
               $(elementoPadre+' #${campo}').val(respuesta['${campo}']);`).join("\t\t") 
             }
@@ -402,7 +412,7 @@ function generarProcesos(tabla,campos){
     <?php
       // Update ${nombreTablaCamel}
       $datos = [
-        ${campos.map(campo => "'"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")},
+        ${campos.map(campo => "'"+ campo +"' => $_POST['" + campo+"']").join(",\n\t\t")},
         'id_${nombreTabla}' => $datos['id_${nombreTabla}']       
       ];
 
@@ -413,7 +423,7 @@ function generarProcesos(tabla,campos){
     <?php
       // Insert ${nombreTablaCamel}
       $datos = [
-        ${campos.map(campo => "'"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")}
+        ${campos.map(campo => "'"+ campo +"' => $_POST['" + campo+"']").join(",\n\t\t")}
       ];
       include "../../clases/${nombreTablaCamel}.php";
       $${nombreTablaCamel} = new ${nombreTablaCamel}();
@@ -423,10 +433,10 @@ function generarProcesos(tabla,campos){
     <?php
       // Delete ${nombreTablaCamel}
       $datos = [
-        'id_${nombreTabla} ' => $datos['id_${nombreTabla}']
+        'id_${nombreTabla} ' => $_POST['id_${nombreTabla}']
       ];
 
-      include "../../../clases/${nombreTablaCamel}.php";
+      include "../../clases/${nombreTablaCamel}.php";
       echo ${nombreTablaCamel}::eliminar${nombreTablaCamel}($datos);
   `
   echo(php)
