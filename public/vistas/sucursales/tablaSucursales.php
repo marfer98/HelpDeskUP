@@ -1,19 +1,14 @@
 <?php
-
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
-error_reporting(E_ALL);
-
     require_once "../../../clases/Sucursales.php";
   
     $respuesta = Sucursales::obtenerDatosSucursales();
 ?>
 <table class="table table-sm table-bordered dt-responsive nowrap" id="tablaSucursalesDataTable" style="width:100%">
        <thead>
-         <th>Descripcion</th>
-		     <th>Direccion</th>
-         <th>Editar</th>
-         <th>Eliminar</th>
+            <th>Descripcion</th>
+		    <th>Direccion</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
        </thead>
        <tbody>
          <?php foreach ($respuesta as $mostrar) { ?>
@@ -23,7 +18,7 @@ error_reporting(E_ALL);
                 <td>
                     <button class="btn btn-warning btn-sm" data-toggle="modal" 
                         data-target="#modalActualizarSucursales" 
-                        onclick= "obtenerDatosSucursales(<?php echo $mostrar ['id_sucursal']?>)"> 
+                        onclick= "obtenerDatosSucursales(<?php echo $mostrar ['id_sucursal']?>,'#modalActualizarSucursales')"> 
                         <i class=" fas fa-edit"></i>
                     </button>
                 </td>

@@ -36,7 +36,6 @@ function validar(form) {
   return false;
 }
 
-
 // Función para eliminar la palabra "return" y los paréntesis
 function eliminarReturn(texto) {
     let returnRegex = /return\s+([a-zA-Z0-9]+)\((.*)\)/;
@@ -73,7 +72,7 @@ const toCamelCase = (snakeCaseString) => {
      .split('_')
      .map((word) => word[0].toUpperCase() + word.substring(1))
      .join('');
- };
+};
  
 function generarJS(tabla, campos) {
   // Obtenemos los datos de la tabla
@@ -112,17 +111,17 @@ function generarJS(tabla, campos) {
     return false;
   }
   
-  function obtenerDatos${nombreTablaCamel}(id_${nombreTabla}){
+  function obtenerDatos${nombreTablaCamel}(id_${nombreTabla},elementoPadre='body'){
   // alert(id_${nombreTabla});
     $.ajax({
         type: "POST",
         data: "id_${nombreTabla}=" + id_${nombreTabla},//mandar el id ${nombreTablaCamel}
         url: "../../procesos/${nombreTablaCamel}/obtenerDatos${nombreTablaCamel}.php",
         success:function(respuesta){
-            respuesta= jQuery.parseJSON(respuesta);//envio de respuesta valida
+            respuesta= jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
             //console.log(respuesta);
             ${campos.map(campo => `
-              $('#${campo}').val(respuesta['${campo}']);`).join("\t\t") 
+              $(elementoPadre+' #${campo}').val(respuesta['${campo}']);`).join("\t\t") 
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -169,7 +168,7 @@ function generarJS(tabla, campos) {
       // Reemplazamos los guiones bajos por espacios
       return valorMayusculas.replace("_", " ");
     });
- }
+}
  
  function generarTablaHTML(tabla, campos) {
    // Obtenemos los datos de la tabla
@@ -197,7 +196,7 @@ function generarJS(tabla, campos) {
                 <td>
                     <button class="btn btn-warning btn-sm" data-toggle="modal" 
                         data-target="#modalActualizar${nombreTablaCamel}" 
-                        onclick= "obtenerDatos${nombreTablaCamel}(<?php echo $mostrar ['id_${nombreTablaCamel}']?>)"> 
+                        onclick= "obtenerDatos${nombreTablaCamel}(<?php echo $mostrar ['id_${nombreTablaCamel}']?>,'#modalActualizar${nombreTablaCamel}')"> 
                         <i class=" fas fa-edit"></i>
                     </button>
                 </td>
@@ -214,7 +213,7 @@ function generarJS(tabla, campos) {
    `;
  
    console.log(tablaHTML); 
- }
+}
  
  function generarModalAgregar(tabla, campos) {
     const nombreTabla = tabla.replace("t_", "");
@@ -253,9 +252,46 @@ function generarJS(tabla, campos) {
     </div>
 </form>
     `
+    // form Actualizar
+    html += `
+    <form id="frmActualizar${nombreTablaCamel}" method="POST" onsubmit="return actualizar${nombreTablaCamel}()">
+        <div class="modal fade" id="modalActualizar${nombreTablaCamel}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-plus-circle"></i> Editar ${nombreTablaCamel}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                      <div class="col-sm-4 d-none" >
+                        <label for="id_${nombreTabla}">id_${nombreTabla}</label>
+                        <input type="hidden" name="id_${nombreTabla}" id="id_${nombreTabla}" class="form-control" required="">
+                    </div>
+        `
+        i=0
+        html += campos.map(campo => `
+                      <div class="col-sm-4">
+                          <label for="${campo}">${camposTitulo[i++]}</label>
+                          <input type="text" name="${campo}" id="${campo}" class="form-control" required>
+                      </div>`).join("\t\t") 
+
+        html += `\n\t\t\t</div>
+                    </div>
+                    <div class="modal-footer">
+                        <span class="btn btn-danger" data-dismiss="modal">Cerrar</span>
+                        <button class="btn btn-success">Editar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    `
    // Devolvemos las tres funciones
      console.log(html); 
- }
+}
  
  function generarFunciones(tabla, campos) {
    // Obtenemos el nombre de la tabla en camelCase
@@ -326,24 +362,76 @@ function generarJS(tabla, campos) {
    return consultaDelete;
   };
 
-      generarModalAgregar(tabla, campos)
+  generarModalAgregar(tabla, campos)
 
-      generarTablaHTML(tabla, campos)
+  generarTablaHTML(tabla, campos)
 
-      generarJS(tabla, campos)
+  generarJS(tabla, campos)
 
-     
-     
-   // Devolvemos las tres funciones
-     console.log(obtenerDatos() +'\n' + agregar()+'\n' +actualizar()+'\n' +eliminar());
-   return {
-     obtenerDatos,
-     agregar,
-     actualizar,
-        eliminar, 
-   };
- }
+  generarProcesos(tabla,campos)
+
+  // Devolvemos las tres funciones
+  console.log(obtenerDatos() +'\n' + agregar()+'\n' +actualizar()+'\n' +eliminar());
+
+  return {
+    obtenerDatos,
+    agregar,
+    actualizar,
+      eliminar, 
+  };
+}
  
+function generarProcesos(tabla,campos){
+  const nombreTabla = tabla.replace("t_", "");
+  const nombreTablaCamel = toCamelCase(nombreTabla)
+  const camposTitulo = convertirSnakeCaseAMayusculas(campos)
+  console.info('obtener'+nombreTablaCamel+'.php')
+  console.info('actualizar'+nombreTablaCamel+'.php')
+  console.info('agregar'+nombreTablaCamel+'.php')
+  console.info('eliminar'+nombreTablaCamel+'.php')
+  let php = `
+    <?php
+      // Obtener ${nombreTablaCamel}
+      $id_${nombreTabla} = $_POST['id_${nombreTabla}'];
+      include "../../clases/${nombreTablaCamel}.php";
+      $where = "WHERE id_${nombreTabla} = $id_${nombreTabla}";
+      echo json_encode(${nombreTablaCamel}::obtenerDatos${nombreTablaCamel}($where));
+      `
+  
+  php += ` 
+    <?php
+      // Update ${nombreTablaCamel}
+      $datos = [
+        ${campos.map(campo => "'"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")},
+        'id_${nombreTabla}' => $datos['id_${nombreTabla}']       
+      ];
+
+      include "../../../clases/${nombreTablaCamel}.php";
+      echo ${nombreTablaCamel}::actualizar${nombreTablaCamel}($datos);
+  `
+  php += `
+    <?php
+      // Insert ${nombreTablaCamel}
+      $datos = [
+        ${campos.map(campo => "'"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")}
+      ];
+      include "../../clases/${nombreTablaCamel}.php";
+      $${nombreTablaCamel} = new ${nombreTablaCamel}();
+      echo $${nombreTablaCamel}->agregar${nombreTablaCamel}($datos);
+  `
+  php += ` 
+    <?php
+      // Delete ${nombreTablaCamel}
+      $datos = [
+        'id_${nombreTabla} ' => $datos['id_${nombreTabla}']
+      ];
+
+      include "../../../clases/${nombreTablaCamel}.php";
+      echo ${nombreTablaCamel}::eliminar${nombreTablaCamel}($datos);
+  `
+  echo(php)
+}
+
 // Ejemplo de uso
 const funciones = generarFunciones("t_adquisiciones", [
   "id_articulo", 

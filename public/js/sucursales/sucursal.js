@@ -27,18 +27,18 @@ function agregarSucursales(){
   return false;
 }
 
-function obtenerDatosSucursales(id_sucursal){
+function obtenerDatosSucursales(id_sucursal,elementoPadre){
 // alert(id_sucursal);
   $.ajax({
       type: "POST",
       data: "id_sucursal=" + id_sucursal,//mandar el id Sucursales
       url: "../../procesos/sucursales/obtenerDatosSucursales.php",
       success:function(respuesta){
-          respuesta= jQuery.parseJSON(respuesta);//envio de respuesta valida
+          respuesta = jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
           //console.log(respuesta);
           
-            $('#descripcion').val(respuesta['descripcion']);		
-            $('#direccion').val(respuesta['direccion']);
+            $(elementoPadre + ' #descripcion').val(respuesta['descripcion']);		
+            $(elementoPadre + ' #direccion').val(respuesta['direccion']);
       },
       error: function(jqXHR, textStatus, errorThrown) {
           console.error(jqXHR);
