@@ -63,6 +63,10 @@
                                     <a class="dropdown-item" href="sucursales.php">
                                     <i class="fas fa-building"></i> Sucursales</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="proveedores.php">
+                                    <i class="fas fa-building"></i> Proveedores</a>
+                                </li>
                             </ul>
                         </li>
                         

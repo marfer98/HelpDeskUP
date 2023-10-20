@@ -146,7 +146,7 @@ function generarJS(tabla, campos) {
     $.ajax({
         type: "POST",
         data: $('#frmActualizar${nombreTablaCamel}').serialize(),
-        url: "../../procesos/${nombreTablaCamel}/id_${nombreTablaCamel}actualizar${nombreTablaCamel}.php",
+        url: "../../procesos/${nombreTablaCamel}/actualizar${nombreTablaCamel}.php",
         success:function(respuesta){
             // console.log(respuesta);
             respuesta = respuesta.trim();
