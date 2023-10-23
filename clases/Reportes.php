@@ -29,7 +29,7 @@
 
         public function obtenerSolucion($idReporte){
             $sql = "SELECT solucion_problema, estatus, usuario_tecnico
-                FROM t_reportes WHERE id_reporte = ':idReporte'";
+                FROM t_reportes WHERE id_reporte = :idReporte";
             $reporte = Conexion::select($sql,[
                 ":idReporte" => $idReporte
             ])[0];
