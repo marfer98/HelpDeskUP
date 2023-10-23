@@ -1,6 +1,3 @@
-<?php
-    require_once "../../../clases/Articulos.php";
-?>
 <!-- Modal -->
 <form id="frmAsignaEquipo" method="POST" onsubmit="return asignarEquipo()">
     <div class="modal fade" id="modalAsignarEquipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
