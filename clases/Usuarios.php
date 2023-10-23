@@ -23,10 +23,10 @@
                     $_SESSION['usuario']['rol']     = $datosUsuario['id_rol']; // toma el rol del usuario
                     return 1; 
                 }else{
-                    return 0; 
+                    return 'El usuario se encuentra inactivo'; 
                 }
             }else{
-                return 0;
+                return 'No se ha encontrado usuario';
             }
 
         }
