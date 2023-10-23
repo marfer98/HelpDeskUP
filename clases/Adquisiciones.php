@@ -37,7 +37,9 @@
             return Conexion::select($sql); 
         }
       
-        public static function agregarAdquisiciones($datos){
+        public static function agregarAdquisiciones($datos,$getId = false){
+            $datos['id_articulo'] = self::agregarArticulos($datos,true);
+
             $adquisicion = self::obtenerDatosAdquisiciones('
                 WHERE 
                     id_articulo = '.$datos['id_articulo'].' AND
@@ -45,8 +47,7 @@
             ');
 
             if(!$adquisicion){
-                $articulo = self::agregarArticulos($datos);
-
+                
                 $sql = '
                     INSERT INTO t_adquisiciones (
                         id_articulo, 
@@ -62,7 +63,7 @@
                     ':id_proveedor' => $datos['id_proveedor'],
                     ':cantidad' => $datos['cantidad']
                 ];
-                $respuesta = Conexion::execute($sql,$datos);
+                $respuesta = !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
             }else{
                 $respuesta = 'Esta adquisición ya se ha realizado.';
             }
@@ -89,6 +90,13 @@
         }
       
         public static function eliminarAdquisiciones($id){
+            $adquisicion = self::obtenerDatosAdquisiciones('
+                WHERE 
+                    id_adquisicion = '.$id['id_adquisicion'].'
+            ');
+
+            $datos['id_articulo'] = self::eliminarArticulos($adquisicion['id_articulo'],true);
+            
             $sql = '
             DELETE FROM t_adquisiciones
             WHERE id_adquisicion = :id_adquisicion';

@@ -22,7 +22,7 @@
             return Conexion::select($sql); 
         }
       
-        public static function agregarArticulos($datos){
+        public static function agregarArticulos($datos,$getId = false){
             $sql = '
             INSERT INTO t_articulos (
                 id_equipo, 
@@ -68,7 +68,7 @@
                 ':procesador' => $datos['procesador'],
                 ':sistema_operativo' => $datos['sistema_operativo']
             ];
-            return Conexion::execute($sql,$datos);
+            return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }
       
         public static function actualizarArticulos($datos){

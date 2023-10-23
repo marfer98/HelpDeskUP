@@ -1,7 +1,7 @@
 <?php
     // Delete Adquisiciones
     $datos = [
-    'id_adquisicion ' => $_POST['id_adquisicion']
+    'id_adquisicion' => $_POST['id_adquisicion']
     ];
 
     include "../../clases/Adquisiciones.php";

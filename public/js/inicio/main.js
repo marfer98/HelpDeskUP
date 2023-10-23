@@ -361,7 +361,7 @@ function generarJS(tabla, campos) {
    };
    // Generamos la consulta INSERT
    const consultaInsert = `
-   public static function agregar${nombreTablaCamel}($datos){
+   public static function agregar${nombreTablaCamel}($datos,$getId = false){
        $sql = '
        INSERT INTO ${tabla} (
            ${campos.join(", \n\t\t\t  ")}
@@ -371,7 +371,7 @@ function generarJS(tabla, campos) {
        $datos = [
          ${campos.map(campo => "':"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")}
        ];
-       return Conexion::execute($sql,$datos);
+       return !$$respuesta = !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos); ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
    }`;
    // Generamos la función INSERT
    const agregar = () => {
@@ -480,6 +480,7 @@ function generarProcesos(tabla,campos){
   echo(php)
 }
 
+/*
 // Ejemplo de uso
 const funciones = generarFunciones("t_adquisiciones", [
   "id_articulo", 
@@ -488,4 +489,4 @@ const funciones = generarFunciones("t_adquisiciones", [
 ]);
  
  
- 
+ */

@@ -48,7 +48,7 @@ require_once "../../clases/Conexion.php";
                             </div>	
                         </div>
                         <div class="row">
-                        <div class="col-sm-12">
+                            <div class="col-sm-6">
                                 <label>Articulo</label>
                                 <?php //agarra el ID de la oficina 
                                     $sql = "SELECT  id_articulo, CONCAT_WS('',
@@ -125,6 +125,10 @@ require_once "../../clases/Conexion.php";
                                     ?>
                                 </select>
                             </div>
+                            <div class="col">
+                                <label for="cantidad">Cantidad</label>
+                                <input type="text" name="cantidad" id="cantidad" class="form-control" required>
+                            </div>
                             <div class="col-sm-4">
                                 <label for="nombreEquipoA">Nombre del equipo</label>
                                 <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control" required>
@@ -138,6 +142,7 @@ require_once "../../clases/Conexion.php";
                                 <input type="text" name="marca" id="marca" class="form-control">
                             </div>
                         </div>
+                        
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="modelo">Modelo</label>
@@ -242,15 +247,21 @@ require_once "../../clases/Conexion.php";
                             </div>	
                         </div>
                         <div class="row">
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="nombreEquipoA">Nombre del equipo</label>
                                 <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control" required>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
+                                <label for="cantidad">Cantidad</label>
+                                <input type="text" name="cantidad" id="cantidad" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
                                 <label for="rotulado">Rotulado</label>
                                 <input type="text" name="rotulado" id="rotulado" class="form-control">
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-6">
                                 <label for="marca">Marca</label>
                                 <input type="text" name="marca" id="marca" class="form-control">
                             </div>
