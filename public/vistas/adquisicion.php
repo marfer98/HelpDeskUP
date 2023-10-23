@@ -14,7 +14,7 @@
             <h1 class="fw_light">Adquisición de Equipos</h1>
             <p class="lead">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#frmAgregarAdquisiciones" onclick="javascript:$('#modalAgregarAdquisiciones').modal('show')">
-                <i class="fas fa-plus-circle"></i> Asignar Equipo</button>
+                <i class="fas fa-plus-circle"></i> Adquirir Equipo</button>
                 <hr>
                 <div id="tablaAdquisicionesLoad"></div>
             </p>
