@@ -29,7 +29,7 @@
                     JOIN t_articulos a ON a.id_articulo = ad.id_articulo
                     JOIN t_cat_equipos e ON a.id_equipo = e.id_equipo
                     JOIN t_proveedores p ON ad.id_proveedor = p.id_proveedor
-            )tmp
+            )v_adquisiciones
             '.$where;
             return Conexion::select($sql); 
         }

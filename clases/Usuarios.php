@@ -147,7 +147,7 @@
                     SET password = :password
                     WHERE id_usuario = :idUsuario";
             
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ':password'     => $datos['password'],
                 ':idUsuario'    => $datos['idUsuario']
             ]);
@@ -162,7 +162,7 @@
                     SET activo = :estatus
                     WHERE id_usuario = :idUsuario";
                        
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ':estatus'      => $estatus, 
                 ':idUsuario'    => $idUsuario
             ]);
@@ -186,11 +186,11 @@
                         s.descripcion as sucursal
                     FROM
                     t_usuarios AS usuarios
-                        INNER JOIN
+                         JOIN
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                         INNER JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
-                        LEFT JOIN
+                         JOIN
                     t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
                     ";// Obtener todos los datos del usuario
             $respuesta = Conexion::select($sql,[
