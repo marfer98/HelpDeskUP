@@ -29,7 +29,7 @@ function agregarNuevoUsuario(){
     return false;
 }
 
-function obtenerDatosUsuario(idUsuario){
+function obtenerDatosUsuario(idUsuario,elementoPadre='body'){
   // alert(idUsuario);
     $.ajax({
         type: "POST",
@@ -38,14 +38,14 @@ function obtenerDatosUsuario(idUsuario){
         success:function(respuesta){
             respuesta= jQuery.parseJSON(respuesta);//envio de respuesta valida
             //console.log(respuesta);
-            $('#idUsuario').val(respuesta['idUsuario']);
-            $('#nombreu').val(respuesta['nombreOficina']);
-            $('#telefonou').val(respuesta['telefono']);
-            $('#correou').val(respuesta['correo']);
-            $('#nombreUsuariou').val(respuesta['nombreUsuario']);
-           // $('#idRolu').val(respuesta['id_rol']);
-            $('#idRolu').val(respuesta['id_rol']);
-            $('#ubicacionu').val(respuesta['ubicacion']);
+            $(elementoPadre + ' #idUsuario').val(respuesta['idUsuario']);
+            $(elementoPadre + ' #nombreu').val(respuesta['nombreOficina']);
+            $(elementoPadre + ' #telefonou').val(respuesta['telefono']);
+            $(elementoPadre + ' #correou').val(respuesta['correo']);
+            $(elementoPadre + ' #nombreUsuariou').val(respuesta['nombreUsuario']);
+            $(elementoPadre + ' #id_oficina').val(respuesta['id_oficina']);
+            $(elementoPadre + ' #idRol').val(respuesta['id_rol']);
+            $(elementoPadre + ' #ubicacionu').val(respuesta['ubicacion']);
 
 
         },

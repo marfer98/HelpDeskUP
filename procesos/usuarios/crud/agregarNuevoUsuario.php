@@ -7,7 +7,8 @@
     "nombreUsuario"  => $_POST['nombreUsuario'], 
     "password"       => sha1($_POST['password']), //encriptación de contraseña
     "idRol"          => $_POST['idRol'], 
-    "ubicacion"      => $_POST['ubicacion']  
+    "ubicacion"      => $_POST['ubicacion'],
+    'id_sucursal' => $_POST['id_sucursal']  
    
  );
 

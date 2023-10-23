@@ -32,7 +32,7 @@
         }
 
         public function agregaNuevoUsuario($datos){
-            $idOficina = self::agregarOficina($datos);
+            $idOficina = self::agregarOficina($datos,true);
             
             if ($idOficina > 0) {
                 $sql ="INSERT INTO t_usuarios ( 
@@ -40,13 +40,15 @@
                             id_oficina,
                             usuario,
                             password,
-                            ubicacion)
+                            ubicacion,
+                            id_sucursal)
                         VALUES (
                             :id_rol,
                             :id_oficina,
                             :usuario,
                             :password,
-                            :ubicacion
+                            :ubicacion,
+                            :id_sucursal
                         )";                                       
                                   
                 $respuesta = Conexion::execute($sql,[
@@ -54,7 +56,8 @@
                     ':id_oficina'   => $idOficina,
                     ':usuario'      => $datos['nombreUsuario'],
                     ':password'     => $datos['password'],
-                    ':ubicacion'    => $datos['ubicacion']
+                    ':ubicacion'    => $datos['ubicacion'],
+                    ':id_sucursal'  => $datos['id_sucursal']
                 ]);
                 
                 return $respuesta;
@@ -77,14 +80,19 @@
                         usuarios.id_oficina as idOficina,
                         oficina.nombre AS nombreOficina,
                         oficina.telefono AS telefono,
-                        oficina.correo AS correo
+                        oficina.correo AS correo,
+                        oficina.id_oficina,
+                        s.id_sucursal,
+                        s.descripcion as sucursal
                     FROM
                     t_usuarios AS usuarios
                         INNER JOIN
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                         INNER JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
-                    AND usuarios.id_usuario = :idUsuario";// Obtener todos los datos del usuario
+                    LEFT JOIN
+                    t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
+                    WHERE  usuarios.id_usuario = :idUsuario";// Obtener todos los datos del usuario
             $respuesta = Conexion::select($sql,[
                 ':idUsuario' => $idUsuario
             ]);
@@ -101,7 +109,8 @@
                 'idOficina'      => $usuario['idOficina'],
                 'nombreOficina'  => $usuario['nombreOficina'],
                 'telefono'       => $usuario['telefono'],
-                'correo'         => $usuario['correo']
+                'correo'         => $usuario['correo'],
+                'id_oficina'     => $usuario['id_oficina'],
             );
 
             return $datos;
@@ -114,14 +123,16 @@
             if ($exitoOficina){
                 $sql = "UPDATE t_usuarios SET id_rol   = :idRol,
                                              usuario   = :nombreUsuario,
-                                             ubicacion = :ubicacion 
+                                             ubicacion = :ubicacion,
+                                             id_sucursal = :id_sucursal
                         WHERE id_usuario = :idUsuario";                     
                                            
                 $respuesta = Conexion::execute($sql,[
                     ':idRol'            => $datos['idRol'],
                     ':nombreUsuario'    => $datos['nombreUsuario'],
                     ':ubicacion'        => $datos['ubicacion'],
-                    ':idUsuario'        => $datos['idUsuario']
+                    ':idUsuario'        => $datos['idUsuario'],
+                    ':id_sucursal'      => $datos['id_sucursal'],
                 ]);
 
                 return $respuesta;
@@ -171,6 +182,7 @@
                         oficina.nombre AS nombreOficina,
                         oficina.telefono AS telefono,
                         oficina.correo AS correo,
+                        s.id_sucursal,
                         s.descripcion as sucursal
                     FROM
                     t_usuarios AS usuarios
@@ -178,7 +190,7 @@
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
                         INNER JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
-                        INNER JOIN
+                        LEFT JOIN
                     t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
                     ";// Obtener todos los datos del usuario
             $respuesta = Conexion::select($sql,[

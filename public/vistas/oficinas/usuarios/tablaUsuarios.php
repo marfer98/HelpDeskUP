@@ -85,7 +85,7 @@
             <th>
                 <button class="btn btn-warning btn-sm" data-toggle="modal" 
                     data-target="#modalActualizarUsuarios" 
-                    onclick= "obtenerDatosUsuario(<?php echo $mostrar ['idUsuario']?>,'#frmActualizarUsuario')"> 
+                    onclick= "obtenerDatosUsuario(<?php echo $mostrar ['idUsuario']?>)"> 
                     <i class=" fas fa-edit"></i>
                 </button>
             </th>

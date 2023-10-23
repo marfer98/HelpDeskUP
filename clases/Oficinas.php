@@ -15,7 +15,7 @@
         return Conexion::select($sql); 
     }
 
-    public static function agregarOficina($datos){
+    public static function agregarOficina($datos,$getId=false){
         $sql = '
         INSERT INTO t_oficina (
             nombre, 
@@ -31,10 +31,10 @@
             ':telefono' => $datos['telefono'],
             ':correo' => $datos['correo']
         ];
-        return Conexion::execute($sql,$datos);
+        return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
     }
 
-    public static function actualizarOficina($datos){
+    public static function actualizarOficina($datos,$getId=false){
         $sql = '
         UPDATE t_oficina 
         SET 
@@ -49,7 +49,7 @@
             ':correo' => $datos['correo'],
             ':id_oficina' => $datos['id_oficina']
         ];
-        return Conexion::execute($sql,$datos);
+        return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
     }
 
     public static function eliminarOficina($id){

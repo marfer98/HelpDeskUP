@@ -3,21 +3,27 @@
     class Articulos{
         public static function obtenerDatosArticulos($where=null){
             $sql = '
-                SELECT 
-                    id_equipo,
-                    id_proveedor,
-                    nombreEquipoA,
-                    rotulado,
-                    marca,
-                    modelo,
-                    numeroSerie,
-                    descripcion,
-                    memoria,
-                    tipo_ram,
-                    disco_duro,
-                    procesador,
-                    sistema_operativo
-                FROM t_articulos
+                SELECT DISTINCT * FROM (
+                    SELECT 
+                        a.id_equipo,
+                        e.nombre as nombre_equipo,
+                        a.id_proveedor,
+                        p.nombre as nombre_proveedor,
+                        a.nombreEquipoA,
+                        a.rotulado,
+                        a.marca,
+                        a.modelo,
+                        a.numeroSerie,
+                        a.descripcion,
+                        a.memoria,
+                        a.tipo_ram,
+                        a.disco_duro,
+                        a.procesador,
+                        a.sistema_operativo
+                    FROM t_articulos a
+                    JOIN t_cat_equipos e ON a.id_equipo = e.id_equipo
+                    JOIN t_proveedores p ON a.id_proveedor = p.id_proveedor
+                ) v_articulos
                 '.$where;
             return Conexion::select($sql); 
         }

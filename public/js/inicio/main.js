@@ -379,7 +379,7 @@ function generarJS(tabla, campos) {
    };
    // Generamos la consulta UPDATE
    const consultaUpdate = `
-   public static function actualizar${nombreTablaCamel}($datos){
+   public static function actualizar${nombreTablaCamel}($datos,$getId = false){
        $sql = '
        UPDATE ${tabla} 
        SET 
@@ -389,7 +389,7 @@ function generarJS(tabla, campos) {
          ${campos.map(campo => "':"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")},
          ':id_${nombreTabla}' => $datos['id_${nombreTabla}']
        ];
-       return Conexion::execute($sql,$datos);
+       return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
    }`;
    // Generamos la función UPDATE
    const actualizar = () => {
