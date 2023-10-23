@@ -13,7 +13,7 @@
         <div class="card-body p-5">
             <h1 class="fw_light">Adquisición de Equipos</h1>
             <p class="lead">
-                <button class="btn btn-primary" data-toggle="modal" data-target="#frmAgregarAdquisiciones">
+                <button class="btn btn-primary" data-toggle="modal" data-target="#frmAgregarAdquisiciones" onclick="javascript:$('#modalAgregarAdquisiciones').modal('show')">
                 <i class="fas fa-plus-circle"></i> Asignar Equipo</button>
                 <hr>
                 <div id="tablaAdquisicionesLoad"></div>

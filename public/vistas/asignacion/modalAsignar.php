@@ -1,3 +1,6 @@
+<?php
+    require_once "../../../clases/Articulos.php";
+?>
 <!-- Modal -->
 <form id="frmAsignaEquipo" method="POST" onsubmit="return asignarEquipo()">
     <div class="modal fade" id="modalAsignarEquipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -97,7 +100,6 @@
                                 foreach ($arrayCategoria as $categoria => $articulos) {
                                     echo "<optgroup label='$categoria'>";
                                     foreach ($articulos as $articulo) {
-                                        var_dump($articulo);
                                         echo "<option value='".$articulo[0]."'>".$articulo[1]."</option>";
                                     }
                                     echo "</optgroup>";
