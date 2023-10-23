@@ -5,7 +5,7 @@ require_once "../../clases/Conexion.php";
 
 ?>
 
-<form id="frmActualizarAdquisiciones_" method="POST" onsubmit="return actualizarAdquisiciones()">
+<form id="frmActualizarAdquisiciones" method="POST" onsubmit="return actualizarAdquisiciones()">
     <div class="modal fade" id="modalActualizarAdquisiciones" tabindex="-1" role="dialog" aria-labelledby="frmActualizarAdquisiciones" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-dialog modal-lg">
@@ -33,6 +33,22 @@ require_once "../../clases/Conexion.php";
                                 </select>
                             </div>
                             <div class="col-sm-6">
+                                <label>Proveedor</label>
+                                <?php //agarra el ID de la oficina 
+                                    $sql = "SELECT  id_proveedor, nombre
+                                    FROM t_proveedores ORDER BY nombre";
+                                    $respuesta = Conexion::select($sql)
+                                ?>
+                                <select name="id_proveedor" id="id_proveedor" class="form-control" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <?php foreach($respuesta as $mostrar){?>
+                                        <option value="<?php echo $mostrar['id_proveedor'];?>"><?php echo $mostrar ['nombre'];?></option>
+                                    <?php }?><!-- Cierre del while -->
+                                </select>
+                            </div>	
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-12">
                                 <label>Articulo</label>
                                 <?php //agarra el ID de la oficina 
                                     $sql = "SELECT  id_articulo, CONCAT_WS('',
@@ -109,11 +125,9 @@ require_once "../../clases/Conexion.php";
                                     ?>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-sm-4">
                                 <label for="nombreEquipoA">Nombre del equipo</label>
-                                <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control">
+                                <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control" required>
                             </div>
                             <div class="col-sm-4">
                                 <label for="rotulado">Rotulado</label>
@@ -213,87 +227,24 @@ require_once "../../clases/Conexion.php";
                                 </select>
                             </div>
                             <div class="col-sm-6">
-                                <label>Articulo</label>
+                                <label>Proveedor</label>
                                 <?php //agarra el ID de la oficina 
-                                    $sql = "SELECT  id_articulo, CONCAT_WS('',
-                                        CASE
-                                            WHEN nombre IS NOT NULL THEN CONCAT(nombre,' - ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN nombreEquipoA IS NOT NULL THEN CONCAT(nombreEquipoA,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN rotulado IS NOT NULL THEN CONCAT(rotulado,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN marca IS NOT NULL THEN CONCAT(marca,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN modelo IS NOT NULL THEN CONCAT(modelo,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN numeroSerie IS NOT NULL THEN CONCAT(numeroSerie,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN memoria IS NOT NULL THEN CONCAT(memoria,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN tipo_ram IS NOT NULL THEN CONCAT(tipo_ram,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN disco_duro IS NOT NULL THEN CONCAT(disco_duro,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN procesador IS NOT NULL THEN CONCAT(procesador,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN sistema_operativo IS NOT NULL THEN CONCAT(sistema_operativo,' ')
-                                            ELSE ''
-                                        END
-                                    ) AS nombre
-                                    FROM t_articulos a
-                                    JOIN t_cat_equipos e ON e.id_equipo = a.id_equipo
-                                    ORDER BY nombre";
+                                    $sql = "SELECT  id_proveedor, nombre
+                                    FROM t_proveedores ORDER BY nombre";
                                     $respuesta = Conexion::select($sql)
                                 ?>
-                                <select name="id_articulo" id="id_articulo" class="form-control" required>
+                                <select name="id_proveedor" id="id_proveedor" class="form-control" required>
                                     <option value="">Seleccione una opción</option>
-                                    <?php
-                                        foreach ($respuesta as $mostrar) {
-                                            $posicion = strpos($mostrar['nombre'], '-');
-                                            $categoria = substr($mostrar['nombre'], 0, $posicion);
-                                            $articulo = substr($mostrar['nombre'], $posicion + 1);
-
-                                            // Agrega el artículo al array de la categoría correspondiente
-                                            $arrayCategoria[$categoria][] = [$mostrar['id_articulo'], $articulo];
-                                        }
-
-                                    // Itera sobre los arrays de categorías
-                                    foreach ($arrayCategoria as $categoria => $articulos) {
-                                        echo "<optgroup label='$categoria'>";
-                                        foreach ($articulos as $articulo) {
-                                            echo "<option value='".$articulo[0]."'>".$articulo[1]."</option>";
-                                        }
-                                        echo "</optgroup>";
-                                    }
-                                    ?>
+                                    <?php foreach($respuesta as $mostrar){?>
+                                        <option value="<?php echo $mostrar['id_proveedor'];?>"><?php echo $mostrar ['nombre'];?></option>
+                                    <?php }?><!-- Cierre del while -->
                                 </select>
-                            </div>
+                            </div>	
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
                                 <label for="nombreEquipoA">Nombre del equipo</label>
-                                <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control">
+                                <input type="text" name="nombreEquipoA" id="nombreEquipoA" class="form-control" required>
                             </div>
                             <div class="col-sm-4">
                                 <label for="rotulado">Rotulado</label>

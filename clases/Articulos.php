@@ -1,7 +1,7 @@
 <?php 
     require_once "Conexion.php"; //se incluye la conexion a la bd
-    class Reportes{
-        public function obtenerDatosArticulos($where=null){
+    class Articulos{
+        public static function obtenerDatosArticulos($where=null){
             $sql = '
                 SELECT 
                     id_equipo,
@@ -17,14 +17,14 @@
                     disco_duro,
                     procesador,
                     sistema_operativo
-                FROM articulos
+                FROM t_articulos
                 '.$where;
             return Conexion::select($sql); 
         }
       
-        public function agregarNuevoArticulo($datos){
+        public static function agregarArticulos($datos){
             $sql = '
-            INSERT INTO articulos (
+            INSERT INTO t_articulos (
                 id_equipo, 
                 id_proveedor, 
                 nombreEquipoA, 
@@ -71,9 +71,9 @@
             return Conexion::execute($sql,$datos);
         }
       
-        public function actualizarArticulo($datos){
+        public static function actualizarArticulos($datos){
             $sql = '
-            UPDATE articulos 
+            UPDATE t_articulos 
             SET 
                 id_equipo = :id_equipo,
                 id_proveedor = :id_proveedor,
@@ -88,7 +88,7 @@
                 disco_duro = :disco_duro,
                 procesador = :procesador,
                 sistema_operativo = :sistema_operativo 
-            WHERE id_articulos = :id_articulos';
+            WHERE id_articulo = :id_articulo';
             $datos = [
                 ':id_equipo' => $datos['id_equipo'],
                 ':id_proveedor' => $datos['id_proveedor'],
@@ -103,17 +103,17 @@
                 ':disco_duro' => $datos['disco_duro'],
                 ':procesador' => $datos['procesador'],
                 ':sistema_operativo' => $datos['sistema_operativo'],
-                ':id_articulos' => $datos['id_articulos']
+                ':id_articulo' => $datos['id_articulo']
             ];
             return Conexion::execute($sql,$datos);
         }
       
-        public function eliminarArticulo($id){
+        public static function eliminarArticulos($id){
             $sql = '
-            DELETE FROM articulos
-            WHERE id_articulos = :id_articulos';
+            DELETE FROM t_articulos
+            WHERE id_articulo = :id_articulo';
             $datos = [
-                ':id_articulos' => $id
+                ':id_articulo' => $id
             ];
             return Conexion::execute($sql,$datos);
         }
