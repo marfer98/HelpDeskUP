@@ -17,6 +17,7 @@ $respuesta = Asignacion::obtenerDatosAsignacion();
             <th>Disco duro</th>
             <th>Procesador</th>
             <th>Sistema operativo</th>
+            <th>Cantidad</th>
             <th>Editar</th>
             <th>Eliminar</th>
        </thead>
@@ -35,6 +36,7 @@ $respuesta = Asignacion::obtenerDatosAsignacion();
                 <td><?php echo $mostrar['disco_duro']; ?></td>
                 <td><?php echo $mostrar['procesador']; ?></td>
                 <td><?php echo $mostrar['sistema_operativo']; ?></td>
+                <td><?php echo $mostrar['cantidad']; ?></td>
                 <td>
                     <button class="btn btn-warning btn-sm" data-toggle="modal" 
                         data-target="#modalActualizarAsignacion" 

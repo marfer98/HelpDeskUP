@@ -55,6 +55,7 @@ function obtenerDatosAsignacion(id_asignacion,elementoPadre='body'){
               $(elementoPadre+' #disco_duro').val(respuesta['disco_duro']);		
               $(elementoPadre+' #procesador').val(respuesta['procesador']);		
               $(elementoPadre+' #sistema_operativo').val(respuesta['sistema_operativo']);
+              $(elementoPadre+' #cantidad').val(respuesta['cantidad']);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error(jqXHR);

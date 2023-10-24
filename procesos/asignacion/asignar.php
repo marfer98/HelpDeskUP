@@ -2,8 +2,9 @@
     //print_r($_POST);
 
 $datos = array(
-    'idOficina'             => $_POST['idOficina'],
-    'id_articulo'           => $_POST['id_articulo'],
+    'idOficina'     => $_POST['idOficina'],
+    'id_articulo'   => $_POST['id_articulo'],
+    'cantidad'      => $_POST['cantidad'],
 );
 
 include "../../clases/Asignacion.php";

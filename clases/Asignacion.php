@@ -20,7 +20,8 @@
                     a.tipo_ram AS tipo_ram,  
                     a.disco_duro AS disco_duro,
                     a.procesador AS procesador,
-                    a.sistema_operativo AS sistema_operativo
+                    a.sistema_operativo AS sistema_operativo,
+                    asg.cantidad
                 FROM t_asignacion asg
                     INNER JOIN t_articulos AS a ON asg.id_articulo = a.id_articulo
                     INNER JOIN t_oficina AS o ON asg.id_oficina = o.id_oficina
@@ -33,16 +34,19 @@
             $sql ="
                 INSERT INTO t_asignacion (
                     id_oficina, 
-                    id_articulo)
+                    id_articulo,
+                    cantidad)
                 VALUES (
                     :idOficina, 
-                    :id_articulo
+                    :id_articulo,
+                    :cantidad
                     )";
      
             //VIENE DEL PROCESO asignar.php
             $respuesta = Conexion::execute($sql,[
-                ':idOficina'            => $datos['idOficina'], 
-                ':id_articulo'          => $datos['id_articulo'],
+                ':idOficina'    => $datos['idOficina'], 
+                ':id_articulo'  => $datos['id_articulo'],
+                ':cantidad'     => $datos['cantidad'],
             ]);
             return $respuesta;
         }
@@ -64,12 +68,14 @@
             UPDATE t_asignacion 
             SET 
                 id_oficina = :id_oficina,
-                id_articulo = :id_articulo 
+                id_articulo = :id_articulo,
+                cantidad = :cantidad 
             WHERE id_asignacion = :id_asignacion';
             $datos = [
                 ':id_oficina' => $datos['id_oficina'],
                 ':id_articulo' => $datos['id_articulo'],
-                ':id_asignacion' => $datos['id_asignacion']
+                ':id_asignacion' => $datos['id_asignacion'],
+                ':cantidad' => $datos['cantidad'],
             ];
             return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }

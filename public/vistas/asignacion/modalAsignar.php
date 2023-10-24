@@ -105,6 +105,10 @@
                             </select>
 
                         </div>
+                        <div class="col-sm-12">
+                            <label for="cantidad">Nombre Equipo</label>
+                            <input type="number" name="cantidad" id="cantidad" class="form-control" required>
+                        </div>	
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -227,48 +231,52 @@
 
                             </div>	
                             <div class="col-sm-4">
+                                <label for="cantidad">Nombre Equipo</label>
+                                <input type="number" name="cantidad" id="cantidad" class="form-control" required>
+                            </div>	
+                            <div class="col-sm-4">
                                 <label for="nombreEquipoA">Nombre Equipo</label>
-                                <input type="text" disabled name="nombreEquipoA" id="nombreEquipoA" class="form-control" required>
+                                <input type="text" disabled name="nombreEquipoA" id="nombreEquipoA" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="rotulado">Rotulado</label>
-                                <input type="text" disabled name="rotulado" id="rotulado" class="form-control" required>
+                                <input type="text" disabled name="rotulado" id="rotulado" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="marca">Marca</label>
-                                <input type="text" disabled name="marca" id="marca" class="form-control" required>
+                                <input type="text" disabled name="marca" id="marca" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="modelo">Modelo</label>
-                                <input type="text" disabled name="modelo" id="modelo" class="form-control" required>
+                                <input type="text" disabled name="modelo" id="modelo" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="numeroSerie">NumeroSerie</label>
-                                <input type="text" disabled name="numeroSerie" id="numeroSerie" class="form-control" required>
+                                <input type="text" disabled name="numeroSerie" id="numeroSerie" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="descripcion">Descripcion</label>
-                                <input type="text" disabled name="descripcion" id="descripcion" class="form-control" required>
+                                <input type="text" disabled name="descripcion" id="descripcion" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="memoria">Memoria</label>
-                                <input type="text" disabled name="memoria" id="memoria" class="form-control" required>
+                                <input type="text" disabled name="memoria" id="memoria" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="tipo_ram">Tipo ram</label>
-                                <input type="text" disabled name="tipo_ram" id="tipo_ram" class="form-control" required>
+                                <input type="text" disabled name="tipo_ram" id="tipo_ram" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="disco_duro">Disco duro</label>
-                                <input type="text" disabled name="disco_duro" id="disco_duro" class="form-control" required>
+                                <input type="text" disabled name="disco_duro" id="disco_duro" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="procesador">Procesador</label>
-                                <input type="text" disabled name="procesador" id="procesador" class="form-control" required>
+                                <input type="text" disabled name="procesador" id="procesador" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
                                 <label for="sistema_operativo">Sistema operativo</label>
-                                <input type="text" disabled name="sistema_operativo" id="sistema_operativo" class="form-control" required>
+                                <input type="text" disabled name="sistema_operativo" id="sistema_operativo" class="form-control" >
                             </div>
                         </div>
                     </div>
