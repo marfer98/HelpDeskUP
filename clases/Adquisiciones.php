@@ -1,4 +1,7 @@
 <?php
+    ini_set('display_errors',1);
+    ini_set('display_startup_errors',1);
+    error_reporting(E_ALL);
     require_once "Conexion.php";
     require_once "Articulos.php";
 
@@ -29,7 +32,7 @@
                     JOIN t_articulos a ON a.id_articulo = ad.id_articulo
                     JOIN t_cat_equipos e ON a.id_equipo = e.id_equipo
                     JOIN t_proveedores p ON ad.id_proveedor = p.id_proveedor
-            )v_adquisiciones
+            )tmp
             '.$where;
             return Conexion::select($sql); 
         }

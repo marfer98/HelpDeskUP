@@ -18,6 +18,7 @@ require_once "../../clases/Conexion.php";
                     </div>
                     <div class="modal-body">
                         <div class="row">
+                            <input type="hidden" name="id_adquisicion" id="id_adquisicion" class="form-control" required>
                             <div class="col-sm-6">
                                 <label>Tipo de Equipo</label>
                                 <?php //agarra el ID de la oficina 

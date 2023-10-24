@@ -17,7 +17,7 @@
         'sistema_operativo' => $_POST['sistema_operativo'],
         'nombre_equipo' => $_POST['nombre_equipo'],
         'cantidad' => $_POST['cantidad'],
-        'id_adquisicion' => $datos['id_adquisicion']       
+        'id_adquisicion' => $_POST['id_adquisicion']       
     ];
 
     include "../../clases/Adquisiciones.php";
