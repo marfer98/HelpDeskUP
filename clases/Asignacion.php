@@ -30,7 +30,6 @@
         }
 
         public static function agregarAsignacion($datos){
-            $conexion = Conexion::conectar(); //traemos la conexion
             $sql ="
                 INSERT INTO t_asignacion (
                     id_oficina, 
@@ -54,7 +53,7 @@
                     WHERE id_asignacion = :id_asignacion";
             
             $respuesta = Conexion::execute($sql,[
-                ':idAsignacion' => $idAsignacion
+                ':id_asignacion' => $idAsignacion['idAsignacion']
             ]);
 
             return $respuesta;

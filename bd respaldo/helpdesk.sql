@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: sql110.ezyro.com
--- Tiempo de generación: 18-10-2023 a las 16:52:05
+-- Tiempo de generación: 24-10-2023 a las 06:33:03
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.2.22
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ezyro_35208593_helpdesk`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_adquisiciones`
+--
+
+CREATE TABLE `t_adquisiciones` (
+  `id_adquisicion` int(11) NOT NULL,
+  `id_articulo` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `fecha_insert` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `t_adquisiciones`
+--
+
+INSERT INTO `t_adquisiciones` (`id_adquisicion`, `id_articulo`, `id_proveedor`, `cantidad`, `fecha_insert`) VALUES
+(1, 1, 1, 100, '2023-10-20 14:24:30'),
+(3, 29, 1, 100, '2023-10-23 10:25:57');
 
 -- --------------------------------------------------------
 
@@ -51,6 +73,7 @@ CREATE TABLE `t_articulos` (
 --
 
 INSERT INTO `t_articulos` (`id_articulo`, `id_equipo`, `id_proveedor`, `nombreEquipoA`, `rotulado`, `marca`, `modelo`, `numeroSerie`, `descripcion`, `memoria`, `tipo_ram`, `disco_duro`, `procesador`, `sistema_operativo`, `fecha_insert`) VALUES
+(1, 1, 1, 'PC de oficina', '', 'Toshiba', 'RG-506', 'vrg0787k7', '', '', NULL, NULL, '', 'Windows 10 64 bits', '2023-10-20 14:26:37'),
 (4, 2, 0, '', NULL, 'HP', 'gamer', 'verde', 'Aca va la descripción', '32gb', NULL, '1tb', 'i9', NULL, '2023-10-14 09:16:53'),
 (7, 9, 0, '', NULL, 'EPSON', 'PRO', 'Blanco', 'Impresora tipo fotocopiadora ', '', NULL, '', '', NULL, '2023-10-14 09:16:53'),
 (10, 2, 0, '', NULL, '1', 'GT547', NULL, 'descrip', 'RAM', NULL, 'DIS', 'PRO', NULL, '2023-10-14 09:16:53'),
@@ -60,7 +83,13 @@ INSERT INTO `t_articulos` (`id_articulo`, `id_equipo`, `id_proveedor`, `nombreEq
 (16, 2, 0, 'MDEPC001', NULL, 'DELL', 'AX800', 'AJRE1000', 'PC negro nuevo con mouse, teclado y un parlante ', '8GB', NULL, '250 gb', 'i3 8th', NULL, '2023-10-14 09:16:53'),
 (18, 9, 0, 'APE2SE006', '', 'Marca', 'GT547', '4A185048W', '', '', '', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
 (19, 6, 0, 'nombre equipo', 'ram', 'marca', 'modelo', 'tag', '', '', 'ram', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
-(20, 2, 0, 'nombre equipo', 'DD4', 'CANNON', 'GT547', 'tag', '', '3GB', 'DD4', 'disco duro', 'i3', 'Windows 7 64 bits', '2023-10-14 09:16:53');
+(20, 2, 0, 'nombre equipo', 'DD4', 'CANNON', 'GT547', 'tag', '', '3GB', 'DD4', 'disco duro', 'i3', 'Windows 7 64 bits', '2023-10-14 09:16:53'),
+(24, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:00:38'),
+(25, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:14:53'),
+(26, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:16:35'),
+(27, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:18:27'),
+(28, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:25:25'),
+(29, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:25:57');
 
 -- --------------------------------------------------------
 
@@ -72,6 +101,7 @@ CREATE TABLE `t_asignacion` (
   `id_asignacion` int(11) NOT NULL,
   `id_oficina` int(11) NOT NULL,
   `id_articulo` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL DEFAULT 0,
   `fecha_insert` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -79,20 +109,28 @@ CREATE TABLE `t_asignacion` (
 -- Volcado de datos para la tabla `t_asignacion`
 --
 
-INSERT INTO `t_asignacion` (`id_asignacion`, `id_oficina`, `id_articulo`, `fecha_insert`) VALUES
-(4, 3, 4, '2023-10-14 09:16:53'),
-(7, 5, 7, '2023-10-14 09:16:53'),
-(10, 1, 10, '2023-10-14 09:16:53'),
-(12, 5, 12, '2023-10-14 09:16:53'),
-(13, 3, 13, '2023-10-14 09:16:53'),
-(15, 8, 15, '2023-10-14 09:16:53'),
-(16, 7, 16, '2023-10-14 09:16:53'),
-(18, 3, 18, '2023-10-14 09:16:53'),
-(19, 3, 19, '2023-10-14 09:16:53'),
-(20, 3, 20, '2023-10-14 09:16:53'),
-(24, 3, 16, '2023-10-18 11:15:02'),
-(25, 8, 18, '2023-10-18 11:18:39'),
-(26, 8, 18, '2023-10-18 11:19:22');
+INSERT INTO `t_asignacion` (`id_asignacion`, `id_oficina`, `id_articulo`, `cantidad`, `fecha_insert`) VALUES
+(4, 3, 4, 0, '2023-10-14 09:16:53'),
+(7, 5, 7, 0, '2023-10-14 09:16:53'),
+(10, 1, 10, 0, '2023-10-14 09:16:53'),
+(12, 5, 12, 0, '2023-10-14 09:16:53'),
+(13, 3, 13, 0, '2023-10-14 09:16:53'),
+(15, 8, 15, 0, '2023-10-14 09:16:53'),
+(16, 7, 16, 0, '2023-10-14 09:16:53'),
+(18, 3, 18, 0, '2023-10-14 09:16:53'),
+(19, 3, 19, 0, '2023-10-14 09:16:53'),
+(20, 3, 20, 0, '2023-10-14 09:16:53'),
+(24, 3, 16, 0, '2023-10-18 11:15:02'),
+(25, 8, 18, 0, '2023-10-18 11:18:39'),
+(26, 8, 18, 0, '2023-10-18 11:19:22'),
+(27, 9, 7, 0, '2023-10-19 14:00:19'),
+(28, 9, 19, 0, '2023-10-19 14:01:35'),
+(29, 9, 7, 0, '2023-10-19 14:03:40'),
+(31, 9, 18, 0, '2023-10-19 14:04:08'),
+(32, 15, 18, 0, '2023-10-19 14:04:56'),
+(33, 3, 18, 0, '2023-10-19 14:05:29'),
+(34, 3, 19, 0, '2023-10-20 14:10:00'),
+(35, 18, 7, 0, '2023-10-23 09:14:03');
 
 -- --------------------------------------------------------
 
@@ -159,13 +197,13 @@ CREATE TABLE `t_oficina` (
 --
 
 INSERT INTO `t_oficina` (`id_oficina`, `nombre`, `telefono`, `correo`, `fecha_insert`) VALUES
-(1, 'Informatica', '0981288060', 'marferantonio@gmail.com', '2022-01-03 08:47:00'),
+(1, 'AdministraciÃ³n', '0981288060', 'ofi7@helpdesk.com', '2022-01-03 08:47:00'),
 (3, 'ApelaciÃ³n', '12454', 'apel@gmail.com', '2022-01-03 09:12:43'),
 (4, 'Mesa de Entrada', '0962812685', 'mesadeentrada@helpdesk.com', '2022-01-03 09:19:17'),
 (5, 'telecentro', '0981288060', 'telecentrocsj@gmail.com', '2022-01-04 10:49:36'),
-(7, 'Mesa de Entrada', '4545445', 'MESA@GMAIL.COM', '2022-02-03 08:05:33'),
+(7, 'Mesa de Entrada 1', '4545445', 'MESA@GMAIL.COM', '2022-02-03 08:05:33'),
 (8, 'Estadisticas', '000', 'estadisticas@gmail.com', '2022-02-03 08:07:45'),
-(9, 'Administración ', '5470', 'admin@gmail.com', '2022-03-10 09:19:23'),
+(9, 'AdministraciÃ³n ', '5471', 'admin@gmail.com', '2022-03-10 09:19:23'),
 (13, 'Tesoreria', '0988002933', 'tesoreria@helpdesk.com', '2022-03-22 08:24:55'),
 (14, 'Correo', '0998417063', 'correo@helpdesk.com', '2022-03-22 08:25:15'),
 (15, 'Contabilidad', '0998844888', 'contabilidad@helpdesk.com', '2022-03-22 08:33:33'),
@@ -174,8 +212,10 @@ INSERT INTO `t_oficina` (`id_oficina`, `nombre`, `telefono`, `correo`, `fecha_in
 (18, 'Control Personal', '0986795392', 'controlpersonal@helpdesk.com', '2022-03-22 08:34:23'),
 (19, 'Oficina de Inspectoria', '0973303802', 'oficinadeinspectoria@helpdesk.com', '2022-03-22 08:34:38'),
 (20, 'Facilitadores Judiciales ', '0991386847', 'facilitadoresjudiciales@helpdesk.com', '2022-03-22 08:35:09'),
-(21, 'Prueba', '0150515', 'ererer', '2023-10-18 14:43:20'),
-(23, 'Prueba', '0150515', 'ererer_', '2023-10-18 14:48:23');
+(78, 'Prueba', '09812431242', 'ererer@erer', '2023-10-19 13:58:01'),
+(80, 'Mitxel', '09812431242', 'ererer_@etert', '2023-10-19 14:06:35'),
+(81, 'Oficina 5', '0984848', 'ofi5@gmail.com', '2023-10-20 11:44:19'),
+(82, 'Oficina 7', '0959465484', 'ofi7@gmail.com', '2023-10-23 10:42:32');
 
 -- --------------------------------------------------------
 
@@ -190,6 +230,14 @@ CREATE TABLE `t_proveedores` (
   `telefono` int(11) NOT NULL,
   `fecha_insert` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `t_proveedores`
+--
+
+INSERT INTO `t_proveedores` (`id_proveedor`, `nombre`, `direccion`, `telefono`, `fecha_insert`) VALUES
+(1, 'Entregas S.A.', 'AsunciÃ³n', 6969, '2023-10-20 11:17:26'),
+(2, 'Promex', 'Av. SebastiÃ¡n L.', 98546545, '2023-10-23 10:33:21');
 
 -- --------------------------------------------------------
 
@@ -273,8 +321,7 @@ CREATE TABLE `t_sucursales` (
 --
 
 INSERT INTO `t_sucursales` (`id_sucursal`, `descripcion`, `direccion`, `estado`, `fecha_insert`) VALUES
-(1, 'Sajonia Y lideressfd', 'Enrique Segoviano', 1, '2023-10-14 10:09:33'),
-(2, 'SÃ­', 'sÃ­', 1, '2023-10-18 14:08:34');
+(1, 'Sajonia L', 'Mariano Roque Alonso & Testanova, AsunciÃ³n', 1, '2023-10-14 10:09:33');
 
 -- --------------------------------------------------------
 
@@ -302,14 +349,23 @@ CREATE TABLE `t_usuarios` (
 INSERT INTO `t_usuarios` (`id_usuario`, `id_rol`, `id_oficina`, `usuario`, `nombre`, `password`, `ubicacion`, `activo`, `fecha_insert`, `id_sucursal`) VALUES
 (1, 2, 1, 'admin', '', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'Primer piso', 1, '2022-01-03 08:57:33', 1),
 (3, 2, 3, 'Rocio ', '', '011c945f30ce2cbafc452f39840f025693339c42', 'Tercer Piso', 1, '2022-01-03 09:19:17', 1),
-(5, 1, 7, 'MDE001', '', '6e6484c552ab654fe83a243bdf159a35bcd81dcb', 'Planta baja', 1, '2022-02-03 08:05:33', 1),
-(6, 1, 8, 'ESTA001', '', 'e8040662711125241cdab6e1da4f6b24587dd8a5', 'Planta baja', 1, '2022-02-03 08:07:45', 1),
-(7, 2, 21, 'ererer', '', 'd4ccbc79af1c084468bbe0049c7085f2d7d55857', 'Lejos', 1, '2023-10-18 14:43:20', NULL),
-(8, 1, 23, 'ererer_', '', '666ae00902127bff9ae6440b9a044e6f7383e074', '', 1, '2023-10-18 14:48:23', NULL);
+(5, 1, 7, 'MDE001', '', '6e6484c552ab654fe83a243bdf159a35bcd81dcb', 'Planta baja', 0, '2022-02-03 08:05:33', 1),
+(6, 2, 8, 'ESTA001', '', 'e8040662711125241cdab6e1da4f6b24587dd8a5', 'Planta baja', 0, '2022-02-03 08:07:45', 1),
+(7, 2, 21, 'ererer', '', 'd4ccbc79af1c084468bbe0049c7085f2d7d55857', 'Lejos', 1, '2023-10-18 14:43:20', 1),
+(11, 1, 76, '6767', '', '494358ffd9f44efeb1fc508318faa0224e6578e7', '', 1, '2023-10-19 13:55:34', 1),
+(12, 1, 78, 'mitxel', '', '909f0c9b6de433b23a81fe89fac55fa7510bd83d', 'Cambio', 1, '2023-10-19 13:58:01', 1),
+(13, 1, 80, 'mitxeltr', '', '224886ce66d5feef1581d6d55cc57d55165e54f9', '', 1, '2023-10-19 14:06:35', 1),
+(14, 2, 82, 'ofi7', '', '8cb2237d0679ca88db6464eac60da96345513964', '', 1, '2023-10-23 10:42:32', 1);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `t_adquisiciones`
+--
+ALTER TABLE `t_adquisiciones`
+  ADD PRIMARY KEY (`id_adquisicion`);
 
 --
 -- Indices de la tabla `t_articulos`
@@ -388,16 +444,22 @@ ALTER TABLE `t_usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `t_adquisiciones`
+--
+ALTER TABLE `t_adquisiciones`
+  MODIFY `id_adquisicion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `t_articulos`
 --
 ALTER TABLE `t_articulos`
-  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `t_asignacion`
 --
 ALTER TABLE `t_asignacion`
-  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_asignacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `t_cat_equipos`
@@ -415,13 +477,13 @@ ALTER TABLE `t_cat_roles`
 -- AUTO_INCREMENT de la tabla `t_oficina`
 --
 ALTER TABLE `t_oficina`
-  MODIFY `id_oficina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_oficina` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT de la tabla `t_proveedores`
 --
 ALTER TABLE `t_proveedores`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `t_recepcion`
@@ -445,7 +507,7 @@ ALTER TABLE `t_sucursales`
 -- AUTO_INCREMENT de la tabla `t_usuarios`
 --
 ALTER TABLE `t_usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Restricciones para tablas volcadas

@@ -53,9 +53,10 @@
     }
 
     public static function eliminarOficina($id){
+        Asignacion::eliminarAsignacion($idAsignacion);
         $sql = '
-        DELETE FROM t_oficina
-        WHERE id_oficina = :id_oficina';
+            DELETE FROM t_oficina
+            WHERE id_oficina = :id_oficina';
         $datos = [
             ':id_oficina' => $id['id_oficina']
         ];
