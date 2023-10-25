@@ -1,14 +1,13 @@
-
 <?php
-        require_once "../../../clases/Prestamos.php";
-      
-        $respuesta = Prestamos::obtenerDatosPrestamos();
-      ?>
-     <table class="table table-sm table-bordered dt-responsive nowrap" id="tablaPrestamosDataTable" style="width:100%">
+    require_once "../../../clases/Prestamos.php";
+    
+    $respuesta = Prestamos::obtenerDatosPrestamos();
+    ?>
+    <table class="table table-sm table-bordered dt-responsive nowrap" id="tablaPrestamosDataTable" style="width:100%">
        <thead>
             <th>Nombre Equipo</th>
-            <th>Nombre oficina origen</th>
-            <th>Nombre oficina destino</th>
+            <th>Oficina origen</th>
+            <th>Oficina destino</th>
             <th>Cantidad</th>
             <th>Estado</th>
             <th>Editar</th>
@@ -38,5 +37,5 @@
            </tr>
          <?php } ?>
        </tbody>
-     </table>
+       </table>
    
