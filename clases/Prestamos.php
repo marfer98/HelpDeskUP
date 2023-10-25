@@ -1,4 +1,8 @@
 <?php
+    ini_set('display_errors',1);
+    ini_set('display_startup_errors',1);
+    error_reporting(E_ALL);
+
     require_once "Conexion.php";
     require_once "Adquisiciones.php";
     require_once "Asignacion.php";
@@ -6,17 +10,23 @@
     
 class Prestamos{
     public static function obtenerDatosPrestamos($where=null){
-        $sql = '
-        SELECT 
-            id_prestamo,
-            id_articulo,
-            id_oficina_origen,
-            nombre_oficina_origen,
-            id_oficina_destino,
-            nombre_oficina_destino,
-            cantidad,
-            estado
-        FROM t_prestamos
+        $sql = '/*v_prestamos*/
+        SELECT * FROM (
+            SELECT 
+                p.id_prestamo,
+                p.id_articulo,
+                a.nombreEquipoA,
+                p.id_oficina_origen,
+                o1.nombre as nombre_oficina_origen,
+                p.id_oficina_destino,
+                o2.nombre as nombre_oficina_destino,
+                p.cantidad,
+                p.estado
+            FROM t_prestamos p
+            JOIN t_articulos a ON a.id_articulo = p.id_articulo
+            JOIN t_oficina o1 ON p.id_oficina_origen = o1.id_oficina
+            JOIN t_oficina o2 ON p.id_oficina_destino = o2.id_oficina
+        )v_prestamos
         '.$where;
         return Conexion::select($sql); 
     }
@@ -43,7 +53,7 @@ class Prestamos{
             ':cantidad' => $datos['cantidad'],
             ':estado' => $datos['estado']
         ];
-        return !$$respuesta = !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos); 
+        return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos); 
     }
  
     public static function actualizarPrestamos($datos,$getId = false){

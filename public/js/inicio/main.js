@@ -372,7 +372,7 @@ function generarJS(tabla, campos) {
        $datos = [
          ${campos.map(campo => "':"+ campo +"' => $datos['" + campo+"']").join(",\n\t\t")}
        ];
-       return !$$respuesta = !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
+       return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
    }`;
    // Generamos la función INSERT
    const agregar = () => {

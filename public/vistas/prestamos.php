@@ -26,7 +26,7 @@
     
     require_once "footer.php"; 
 ?>
-<script src="../js/prestamos/prestamo.js"></script>
+<script src="../js/prestamos/prestamos.js"></script>
 <?php
     }else{//FIN DEL IF
         header ("location:../index.html");
