@@ -6,6 +6,7 @@
       ?>
      <table class="table table-sm table-bordered dt-responsive nowrap" id="tablaPrestamosDataTable" style="width:100%">
        <thead>
+            <th>Nombre Equipo</th>
             <th>Nombre oficina origen</th>
             <th>Nombre oficina destino</th>
             <th>Cantidad</th>
@@ -16,7 +17,7 @@
        <tbody>
          <?php foreach ($respuesta as $mostrar) { ?>
            <tr>
-                <td><?php echo $mostrar['id_articulo']; ?></td>
+                <td><?php echo $mostrar['nombreEquipoA']; ?></td>
                 <td><?php echo $mostrar['nombre_oficina_origen']; ?></td>
                 <td><?php echo $mostrar['nombre_oficina_destino']; ?></td>
                 <td><?php echo $mostrar['cantidad']; ?></td>
