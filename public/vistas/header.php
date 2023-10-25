@@ -81,12 +81,16 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
-                                    <a class="dropdown-item" href="asignacion.php">
-                            <i class="fas fa-file-signature"></i> Asignación</a>
+                                    <a class="dropdown-item" href="adquisicion.php">
+                                    <i class="fas fa-shopping-cart"></i> Adquisición</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="dropdown-item" href="adquisicion.php">
-                                    <i class="fas fa-building"></i> Adquisición</a>
+                                    <a class="dropdown-item" href="asignacion.php">
+                                    <i class="fas fa-user-plus"></i> Asignación</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="prestamos.php">
+                                    <i class="fas fa-hand-holding-usd"></i> Prestamos</a>
                                 </li>
                             </ul>
                         </li>
