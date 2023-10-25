@@ -61,7 +61,7 @@ function actualizarSucursales(){
               $('#modalActualizarSucursales').modal('hide');
               Swal.fire(":D","Actualizado con EXITO","success");
           }else{
-              Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); //sweet aler 2
+              Swal.fire(":(","ERROR AL ACTUALIZAR: " + respuesta, "error"); //sweet aler 2
           }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -95,7 +95,7 @@ function eliminarSucursales(id_sucursal){//la funcion trae un id de reporte
                         Swal.fire(":D","Eliminado con exito","success");
         
                     }else{
-                        Swal.fire(":(","Error al Eliminar" + respuesta,"error");
+                        Swal.fire(":(","Error al Eliminar: " + respuesta,"error");
         
                     }
                 },

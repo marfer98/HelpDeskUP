@@ -16,7 +16,7 @@ function agregarNuevoReporte(){
                 $('#frmNuevoReporte')[0].reset();//reiniciar el formulario de agregado 
                 Swal.fire(":D","Agregado con EXITO","success");
             }else{
-                Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
+                Swal.fire(":(","ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -49,7 +49,7 @@ function eliminarReporteCliente(idReporte){//la funcion trae un id de reporte
                         Swal.fire(":D","Eliminado con exito","success");
         
                     }else{
-                        Swal.fire(":(","Error al Eliminar" + respuesta,"error");
+                        Swal.fire(":(","Error al Eliminar: " + respuesta,"error");
         
                     }
                 },

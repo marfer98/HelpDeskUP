@@ -119,7 +119,7 @@
             $asignacionOriginal = $asignacionOriginal[0];
 
             // En caso de que el stock sea establecido como menor al que tenía
-            if($asignacionOriginal['cantidad'] < $datos['cantidad']){
+            if($asignacionOriginal['cantidad'] > $datos['cantidad']){
                 $adquisicion = Adquisiciones::obtenerDatosAdquisiciones("
                     WHERE 
                         id_articulo = ".$asignacionOriginal['id_articulo']."
@@ -129,7 +129,7 @@
                     $adquisicion = $adquisicion[0];
                     
                     Adquisiciones::actualizarAdquisiciones([
-                        'cantidad'         => $adquisicion['cantidad'] + ( $adquisicion['cantidad'] - $datos['cantidad']),
+                        'cantidad'         => $adquisicion['cantidad'] + ( $asignacionOriginal['cantidad'] - $datos['cantidad']),
                         'id_adquisicion'   => $adquisicion['id_adquisicion'], 
                         'id_articulo'      => $adquisicion['id_articulo'],
                         'id_proveedor'     => $adquisicion['id_proveedor'],

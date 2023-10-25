@@ -16,7 +16,7 @@ function agregarAdquisiciones(){
               $('#frmAgregarAdquisiciones')[0].reset();//reiniciar el formulario de agregado 
               Swal.fire(":D","Agregado con EXITO","success");
           }else{
-              Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
+              Swal.fire(":(","ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
           }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -77,7 +77,7 @@ function actualizarAdquisiciones(){
               $('#modalActualizarAdquisiciones').modal('hide');
               Swal.fire(":D","Actualizado con EXITO","success");
           }else{
-              Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); //sweet aler 2
+              Swal.fire(":(","ERROR AL ACTUALIZAR: " + respuesta, "error"); //sweet aler 2
           }
       },
       error: function(jqXHR, textStatus, errorThrown) {

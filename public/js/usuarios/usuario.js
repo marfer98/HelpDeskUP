@@ -70,7 +70,7 @@ function actualizarUsuario(){
                 $('#modalActualizarUsuarios').modal('hide');
                 Swal.fire(":D","Actualizado con EXITO","success");
             }else{
-                Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); //sweet aler 2
+                Swal.fire(":(","ERROR AL ACTUALIZAR: " + respuesta, "error"); //sweet aler 2
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -98,7 +98,7 @@ function resetPassword(){
                 $('#modalResetPassword').modal('hide');
                 Swal.fire(":D","Actualizado con EXITO","success");
             }else{
-                Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); 
+                Swal.fire(":(","ERROR AL ACTUALIZAR: " + respuesta, "error"); 
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {

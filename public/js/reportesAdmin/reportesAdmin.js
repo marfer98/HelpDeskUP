@@ -23,7 +23,7 @@ $(document).ready(function(){
                         Swal.fire(":D","Eliminado con exito","success");
         
                     }else{
-                        Swal.fire(":(","Error al Eliminar" + respuesta,"error");
+                        Swal.fire(":(","Error al Eliminar: " + respuesta,"error");
         
                     }
                 },
@@ -91,7 +91,7 @@ function agregarSolucionReporte(){
                 $('#modalAgregarSolucion').modal('hide');
                 $("#tablaReporteAdminLoad").load("reportesAdmin/tablaReportesAdmin.php");
             }else{
-                Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
+                Swal.fire(":(","ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
             }
 
         },

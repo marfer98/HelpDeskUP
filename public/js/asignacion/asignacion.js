@@ -17,7 +17,7 @@ function asignarEquipo(){
                 Swal.fire(":D","Asignado con exito","success");
 
             }else{
-                Swal.fire(":(","Error al asignar" + respuesta,"error");
+                Swal.fire(":(","Error al asignar: " + respuesta,"error");
 
             }
         },

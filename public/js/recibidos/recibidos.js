@@ -16,7 +16,7 @@ function agregarNuevaRecepcion(){
                 $('#frmAgregarRecibido')[0].reset();//reiniciar el formulario de agregado 
                 Swal.fire(":D","Agregado con EXITO","success");
             }else{
-                Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
+                Swal.fire(":(","ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -102,7 +102,7 @@ function obtenerDatosRecebido(idRecepcion){
                 Swal.fire(":D","Agregado con EXITO","success");
                 $("#tablaRecibidosLoad").load("recibidos/tablaRecibidos.php");
             }else{
-                Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
+                Swal.fire(":(","ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
             }
 
         },
