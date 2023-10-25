@@ -74,6 +74,7 @@ window.onload = (event) => {
     // Agregamos la función de validación después del envío
     formulario.setAttribute("afterValidate", eliminarReturn(funcion), "");
   }
+  
 };
 
 const toCamelCase = (snakeCaseString) => {

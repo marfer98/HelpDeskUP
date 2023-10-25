@@ -4,10 +4,12 @@
     error_reporting(E_ALL);
     require_once "Conexion.php";
     require_once "Articulos.php";
+    require_once "Asignacion.php";
 
     class Adquisiciones extends Articulos{
         public static function obtenerDatosAdquisiciones($where=null){
             $sql = '
+            /*v_adquisiciones*/
             SELECT DISTINCT * FROM (
                 SELECT 
                     ad.id_adquisicion,
@@ -107,6 +109,33 @@
                 ':id_adquisicion' => $id['id_adquisicion']
             ];
             return Conexion::execute($sql,$datos);
+        }
+
+        public static function devolverStockAquisiciones($datos){
+            $asignacionOriginal = Asignacion::obtenerDatosAsignacion("
+                WHERE 
+                    id_asignacion = ".$datos['id_asignacion']." 
+            ");
+            $asignacionOriginal = $asignacionOriginal[0];
+
+            // En caso de que el stock sea establecido como menor al que tenía
+            if($asignacionOriginal['cantidad'] < $datos['cantidad']){
+                $adquisicion = Adquisiciones::obtenerDatosAdquisiciones("
+                    WHERE 
+                        id_articulo = ".$asignacionOriginal['id_articulo']."
+                ");
+
+                if($adquisicion){
+                    $adquisicion = $adquisicion[0];
+                    
+                    Adquisiciones::actualizarAdquisiciones([
+                        'cantidad'         => $adquisicion['cantidad'] + ( $adquisicion['cantidad'] - $datos['cantidad']),
+                        'id_adquisicion'   => $adquisicion['id_adquisicion'], 
+                        'id_articulo'      => $adquisicion['id_articulo'],
+                        'id_proveedor'     => $adquisicion['id_proveedor'],
+                    ],false,false);
+                }
+            }
         }
     }
 

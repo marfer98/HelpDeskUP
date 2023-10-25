@@ -43,7 +43,8 @@ function obtenerDatosAsignacion(id_asignacion,elementoPadre='body'){
             
               $(elementoPadre+' #id_oficina').val(respuesta['id_oficina']);		
               $(elementoPadre+' #nombre_oficina').val(respuesta['nombre_oficina']);		
-              $(elementoPadre+' #id_articulo').val(respuesta['id_articulo']);		
+              $(elementoPadre+' #id_articulo').val(respuesta['id_articulo']);	
+              $(elementoPadre+' #id_articulo_text').val(respuesta['nombreEquipoA']);
               $(elementoPadre+' #nombreEquipoA').val(respuesta['nombreEquipoA']);		
               $(elementoPadre+' #rotulado').val(respuesta['rotulado']);		
               $(elementoPadre+' #marca').val(respuesta['marca']);		

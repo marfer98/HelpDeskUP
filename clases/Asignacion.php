@@ -5,10 +5,10 @@
 
     class Asignacion{
         public static function obtenerDatosAsignacion($where=null){
-            $sql = 'SELECT DISTINCT * FROM (
+            $sql = '/*v_asignacion*/
+            SELECT DISTINCT * FROM (
                 SELECT 
                     asg.id_asignacion,
-                    asg.id_oficina as id_oficina,
                     asg.id_oficina,
                     o.nombre as nombre_oficina,
                     asg.id_articulo,
@@ -85,35 +85,13 @@
         }
 
         public static function actualizarAsignacion($datos,$getId = false){
-            $asignacionOriginal = self::obtenerDatosAsignacion("
-                WHERE 
-                    id_asignacion = ".$datos['id_asignacion']." 
-            ");
-            $asignacionOriginal = $asignacionOriginal[0];
-
             $asignacion = self::obtenerDatosAsignacion("
                 WHERE 
                     id_oficina != ".$datos['id_oficina']." AND
                     id_asignacion = ".$datos['id_asignacion']." 
             ");
-            
-            // En caso de que el stock sea establecido como menor al que tenía
-            if($asignacionOriginal['cantidad'] < $datos['cantidad']){
-                $adquisicion = Adquisiciones::obtenerDatosAdquisiciones("
-                    WHERE 
-                        id_articulo = ".$datos['id_articulo']."
-                ");
-
-                if($adquisicion){
-                    $adquisicion = $adquisicion[0];
-                    Adquisiciones::actualizarAdquisiciones([
-                        'cantidad'         => $asignacionOriginal['cantidad'] + ( $asignacionOriginal['cantidad'] - $datos['cantidad']),
-                        'id_adquisicion'   => $asignacionOriginal['id_adquisicion'], 
-                        'id_articulo'      => $asignacionOriginal['id_articulo'],
-                        'id_proveedor'     => $asignacionOriginal['id_proveedor'],
-                    ],false,false);
-                }
-            }
+        
+            Adquisiciones::devolverStockAquisiciones($datos);
 
             $datos['cantidad'] = $asignacion ? $asignacion[0]['cantidad'] + $datos['cantidad'] : $datos['cantidad'];
 
@@ -132,6 +110,8 @@
             ];
             return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }
+
+        
     }
 
     

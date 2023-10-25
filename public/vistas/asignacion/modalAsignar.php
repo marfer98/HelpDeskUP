@@ -208,7 +208,7 @@
                                     ORDER BY nombre";
                                     $respuesta = Conexion::select($sql)
                                 ?>
-                                <select name="id_articulo" id="id_articulo" class="form-control" required>
+                                <select name="id_articulo" id="id_articulo" class="form-control disabled d-none" required >
                                     <option value="">Seleccione una opción</option>
                                     <?php
                                         foreach ($respuesta as $mostrar) {
@@ -230,10 +230,10 @@
                                     }
                                     ?>
                                 </select>
-
+                                <input type="text" disabled name="id_articulo_text" id="id_articulo_text" class="form-control" >
                             </div>	
                             <div class="col-sm-4">
-                                <label for="cantidad">Nombre Equipo</label>
+                                <label for="cantidad">Cantidad</label>
                                 <input type="number" name="cantidad" id="cantidad" class="form-control" required>
                             </div>	
                             <div class="col-sm-4">

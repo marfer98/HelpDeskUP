@@ -3,6 +3,7 @@
     class Articulos{
         public static function obtenerDatosArticulos($where=null){
             $sql = '
+                /*v_articulos*/
                 SELECT DISTINCT * FROM (
                     SELECT 
                         a.id_equipo,
