@@ -71,8 +71,11 @@
             return $respuesta;
         }
       
-        public static function actualizarAdquisiciones($datos){
-            self::actualizarArticulos($datos);
+        public static function actualizarAdquisiciones($datos,$getId = false,$actualizarArticulo = true){
+            if($actualizarArticulo){
+                self::actualizarArticulos($datos);
+            }
+            
             $sql = '
                 UPDATE t_adquisiciones 
                 SET 
@@ -86,7 +89,7 @@
                 ':cantidad' => $datos['cantidad'],
                 ':id_adquisicion' => $datos['id_adquisicion']
             ];
-            return Conexion::execute($sql,$datos);
+            return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }
       
         public static function eliminarAdquisiciones($id){

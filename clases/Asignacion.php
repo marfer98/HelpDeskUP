@@ -1,12 +1,14 @@
 <?php
 
     require_once "Conexion.php";
+    require_once "Adquisiciones.php";
 
     class Asignacion{
         public static function obtenerDatosAsignacion($where=null){
             $sql = 'SELECT DISTINCT * FROM (
                 SELECT 
                     asg.id_asignacion,
+                    asg.id_oficina as id_oficina,
                     asg.id_oficina,
                     o.nombre as nombre_oficina,
                     asg.id_articulo,
@@ -31,46 +33,97 @@
         }
 
         public static function agregarAsignacion($datos){
-            $sql ="
-                INSERT INTO t_asignacion (
-                    id_oficina, 
-                    id_articulo,
-                    cantidad)
-                VALUES (
-                    :idOficina, 
-                    :id_articulo,
-                    :cantidad
-                    )";
-     
-            //VIENE DEL PROCESO asignar.php
-            $respuesta = Conexion::execute($sql,[
-                ':idOficina'    => $datos['idOficina'], 
-                ':id_articulo'  => $datos['id_articulo'],
-                ':cantidad'     => $datos['cantidad'],
-            ]);
-            return $respuesta;
+            $adquisicion = Adquisiciones::obtenerDatosAdquisiciones("
+                WHERE 
+                    id_articulo = ".$datos['id_articulo']." AND
+                    cantidad >= ".$datos['cantidad']."
+            ");
+            
+            if($adquisicion){
+                $adquisicion = $adquisicion[0];
+                Adquisiciones::actualizarAdquisiciones([
+                    'cantidad'          => $adquisicion['cantidad'] - $datos['cantidad'],
+                    'id_adquisicion'   => $adquisicion['id_adquisicion'], 
+                    'id_articulo'      => $adquisicion['id_articulo'],
+                    'id_proveedor'     => $adquisicion['id_proveedor'],
+                ],false,false);
+               
+                $sql ="
+                    INSERT INTO t_asignacion (
+                        id_oficina, 
+                        id_articulo,
+                        cantidad)
+                    VALUES (
+                        :id_oficina, 
+                        :id_articulo,
+                        :cantidad
+                        )";
+        
+                //VIENE DEL PROCESO asignar.php
+                $respuesta = Conexion::execute($sql,[
+                    ':id_oficina'    => $datos['id_oficina'], 
+                    ':id_articulo'  => $datos['id_articulo'],
+                    ':cantidad'     => $datos['cantidad'],
+                ]);
+                return $respuesta;
+            }else{
+                return ' Equipo con cantidad insuficiente';
+            }
+
         }
 
-        public static function eliminarAsignacion($idAsignacion){
+        public static function eliminarAsignacion($id_asignacion){
             $conexion = Conexion::conectar(); //traemos la conexion
             $sql = "DELETE FROM t_asignacion 
                     WHERE id_asignacion = :id_asignacion";
             
             $respuesta = Conexion::execute($sql,[
-                ':id_asignacion' => $idAsignacion['idAsignacion']
+                ':id_asignacion' => $id_asignacion['id_asignacion']
             ]);
 
             return $respuesta;
         }
 
         public static function actualizarAsignacion($datos,$getId = false){
+            $asignacionOriginal = self::obtenerDatosAsignacion("
+                WHERE 
+                    id_asignacion = ".$datos['id_asignacion']." 
+            ");
+            $asignacionOriginal = $asignacionOriginal[0];
+
+            $asignacion = self::obtenerDatosAsignacion("
+                WHERE 
+                    id_oficina != ".$datos['id_oficina']." AND
+                    id_asignacion = ".$datos['id_asignacion']." 
+            ");
+            
+            // En caso de que el stock sea establecido como menor al que tenía
+            if($asignacionOriginal['cantidad'] < $datos['cantidad']){
+                $adquisicion = Adquisiciones::obtenerDatosAdquisiciones("
+                    WHERE 
+                        id_articulo = ".$datos['id_articulo']."
+                ");
+
+                if($adquisicion){
+                    $adquisicion = $adquisicion[0];
+                    Adquisiciones::actualizarAdquisiciones([
+                        'cantidad'         => $asignacionOriginal['cantidad'] + ( $asignacionOriginal['cantidad'] - $datos['cantidad']),
+                        'id_adquisicion'   => $asignacionOriginal['id_adquisicion'], 
+                        'id_articulo'      => $asignacionOriginal['id_articulo'],
+                        'id_proveedor'     => $asignacionOriginal['id_proveedor'],
+                    ],false,false);
+                }
+            }
+
+            $datos['cantidad'] = $asignacion ? $asignacion[0]['cantidad'] + $datos['cantidad'] : $datos['cantidad'];
+
             $sql = '
-            UPDATE t_asignacion 
-            SET 
-                id_oficina = :id_oficina,
-                id_articulo = :id_articulo,
-                cantidad = :cantidad 
-            WHERE id_asignacion = :id_asignacion';
+                UPDATE t_asignacion 
+                SET 
+                    id_oficina = :id_oficina,
+                    id_articulo = :id_articulo,
+                    cantidad = :cantidad 
+                WHERE id_asignacion = :id_asignacion';
             $datos = [
                 ':id_oficina' => $datos['id_oficina'],
                 ':id_articulo' => $datos['id_articulo'],

@@ -1,8 +1,8 @@
 <?php 
-    require_once "Conexion.php"; //se incluye la conexion a la bd
-    class Oficinas{
+require_once "Conexion.php";
+require_once "Asignacion.php";
 
-        
+class Oficinas{
     public static function obtenerDatosOficina($where=null){
         $sql = '
         SELECT 
@@ -53,7 +53,7 @@
     }
 
     public static function eliminarOficina($id){
-        Asignacion::eliminarAsignacion($idAsignacion);
+        Asignacion::eliminarAsignacion($id_asignacion);
         $sql = '
             DELETE FROM t_oficina
             WHERE id_oficina = :id_oficina';
@@ -67,7 +67,7 @@
         
         //obtener el id 
         $sql = "SELECT 
-                    oficina.id_oficina as idOficina 
+                    oficina.id_oficina as id_oficina 
                 FROM 
                     t_usuarios as usuarios 
                 INNER JOIN 
@@ -78,7 +78,7 @@
             ':idUsuario' => $idUsuario
         ]);
 
-        return $respuesta[0]['idOficina'];
+        return $respuesta[0]['id_oficina'];
     }
 }
 ?>

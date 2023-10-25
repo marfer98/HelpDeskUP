@@ -26,7 +26,7 @@
     ?>
         <tr>
             <th>
-                <?php echo $mostrar ['idOficina']; ?>
+                <?php echo $mostrar ['id_oficina']; ?>
             </th> 
             <th>
                 <?php echo $mostrar ['nombreOficina']; ?>

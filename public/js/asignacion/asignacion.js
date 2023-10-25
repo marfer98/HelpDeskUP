@@ -91,7 +91,7 @@ function actualizarAsignacion(){
   }
 
 //Funcion para eliminar la asignacion
-function eliminarAsignacion(idAsignacion){ //sweetalert con confirmación 
+function eliminarAsignacion(id_asignacion){ //sweetalert con confirmación 
     Swal.fire({
         title: '¿Estas seguro de eliminar?',
         text: "Una vez eliminado no podrá ser recuperado",
@@ -104,7 +104,7 @@ function eliminarAsignacion(idAsignacion){ //sweetalert con confirmación
         if (result.isConfirmed) {
             $.ajax({
                 type: "POST",
-                data: "idAsignacion=" + idAsignacion,//manda,os como dato el id de la asignacion que queremos eliminar 
+                data: "id_asignacion=" + id_asignacion,//manda,os como dato el id de la asignacion que queremos eliminar 
                 url: "../../procesos/asignacion/eliminarAsignacion.php",
                 success:function(respuesta){
                     //console.log(respuesta);

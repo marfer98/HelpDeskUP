@@ -32,9 +32,9 @@
         }
 
         public function agregaNuevoUsuario($datos){
-            $idOficina = self::agregarOficina($datos,true);
+            $id_oficina = self::agregarOficina($datos,true);
             
-            if ($idOficina > 0) {
+            if ($id_oficina > 0) {
                 $sql ="INSERT INTO t_usuarios ( 
                             id_rol,
                             id_oficina,
@@ -53,7 +53,7 @@
                                   
                 $respuesta = Conexion::execute($sql,[
                     ':id_rol'       => $datos['idRol'],
-                    ':id_oficina'   => $idOficina,
+                    ':id_oficina'   => $id_oficina,
                     ':usuario'      => $datos['nombreUsuario'],
                     ':password'     => $datos['password'],
                     ':ubicacion'    => $datos['ubicacion'],
@@ -77,7 +77,7 @@
                         usuarios.id_rol AS id_rol,
                         usuarios.ubicacion as ubicacion,
                         usuarios.activo as estatus,
-                        usuarios.id_oficina as idOficina,
+                        usuarios.id_oficina as id_oficina,
                         oficina.nombre AS nombreOficina,
                         oficina.telefono AS telefono,
                         oficina.correo AS correo,
@@ -106,7 +106,7 @@
                 'id_rol'         => $usuario['id_rol'],
                 'ubicacion'      => $usuario['ubicacion'],
                 'estatus'        => $usuario['estatus'],
-                'idOficina'      => $usuario['idOficina'],
+                'id_oficina'      => $usuario['id_oficina'],
                 'nombreOficina'  => $usuario['nombreOficina'],
                 'telefono'       => $usuario['telefono'],
                 'correo'         => $usuario['correo'],
@@ -178,7 +178,7 @@
                         usuarios.id_rol AS id_rol,
                         usuarios.ubicacion as ubicacion,
                         usuarios.activo as estatus,
-                        usuarios.id_oficina as idOficina,
+                        usuarios.id_oficina as id_oficina,
                         oficina.nombre AS nombreOficina,
                         oficina.telefono AS telefono,
                         oficina.correo AS correo,

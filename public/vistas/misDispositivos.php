@@ -8,21 +8,21 @@
     //TOQUE ACA PARA QUE ME MUESTRE LO DE LA OFICINA TOMANDO SU ID
     $idUsuario =  $_SESSION['usuario']['id'] ;
     $sql= "SELECT 
-                oficina.id_oficina AS idOficina
+                oficina.id_oficina AS id_oficina
             FROM
                 t_usuarios AS usuario
                     INNER JOIN
                 t_oficina AS oficina ON usuario.id_oficina = oficina.id_oficina
                     AND usuario.id_usuario = '$idUsuario'";
         $respuesta = Conexion::select($sql);
-        $idOficina = $respuesta[0]['idOficina'];
+        $id_oficina = $respuesta[0]['id_oficina'];
 
         $sql = " SELECT
-                oficina.id_oficina AS idOficina,
+                oficina.id_oficina AS id_oficina,
                 oficina.nombre AS nombreOficina,
                 equipo.id_equipo AS idEquipo,
                 equipo.nombre AS nombreEquipo,
-                asignacion.id_asignacion AS idAsignacion,
+                asignacion.id_asignacion AS id_asignacion,
                 a.nombreEquipoA AS nombreEquipoA,
                 a.marca AS marca,
                 a.modelo AS modelo,
@@ -42,7 +42,7 @@
                 asignacion.id_oficina = oficina.id_oficina
             INNER JOIN t_cat_equipos AS equipo
             ON
-                a.id_equipo = equipo.id_equipo AND asignacion.id_oficina = '$idOficina'";
+                a.id_equipo = equipo.id_equipo AND asignacion.id_oficina = '$id_oficina'";
 
         $respuesta = Conexion::select($sql);
   ?>

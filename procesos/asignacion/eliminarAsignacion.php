@@ -1,7 +1,7 @@
 <?php
     // Delete Asignacion
     $datos = [
-        'idAsignacion' => $_POST['idAsignacion']
+        'id_asignacion' => $_POST['id_asignacion']
     ];
 
     include "../../clases/Asignacion.php";

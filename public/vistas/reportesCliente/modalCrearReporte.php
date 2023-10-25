@@ -16,7 +16,7 @@
                 <?php
                 $idUsuario = $_SESSION['usuario']['id'];//pasa el id usuario que inicio sesion 
                     $sql="SELECT
-                            asignacion.id_asignacion AS idAsignacion,
+                            asignacion.id_asignacion AS id_asignacion,
                             equipo.id_equipo AS idEquipo,
                             equipo.nombre AS nombreEquipo
                             

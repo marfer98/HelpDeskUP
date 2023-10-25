@@ -20,7 +20,7 @@
                                 $respuesta = Conexion::select($sql)
                             ?>
 
-                            <select name="idOficina" id="idOficina" class="form-control" required>
+                            <select name="id_oficina" id="id_oficina" class="form-control" required>
                                 <option value="">Seleccione una opción</option>
                                 <?php foreach($respuesta as $mostrar){?>
                                     <option value="<?php echo $mostrar['id_oficina'];?>"><?php echo $mostrar ['nombre'];?></option>
@@ -30,7 +30,7 @@
                         <div class="col-sm-6">
                             <label>Articulo</label>
                             <?php //agarra el ID de la oficina 
-                                $sql = "SELECT  id_articulo, CONCAT_WS('',
+                                $sql = "SELECT DISTINCT a.id_articulo, CONCAT_WS('',
                                     CASE
                                         WHEN nombre IS NOT NULL THEN CONCAT(nombre,' - ')
                                         ELSE ''
@@ -77,7 +77,9 @@
                                     END
                                 ) AS nombre
                                 FROM t_articulos a
-                                JOIN t_cat_equipos e ON e.id_equipo = a.id_equipo
+                                    JOIN t_adquisiciones ad ON a.id_articulo = ad.id_articulo
+                                    JOIN t_cat_equipos e ON e.id_equipo = a.id_equipo
+                                WHERE ad.cantidad > 0
                                 ORDER BY nombre";
                                 $respuesta = Conexion::select($sql)
                             ?>
@@ -106,7 +108,7 @@
 
                         </div>
                         <div class="col-sm-12">
-                            <label for="cantidad">Nombre Equipo</label>
+                            <label for="cantidad">Cantidad</label>
                             <input type="number" name="cantidad" id="cantidad" class="form-control" required>
                         </div>	
                     </div>
@@ -145,7 +147,7 @@
                                     $respuesta = Conexion::select($sql)
                                 ?>
 
-                                <select name="idOficina" id="idOficina" class="form-control" required>
+                                <select name="id_oficina" id="id_oficina" class="form-control" required>
                                     <option value="">Seleccione una opción</option>
                                     <?php foreach($respuesta as $mostrar){?>
                                         <option value="<?php echo $mostrar['id_oficina'];?>"><?php echo $mostrar ['nombre'];?></option>
