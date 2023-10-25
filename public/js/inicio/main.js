@@ -258,7 +258,18 @@ function generarJS(tabla, campos) {
            </tr>
          <?php } ?>
        </tbody>
-     </table>
+    </table>
+
+    <script>
+      //datatable 
+      $(document).ready(function () {
+          $('#tabla${nombreTablaCamel}DataTable').DataTable({
+              language :{ //esto es una propiedad 
+                  url: "../datatable/es_es.json"
+              }
+          });
+      });
+  </script>
    `;
  
    console.log(tablaHTML); 
