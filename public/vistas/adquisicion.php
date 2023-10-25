@@ -33,3 +33,13 @@ include "footer.php";
         header ("location:../index.html");
     }  
   ?>
+<script>
+    //datatable 
+    $(document).ready(function () {
+        $('#tablaAdquisicionesDataTable').DataTable({
+            language :{ //esto es una propiedad 
+                url: "../datatable/es_es.json"
+            }
+        });
+    });
+</script>

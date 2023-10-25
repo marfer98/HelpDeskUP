@@ -32,3 +32,13 @@
         header ("location:../index.html");
     }  
 ?>
+<script>
+    //datatable 
+    $(document).ready(function () {
+        $('#tablaPrestamosDataTable').DataTable({
+            language :{ //esto es una propiedad 
+                url: "../datatable/es_es.json"
+            }
+        });
+    });
+</script>

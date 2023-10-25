@@ -82,7 +82,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="adquisicion.php">
-                                    <i class="fas fa-shopping-cart"></i> Adquisición</a>
+                                    <i class="fas fa-box-open"></i> Adquisición</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="asignacion.php">
@@ -90,7 +90,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="prestamos.php">
-                                    <i class="fas fa-hand-holding-usd"></i> Prestamos</a>
+                                    <i class="fas fa-solid fa-retweet"></i> Prestamos</a>
                                 </li>
                             </ul>
                         </li>
