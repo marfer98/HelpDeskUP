@@ -1,22 +1,20 @@
-function obtenerSelectHtml(elementoPadre,path,id,campo,tabla,where = null){
+function obtenerSelectHtml(elementoPadre,id_select,path,id,campo,tabla,where = null){
   // Agregar una variable para almacenar el elemento select.
-  var select = $(elementoPadre);
+  var select = $(elementoPadre+' '+id_select);
 
   // Iterar sobre la respuesta JSON y agregar un option para cada elemento.
   $.ajax({
       type: "POST",
       data: "where=" + where,//mandar el where
-      url: "../../procesos/"+path+"/obtenerDatos"+tabla+".php",
+      url: "../../procesos/"+path+"/obtenerSelect"+tabla+".php",
       success:function(respuesta){
-          respuesta= jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
-
+          respuesta= jQuery.parseJSON(respuesta);//envio de respuesta valida
           // Iterar sobre la respuesta JSON.
-          for (var i = 0; i < respuesta.length; i++) {
-              // Agregar un option para cada elemento.
-              var option = $('<option value="' + respuesta[i][id] + '">' + respuesta[i][campo] + '</option>');
-              // Asignar el valor del option al valor del elemento select.
-              select.append(option);
+          var option = ''
+          for (valor of respuesta) {
+              option += ('<option value="' + valor[id] + '">' + valor[campo] + '</option>');
           }
+           $(select).html(option);
       },
       error: function(jqXHR, textStatus, errorThrown) {
           console.error(jqXHR);

@@ -127,7 +127,7 @@
         }
 
         public static function obtenerDatosArticulosParaSelect($where = null){
-            $sql = "SELECT  a.id_articulo, CONCAT_WS('',
+            $sql = "SELECT DISTINCT a.id_articulo, CONCAT_WS('',
                         CASE
                             WHEN nombre IS NOT NULL THEN CONCAT(nombre,' - ')
                             ELSE ''
@@ -176,6 +176,7 @@
                     FROM t_articulos a
                     JOIN t_cat_equipos e ON e.id_equipo = a.id_equipo
                     LEFT JOIN t_adquisiciones ad ON a.id_articulo = ad.id_articulo
+                    LEFT JOIN t_asignacion asg ON a.id_articulo = asg.id_articulo
                     $where
                     ORDER BY nombre";
 

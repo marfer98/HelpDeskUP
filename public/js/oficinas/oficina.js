@@ -32,7 +32,7 @@ function obtenerDatosOficina(id_oficina,elementoPadre='body'){
   $.ajax({
       type: "POST",
       data: "id_oficina=" + id_oficina,//mandar el id Oficina
-      url: "../../procesos/oficina/obtenerDatosOficina.php",
+      url: "../../procesos/oficina/obtenerDatosOficinas.php",
       success:function(respuesta){
             respuesta= jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
             //console.log(respuesta);
