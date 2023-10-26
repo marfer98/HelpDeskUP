@@ -1,6 +1,6 @@
 
   //jquery
-  $(document).ready(function(){
+$(document).ready(function(){
     $("#tablaPrestamosLoad").load("prestamos/tablaPrestamos.php");
 });
 function agregarPrestamos(){
@@ -116,3 +116,22 @@ function eliminarPrestamos(id_prestamo){//la funcion trae un id de reporte
     })
   return false //para que no recargue la función 
 }
+
+function obtenerSelectPrestamos(elementoPadre,where = null){
+    $.ajax({
+        type: "POST",
+        data: "where=" + where,//mandar el id Prestamos
+        url: "../../procesos/prestamos/obtenerDatosPrestamos.php",
+        success:function(respuesta){
+            respuesta= jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
+            //console.log(respuesta);
+            $(elementoPadre+' #id_prestamo').val(respuesta['id_prestamo']);
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
+        }
+    });
+}
+

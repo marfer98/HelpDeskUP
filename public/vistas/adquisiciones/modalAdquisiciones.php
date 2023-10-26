@@ -50,7 +50,7 @@ require_once "../../clases/Articulos.php";
                         </div>
                         <div class="row">
                             <div class="col-sm-6">
-                                <label>Articulo</label>
+                                <label>Artículo</label>
                                 <?php //agarra el ID del articulo
                                     $respuesta = Articulos::obtenerDatosArticulosParaSelect();
                                 ?>

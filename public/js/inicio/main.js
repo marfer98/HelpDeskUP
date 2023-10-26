@@ -1,3 +1,31 @@
+function obtenerSelectHtml(elementoPadre,path,id,campo,tabla,where = null){
+  // Agregar una variable para almacenar el elemento select.
+  var select = $(elementoPadre);
+
+  // Iterar sobre la respuesta JSON y agregar un option para cada elemento.
+  $.ajax({
+      type: "POST",
+      data: "where=" + where,//mandar el where
+      url: "../../procesos/"+path+"/obtenerDatos"+tabla+".php",
+      success:function(respuesta){
+          respuesta= jQuery.parseJSON(respuesta)[0];//envio de respuesta valida
+
+          // Iterar sobre la respuesta JSON.
+          for (var i = 0; i < respuesta.length; i++) {
+              // Agregar un option para cada elemento.
+              var option = $('<option value="' + respuesta[i][id] + '">' + respuesta[i][campo] + '</option>');
+              // Asignar el valor del option al valor del elemento select.
+              select.append(option);
+          }
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+          console.error(jqXHR);
+          console.error(textStatus);
+          console.error(errorThrown);
+      }
+  });
+}
+
 // Función para validar un formulario
 function validar(form) {
   // Obtenemos todos los campos del formulario
