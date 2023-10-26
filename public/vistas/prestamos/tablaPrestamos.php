@@ -20,7 +20,11 @@
                 <td><?php echo $mostrar['nombre_oficina_origen']; ?></td>
                 <td><?php echo $mostrar['nombre_oficina_destino']; ?></td>
                 <td><?php echo $mostrar['cantidad']; ?></td>
-                <td><?php echo $mostrar['estado']; ?></td>
+                <td><?php 
+                    echo ($mostrar['estado'] == 0) ? 
+                        '<span class="badge bg-success">Rechazado</span>' :
+                        '<span class="badge bg-danger">Confirmado</span>';?>
+                </td>
                 <td>
                     <button class="btn btn-warning btn-sm" data-toggle="modal" 
                         data-target="#modalActualizarPrestamos" 
