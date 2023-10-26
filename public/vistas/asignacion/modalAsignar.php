@@ -1,3 +1,8 @@
+<?php
+
+require_once "../../clases/Conexion.php";
+require_once "../../clases/Articulos.php";
+?>
 <!-- Modal -->
 <form id="frmAsignaEquipo" method="POST" onsubmit="return asignarEquipo()">
     <div class="modal fade" id="modalAsignarEquipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -29,59 +34,8 @@
                         </div>
                         <div class="col-sm-6">
                             <label>Articulo</label>
-                            <?php //agarra el ID de la oficina 
-                                $sql = "SELECT DISTINCT a.id_articulo, CONCAT_WS('',
-                                    CASE
-                                        WHEN nombre IS NOT NULL THEN CONCAT(nombre,' - ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN nombreEquipoA IS NOT NULL THEN CONCAT(nombreEquipoA,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN rotulado IS NOT NULL THEN CONCAT(rotulado,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN marca IS NOT NULL THEN CONCAT(marca,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN modelo IS NOT NULL THEN CONCAT(modelo,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN numeroSerie IS NOT NULL THEN CONCAT(numeroSerie,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN memoria IS NOT NULL THEN CONCAT(memoria,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN tipo_ram IS NOT NULL THEN CONCAT(tipo_ram,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN disco_duro IS NOT NULL THEN CONCAT(disco_duro,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN procesador IS NOT NULL THEN CONCAT(procesador,' ')
-                                        ELSE ''
-                                    END,
-                                    CASE
-                                        WHEN sistema_operativo IS NOT NULL THEN CONCAT(sistema_operativo,' ')
-                                        ELSE ''
-                                    END
-                                ) AS nombre
-                                FROM t_articulos a
-                                    JOIN t_adquisiciones ad ON a.id_articulo = ad.id_articulo
-                                    JOIN t_cat_equipos e ON e.id_equipo = a.id_equipo
-                                WHERE ad.cantidad > 0
-                                ORDER BY nombre";
-                                $respuesta = Conexion::select($sql)
+                            <?php //agarra el ID de Articulos 
+                                $respuesta = Articulos::obtenerDatosArticulosParaSelect('WHERE cantidad > 0');
                             ?>
                             <select name="id_articulo" id="id_articulo" class="form-control" required>
                                 <option value="">Seleccione una opción</option>
@@ -156,57 +110,8 @@
                             </div>		
                             <div class="col-sm-6">
                                 <label>Articulo</label>
-                                <?php //agarra el ID de la oficina 
-                                    $sql = "SELECT  id_articulo, CONCAT_WS('',
-                                        CASE
-                                            WHEN nombre IS NOT NULL THEN CONCAT(nombre,' - ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN nombreEquipoA IS NOT NULL THEN CONCAT(nombreEquipoA,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN rotulado IS NOT NULL THEN CONCAT(rotulado,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN marca IS NOT NULL THEN CONCAT(marca,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN modelo IS NOT NULL THEN CONCAT(modelo,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN numeroSerie IS NOT NULL THEN CONCAT(numeroSerie,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN memoria IS NOT NULL THEN CONCAT(memoria,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN tipo_ram IS NOT NULL THEN CONCAT(tipo_ram,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN disco_duro IS NOT NULL THEN CONCAT(disco_duro,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN procesador IS NOT NULL THEN CONCAT(procesador,' ')
-                                            ELSE ''
-                                        END,
-                                        CASE
-                                            WHEN sistema_operativo IS NOT NULL THEN CONCAT(sistema_operativo,' ')
-                                            ELSE ''
-                                        END
-                                    ) AS nombre
-                                    FROM t_articulos a
-                                    JOIN t_cat_equipos e ON e.id_equipo = a.id_equipo
-                                    ORDER BY nombre";
-                                    $respuesta = Conexion::select($sql)
+                                <?php //agarra el ID de Articulos 
+                                    $respuesta = Articulos::obtenerDatosArticulosParaSelect();
                                 ?>
                                 <select name="id_articulo" id="id_articulo" class="form-control disabled d-none" required >
                                     <option value="">Seleccione una opción</option>
