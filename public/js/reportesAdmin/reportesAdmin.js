@@ -62,27 +62,20 @@ function obtenerDatosSolucion(idReporte){
     });
 }
 function agregarSolucionReporte(){
+
+    const imagen = convertirBlob('imagen_solucion');//document.querySelector('#imagen_solucion').files[0];
+
+    $('#imagen_solucion_blob').html(imagen)
+    $('#imagen_solucion_blob').val(imagen)
+
     $.ajax({
         type: "POST",
-        data: $('#frmAgregarSolucionReporte').serialize(),
+        data: $('#frmAgregarSolucionReporte').serialize()+'&imagen_solucion_blob='+imagen,//new FormData(document.getElementById("frmAgregarSolucionReporte")),
         url:"../../procesos/reportesAdmin/actualizarSolucion.php",
-     /*   error: function (jqXHR, exception) {
-            if (jqXHR.status === 0) {
-                console.log('Not connect.\n Verify Network.'); 
-            } else if (jqXHR.status == 404) {
-                console.log('Requested page not found. [404]'); 
-            } else if (jqXHR.status == 500) {
-                console.log('Internal Server Error [500].');  
-            } else if (exception === 'parsererror') {
-                console.log( 'Requested JSON parse failed.'); 
-            } else if (exception === 'timeout') {
-                console.log( 'Time out error.'); 
-            } else if (exception === 'abort') {
-                console.log('Ajax request aborted.');  
-            } else {
-                console.log('Uncaught Error.\n' + jqXHR.responseText); 
-            }
-        },*/
+        dataType: "HTML",
+		cache: false,
+		contentType: false,
+		processData: false,
         success:function(respuesta){
             console.log(respuesta);
             respuesta = respuesta.trim();//quita los espacios
@@ -103,3 +96,24 @@ function agregarSolucionReporte(){
     });
     return false;
 }
+
+function convertirBlob(id = "imagen_solucion") {
+    const input = document.getElementById(id);
+    let file = input.files[0];
+  
+    // Encode the file using the FileReader API
+    const reader = new FileReader();
+    prueaba = reader.onloadend = () => {
+      // Get the dataURL
+      const dataURL = reader.result;
+  
+      // Convert the dataURL to a string
+      const string = dataURL;
+  echo(string)
+      // Return the string
+      return string;
+    };
+      echo(prueaba)
+      echo(reader.readAsDataURL(file))
+    return prueaba;
+  }

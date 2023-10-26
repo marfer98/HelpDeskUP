@@ -9,7 +9,7 @@
                         :idUsuario,
                         :idEquipo,
                         :problema)";
-            $respuesta = Conexion::select($sql,[
+            $respuesta = Conexion::execute($sql,[
                 ":idUsuario"    => $datos['idUsuario'],
                 ":idEquipo"     => $datos['idEquipo'],
                 ":problema"     => $datos['problema'],
@@ -52,7 +52,8 @@
                         id_usuario_tecnico = :idUsuario,
                         solucion_problema = :solucion,
                         estatus = :estatus,
-                        usuario_tecnico = :usuarioTecnico
+                        usuario_tecnico = :usuarioTecnico,
+                        imagen_solucion = :imagen_solucion
                     WHERE
                         id_reporte = :idReporte";
 
@@ -61,7 +62,8 @@
                 ":solucion"         => $datos['solucion'],
                 ":estatus"          => $datos['estatus'],
                 ":usuarioTecnico"   => $datos['usuarioTecnico'],
-                ":idReporte"        => $datos['idReporte']
+                ":idReporte"        => $datos['idReporte'],
+                ':imagen_solucion'  => $datos['imagen_solucion'],
             ]);
             return $respuesta;
         }
