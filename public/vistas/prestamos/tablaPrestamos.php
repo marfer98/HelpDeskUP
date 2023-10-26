@@ -22,8 +22,8 @@
                 <td><?php echo $mostrar['cantidad']; ?></td>
                 <td><?php 
                     echo ($mostrar['estado'] == 0) ? 
-                        '<span class="badge bg-success">Rechazado</span>' :
-                        '<span class="badge bg-danger">Confirmado</span>';?>
+                        '<span class="badge bg-success">Confirmado</span>' :
+                        '<span class="badge bg-danger">Rechazado</span>';?>
                 </td>
                 <td>
                     <button class="btn btn-warning btn-sm" data-toggle="modal" 
