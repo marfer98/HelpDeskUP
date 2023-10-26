@@ -126,3 +126,13 @@ function eliminarPrestamos(id_prestamo){//la funcion trae un id de reporte
     return false //para que no recargue la función 
 }
 
+$('select').on('change', function(e,o) {
+    // Ejecutar la función JavaScript.
+   let id_oficina = ($(e.currentTarget).find('option:selected').val())
+
+   //Listar todo menos la misma oficina
+   obtenerSelectHtml('#frmAgregarPrestamos','#id_oficina_destino','oficina','id_oficina','nombre','Oficinas','WHERE id_oficina != '+id_oficina)
+   //Listar solo articulos que están en una oficina
+   obtenerSelectHtml('#frmAgregarPrestamos','#id_articulo','articulos','id_articulo','nombre','Articulos','WHERE asg.cantidad > 0 AND asg.id_oficina = '+id_oficina)
+
+});

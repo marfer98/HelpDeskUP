@@ -1,7 +1,7 @@
 <?php
     // Delete Prestamos
     $datos = [
-        'id_prestamo ' => $_POST['id_prestamo']
+        'id_prestamo' => $_POST['id_prestamo']
     ];
 
     include "../../clases/Prestamos.php";

@@ -8,13 +8,16 @@ function obtenerSelectHtml(elementoPadre,id_select,path,id,campo,tabla,where = n
       data: "where=" + where,//mandar el where
       url: "../../procesos/"+path+"/obtenerSelect"+tabla+".php",
       success:function(respuesta){
-          respuesta= jQuery.parseJSON(respuesta);//envio de respuesta valida
+          respuesta = jQuery.parseJSON(respuesta);//envio de respuesta valida
           // Iterar sobre la respuesta JSON.
-          var option = ''
-          for (valor of respuesta) {
-              option += ('<option value="' + valor[id] + '">' + valor[campo] + '</option>');
+          var option = '<option value="">Seleccione una opción</option>'
+          if(respuesta){
+            for (valor of respuesta) {
+                option += ('<option value="' + valor[id] + '">' + valor[campo] + '</option>');
+            }
           }
-           $(select).html(option);
+          
+          $(select).html(option);
       },
       error: function(jqXHR, textStatus, errorThrown) {
           console.error(jqXHR);

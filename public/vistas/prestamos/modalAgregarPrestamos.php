@@ -71,13 +71,13 @@
                                 ?>
                             </select>
                         </div>			
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <label for="cantidad">Cantidad</label>
                             <input type="text" name="cantidad" id="cantidad" class="form-control" required>
                         </div>		
-                        <div class="col-sm-6">
+                        <div class="col-sm-6 d-none">
                             <label for="estado">Estado</label>
-                            <input type="text" name="estado" id="estado" class="form-control" required>
+                            <input type="text" name="estado" id="estado" class="form-control" value="2" required>
                         </div>
                     </div>
                 </div>
@@ -166,7 +166,18 @@
                         </div>		
                         <div class="col-sm-6">
                             <label for="estado">Estado</label>
-                            <input type="text" name="estado" id="estado" class="form-control" required>
+                            <select name="estado" id="estado" class="form-control" required>
+                                <option value="">Seleccione una opción</option>
+                                <?php
+                                    $oficinas = [
+                                        ['id_estado'=>'0','estado'=>'Rechazar'],
+                                        ['id_estado'=>'1','estado'=>'Confirmar'],
+                                    ];
+                                    foreach($oficinas as $oficina){
+                                        echo "<option value='".$oficina['id_estado']."'>".$oficina['estado']."</option>";
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
                 </div>

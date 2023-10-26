@@ -21,10 +21,12 @@
                 <td><?php echo $mostrar['nombre_oficina_destino']; ?></td>
                 <td><?php echo $mostrar['cantidad']; ?></td>
                 <td><?php 
-                    echo ($mostrar['estado'] == 0) ? 
+                    echo ($mostrar['estado'] == 1) ? 
                         '<span class="badge bg-success">Confirmado</span>' :
-                        '<span class="badge bg-danger">Rechazado</span>';?>
+                        ( ($mostrar['estado'] == 0) ?'<span class="badge bg-danger">Rechazado</span>' :'<span class="badge bg-warning">Pendiente</span>' );?>
                 </td>
+                <?php
+                if(!in_array($mostrar['estado'],[1,0])){ ?>
                 <td>
                     <button class="btn btn-warning btn-sm" data-toggle="modal" 
                         data-target="#modalActualizarPrestamos" 
@@ -38,6 +40,10 @@
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </td>
+                <?php }else{ ?>
+                <td></td> 
+                <td></td>
+                <?php } ?>
            </tr>
          <?php } ?>
        </tbody>
