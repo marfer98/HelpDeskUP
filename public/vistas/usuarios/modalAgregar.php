@@ -33,12 +33,13 @@
                                     <?php }?><!-- Cierre del while -->
                             </select>
                         </div>
-                        <div class="col-sm-12">
+                       <!--  <div class="col-sm-12">
                             <label for="nombre"> Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" disabled>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="row">
+                    <!-- 
+                        <div class="row">
                         <div class="col-sm-12">
                             <label for="telefono"> Telefono</label>
                             <input type="number" class="form-control" id="telefono" name="telefono" disabled>
@@ -50,6 +51,7 @@
                             <input type="email" class="form-control" id="correo" name="correo" disabled>
                         </div>
                     </div>
+                    -->
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="nombreUsuario"> Usuario</label>

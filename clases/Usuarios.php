@@ -114,7 +114,7 @@
 
         public function actualizarUsuario($datos){
             //hace referencia a que se actualizo con exito 
-            //$exitoOficina = self::actualizarOficina($datos); // exito al actualizar
+                $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
                 $sql = "UPDATE t_usuarios SET id_rol   = :idRol,
                                              usuario   = :nombreUsuario,
@@ -134,7 +134,6 @@
                 ]);
 
                 return $respuesta;
-           
         }
 
         public function resetPassword($datos){

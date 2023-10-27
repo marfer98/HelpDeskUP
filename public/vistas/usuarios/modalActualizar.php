@@ -40,19 +40,19 @@ error_reporting(E_ALL);
                         </div>
                         <div class="col-sm-12">
                             <label for="nombreu"> Nombre</label>
-                            <input type="text" class="form-control" id="nombreu" name="nombreu" disabled>
+                            <input type="text" class="form-control" id="nombreu" name="nombreu" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="telefonou"> Telefono</label>
-                            <input type="text" class="form-control" id="telefonou" name="telefonou" disabled>
+                            <input type="text" class="form-control" id="telefonou" name="telefonou" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="correou"> Correo</label>
-                            <input type="mail" class="form-control" id="correou" name="correou" disabled>
+                            <input type="mail" class="form-control" id="correou" name="correou" required>
                         </div>
                     </div>
                     <div class="row">
