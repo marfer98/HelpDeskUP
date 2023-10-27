@@ -28,7 +28,7 @@
         }
 
         public function agregaNuevoUsuario($datos){
-            $id_oficina = self::agregarOficina($datos,true);
+            //$id_oficina = self::agregarOficina($datos,true);
             
             if ($id_oficina > 0) {
                 $sql ="INSERT INTO t_usuarios ( 
@@ -49,7 +49,7 @@
                                   
                 $respuesta = Conexion::execute($sql,[
                     ':id_rol'       => $datos['idRol'],
-                    ':id_oficina'   => $id_oficina,
+                    ':id_oficina'   => datos['id_oficina'],
                     ':usuario'      => $datos['nombreUsuario'],
                     ':password'     => $datos['password'],
                     ':ubicacion'    => $datos['ubicacion'],
@@ -114,13 +114,13 @@
 
         public function actualizarUsuario($datos){
             //hace referencia a que se actualizo con exito 
-            $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
+            //$exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
-            if ($exitoOficina){
                 $sql = "UPDATE t_usuarios SET id_rol   = :idRol,
                                              usuario   = :nombreUsuario,
                                              ubicacion = :ubicacion,
-                                             id_sucursal = :id_sucursal
+                                             id_sucursal = :id_sucursal,
+                                             id_oficina = :id_oficina
                         WHERE id_usuario = :idUsuario";                     
                                            
                 $respuesta = Conexion::execute($sql,[
@@ -129,12 +129,12 @@
                     ':ubicacion'        => $datos['ubicacion'],
                     ':idUsuario'        => $datos['idUsuario'],
                     ':id_sucursal'      => $datos['id_sucursal'],
+                    ':id_oficina'      => $datos['id_oficina'],
+                    
                 ]);
 
                 return $respuesta;
-            }else{
-                return 0;
-            }
+           
         }
 
         public function resetPassword($datos){

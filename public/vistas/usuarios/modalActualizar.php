@@ -23,22 +23,36 @@ error_reporting(E_ALL);
                     <div class="row">
                         <!--la U al final hace referencia al UPDATE-->
                         <input type="text " id="idUsuario" name="idUsuario" hidden>
-                        <input type="text " id="id_oficina" name="id_oficina" hidden>
+                        <div class="col-sm-12">
+                            <label>Nombre de Oficina</label>
+                            <?php //agarra el ID de la oficina 
+                                $sql = "SELECT id_oficina, nombre
+                                FROM t_oficina ORDER BY nombre";
+                                $respuesta = Conexion::select($sql)
+                            ?>
+
+                            <select name="id_oficina" id="id_oficina" class="form-control" required>
+                                <option value="">Seleccione una opción</option>
+                                <?php foreach($respuesta as $mostrar){?>
+                                    <option value="<?php echo $mostrar['id_oficina'];?>"><?php echo $mostrar ['nombre'];?></option>
+                                    <?php }?><!-- Cierre del while -->
+                            </select>
+                        </div>
                         <div class="col-sm-12">
                             <label for="nombreu"> Nombre</label>
-                            <input type="text" class="form-control" id="nombreu" name="nombreu" required>
+                            <input type="text" class="form-control" id="nombreu" name="nombreu" disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="telefonou"> Telefono</label>
-                            <input type="text" class="form-control" id="telefonou" name="telefonou" required>
+                            <input type="text" class="form-control" id="telefonou" name="telefonou" disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="correou"> Correo</label>
-                            <input type="mail" class="form-control" id="correou" name="correou" required>
+                            <input type="mail" class="form-control" id="correou" name="correou" disabled>
                         </div>
                     </div>
                     <div class="row">

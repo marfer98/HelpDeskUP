@@ -8,7 +8,8 @@
     "password"       => sha1($_POST['password']), //encriptación de contraseña
     "idRol"          => $_POST['idRol'], 
     "ubicacion"      => $_POST['ubicacion'],
-    'id_sucursal' => $_POST['id_sucursal']  
+    'id_sucursal' => $_POST['id_sucursal'] ,
+    'id_oficina' => $_POST['id_oficina'] ,
    
  );
 

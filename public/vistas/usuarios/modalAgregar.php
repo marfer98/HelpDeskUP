@@ -19,20 +19,35 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-12">
+                            <label>Nombre de Oficina</label>
+                            <?php //agarra el ID de la oficina 
+                                $sql = "SELECT id_oficina, nombre
+                                FROM t_oficina ORDER BY nombre";
+                                $respuesta = Conexion::select($sql)
+                            ?>
+
+                            <select name="id_oficina" id="id_oficina" class="form-control" required>
+                                <option value="">Seleccione una opción</option>
+                                <?php foreach($respuesta as $mostrar){?>
+                                    <option value="<?php echo $mostrar['id_oficina'];?>"><?php echo $mostrar ['nombre'];?></option>
+                                    <?php }?><!-- Cierre del while -->
+                            </select>
+                        </div>
+                        <div class="col-sm-12">
                             <label for="nombre"> Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                            <input type="text" class="form-control" id="nombre" name="nombre" disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="telefono"> Telefono</label>
-                            <input type="number" class="form-control" id="telefono" name="telefono" required>
+                            <input type="number" class="form-control" id="telefono" name="telefono" disabled>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="correo"> Correo</label>
-                            <input type="email" class="form-control" id="correo" name="correo" required>
+                            <input type="email" class="form-control" id="correo" name="correo" disabled>
                         </div>
                     </div>
                     <div class="row">
@@ -62,7 +77,7 @@
                             </select>
                         </div>
                         <div class="col-sm-12">
-                            <label for="id_sucursal"> Rol Sucursal</label>
+                            <label for="id_sucursal"> Sucursal</label>
                             <select name="id_sucursal" id="id_sucursal" class="form-control" required>
                                 <option value="">Seleccione una opción</option>
                                 <?php
