@@ -15,7 +15,7 @@
                     <input type="text" id ="idReporte" name="idReporte" hidden>
                     <label for="solucion">Descripción de la solución</label>
                     <textarea name="solucion" id="solucion" required class="form-control"></textarea>
-                    <textarea name="imagen_solucion" id="imagen_solucion" class="d-none form-control"></textarea>
+                    <textarea name="imagen_solucion_blob" id="imagen_solucion_blob" class="d-none form-control"></textarea>
             
                     <label for="estatus">Estatus</label>
                     <select name="estatus" id="estatus" class ="form-control">

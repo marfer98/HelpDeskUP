@@ -5,16 +5,16 @@
     error_reporting(E_ALL);
     // Recibir la imagen del AJAX.
 
-    $blob = file_get_contents('php://input');
-
+   /* $blob = file_get_contents('php://input');
+var_dump($blob);
     // Mostrar el blob en el navegador.
    
 
-    /*$name = $_FILES['img']['name'];
+    $name = $_FILES['img']['name'];
     $type = $_FILES['img']['type'];
     $data = file_get_contents($_FILES['img']['tmp_name']);
 */
-    var_dump($_POST);
+    //var_dump($_POST);
 
     // Guardar la imagen en el disco duro.
     $nombreImagen = uniqid() . '.jpg';

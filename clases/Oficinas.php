@@ -53,7 +53,10 @@ class Oficinas{
     }
 
     public static function eliminarOficina($id){
-        Asignacion::eliminarAsignacion($id_asignacion);
+        $oficina = Asignacion::obtenerDatosAsignacion('WHERE id_oficina = '.$id['id_oficina']);
+        $oficina = $oficina ? $oficina[0] : ['id_asignacion'=>null];
+        Asignacion::eliminarAsignacion(['id_asignacion'=>$oficina['id_asignacion']]);
+        
         $sql = '
             DELETE FROM t_oficina
             WHERE id_oficina = :id_oficina';

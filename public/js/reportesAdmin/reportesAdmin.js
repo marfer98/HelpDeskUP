@@ -65,17 +65,10 @@ function agregarSolucionReporte(){
 
     const imagen = convertirBlob('imagen_solucion');//document.querySelector('#imagen_solucion').files[0];
 
-    $('#imagen_solucion_blob').html(imagen)
-    $('#imagen_solucion_blob').val(imagen)
-
     $.ajax({
         type: "POST",
-        data: $('#frmAgregarSolucionReporte').serialize()+'&imagen_solucion_blob='+imagen,//new FormData(document.getElementById("frmAgregarSolucionReporte")),
+        data: $('#frmAgregarSolucionReporte').serialize(),//+'&imagen_solucion_blob='+imagen,//new FormData(document.getElementById("frmAgregarSolucionReporte")),
         url:"../../procesos/reportesAdmin/actualizarSolucion.php",
-        dataType: "HTML",
-		cache: false,
-		contentType: false,
-		processData: false,
         success:function(respuesta){
             console.log(respuesta);
             respuesta = respuesta.trim();//quita los espacios
@@ -104,16 +97,17 @@ function convertirBlob(id = "imagen_solucion") {
     // Encode the file using the FileReader API
     const reader = new FileReader();
     prueaba = reader.onloadend = () => {
-      // Get the dataURL
-      const dataURL = reader.result;
-  
-      // Convert the dataURL to a string
-      const string = dataURL;
-  echo(string)
-      // Return the string
-      return string;
+        // Get the dataURL
+        const dataURL = reader.result;
+
+        // Convert the dataURL to a string
+        const string = dataURL;
+        echo(string)
+
+        $('#imagen_solucion_blob').html('puta')
+        $('#imagen_solucion_blob').val(string)
+        // Return the string
+        return string;
     };
-      echo(prueaba)
-      echo(reader.readAsDataURL(file))
     return prueaba;
   }
