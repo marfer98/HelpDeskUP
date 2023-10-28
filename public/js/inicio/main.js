@@ -474,7 +474,7 @@ function generarProcesos(tabla,campos){
   const nombreTabla = tabla.replace("t_", "");
   const nombreTablaCamel = toCamelCase(nombreTabla)
   const camposTitulo = convertirSnakeCaseAMayusculas(campos)
-  console.info('obtener'+nombreTablaCamel+'.php')
+  console.info('obtenerDatos'+nombreTablaCamel+'.php')
   console.info('actualizar'+nombreTablaCamel+'.php')
   console.info('agregar'+nombreTablaCamel+'.php')
   console.info('eliminar'+nombreTablaCamel+'.php')
@@ -512,7 +512,7 @@ function generarProcesos(tabla,campos){
     <?php
       // Delete ${nombreTablaCamel}
       $datos = [
-        'id_${nombreTabla} ' => $_POST['id_${nombreTabla}']
+        'id_${nombreTabla}' => $_POST['id_${nombreTabla}']
       ];
 
       include "../../clases/${nombreTablaCamel}.php";

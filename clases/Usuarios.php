@@ -3,7 +3,7 @@
     require_once "Oficinas.php";
 
     class Usuarios extends Oficinas{
-        public function loginUsuario($usuario,$password){
+        public static function loginUsuario($usuario,$password){
             $sql = "SELECT * FROM t_usuarios 
                 WHERE usuario = '$usuario' AND password = '$password'";//condicion para el ingreso desde la base de datos
 
@@ -27,10 +27,10 @@
 
         }
 
-        public function agregaNuevoUsuario($datos){
+        public static function agregaNuevoUsuario($datos){
             //$id_oficina = self::agregarOficina($datos,true);
             
-            if ($id_oficina > 0) {
+            //if ($id_oficina > 0) {
                 $sql ="INSERT INTO t_usuarios ( 
                             id_rol,
                             id_oficina,
@@ -49,7 +49,7 @@
                                   
                 $respuesta = Conexion::execute($sql,[
                     ':id_rol'       => $datos['idRol'],
-                    ':id_oficina'   => datos['id_oficina'],
+                    ':id_oficina'   => $datos['id_oficina'],
                     ':usuario'      => $datos['nombreUsuario'],
                     ':password'     => $datos['password'],
                     ':ubicacion'    => $datos['ubicacion'],
@@ -57,15 +57,15 @@
                 ]);
                 
                 return $respuesta;
-            }else {
+          /*  }else {
                 return 0;
-            }
+            }*/
 
             //insertamos datos en la tabla usuarios
  
         }
 
-        public function obtenerDatosUsuario($idUsuario){
+        public static function obtenerDatosUsuario($idUsuario){
             $sql = "SELECT 
                         usuarios.id_usuario AS idUsuario,
                         usuarios.usuario as nombreUsuario,
@@ -112,7 +112,7 @@
             return $datos;
         }
 
-        public function actualizarUsuario($datos){
+        public static function actualizarUsuario($datos){
             //hace referencia a que se actualizo con exito 
                 $exitoOficina = self::actualizarOficina($datos); // exito al actualizar
 
@@ -136,7 +136,7 @@
                 return $respuesta;
         }
 
-        public function resetPassword($datos){
+        public static function resetPassword($datos){
             
             $sql = "UPDATE t_usuarios
                     SET password = :password
@@ -150,7 +150,7 @@
             return $respuesta;
         }
 
-        public function cambioEstatusUsuario($idUsuario, $estatus){
+        public static function cambioEstatusUsuario($idUsuario, $estatus){
             $estatus = ($estatus == 1) ? 0 : 1;
                 
             $sql = "UPDATE t_usuarios
@@ -165,7 +165,7 @@
             return $respuesta;
         }
     
-        public function obtenerDatosUsuarios(){
+        public static function obtenerDatosUsuarios(){
             $sql = "SELECT 
                         usuarios.id_usuario AS idUsuario,
                         usuarios.usuario as nombreUsuario,
@@ -193,6 +193,16 @@
             ]);
 
             return $respuesta;
+        }
+        
+        public static function eliminarUsuarios($id){
+            $sql = '
+        DELETE FROM t_usuarios
+        WHERE id_usuario = :id_usuario';
+            $datos = [
+                ':id_usuario' => $id['id_usuario']
+            ];
+            return Conexion::execute($sql,$datos);
         }
 }
 
