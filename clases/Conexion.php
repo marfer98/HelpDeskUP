@@ -2,10 +2,10 @@
 
 class Conexion {
     public static function conectar(){
-        $host   = "sql110.ezyro.com"; 
-        $bbdd   = "ezyro_35208593_helpdesk"; 
-        $user   = "ezyro_35208593";
-        $pass   = '7ae22595a4b9';
+        $host   = "localhost";
+        $bbdd   = "if0_35201982_helpdesk";
+        $user   = "root";
+        $pass   = '';
         $puerto = '3306';
         $opcionesPDO = [];
         $driver = 'mysql';
@@ -21,10 +21,6 @@ class Conexion {
                 $dbh->setAttribute(PDO::ATTRR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 
                 return $dbh;
-
-            }else{
-                echo 'No se ha podido conectar';
-                die();
             }
     
         } catch (PDOException $e){
