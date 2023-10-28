@@ -1,5 +1,6 @@
 <?php
     require_once '../../../clases/Usuarios.php';
+    require_once '../../../clases/Roles.php';
     $usuario = new Usuarios;
     $respuesta = $usuario->obtenerDatosUsuarios();
 ?>
@@ -25,7 +26,7 @@
     ?>
         <tr>
             <th>
-                <?php echo $mostrar ['idOficina']; ?>
+                <?php echo $mostrar ['id_oficina']; ?>
             </th> 
             <th>
                 <?php echo $mostrar ['nombreOficina']; ?>
@@ -84,7 +85,7 @@
             <th>
                 <button class="btn btn-warning btn-sm" data-toggle="modal" 
                     data-target="#modalActualizarUsuarios" 
-                    onclick= "obtenerDatosUsuario(<?php echo $mostrar ['idUsuario']?>)"> 
+                    onclick= "obtenerDatosUsuario(<?php echo $mostrar ['idUsuario']?>,'#frmActualizarUsuario')"> 
                     <i class=" fas fa-edit"></i>
                 </button>
             </th>

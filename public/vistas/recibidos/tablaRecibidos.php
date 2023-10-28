@@ -1,7 +1,6 @@
 <?php
     require_once "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
     $con = new Conexion();
-    $conexion = $con->conectar();
     $sql = "SELECT
                 recepcion.id_recepcion AS idRecepcion,
                 recepcion.ciudad AS ciudad,
@@ -48,7 +47,6 @@
         <th>Informe Técnico</th>
         <th>Editar</th>
         <th>Eliminar</th>
-
     </thead>
     <tbody>
         <?php

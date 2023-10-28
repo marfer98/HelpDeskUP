@@ -3,7 +3,7 @@
   if (isset ($_SESSION ['usuario']) && $_SESSION['usuario']['rol']== 1){
       require_once "../../clases/Conexion.php";
       $con = new Conexion();
-      $conexion =$con->conectar();
+      $conexion = $con->conectar();
   ?>
 
 <!-- Page Content -->

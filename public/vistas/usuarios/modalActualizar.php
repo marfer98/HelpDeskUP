@@ -1,3 +1,10 @@
+<?php
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+    require_once '../../clases/Roles.php';
+    require_once '../../clases/Sucursales.php';
+?>
 <!-- Modal -->
 <!--onsubmit es para recargar el campo y este en blanco-->
 <form id="frmActualizarUsuario" method="POST" onsubmit="return actualizarUsuario()">
@@ -12,9 +19,25 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <input type="text " id="idUsuario" name="idUsuario" hidden>
+                    
                     <div class="row">
                         <!--la U al final hace referencia al UPDATE-->
+                        <input type="text " id="idUsuario" name="idUsuario" hidden>
+                        <div class="col-sm-12">
+                            <label>Nombre de Oficina</label>
+                            <?php //agarra el ID de la oficina 
+                                $sql = "SELECT id_oficina, nombre
+                                FROM t_oficina ORDER BY nombre";
+                                $respuesta = Conexion::select($sql)
+                            ?>
+
+                            <select name="id_oficina" id="id_oficina" class="form-control" required>
+                                <option value="">Seleccione una opción</option>
+                                <?php foreach($respuesta as $mostrar){?>
+                                    <option value="<?php echo $mostrar['id_oficina'];?>"><?php echo $mostrar ['nombre'];?></option>
+                                    <?php }?><!-- Cierre del while -->
+                            </select>
+                        </div>
                         <div class="col-sm-12">
                             <label for="nombreu"> Nombre</label>
                             <input type="text" class="form-control" id="nombreu" name="nombreu" required>
@@ -40,21 +63,36 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="idRolu"> Rol usuario</label>
-                            <select name="idRolu" id="idRolu" class="form-control" required>
-                                <option value=""></option>
-                                <option value="1">Cliente</option>
-                                <option value="2">Administrador</option>
+                            <label for="idRol"> Rol usuario</label>
+                            <select name="idRol" id="idRol" class="form-control" required>
+                                <option value="">Seleccione un rol</option>
+                                <?php
+                                    $roles = new Roles;
+                                    $roles = $roles->obtenerDatosRoles();
+                                    foreach($roles as $rol){
+                                        echo "<option value='".$rol['id_rol']."'>".$rol['nombre']."</option>";
+                                    }
+                                ?>
                             </select>
                         </div>
-                    </div>
-                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="id_sucursal"> Sucursal</label>
+                            <select name="id_sucursal" id="id_sucursal" class="form-control" required>
+                                <option value="">Seleccione una opción</option>
+                                <?php
+                                    $sucursal = new Sucursales;
+                                    $sucursal = $sucursal->obtenerDatosSucursales();
+                                    foreach($sucursal as $sucu){
+                                        echo "<option value='".$sucu['id_sucursal']."'>".$sucu['descripcion']."</option>";
+                                    }
+                                ?>
+                            </select>
+                        </div>
                         <div class="col-sm-12">
                             <label for="ubicacionu"> Ubicación</label>
                             <textarea name="ubicacionu" id="ubicacionu" class="form-control"></textarea>
                         </div>
                     </div>
-
                 </div>
                 <div class="modal-footer">
                     <span class="btn btn-danger" data-dismiss="modal">Cancelar</span>

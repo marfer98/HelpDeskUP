@@ -14,7 +14,7 @@
                     Agregar Oficinas
                 </button>
                 <hr>
-                <div id="tablaOficinasLoad"></div>
+                <div id="tablaOficinaLoad"></div>
             </p>
             <div style="height: 700px"></div>
         </div>

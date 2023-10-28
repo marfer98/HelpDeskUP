@@ -16,15 +16,18 @@
                 <?php
                 $idUsuario = $_SESSION['usuario']['id'];//pasa el id usuario que inicio sesion 
                     $sql="SELECT
-                            asignacion.id_asignacion AS idAsignacion,
+                            asignacion.id_asignacion AS id_asignacion,
                             equipo.id_equipo AS idEquipo,
                             equipo.nombre AS nombreEquipo
                             
                         FROM
                             t_asignacion AS asignacion
+                        INNER JOIN t_articulos AS a
+                        ON
+                            a.id_articulo = asignacion.id_articulo
                         INNER JOIN t_cat_equipos AS equipo
                         ON
-                            asignacion.id_equipo = equipo.id_equipo
+                            a.id_equipo = equipo.id_equipo
                         WHERE
                             asignacion.id_oficina =(
                             SELECT

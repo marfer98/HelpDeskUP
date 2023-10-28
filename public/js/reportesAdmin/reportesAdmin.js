@@ -23,7 +23,7 @@ $(document).ready(function(){
                         Swal.fire(":D","Eliminado con exito","success");
         
                     }else{
-                        Swal.fire(":(","Error al Eliminar" + respuesta,"error");
+                        Swal.fire(":(","Error al Eliminar: " + respuesta,"error");
         
                     }
                 },
@@ -44,7 +44,7 @@ function obtenerDatosSolucion(idReporte){
     $.ajax({
         type: "POST",
         data: "idReporte=" + idReporte,
-        url:"../../procesos/reportesAdmin/obtenerSalucion.php",
+        url:"../../procesos/reportesAdmin/obtenerSolucion.php",
         success:function(respuesta){
            //console.log(respuesta);
            respuesta = jQuery.parseJSON(respuesta);
@@ -62,27 +62,13 @@ function obtenerDatosSolucion(idReporte){
     });
 }
 function agregarSolucionReporte(){
+
+    const imagen = convertirBlob('imagen_solucion');//document.querySelector('#imagen_solucion').files[0];
+
     $.ajax({
         type: "POST",
-        data: $('#frmAgregarSolucionReporte').serialize(),
+        data: $('#frmAgregarSolucionReporte').serialize(),//+'&imagen_solucion_blob='+imagen,//new FormData(document.getElementById("frmAgregarSolucionReporte")),
         url:"../../procesos/reportesAdmin/actualizarSolucion.php",
-     /*   error: function (jqXHR, exception) {
-            if (jqXHR.status === 0) {
-                console.log('Not connect.\n Verify Network.'); 
-            } else if (jqXHR.status == 404) {
-                console.log('Requested page not found. [404]'); 
-            } else if (jqXHR.status == 500) {
-                console.log('Internal Server Error [500].');  
-            } else if (exception === 'parsererror') {
-                console.log( 'Requested JSON parse failed.'); 
-            } else if (exception === 'timeout') {
-                console.log( 'Time out error.'); 
-            } else if (exception === 'abort') {
-                console.log('Ajax request aborted.');  
-            } else {
-                console.log('Uncaught Error.\n' + jqXHR.responseText); 
-            }
-        },*/
         success:function(respuesta){
             console.log(respuesta);
             respuesta = respuesta.trim();//quita los espacios
@@ -91,7 +77,7 @@ function agregarSolucionReporte(){
                 $('#modalAgregarSolucion').modal('hide');
                 $("#tablaReporteAdminLoad").load("reportesAdmin/tablaReportesAdmin.php");
             }else{
-                Swal.fire(":(","ERROR AL AGREGAR" + respuesta, "error"); //sweet aler 2
+                Swal.fire(":(","ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
             }
 
         },
@@ -103,3 +89,25 @@ function agregarSolucionReporte(){
     });
     return false;
 }
+
+function convertirBlob(id = "imagen_solucion") {
+    const input = document.getElementById(id);
+    let file = input.files[0];
+  
+    // Encode the file using the FileReader API
+    const reader = new FileReader();
+    prueaba = reader.onloadend = () => {
+        // Get the dataURL
+        const dataURL = reader.result;
+
+        // Convert the dataURL to a string
+        const string = dataURL;
+        echo(string)
+
+        $('#imagen_solucion_blob').html('puta')
+        $('#imagen_solucion_blob').val(string)
+        // Return the string
+        return string;
+    };
+    return prueaba;
+  }
