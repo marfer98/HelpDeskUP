@@ -30,7 +30,6 @@
         public static function agregaNuevoUsuario($datos){
             //$id_oficina = self::agregarOficina($datos,true);
             
-            //if ($id_oficina > 0) {
                 $sql ="INSERT INTO t_usuarios ( 
                             id_rol,
                             id_oficina,
@@ -57,12 +56,8 @@
                 ]);
                 
                 return $respuesta;
-          /*  }else {
-                return 0;
-            }*/
 
-            //insertamos datos en la tabla usuarios
- 
+
         }
 
         public static function obtenerDatosUsuario($idUsuario){
@@ -159,6 +154,21 @@
                        
             $respuesta = Conexion::execute($sql,[
                 ':estatus'      => $estatus, 
+                ':idUsuario'    => $idUsuario
+            ]);
+
+            return $respuesta;
+        }
+
+        public static function cambioRolUsuario($idUsuario, $rol){
+            $rol = ($rol == 1) ? 2 : 1;
+
+            $sql = "UPDATE t_usuarios
+                    SET id_rol = :id_rol
+                    WHERE id_usuario = :idUsuario";
+
+            $respuesta = Conexion::execute($sql,[
+                ':id_rol'      => $rol,
                 ':idUsuario'    => $idUsuario
             ]);
 

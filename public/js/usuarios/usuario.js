@@ -168,3 +168,27 @@ function eliminarUsuarios(id_usuario){//la funcion trae un id de reporte
     })
     return false //para que no recargue la función
 }
+
+
+
+function cambioRolUsuario(idUsuario, rol){
+    $.ajax({
+        type: "POST",
+        data: "idUsuario=" + idUsuario + "&rol=" + rol,
+        url: "../../procesos/usuarios/extras/cambioRol.php",
+        success:function(respuesta){
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                $("#tablaUsuariosLoad").load("usuarios/tablaUsuarios.php");
+                Swal.fire(":D","Cambio de estado con EXITO","success");
+            }else{
+                Swal.fire(":(","ERROR AL CAMBIAR ESTADO" + respuesta, "error");
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
+        }
+    });
+}

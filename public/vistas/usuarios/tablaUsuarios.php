@@ -56,7 +56,7 @@ $respuesta = $usuario->obtenerDatosUsuarios();
                 </button>
             </th>
             <th>
-                <button class="btn btn-warning btn-sm">
+                <button class="btn btn-warning btn-sm" onclick="cambioRolUsuario(<?php echo $mostrar['idUsuario'] ?>,  <?php echo $mostrar ['rol']; ?>)">
                     <i class=" fas fa-exchange-alt"></i>
                 </button>
             </th>
