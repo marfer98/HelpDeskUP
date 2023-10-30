@@ -97,7 +97,7 @@
                 'id_rol'         => $usuario['id_rol'],
                 'ubicacion'      => $usuario['ubicacion'],
                 'estatus'        => $usuario['estatus'],
-                'id_oficina'      => $usuario['id_oficina'],
+                'id_oficina'     => $usuario['id_oficina'],
                 'nombreOficina'  => $usuario['nombreOficina'],
                 'telefono'       => $usuario['telefono'],
                 'correo'         => $usuario['correo'],
