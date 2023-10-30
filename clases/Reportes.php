@@ -28,7 +28,7 @@
         }
 
         public function obtenerSolucion($idReporte){
-            $sql = "SELECT solucion_problema, estatus, usuario_tecnico
+            $sql = "SELECT solucion_problema, estatus, usuario_tecnico,imagen_solucion
                 FROM t_reportes WHERE id_reporte = :idReporte";
             $reporte = Conexion::select($sql,[
                 ":idReporte" => $idReporte
@@ -38,8 +38,8 @@
                 "idReporte"        => $idReporte,
                 "estatus"          => $reporte['estatus'],
                 "solucion"         => $reporte['solucion_problema'],
-                "usuarioTecnico"   => $reporte['usuario_tecnico']
-
+                "usuarioTecnico"   => $reporte['usuario_tecnico'],
+                "imagen_solucion"   => $reporte['imagen_solucion'],
             );
 
             return $datos;
@@ -79,7 +79,8 @@
                         reporte.descripcion_problema AS problema,
                         reporte.solucion_problema    AS solucion,
                         reporte.estatus              AS estatus,
-                        reporte.fecha                AS fecha
+                        reporte.fecha                AS fecha,
+                        imagen_solucion
                 FROM   t_reportes AS reporte
                         INNER JOIN t_usuarios AS usuario
                                 ON reporte.id_usuario = usuario.id_usuario
