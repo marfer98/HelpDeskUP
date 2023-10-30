@@ -25,6 +25,7 @@
     include "footer.php"; 
 ?>
 <script src="../js/usuarios/usuario.js"></script>
+<script src="../js/oficinas/oficina.js"></script>
 <?php
     }else{//FIN DEL IF
         header ("location:../index.html");

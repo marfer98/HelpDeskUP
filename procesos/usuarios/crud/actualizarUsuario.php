@@ -2,9 +2,9 @@
 
     $datos = array(//ARRAY DE POST QUE SE ENVIAN
         'idUsuario' => $_POST['idUsuario'],
-        'nombre' => $_POST['nombreu'],
-        'telefono' => $_POST['telefonou'],
-        'correo' => $_POST['correou'],
+        'nombre' => $_POST['nombre'],
+        'telefono' => $_POST['telefono'],
+        'correo' => $_POST['correo'],
         'nombreUsuario' => $_POST['nombreUsuariou'],
         'idRol' => $_POST['idRol'],
         'ubicacion' => $_POST['ubicacionu'],

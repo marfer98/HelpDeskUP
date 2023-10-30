@@ -79,7 +79,7 @@
                     t_usuarios AS usuarios
                         INNER JOIN
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
-                        INNER JOIN
+                        LEFT JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
                     LEFT JOIN
                     t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
@@ -87,6 +87,8 @@
             $respuesta = Conexion::select($sql,[
                 ':idUsuario' => $idUsuario
             ]);
+
+            //var_dump($sql);
 
             $usuario = $respuesta[0];
             
@@ -193,9 +195,9 @@
                     t_usuarios AS usuarios
                          JOIN
                     t_cat_roles AS roles ON usuarios.id_rol = roles.id_rol
-                        INNER JOIN
+                        LEFT JOIN
                     t_oficina AS oficina ON usuarios.id_oficina = oficina.id_oficina
-                         JOIN
+                        LEFT JOIN
                     t_sucursales AS s ON usuarios.id_sucursal = s.id_sucursal
                     ";// Obtener todos los datos del usuario
             $respuesta = Conexion::select($sql,[

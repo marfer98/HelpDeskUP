@@ -6,14 +6,14 @@ $respuesta = $usuario->obtenerDatosUsuarios();
 ?>
 <table class="table table-sm dt-responsive nowrap" id="tablaUsuariosDataTable" style="width:100%">
     <thead>
-    <th>Cod Oficina</th>
+    <th>Usuario</th>
+    <th>Sucursal</th>
+    <!--<th>Cod Oficina</th>-->
     <th>Nombre Oficina</th>
     <th>Telefono</th>
     <th>Correo</th>
-    <th>Usuario</th>
-    <th>Sucursal</th>
     <th>Ubicacion</th>
-    <th>Nombre Rol</th>
+    <th>Rol</th>
     <th>Reset Password</th>
     <th>Cambiar Rol</th>
     <th>Activar</th>
@@ -24,43 +24,27 @@ $respuesta = $usuario->obtenerDatosUsuarios();
     <?php foreach ($respuesta as $mostrar) {
         ?>
         <tr>
-            <th>
-                <?php echo $mostrar ['id_oficina']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['nombreOficina']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['telefono']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['correo']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['nombreUsuario']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['sucursal']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['ubicacion']; ?>
-            </th>
-            <th>
-                <?php echo $mostrar ['rol']; ?>
-            </th>
-            <th>
+            <td><?php echo $mostrar ['nombreUsuario']; ?></td>
+            <td><?php echo $mostrar ['sucursal']; ?></td>
+            <!--<td><?php echo $mostrar ['id_oficina']; ?></td>-->
+            <td><?php echo $mostrar ['nombreOficina']; ?></td>
+            <td><?php echo $mostrar ['telefono']; ?></td>
+            <td><?php echo $mostrar ['correo']; ?></td>
+            <td><?php echo $mostrar ['ubicacion']; ?></td>
+            <td><?php echo $mostrar ['rol']; ?></td>
+            <td>
                 <button class="btn btn-success btn-sm"
                         data-toggle="modal" data-target="#modalResetPassword"
                         onclick="agregarIdUsuarioReset(<?php echo $mostrar ['idUsuario'] ?>)">
                     <i class="fas fa-retweet"></i>
                 </button>
-            </th>
-            <th>
+            </td>
+            <td>
                 <button class="btn btn-warning btn-sm" onclick="cambioRolUsuario(<?php echo $mostrar['idUsuario'] ?>,  <?php echo $mostrar ['rol']; ?>)">
                     <i class=" fas fa-exchange-alt"></i>
                 </button>
-            </th>
-            <th>
+            </td>
+            <td>
                 <?php
                 if ($mostrar['estatus'] == 1) {
                     ?>
@@ -79,6 +63,7 @@ $respuesta = $usuario->obtenerDatosUsuarios();
                     <?php
                 }
                 ?>
+            </td>
             <td>
                 <button class="btn btn-warning btn-sm" data-toggle="modal"
                         data-target="#modalActualizarUsuarios"
@@ -92,8 +77,6 @@ $respuesta = $usuario->obtenerDatosUsuarios();
                     <i class="fas fa-trash-alt"></i>
                 </button>
             </td>
-            </th>
-
 
         </tr>
     <?php } ?>

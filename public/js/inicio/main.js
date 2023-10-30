@@ -400,6 +400,19 @@ function generarJS(tabla, campos) {
    const obtenerDatos = () => {
      return consultaSelect;
    };
+
+   const consultaSelectWhere = `
+   public static function obtenerSelect${nombreTablaCamel}($where=null){
+       $sql = '
+       SELECT \n\t\t\tid_${nombreTabla},\n\t\t\t${campos.join(",\n\t\t\t")}
+       FROM ${tabla}
+       '.$where;
+       return Conexion::select($sql); 
+   }`;
+   // Generamos la función SELECT
+   const obtenerDatosWhere = () => {
+     return consultaSelectWhere;
+   };
    // Generamos la consulta INSERT
    const consultaInsert = `
    public static function agregar${nombreTablaCamel}($datos,$getId = false){
@@ -466,7 +479,8 @@ function generarJS(tabla, campos) {
     obtenerDatos,
     agregar,
     actualizar,
-      eliminar, 
+    eliminar, 
+    obtenerDatosWhere,
   };
 }
  

@@ -39,9 +39,9 @@ function obtenerDatosUsuario(idUsuario,elementoPadre='body'){
             respuesta= jQuery.parseJSON(respuesta);//envio de respuesta valida
             //console.log(respuesta);
             $(elementoPadre + ' #idUsuario').val(respuesta['idUsuario']);
-            $(elementoPadre + ' #nombreu').val(respuesta['nombreOficina']);
-            $(elementoPadre + ' #telefonou').val(respuesta['telefono']);
-            $(elementoPadre + ' #correou').val(respuesta['correo']);
+            $(elementoPadre + ' #nombre').val(respuesta['nombreOficina']);
+            $(elementoPadre + ' #telefono').val(respuesta['telefono']);
+            $(elementoPadre + ' #correo').val(respuesta['correo']);
             $(elementoPadre + ' #nombreUsuariou').val(respuesta['nombreUsuario']);
             $(elementoPadre + ' #id_oficina').val(respuesta['id_oficina']);
             $(elementoPadre + ' #idRol').val(respuesta['id_rol']);
@@ -192,3 +192,10 @@ function cambioRolUsuario(idUsuario, rol){
         }
     });
 }
+
+$('#frmActualizarUsuario #id_oficina').on('change', function(e,o) {
+    // Ejecutar la función JavaScript.
+   let id_oficina = ($(e.currentTarget).find('option:selected').val())
+
+   obtenerDatosOficina(id_oficina,'#frmActualizarUsuario')
+});
