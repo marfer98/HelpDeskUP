@@ -46,7 +46,9 @@ function obtenerDatosUsuario(idUsuario,elementoPadre='body'){
             $(elementoPadre + ' #id_oficina').val(respuesta['id_oficina']);
             $(elementoPadre + ' #idRol').val(respuesta['id_rol']);
             $(elementoPadre + ' #ubicacionu').val(respuesta['ubicacion']);
-
+            $(elementoPadre + ' #prioridad').val(respuesta['prioridad']);
+            
+            obtenerDatosOficina(respuesta['id_oficina'],'#frmActualizarUsuario')
 
         },
         error: function(jqXHR, textStatus, errorThrown) {

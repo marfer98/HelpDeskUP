@@ -15,8 +15,6 @@
                     <input type="text" id ="idReporte" name="idReporte" hidden>
                     <label for="solucion">Descripción de la solución</label>
                     <textarea name="solucion" id="solucion" required class="form-control"></textarea>
-                    <textarea name="imagen_solucion_blob" id="imagen_solucion_blob" class="d-none form-control"></textarea>
-            
                     <label for="estatus">Estatus</label>
                     <select name="estatus" id="estatus" class ="form-control">
                         <option value="1">Abierto</option>
@@ -36,7 +34,7 @@
                         <option value="José Ricardo">José Ricardo</option>
                         <option value="Nicolas Acosta">Nicolas Acosta</option>
                     </select>
-                    <div class="col-12">
+                    <div class="col-12 p-0">
                         <label for="formFile" class="form-label">Foto de la solución</label>
                         <input class="form-control" type="file" name="imagen_solucion" id="imagen_solucion" accept="image/jpeg, image/png">
                     </div>

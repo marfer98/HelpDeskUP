@@ -89,7 +89,7 @@
                                 ON reporte.id_equipo = equipo.id_equipo
                         INNER JOIN t_cat_roles tcr
                                 ON tcr.id_rol = usuario.id_rol
-                ORDER  BY reporte.estatus DESC, tcr.prioridad DESC,
+                ORDER  BY reporte.estatus DESC, usuario.prioridad DESC,
                             reporte.fecha DESC";
             return Conexion::select($sql);
         }

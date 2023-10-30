@@ -19,6 +19,7 @@
         <th>Estatus</th>
         <th>Técnico</th>
         <th>Solución</th>
+        <th>Imagen de solución</th>
         <th>Eliminar</th>
     </thead>
     <tbody>
@@ -63,7 +64,14 @@
                 </button>
                 <?php echo $mostrar ['solucion']; ?>
             </th>
+            <th>
+                <?php if($mostrar ['imagen_solucion']){ ?>
+                <div style="max-height: 200px;">
+                  <img class="img-fluid" style="max-height: 200px;" src="<?php echo $mostrar ['imagen_solucion']; ?>">
+                </div>
 
+                <?php } ?>
+            </th>
             <th>
                 <button class="btn btn-danger btn-sm"
                     onclick="eliminarReporteAdmin(<?php echo $mostrar['idReporte']?>)">

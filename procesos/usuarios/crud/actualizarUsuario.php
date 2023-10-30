@@ -9,7 +9,8 @@
         'idRol' => $_POST['idRol'],
         'ubicacion' => $_POST['ubicacionu'],
         'id_oficina' => $_POST['id_oficina'],
-        'id_sucursal' => $_POST['id_sucursal']
+        'id_sucursal' => $_POST['id_sucursal'],
+        'prioridad' => $_POST['prioridad'], 
     );
     include "../../../clases/Usuarios.php";
     $Usuarios = new Usuarios();

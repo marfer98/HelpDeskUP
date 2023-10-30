@@ -1,4 +1,9 @@
 <?php
+
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+
     require_once "Conexion.php";
     require_once "Oficinas.php";
 
@@ -36,14 +41,17 @@
                             usuario,
                             password,
                             ubicacion,
-                            id_sucursal)
+                            id_sucursal,
+                            prioridad
+                            )
                         VALUES (
                             :id_rol,
                             :id_oficina,
                             :usuario,
                             :password,
                             :ubicacion,
-                            :id_sucursal
+                            :id_sucursal,
+                            :prioridad
                         )";                                       
                                   
                 $respuesta = Conexion::execute($sql,[
@@ -66,6 +74,7 @@
                         usuarios.usuario as nombreUsuario,
                         roles.nombre as rol,
                         usuarios.id_rol AS id_rol,
+                        usuarios.prioridad AS prioridad,
                         usuarios.ubicacion as ubicacion,
                         usuarios.activo as estatus,
                         usuarios.id_oficina as id_oficina,
@@ -99,11 +108,11 @@
                 'id_rol'         => $usuario['id_rol'],
                 'ubicacion'      => $usuario['ubicacion'],
                 'estatus'        => $usuario['estatus'],
-                'id_oficina'     => $usuario['id_oficina'],
                 'nombreOficina'  => $usuario['nombreOficina'],
                 'telefono'       => $usuario['telefono'],
                 'correo'         => $usuario['correo'],
                 'id_oficina'     => $usuario['id_oficina'],
+                'prioridad'     => $usuario['prioridad'],
             );
 
             return $datos;
@@ -117,7 +126,8 @@
                                              usuario   = :nombreUsuario,
                                              ubicacion = :ubicacion,
                                              id_sucursal = :id_sucursal,
-                                             id_oficina = :id_oficina
+                                             id_oficina = :id_oficina,
+                                             prioridad = :prioridad
                         WHERE id_usuario = :idUsuario";                     
                                            
                 $respuesta = Conexion::execute($sql,[
@@ -127,6 +137,7 @@
                     ':idUsuario'        => $datos['idUsuario'],
                     ':id_sucursal'      => $datos['id_sucursal'],
                     ':id_oficina'      => $datos['id_oficina'],
+                    ':prioridad'      => $datos['prioridad'],
                     
                 ]);
 
@@ -183,6 +194,7 @@
                         usuarios.usuario as nombreUsuario,
                         roles.nombre as rol,
                         usuarios.id_rol AS id_rol,
+                        usuarios.prioridad AS prioridad,
                         usuarios.ubicacion as ubicacion,
                         usuarios.activo as estatus,
                         usuarios.id_oficina as id_oficina,

@@ -6,8 +6,7 @@
             SELECT 
                 id_rol,
                 nombre,
-                descripcion,
-                prioridad
+                descripcion
             FROM t_cat_roles
             '.$where;
             return Conexion::select($sql); 
@@ -18,19 +17,16 @@
             INSERT INTO t_cat_roles (
                 id_rol, 
                 nombre, 
-                descripcion, 
-                prioridad
+                descripcion
             ) VALUES (
                 :id_rol, 
                 :nombre, 
-                :descripcion, 
-                :prioridad
+                :descripcion
             )';
             $datos = [
                 ':id_rol' => $datos['id_rol'],
                 ':nombre' => $datos['nombre'],
                 ':descripcion' => $datos['descripcion'],
-                ':prioridad' => $datos['prioridad']
             ];
             return Conexion::execute($sql,$datos);
         }
@@ -41,14 +37,12 @@
             SET 
                 id_rol = :id_rol,
                 nombre = :nombre,
-                descripcion = :descripcion,
-                prioridad = :prioridad 
+                descripcion = :descripcion
             WHERE id_cat_roles = :id_cat_roles';
             $datos = [
                 ':id_rol' => $datos['id_rol'],
                 ':nombre' => $datos['nombre'],
                 ':descripcion' => $datos['descripcion'],
-                ':prioridad' => $datos['prioridad'],
                 ':id_cat_roles' => $datos['id_cat_roles']
             ];
             return Conexion::execute($sql,$datos);

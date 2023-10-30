@@ -92,6 +92,14 @@ error_reporting(E_ALL);
                             <label for="ubicacionu"> Ubicación</label>
                             <textarea name="ubicacionu" id="ubicacionu" class="form-control"></textarea>
                         </div>
+                        <div class="col-sm-12">
+                            <label for="prioridad"> Prioridad</label>
+                            <select name="prioridad" id="prioridad" class="form-control">
+                                <option value="0">Baja</option>
+                                <option value="1">Media</option>
+                                <option value="2">Alta</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

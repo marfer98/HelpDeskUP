@@ -1,37 +1,34 @@
 <?php
-    session_start();
-    ini_set('display_errors',1);
-    ini_set('display_startup_errors',1);
-    error_reporting(E_ALL);
-    // Recibir la imagen del AJAX.
+session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+// Recibir la imagen del AJAX.
 
-   /* $blob = file_get_contents('php://input');
-var_dump($blob);
-    // Mostrar el blob en el navegador.
-   
+$imagen = null;
 
-    $name = $_FILES['img']['name'];
-    $type = $_FILES['img']['type'];
-    $data = file_get_contents($_FILES['img']['tmp_name']);
-*/
-    //var_dump($_POST);
+if (isset($_FILES['imagen_solucion'])) {
+    $image = $_FILES['imagen_solucion']['tmp_name'];
+    $imgContenido = addslashes(file_get_contents($image));
 
-    // Guardar la imagen en el disco duro.
-    $nombreImagen = uniqid() . '.jpg';
-    //$imagen = file_get_contents('php://input');
+    $imagen = file_get_contents($_FILES["imagen_solucion"]["tmp_name"]);
 
+// Convertimos la imagen a base64
+    $base64 = base64_encode($imagen);
+    $imagen = 'data:' . $_FILES['imagen_solucion']['type'] . ';base64,' . $base64;
+}
 
-    $datos = array(
-        'idReporte'       => $_POST['idReporte'],
-        'solucion'        => $_POST['solucion'],
-        'estatus'         => $_POST['estatus'],
-        'usuarioTecnico'  => $_POST['usuarioTecnico'],
-        'idUsuario'       => $_SESSION['usuario']['id'],  //hace referencia al usuario que arreglo, 
-                                                   //por eso toma el inicio de sesión
-        'imagen_solucion' => $_POST['imagen_solucion_blob'],
-    );
+$datos = array(
+    'idReporte' => $_POST['idReporte'],
+    'solucion' => $_POST['solucion'],
+    'estatus' => $_POST['estatus'],
+    'usuarioTecnico' => $_POST['usuarioTecnico'],
+    'idUsuario' => $_SESSION['usuario']['id'],  //hace referencia al usuario que arreglo,
+    //por eso toma el inicio de sesión
+    'imagen_solucion' => $imagen,
+);
 
-    include "../../clases/Reportes.php";
-    $Reportes = new Reportes();
-    echo $Reportes->actualizarSolucion($datos);//metodo
+include "../../clases/Reportes.php";
+$Reportes = new Reportes();
+echo $Reportes->actualizarSolucion($datos);//metodo
 ?>
