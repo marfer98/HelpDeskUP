@@ -69,11 +69,19 @@ class Conexion {
             return !!( $execResult );
 
         } catch (Exception $exception) {
-            echo('Hubo un error: ');
-            print_r([
+            $errores = ([
                 'error' => $exception->getMessage(),
                 'query' => $exception->getTrace()[0]['args']
             ]);
+
+            //var_dump(strpos($errores['error'], 'Duplicate entry') !== false);
+
+            if(strpos($errores['error'], 'Duplicate entry') !== false){
+                echo(' Datos ya se han cargado previamente');
+            }else{
+                echo('<p>Hubo un error: '.$sql.': '.implode(',',$parametros).'</p>');
+                print_r();
+            }
             return false;
         }
 
@@ -90,11 +98,19 @@ class Conexion {
             return $execResult ? $conexion->lastInsertId() : false;
 
         } catch (Exception $exception) {
-            echo('Hubo un error: ');
-            print_r([
+            $errores = ([
                 'error' => $exception->getMessage(),
                 'query' => $exception->getTrace()[0]['args']
             ]);
+
+            //var_dump(strpos($errores['error'], 'Duplicate entry') !== false);
+
+            if(strpos($errores['error'], 'Duplicate entry') !== false){
+                echo(' Datos ya se han cargado previamente');
+            }else{
+                echo('<p>Hubo un error: '.$sql.': '.implode(',',$parametros).'</p>');
+                print_r();
+            }
             return false;
         }
     }

@@ -60,7 +60,8 @@ error_reporting(E_ALL);
                     ':usuario'      => $datos['nombreUsuario'],
                     ':password'     => $datos['password'],
                     ':ubicacion'    => $datos['ubicacion'],
-                    ':id_sucursal'  => $datos['id_sucursal']
+                    ':id_sucursal'  => $datos['id_sucursal'],
+                    ':prioridad'  => $datos['prioridad'],
                 ]);
                 
                 return $respuesta;

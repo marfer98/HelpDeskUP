@@ -98,7 +98,7 @@
                             <textarea name="ubicacion" id="ubicacion" class="form-control"></textarea>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 p-0">
                         <label for="prioridad"> Prioridad</label>
                         <select name="prioridad" id="prioridad" class="form-control">
                             <option value="0">Baja</option>
