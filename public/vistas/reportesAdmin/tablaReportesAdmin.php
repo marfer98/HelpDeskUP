@@ -107,7 +107,8 @@
 </table>
 <div id="contenedor-totales">
     <h2>Totales</h2>
-    <div>
+    <hr>
+    <div id="contenedor-table-totales">
         <?php
         echo '<table id="table-totales" class="table table-sm table-bordered dt-responsive nowrap">';
         foreach ($arrayResultado as $clave => $valor) {
@@ -118,9 +119,9 @@
                 </thead>
                 <tbody>';
         foreach ($valor as $claveR => $registro) {
-            echo '<tr>      
-                    <td class="pr-2">'. ($claveR ? : '(Vacío)') .'</td>
-                    <td class="px-2">'. $registro['total'] . '</td> 
+            echo '<tr class="py-0">      
+                    <td class="pr-2 py-0">'. ($claveR ? : '(Vacío)') .'</td>
+                    <td class="px-2 py-0">'. $registro['total'] . '</td> 
                 </tr>';
         }
 
