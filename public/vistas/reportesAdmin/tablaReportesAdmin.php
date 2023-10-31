@@ -27,7 +27,30 @@
         <?php foreach ($respuesta as $mostrar){?>
         <tr>
             <th>
-                <?php echo $contador++; ?>
+                <?php echo $contador++; 
+
+                //Contadores
+                $clave = ($mostrar['estatus']) ? 'Cerrado' : 'Abierto' ;
+                if (!isset($arrayResultado['Estatus'][$clave])) {
+                    $arrayResultado['Estatus'][$clave] = ['total' => 0];
+                }
+                $arrayResultado['Estatus'][$clave]['total']++;
+
+                $clave = $mostrar['nombreOficina'];
+                if (!isset($arrayResultado['Oficina'][$clave])) {
+                    $arrayResultado['Oficina'][$clave] = ['total' => 0];
+                }
+                $arrayResultado['Oficina'][$clave]['total']++;
+
+                $clave = $mostrar['usuarioTecnico'];
+                if (!isset($arrayResultado['Técnico'][$clave])) {
+                    $arrayResultado['Técnico'][$clave] = ['total' => 0];
+                }
+                $arrayResultado['Técnico'][$clave]['total']++;
+
+                //var_dump($arrayResultado);
+                    
+                ?>
                 <!--El contador muestra un numero de reporte no así un ID -->
             </th>
             <th>
@@ -82,6 +105,32 @@
       <?php } ?>
     </tbody>
 </table>
+<div id="contenedor-totales">
+    <h2>Totales</h2>
+    <div>
+        <?php
+        echo '<table id="table-totales" class="table table-sm table-bordered dt-responsive nowrap">';
+        foreach ($arrayResultado as $clave => $valor) {
+        echo '<thead>
+                    <tr>';
+        echo '        <th>' . $clave . '</th>';
+        echo '    </tr>
+                </thead>
+                <tbody>';
+        foreach ($valor as $claveR => $registro) {
+            echo '<tr>      
+                    <td class="pr-2">'. ($claveR ? : '(Vacío)') .'</td>
+                    <td class="px-2">'. $registro['total'] . '</td> 
+                </tr>';
+        }
+
+        }
+        echo '</tbody></table>';
+        ?>
+    </div>
+   
+</div>
+
 <script>
     //datatable 
     $(document).ready(function () {
