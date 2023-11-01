@@ -9,13 +9,13 @@ $imagen = null;
 
 if (isset($_FILES['imagen_solucion'])) {
     $image = $_FILES['imagen_solucion']['tmp_name'];
-    $imgContenido = addslashes(file_get_contents($image));
+    $imgContenido = $image ? addslashes(file_get_contents($image)): null;
 
-    $imagen = file_get_contents($_FILES["imagen_solucion"]["tmp_name"]);
+    $imagen = $imgContenido ? file_get_contents($_FILES["imagen_solucion"]["tmp_name"]) : null;
 
 // Convertimos la imagen a base64
-    $base64 = base64_encode($imagen);
-    $imagen = 'data:' . $_FILES['imagen_solucion']['type'] . ';base64,' . $base64;
+    $base64 = $imagen ? base64_encode($imagen) : null;
+    $imagen = $base64 ? 'data:' . $_FILES['imagen_solucion']['type'] . ';base64,' . $base64 : null;
 }
 
 $datos = array(

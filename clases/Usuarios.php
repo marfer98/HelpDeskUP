@@ -9,28 +9,39 @@ error_reporting(E_ALL);
 
     class Usuarios extends Oficinas{
         public static function loginUsuario($usuario,$password){
-            $sql = "SELECT * FROM t_usuarios 
-                WHERE usuario = '$usuario' AND password = '$password'";//condicion para el ingreso desde la base de datos
-
-                $respuesta = Conexion::select($sql);//respuesta de la base de datos
-
-            if ($respuesta && count($respuesta)>0) { // Si retorta un respuesta la bd
-                $datosUsuario = ($respuesta[0]);
-                
-                // Crear una sesion del usuario
-                if ($datosUsuario['activo']==1) {
-                    $_SESSION['usuario']['nombre']  = $datosUsuario['usuario']; // toma el usuario
-                    $_SESSION['usuario']['id']      = $datosUsuario['id_usuario']; // toma el id del usuario
-                    $_SESSION['usuario']['rol']     = $datosUsuario['id_rol']; // toma el rol del usuario
-                    return 1; 
-                }else{
-                    return 'El usuario se encuentra inactivo'; 
+            // Validar si el usuario existe
+            $sql = "SELECT id_usuario FROM t_usuarios WHERE usuario = '$usuario'";
+            $respuesta = Conexion::select($sql);
+        
+            if ($respuesta && count($respuesta)>0) {
+                // El usuario existe
+        
+                // Validar si la contraseña es correcta
+                $sql = "SELECT * FROM t_usuarios WHERE usuario = '$usuario' AND password = '$password'";
+                $respuesta = Conexion::select($sql);
+        
+                if ($respuesta && count($respuesta)>0) {
+                    // La contraseña es correcta
+        
+                    // Crear una sesion del usuario
+                    if ($respuesta[0]['activo']==1) {
+                        $_SESSION['usuario']['nombre']  = $respuesta[0]['usuario']; // toma el usuario
+                        $_SESSION['usuario']['id']      = $respuesta[0]['id_usuario']; // toma el id del usuario
+                        $_SESSION['usuario']['rol']     = $respuesta[0]['id_rol']; // toma el rol del usuario
+                        return 1; 
+                    }else{
+                        return 'El usuario se encuentra inactivo'; 
+                    }
+                } else {
+                    // La contraseña es incorrecta
+                    return 'La contraseña es incorrecta';
                 }
-            }else{
+            } else {
+                // El usuario no existe
                 return 'No se ha encontrado usuario';
             }
-
         }
+        
 
         public static function agregaNuevoUsuario($datos){
             //$id_oficina = self::agregarOficina($datos,true);
