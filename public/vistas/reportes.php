@@ -7,7 +7,11 @@
 <div class="container">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h1 class="fw_light">Gestionar reportes de usuarios</h1>
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="fw_light">Gestionar reportes de usuarios</h1>
+                <a href="#" class="text-black" onclick="toogleFormGrid()"><i class="fa fa-filter" aria-hidden="true"></i></a>
+            </div>
+            
             <hr>
             <p class="lead">
                 <div id="tablaReporteAdminLoad"></div>  
