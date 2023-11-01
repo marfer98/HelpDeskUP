@@ -197,7 +197,7 @@
                 <th>
                     <button class="btn btn-info btn-sm" 
                             onclick="obtenerDatosSolucion('<?php echo $mostrar['idReporte'];?>')"
-                            data-toggle="modal" data-target="#modalFiltrarSolucionReporte">
+                            data-toggle="modal" data-target="#modalAgregarSolucionReporte">
                             <i class="fas fa-tools"></i>
                     </button>
                     <?php echo $mostrar ['solucion']; ?>
