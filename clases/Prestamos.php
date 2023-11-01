@@ -4,7 +4,7 @@
     require_once "Asignacion.php";
     require_once "Oficinas.php";
     
-class Prestamos{
+class Prestamos extends Asignacion{
     public static function obtenerDatosPrestamos($where=null){
         $sql = '/*v_prestamos*/
         SELECT * FROM (
@@ -53,15 +53,65 @@ class Prestamos{
     }
  
     public static function actualizarPrestamos($datos,$getId = false){
+        $prestado = true;
+
+        if($datos['estado']){
+            // Baja el stock actual
+            $asignacion = self::obtenerDatosAsignacion("
+                WHERE 
+                    id_oficina = ".$datos['id_oficina_origen']." AND
+                    id_articulo = ".$datos['id_articulo']." AND
+                    cantidad >= ".$datos['cantidad']." 
+            ");
+
+            if($asignacion){
+                $asignacion = $asignacion[0];
+                Asignacion::actualizarAsignacionPrestamos([
+                    'id_asignacion' => $asignacion['id_asignacion'],
+                    'id_oficina' => $datos['id_oficina_origen'],
+                    'id_articulo' => $datos['id_articulo'],
+                    'cantidad' => $asignacion['cantidad']- $datos['cantidad'],
+                ]);
+
+                $asignacionDestino = self::obtenerDatosAsignacion("
+                    WHERE 
+                        id_oficina = ".$datos['id_oficina_destino']." AND
+                        id_articulo = ".$datos['id_articulo']." AND
+                        cantidad >= ".$datos['cantidad']." 
+                ");
+
+                if($asignacionDestino){
+                    $asignacionDestino = $asignacionDestino[0];
+                    Asignacion::actualizarAsignacionPrestamos([
+                        'id_asignacion' => $asignacionDestino['id_asignacion'],
+                        'id_oficina' => $datos['id_oficina_destino'],
+                        'id_articulo' => $datos['id_articulo'],
+                        'cantidad' => $asignacionDestino['cantidad'] + $datos['cantidad'],
+                    ]);
+                }else{
+                    Asignacion::agregarAsignacion([
+                        'id_oficina' => $datos['id_oficina_destino'],
+                        'id_articulo' => $datos['id_articulo'],
+                        'cantidad' => $asignacion['cantidad'] + $datos['cantidad'],
+                    ],false,false);
+                    
+                }
+
+            }else{
+                return false;
+            }
+            
+        }
+
         $sql = '
-        UPDATE t_prestamos 
-        SET 
-            id_articulo = :id_articulo,
-            id_oficina_origen = :id_oficina_origen,
-            id_oficina_destino = :id_oficina_destino,
-            cantidad = :cantidad,
-            estado = :estado 
-        WHERE id_prestamo = :id_prestamo';
+            UPDATE t_prestamos 
+            SET 
+                id_articulo = :id_articulo,
+                id_oficina_origen = :id_oficina_origen,
+                id_oficina_destino = :id_oficina_destino,
+                cantidad = :cantidad,
+                estado = :estado 
+            WHERE id_prestamo = :id_prestamo';
         $datos = [
             ':id_articulo' => $datos['id_articulo'],
             ':id_oficina_origen' => $datos['id_oficina_origen'],

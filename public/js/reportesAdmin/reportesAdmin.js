@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $("#tablaReporteAdminLoad").load("reportesAdmin/tablaReportesAdmin.php");
- });
- function eliminarReporteAdmin(idReporte){//la funcion trae un id de reporte
+});
+
+function eliminarReporteAdmin(idReporte){//la funcion trae un id de reporte
     Swal.fire({
         title: '¿Estas seguro de eliminar?',
         text: "Una vez eliminado no podrá ser recuperado",
@@ -63,7 +64,7 @@ function obtenerDatosSolucion(idReporte){
 }
 function agregarSolucionReporte(){
 
-    const imagen = convertirBlob('imagen_solucion');//document.querySelector('#imagen_solucion').files[0];
+    //const imagen = convertirBlob('imagen_solucion');//document.querySelector('#imagen_solucion').files[0];
 
     $.ajax({
         type: "POST",
@@ -110,4 +111,30 @@ function convertirBlob(id = "imagen_solucion") {
         return string;
     };
     return prueaba;
-  }
+}
+
+function toogleFormGrid(){
+    dev_dom_class_toogle('contenedor-grid','d-none','d-block')
+    dev_dom_class_toogle('contenedor-form','d-none','d-block')
+}
+
+function obtenerSoluciones(){
+    $.ajax({
+        type: "POST",
+        data: $('#frmFiltrarSolucionReporte').serialize(),
+        url:"./reportesAdmin/tablaReportesAdmin.php",
+        success:function(respuesta){
+            //console.log(respuesta);
+            //respuesta = jQuery.parseJSON(respuesta);
+            //console.log(respuesta['idReporte']);
+            $("#tablaReporteAdminLoad").html(respuesta)
+        
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.error(jqXHR);
+            console.error(textStatus);
+            console.error(errorThrown);
+        }
+    });
+    return false;
+}

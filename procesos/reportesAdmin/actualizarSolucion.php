@@ -9,13 +9,23 @@ $imagen = null;
 
 if (isset($_FILES['imagen_solucion'])) {
     $image = $_FILES['imagen_solucion']['tmp_name'];
-    $imgContenido = $image ? addslashes(file_get_contents($image)): null;
 
-    $imagen = $imgContenido ? file_get_contents($_FILES["imagen_solucion"]["tmp_name"]) : null;
+    $size = isset($_FILES['imagen_solucion']['size']) ? $_FILES['imagen_solucion']['size'] : 0;
 
-// Convertimos la imagen a base64
-    $base64 = $imagen ? base64_encode($imagen) : null;
-    $imagen = $base64 ? 'data:' . $_FILES['imagen_solucion']['type'] . ';base64,' . $base64 : null;
+    // Validar que el tamaño sea menor a 2 MB
+    if ($size > 2048000) {
+        // El tamaño es mayor a 2 MB
+        echo 'El tamaño de la imagen es mayor a 2 MB.';
+        die();
+    } else {
+        $imgContenido = $image ? addslashes(file_get_contents($image)): null;
+
+        $imagen = $imgContenido ? file_get_contents($_FILES["imagen_solucion"]["tmp_name"]) : null;
+
+    // Convertimos la imagen a base64
+        $base64 = $imagen ? base64_encode($imagen) : null;
+        $imagen = $base64 ? 'data:' . $_FILES['imagen_solucion']['type'] . ';base64,' . $base64 : null;
+    }
 }
 
 $datos = array(

@@ -37,6 +37,7 @@
                     <div class="col-12 p-0">
                         <label for="formFile" class="form-label">Foto de la solución</label>
                         <input class="form-control" type="file" name="imagen_solucion" id="imagen_solucion" accept="image/jpeg, image/png">
+                        <span class="text-danger">* El tamaño máximo de la imagen es de 2 MB.</span>
                     </div>
                 </div>
                 <div class="modal-footer">

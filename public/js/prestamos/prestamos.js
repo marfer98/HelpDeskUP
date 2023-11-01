@@ -43,17 +43,18 @@ function obtenerDatosPrestamos(id_prestamo,elementoPadre='body'){
             //Listar todo menos la misma oficina
             obtenerSelectHtml('#frmActualizarPrestamos','#id_oficina_destino','oficina','id_oficina','nombre','Oficinas','WHERE id_oficina != '+respuesta['id_oficina_origen'])
             //Listar solo articulos que están en una oficina
-            obtenerSelectHtml('#frmActualizarPrestamos','#id_articulo','articulos','id_articulo','nombre','Articulos','WHERE asg.cantidad > 0 AND asg.id_oficina = '+respuesta['id_articulo'])
+            obtenerSelectHtml('#frmActualizarPrestamos','#id_articulo','articulos','id_articulo','nombre','Articulos','WHERE asg.cantidad > 0 AND asg.id_oficina = '+respuesta['id_oficina_origen'])
 
-
-            $(elementoPadre+' #id_prestamo').val(respuesta['id_prestamo']);
-            $(elementoPadre+' #id_articulo').val(respuesta['id_articulo']);		
-            $(elementoPadre+' #id_oficina_origen').val(respuesta['id_oficina_origen']);		
-            $(elementoPadre+' #nombre_oficina_origen').val(respuesta['nombre_oficina_origen']);		
-            $(elementoPadre+' #id_oficina_destino').val(respuesta['id_oficina_destino']);		
-            $(elementoPadre+' #nombre_oficina_destino').val(respuesta['nombre_oficina_destino']);		
-            $(elementoPadre+' #cantidad').val(respuesta['cantidad']);		
-            $(elementoPadre+' #estado').val(respuesta['estado']);
+            setTimeout(function(){
+                $(elementoPadre+' #id_prestamo').val(respuesta['id_prestamo']);
+                $(elementoPadre+' #id_articulo').val(respuesta['id_articulo']);		
+                $(elementoPadre+' #id_oficina_origen').val(respuesta['id_oficina_origen']);		
+                $(elementoPadre+' #nombre_oficina_origen').val(respuesta['nombre_oficina_origen']);		
+                $(elementoPadre+' #id_oficina_destino').val(respuesta['id_oficina_destino']);		
+                $(elementoPadre+' #nombre_oficina_destino').val(respuesta['nombre_oficina_destino']);		
+                $(elementoPadre+' #cantidad').val(respuesta['cantidad']);		
+                $(elementoPadre+' #estado').val(respuesta['estado'] != 2 ? respuesta['estado'] : null);
+            }, 1500);
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error(jqXHR);
@@ -126,7 +127,7 @@ function eliminarPrestamos(id_prestamo){//la funcion trae un id de reporte
     return false //para que no recargue la función 
 }
 
-$('select').on('change', function(e,o) {
+$('select#id_oficina_origen').on('change', function(e,o) {
     // Ejecutar la función JavaScript.
    let id_oficina = ($(e.currentTarget).find('option:selected').val())
 

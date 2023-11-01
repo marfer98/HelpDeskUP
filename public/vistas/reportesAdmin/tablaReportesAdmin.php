@@ -39,35 +39,6 @@
     $arrayResultado = [];
 ?>
 
-<script>
-
-    function toogleFormGrid(){
-        dev_dom_class_toogle('contenedor-grid','d-none','d-block')
-        dev_dom_class_toogle('contenedor-form','d-none','d-block')
-    }
-
-    function obtenerSoluciones(){
-        $.ajax({
-            type: "POST",
-            data: $('#frmFiltrarSolucionReporte').serialize(),
-            url:"./reportesAdmin/tablaReportesAdmin.php",
-            success:function(respuesta){
-                //console.log(respuesta);
-                //respuesta = jQuery.parseJSON(respuesta);
-                //console.log(respuesta['idReporte']);
-                $("#tablaReporteAdminLoad").html(respuesta)
-            
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.error(jqXHR);
-                console.error(textStatus);
-                console.error(errorThrown);
-            }
-        });
-        return false;
-    }
-</script>
-
 <div id="contenedor-form" class="d-none">
     <form id="frmFiltrarSolucionReporte"  method="POST" onsubmit="return obtenerSoluciones()" enctype="multipart/form-data">
         <div class="" id="modalFiltrarSolucionReporte">

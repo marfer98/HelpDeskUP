@@ -25,6 +25,8 @@ class Conexion {
                 return $dbh;
 
             }
+            
+            //$dbh->setAttribute();
 
         } catch (PDOException $exception){
             echo $exception->getMessage();
@@ -80,7 +82,7 @@ class Conexion {
                 echo(' Datos ya se han cargado previamente');
             }else{
                 echo('<p>Hubo un error: '.$sql.': '.implode(',',$parametros).'</p>');
-                print_r();
+                print_r($errores['error']);
             }
             return false;
         }
