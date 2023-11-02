@@ -7,7 +7,7 @@
        <thead>
             <th>Nombre</th>
             <th>Direccion</th>
-            <th>Telefono</th>
+            <th>Teléfono</th>
             <th>Editar</th>
             <th>Eliminar</th>
        </thead>

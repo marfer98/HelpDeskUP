@@ -36,11 +36,11 @@
         <th>Estado</th>
         <th>Rotulado</th>
         <th>Tag/Serie</th>
-        <th>Fecha de Recepcion</th>
+        <th>Fecha de Recepción</th>
         <th>Procedencia</th>
         <th>Problema</th>
         <th>Recibido por</th>
-        <th>Responsable/Telefono</th>
+        <th>Responsable/Telèfono</th>
         <th>Solución</th>
         <th>Fecha de Entrega</th>
         <th>Nombre Técnico</th>

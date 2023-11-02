@@ -17,7 +17,7 @@
                       <input type="text" name="nombre" id="nombre" class="form-control" required>
                   </div>		
                   <div class="col-sm-4">
-                      <label for="telefono">Telefono</label>
+                      <label for="telefono">Teléfono</label>
                       <input type="text" name="telefono" id="telefono" class="form-control" required>
                   </div>		
                   <div class="col-sm-4">
@@ -57,7 +57,7 @@
                           <input type="text" name="nombre" id="nombre" class="form-control" required>
                       </div>		
                       <div class="col-sm-4">
-                          <label for="telefono">Telefono</label>
+                          <label for="telefono">Teléfono</label>
                           <input type="text" name="telefono" id="telefono" class="form-control" required>
                       </div>		
                       <div class="col-sm-4">

@@ -52,7 +52,7 @@
                         <li class="nav-item dropdown" >
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-building"></i> Direcciones
+                                <i class="fas fa-map-marker-alt"></i> Direcciones
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
@@ -61,11 +61,11 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="sucursales.php">
-                                    <i class="fas fa-building"></i> Sucursales</a>
+                                    <i class="fas fa-store-alt"></i> Sucursales</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="proveedores.php">
-                                    <i class="fas fa-building"></i> Proveedores</a>
+                                    <i class="fas fa-industry"></i> Proveedores</a>
                                 </li>
                             </ul>
                         </li>
@@ -77,7 +77,7 @@
                         <li class="nav-item dropdown" >
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-building"></i> Articulos
+                                <i class="fas fa-building"></i> Artículos
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">

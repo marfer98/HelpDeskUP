@@ -12,9 +12,9 @@ $respuesta = $usuario->obtenerDatosUsuarios();
     <th>Sucursal</th>
     <!--<th>Cod Oficina</th>-->
     <th>Nombre Oficina</th>
-    <th>Telefono</th>
+    <th>Teléfono</th>
     <th>Correo</th>
-    <th>Ubicacion</th>
+    <th>Ubicación</th>
     <th>Rol</th>
     <th>Reset Password</th>
     <th>Cambiar Rol</th>

@@ -45,7 +45,7 @@ error_reporting(E_ALL);
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="telefono"> Telefono</label>
+                            <label for="telefono"> Teléfono</label>
                             <input type="text" class="form-control" id="telefono" name="telefono" required>
                         </div>
                     </div>

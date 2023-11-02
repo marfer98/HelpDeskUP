@@ -10,7 +10,7 @@ $respuesta = Oficinas::obtenerDatosOficina();
 <table class="table table-sm table-bordered dt-responsive nowrap" id="tablaOficinaDataTable" style="width:100%">
     <thead>
         <th>Nombre</th>
-        <th>Telefono</th>
+        <th>Teléfono</th>
         <th>Correo</th>
         <th>Editar</th>
         <th>Eliminar</th>
