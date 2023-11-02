@@ -110,11 +110,11 @@
                             <i class="fas fa-user-cog"></i> Usuario: <?php echo $_SESSION['usuario']['nombre']; ?><!-- muestra el nombre del ususario -->
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">
-                            <i class="fas fa-user-edit"></i> Editar Datos</a></li>
-                             <!-- donde nos lleva la opcion salir -->
+                            <!-- ssssssssssssssssss<li><a class="dropdown-item" href="#">
+                            <i class="fas fa-user-edit"></i> Editar Datos</a></li> -->
+                            <!-- donde nos lleva la opcion salir -->
                             <li><a style="color:red" class="dropdown-item" href="../../procesos/usuarios/login/salir.php">
-                            <i class="fas fa-sign-out-alt"></i> Salir</a></li>
+                            <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>

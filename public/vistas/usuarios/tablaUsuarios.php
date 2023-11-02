@@ -1,6 +1,8 @@
 <?php
 require_once '../../../clases/Usuarios.php';
 require_once '../../../clases/Roles.php';
+session_start();
+$idUsuarioActual = $_SESSION['usuario']['id'];
 $usuario = new Usuarios;
 $respuesta = $usuario->obtenerDatosUsuarios();
 ?>
@@ -46,21 +48,23 @@ $respuesta = $usuario->obtenerDatosUsuarios();
             </td>
             <td>
                 <?php
-                if ($mostrar['estatus'] == 1) {
-                    ?>
-                    <!-- condicional activo e inactivo -->
-                    <button class="btn btn-secondar btn-sm"
-                            onclick="cambioEstatusUsuario(<?php echo $mostrar['idUsuario'] ?>, <?php echo $mostrar['estatus'] ?>)">
-                        <span class="fas fa-power-off"></span> Off
-                    </button>
-                    <?php
-                } else if ($mostrar['estatus'] == 0) {
-                    ?>
-                    <button class="btn btn-success btn-sm"
-                            onclick="cambioEstatusUsuario(<?php echo $mostrar['idUsuario'] ?>, <?php echo $mostrar['estatus'] ?>)">
-                        <span class="fas fa-power-off"></span> On
-                    </button>
-                    <?php
+                if( $mostrar ['idUsuario'] != $idUsuarioActual){
+                    if ($mostrar['estatus'] == 1) {
+                        ?>
+                        <!-- condicional activo e inactivo -->
+                        <button class="btn btn-secondar btn-sm"
+                                onclick="cambioEstatusUsuario(<?php echo $mostrar['idUsuario'] ?>, <?php echo $mostrar['estatus'] ?>)">
+                            <span class="fas fa-power-off"></span> Off
+                        </button>
+                        <?php
+                    } else if ($mostrar['estatus'] == 0) {
+                        ?>
+                        <button class="btn btn-success btn-sm"
+                                onclick="cambioEstatusUsuario(<?php echo $mostrar['idUsuario'] ?>, <?php echo $mostrar['estatus'] ?>)">
+                            <span class="fas fa-power-off"></span> On
+                        </button>
+                        <?php
+                    }
                 }
                 ?>
             </td>
