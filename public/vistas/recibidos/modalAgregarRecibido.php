@@ -35,12 +35,12 @@
                     <label for="rotulado"> Rotulado</label>
                     <input type="text" class="form-control" id="rotulado" name="rotulado" required>
 
-                    <label for="numeroSerie"> Numero de Serie/Service Tag</label>
+                    <label for="numeroSerie"> Número de Serie/Service Tag</label>
                     <input type="text" class="form-control" id="numeroSerie" name="numeroSerie" required>
 
                     <label for="ciudad"> Ciudad</label>
                     <select name="ciudad" id="ciudad" class="form-control" required>
-                        <option value="">Seleccione una opcion</option>
+                        <option value="">Seleccione una opción</option>
                         <option value="San Lorenzo">San Lorenzo</option>
                         <option value="Lambare">Lambare</option>
                         <option value="J. Augusto Saldivar">J. Augusto Saldivar</option>
@@ -48,7 +48,7 @@
                     
                     <label for="procedencia"> Procedencia</label>
                     <select name="procedencia" id="procedencia" class="form-control" required>
-                        <option value="">Seleccione una opcion</option>
+                        <option value="">Seleccione una opción</option>
                         <option value="CONSEJO DE ADMINISTRACION - CENTRAL">CONSEJO DE ADMINISTRACION - CENTRAL</option>
                         <option value="TRIBUNAL DE APELACION PENAL ">TRIBUNAL DE APELACION PENAL </option>
                         <option value="TRIBUNAL DE LA NIÑEZ Y ADOLESCENCIA">TRIBUNAL DE LA NIÑEZ Y ADOLESCENCIA</option>
@@ -76,7 +76,7 @@
                     
                     <label for="recibido"> Recibido por</label>
                     <select name="recibido" id="recibido" class="form-control" required>
-                        <option value="">Seleccione una opcion</option>
+                        <option value="">Seleccione una opción</option>
                         <option value="Elsidia Caballero">Elsidia Caballero</option>
                         <option value="Gaspar Sosa">Gaspar Sosa</option>
                         <option value="Leonardo Villasanti">Leonardo Villasanti</option>
@@ -94,7 +94,7 @@
 
                    <label for="estado"> Estado</label>
                     <select name="estado" id="estado" class="form-control" required>
-                        <option value="">Seleccione una opcion</option>
+                        <option value="">Seleccione una opción</option>
                         <option value="1">Pendiente</option>
                         <option value="0">Entregado</option>
                         <option value="2">De Baja</option>

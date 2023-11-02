@@ -5,7 +5,7 @@
 ?>
 <table class="table table-sm table-bordered dt-responsive nowrap" id="tablaSucursalesDataTable" style="width:100%">
        <thead>
-            <th>Descripcion</th>
+            <th>Descripción</th>
 		    <th>Direccion</th>
             <th>Editar</th>
             <th>Eliminar</th>

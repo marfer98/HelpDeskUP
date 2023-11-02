@@ -12,7 +12,7 @@ $respuesta = Adquisiciones::obtenerDatosAdquisiciones();
             <th>Marca</th>
             <th>Modelo</th>
             <th>NumeroSerie</th>
-            <th>Descripcion</th>
+            <th>Descripción</th>
             <th>Memoria</th>
             <th>Tipo ram</th>
             <th>Disco duro</th>

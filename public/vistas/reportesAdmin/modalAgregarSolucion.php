@@ -22,7 +22,7 @@
                     </select>
                     <label for="usuarioTecnico">Tecnico</label>
                     <select name="usuarioTecnico" id="usuarioTecnico" class="form-control">
-                        <option value="">Seleccione una opcion</option>
+                        <option value="">Seleccione una opción</option>
                         <option value="Elsidia Caballero">Elsidia Caballero</option>
                         <option value="Gaspar Sosa">Gaspar Sosa</option>
                         <option value="Leonardo Villasanti">Leonardo Villasanti</option>

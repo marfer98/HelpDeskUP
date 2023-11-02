@@ -162,7 +162,7 @@ require_once "../../clases/Articulos.php";
                                 <input type="text" disabled name="numeroSerie" id="numeroSerie" class="form-control" >
                             </div>		
                             <div class="col-sm-4">
-                                <label for="descripcion">Descripcion</label>
+                                <label for="descripcion">Descripción</label>
                                 <input type="text" disabled name="descripcion" id="descripcion" class="form-control" >
                             </div>		
                             <div class="col-sm-4">

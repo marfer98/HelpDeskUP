@@ -22,7 +22,7 @@
 
                     <label for="estado"> Estado</label>
                     <select name="estado" id="estado" class="form-control" required>
-                        <option value="">Seleccione una opcion</option>
+                        <option value="">Seleccione una opción</option>
                         <option value="1">Pendiente</option>
                         <option value="0">Entregado</option>
                         <option value="2">De Baja</option>
@@ -30,7 +30,7 @@
 
                     <label for="tecnico">Nombre Técnico</label>
                     <select name="tecnico" id="tecnico" class="form-control" required>
-                        <option value="">Seleccione una opcion</option>
+                        <option value="">Seleccione una opción</option>
                         <option value="Elsidia Caballero">Elsidia Caballero</option>
                         <option value="Gaspar Sosa">Gaspar Sosa</option>
                         <option value="Leonardo Villasanti">Leonardo Villasanti</option>

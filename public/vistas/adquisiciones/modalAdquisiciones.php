@@ -101,7 +101,7 @@ require_once "../../clases/Articulos.php";
                                 <input type="text" name="modelo" id="modelo" class="form-control">
                             </div>
                             <div class="col-sm-6">
-                                <label for="numeroSerie">Numero de Serie/Service Tag</label>
+                                <label for="numeroSerie">Número de Serie/Service Tag</label>
                                 <input type="text" name="numeroSerie" id="numeroSerie" class="form-control">
                             </div>
                         </div>
@@ -224,13 +224,13 @@ require_once "../../clases/Articulos.php";
                                 <input type="text" name="modelo" id="modelo" class="form-control">
                             </div>
                             <div class="col-sm-6">
-                                <label for="numeroSerie">Numero de Serie/Service Tag</label>
+                                <label for="numeroSerie">Número de Serie/Service Tag</label>
                                 <input type="text" name="numeroSerie" id="numeroSerie" class="form-control">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <label for="descripcion">Descripcion</label>
+                                <label for="descripcion">Descripción</label>
                                 <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
                             </div>
                         </div>

@@ -49,7 +49,7 @@
         <tr>
             <th>
                 <?php echo $contador++; ?>
-                <!--El contador muestra un numero de reporte no así un ID -->
+                <!--El contador muestra un Número de reporte no así un ID -->
             </th>
             <th>
                 <?php echo $mostrar ['nombreOficina']; ?>
