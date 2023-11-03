@@ -10,6 +10,7 @@
             <th>Oficina destino</th>
             <th>Cantidad</th>
             <th>Estado</th>
+            <th>Informe PDF</th>
             <th>Editar</th>
             <th>Eliminar</th>
        </thead>
@@ -24,6 +25,13 @@
                     echo ($mostrar['estado'] == 1) ? 
                         '<span class="badge bg-success">Confirmado</span>' :
                         ( ($mostrar['estado'] == 0) ?'<span class="badge bg-danger">Rechazado</span>' :'<span class="badge bg-warning">Pendiente</span>' );?>
+                </td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-toggle="modal" 
+                        data-target="#modalActualizarPrestamos" 
+                        onclick= "descargarInformePDF(<?php echo $mostrar ['id_prestamo']?>,'#modalActualizarPrestamos')"> 
+                        <i class="fa fa-file-pdf"></i>
+                    </button>
                 </td>
                 <?php
                 if(!in_array($mostrar['estado'],[1,0])){ ?>
