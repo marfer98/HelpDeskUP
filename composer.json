@@ -1,0 +1,20 @@
+{
+    "name": "helpdeskup/yosoymitxel",
+    "description": "Sistema de help desk para uso pequeño",
+    "type": "project",
+    "require": {
+        "setasign/fpdf": "^1.8"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Helpdeskup\\Yosoymitxel\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mitxel Code",
+            "email": "yosoymitxel@gmail.com"
+        }
+    ]
+}
