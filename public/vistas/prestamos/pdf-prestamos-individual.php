@@ -23,18 +23,19 @@ if(isset($_GET['id_prestamo'])){
 </head>
 
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
-        <div class="container">
-            <a class="navbar-brand" href="inicio.php">
-                <img src="../../img/logoicono.ico" width="30%">
-            </a>
-        </div>
-    </nav>
-  
+     
   <body>
     <div class="container">
         <div class="row">
+            <a class="navbar-brand" href="inicio.php" style="
+                min-height: 60px;
+                min-width: 90px;
+                background-image: url(http://helpdeskup.unaux.com/public/img/logoicono.ico);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                margin-bottom: 50px;
+            "></a>
             <div class="col-12 titulopie" style="margin-bottom:50px">
                 <h4>INFORMÁTICA N°: <?php echo $mostrar['id_prestamo'] ?></h4>
             </div>
