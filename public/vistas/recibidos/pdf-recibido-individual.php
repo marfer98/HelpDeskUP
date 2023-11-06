@@ -57,7 +57,7 @@ if(isset($_GET['id_recibido'])){
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
         <div class="container">
             <a class="navbar-brand" href="inicio.php">
-                <img src="../../img//logoicono.ico" width="30%">
+                <img src="../../img/logoicono.ico" width="30%">
             </a>
         </div>
     </nav>
