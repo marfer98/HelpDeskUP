@@ -109,7 +109,7 @@
             </th> 
             <td>
                 <button class="btn btn-warning btn-sm"
-                    onclick= "descargarInformePDF(<?php echo $mostrar ['id_recibo']?>)"> 
+                    onclick= "descargarInformePDF(<?php echo $mostrar ['idRecepcion']?>)"> 
                     <i class="fa fa-file-pdf"></i>
                 </button>
             </td>
