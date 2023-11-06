@@ -114,3 +114,7 @@ function obtenerDatosRecebido(idRecepcion){
     });
     return false;
  }
+
+function descargarInformePDF(id){
+    window.open('http://helpdeskup.unaux.com/public/vistas/recibidos/pdf-recibido-individual.php?id_prestamo='+id,'Imprmir informe','width=600,height=800,left=50,top=50,toolbar=yes');
+}

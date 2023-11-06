@@ -108,9 +108,8 @@
                 <?php echo $mostrar ['informeTecnico']; ?>
             </th> 
             <td>
-                <button class="btn btn-warning btn-sm" data-toggle="modal" 
-                    data-target="#modalActualizarRecibos" 
-                    onclick= "descargarInformePDF(<?php echo $mostrar ['id_recibo']?>,'#modalActualizarRecibos')"> 
+                <button class="btn btn-warning btn-sm"
+                    onclick= "descargarInformePDF(<?php echo $mostrar ['id_recibo']?>)"> 
                     <i class="fa fa-file-pdf"></i>
                 </button>
             </td>

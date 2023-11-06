@@ -127,6 +127,10 @@ function eliminarPrestamos(id_prestamo){//la funcion trae un id de reporte
     return false //para que no recargue la función 
 }
 
+function descargarInformePDF(id){
+    window.open('http://helpdeskup.unaux.com/public/vistas/prestamos/pdf-prestamos-individual.php?id_prestamo='+id,'Imprmir informe','width=600,height=800,left=50,top=50,toolbar=yes');
+}
+
 $('select#id_oficina_origen').on('change', function(e,o) {
     // Ejecutar la función JavaScript.
    let id_oficina = ($(e.currentTarget).find('option:selected').val())

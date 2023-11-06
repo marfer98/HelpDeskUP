@@ -27,9 +27,8 @@
                         ( ($mostrar['estado'] == 0) ?'<span class="badge bg-danger">Rechazado</span>' :'<span class="badge bg-warning">Pendiente</span>' );?>
                 </td>
                 <td>
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" 
-                        data-target="#modalActualizarPrestamos" 
-                        onclick= "descargarInformePDF(<?php echo $mostrar ['id_prestamo']?>,'#modalActualizarPrestamos')"> 
+                    <button class="btn btn-warning btn-sm" 
+                        onclick= "descargarInformePDF(<?php echo $mostrar ['id_prestamo']?>)"> 
                         <i class="fa fa-file-pdf"></i>
                     </button>
                 </td>
