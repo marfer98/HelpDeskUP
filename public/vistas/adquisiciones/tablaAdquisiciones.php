@@ -19,6 +19,7 @@ $respuesta = Adquisiciones::obtenerDatosAdquisiciones();
             <th>Procesador</th>
             <th>Sistema operativo</th>
             <th>Cantidad</th>
+            <th>Informe PDF</th>
             <th>Editar</th>
             <th>Eliminar</th>
        </thead>
@@ -39,6 +40,12 @@ $respuesta = Adquisiciones::obtenerDatosAdquisiciones();
                 <td><?php echo $mostrar['procesador']; ?></td>
                 <td><?php echo $mostrar['sistema_operativo']; ?></td>
                 <td><?php echo $mostrar['cantidad']; ?></td>
+                <td>
+                    <button class="btn btn-warning btn-sm" 
+                        onclick= "descargarInformePDF(<?php echo $mostrar ['id_adquisicion']?>)"> 
+                        <i class="fa fa-file-pdf"></i>
+                    </button>
+                </td>
                 <td>
                     <button class="btn btn-warning btn-sm" data-toggle="modal" 
                         data-target="#modalActualizarAdquisiciones" 
