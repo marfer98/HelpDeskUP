@@ -3,7 +3,7 @@
     "description": "Sistema de help desk para uso pequeño",
     "type": "project",
     "require": {
-        "setasign/fpdf": "^1.8"
+        
     },
     "license": "MIT",
     "autoload": {
@@ -12,6 +12,10 @@
         }
     },
     "authors": [
+        {
+            "name": "Marcos Fernandez",
+            "email": "yosoymitxel@gmail.com"
+        },
         {
             "name": "Mitxel Code",
             "email": "yosoymitxel@gmail.com"
