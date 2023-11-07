@@ -12,20 +12,30 @@
 
     if(isset($_POST['filtro'])){
         // Iterar sobre el array $_POST
-        foreach ($_POST as $key => $value) {
+        foreach ($_POST as $campo => $valor) {
             unset($_POST['filtro']);
             // Si el valor es vacío, eliminarlo del array
-            if (empty($value)) {
-                unset($_POST[$key]);
+            if (empty($valor)) {
+                unset($_POST[$campo]);
             }
         }
 
         if(count($_POST)){
-            foreach ($_POST as $key => $value) {
-
-                // Crear un where con la key y el value
-                $key = strtotime($value) ? "date($key)" : $key; 
-                $where[] = "{$key} = '{$value}'";
+            foreach ($_POST as $campo => $valor) {
+                // Si el nombre del campo termina en _hasta, agregar un where con la condición between
+                if (preg_match('/_hasta$/', $campo)) {
+                    // Validar si existe la variable sin el _hasta
+                    $campo_sin_hasta = str_replace('_hasta', '', $campo);
+                    if (isset($_POST[$campo_sin_hasta])) {
+                        $_POST[$campo_sin_hasta] = $_POST[$campo_sin_hasta] ? $_POST[$campo_sin_hasta] : $valor;
+                        $where[] = "{$campo_sin_hasta} BETWEEN '{$_POST[$campo_sin_hasta]}' AND '{$valor}' ";
+                    }
+                } else {
+                    if(!array_key_exists($campo.'_hasta', $_POST)){
+                        // Crear un where con la key y el value
+                        $where[] = "{$campo} = '{$valor}'";
+                    }
+                }
             }
             
             // Convertir el array de wheres en una cadena
@@ -33,6 +43,7 @@
         }
         
     }
+
 
     $respuesta = $reporte->obtenerDatosReportes($where);
     $respuesta = $respuesta ? : [];
@@ -81,6 +92,10 @@
                         <div class="form-group">
                             <label for="fecha">Fecha</label>
                             <input type="date" class="form-control" id="fecha" name="fecha" min="1998-01-01">
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_hasta">Fecha Hasta</label>
+                            <input type="date" class="form-control" id="fecha_hasta" name="fecha_hasta" min="1998-01-01">
                         </div>
                     </div>
                     <div class="modal-footer">
