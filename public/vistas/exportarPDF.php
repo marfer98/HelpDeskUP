@@ -23,7 +23,7 @@
 /*
     $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, "http://helpdeskup.unaux.com/public/vistas/$ubicacion/$reporte");
+    curl_setopt($ch, CURLOPT_URL, "http://helpdeskup.great-site.net/public/vistas/$ubicacion/$reporte");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_POST, true);
     curl_setopt($ch, CURLOPT_POSTFIELDS, [
@@ -300,7 +300,7 @@
         return $pdf;
     }
 
-    curl_to_pdf("http://helpdeskup.unaux.com/public/vistas/$ubicacion/$reporte",[
+    curl_to_pdf("http://helpdeskup.great-site.net/public/vistas/$ubicacion/$reporte",[
         'ubicacion' => $_GET['ubicacion'],
         'reporte' => $_GET['reporte'],
     ]);

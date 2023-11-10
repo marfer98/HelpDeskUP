@@ -30,7 +30,7 @@ if(isset($_GET['id_prestamo'])){
             <a class="navbar-brand" href="inicio.php" style="
                 min-height: 60px;
                 min-width: 90px;
-                background-image: url(http://helpdeskup.unaux.com/public/img/logoicono.ico);
+                background-image: url(http://helpdeskup.great-site.net/public/img/logoicono.ico);
                 background-size: contain;
                 background-repeat: no-repeat;
                 background-position: center;

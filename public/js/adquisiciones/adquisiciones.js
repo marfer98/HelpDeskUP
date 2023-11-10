@@ -127,5 +127,5 @@ function eliminarAdquisiciones(id_adquisicion){//la funcion trae un id de report
 }
 
 function descargarInformePDF(id){
-    window.open('http://helpdeskup.unaux.com/public/vistas/adquisiciones/pdf-adquisiciones-individual.php?id_adquisicion='+id,'Imprmir informe','width=600,height=800,left=50,top=50,toolbar=yes');
+    window.open('http://helpdeskup.great-site.net/public/vistas/adquisiciones/pdf-adquisiciones-individual.php?id_adquisicion='+id,'Imprmir informe','width=600,height=800,left=50,top=50,toolbar=yes');
 }

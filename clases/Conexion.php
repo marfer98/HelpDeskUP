@@ -4,10 +4,10 @@
 
 class Conexion {
     public static function conectar(){
-        $host   = "sql110.ezyro.com";
-        $bbdd   = "ezyro_35208593_helpdesk";
-        $user   = "ezyro_35208593";
-        $pass   = '7ae22595a4b9';
+        $host   = "sql211.infinityfree.com";
+        $bbdd   = "if0_35387711_helpdesk";
+        $user   = "if0_35387711";
+        $pass   = 'hrKn5rlTg4E';
         $puerto = '3306';
         $opcionesPDO = [];
         $driver = 'mysql';
@@ -118,3 +118,5 @@ class Conexion {
     }
 
 }
+
+
