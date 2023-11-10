@@ -212,7 +212,7 @@
                     p.nombre as nombre_proveedor,
                     ad.cantidad,
                     u.id_usuario,
-                    u.nombreUsuario
+                    u.usuario
                 FROM t_adquisiciones_auditoria ad
                     left JOIN t_usuarios u ON ad.id_usuario = u.id_usuario
                     left JOIN t_articulos a ON a.id_articulo = ad.id_articulo

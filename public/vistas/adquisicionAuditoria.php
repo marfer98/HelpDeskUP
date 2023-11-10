@@ -12,7 +12,11 @@
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
             <h1 class="fw_light">Auditoría de Adquisición de Equipos</h1>
+            <div id="tablaAdquisicionesLoad">
+
+            </div>
         </div>
+        
     </div>
 </div>
 
