@@ -46,9 +46,6 @@
         <th>Fecha de Entrega</th>
         <th>Nombre Técnico</th>
         <th>Informe Técnico</th>
-        <th>Informe PDF</th>
-        <th>Editar</th>
-        <th>Eliminar</th>
     </thead>
     <tbody>
         <?php
@@ -108,24 +105,7 @@
             <th>
                 <?php echo $mostrar ['informeTecnico']; ?>
             </th> 
-            <td>
-                <button class="btn btn-warning btn-sm"
-                    onclick= "descargarInformePDF(<?php echo $mostrar ['idRecepcion']?>)"> 
-                    <i class="fa fa-file-pdf"></i>
-                </button>
-            </td>
-            <td>
-                <button class="btn btn-warning btn-sm"
-                onclick ="obtenerDatosRecebido('<?php echo $mostrar['idRecepcion'];?>')"
-                data-toggle="modal" 
-                data-target= "#modalActualizarRecibido">
-                <i class="fas fa-edit"></i></button>
-            </td> 
-            <td>
-                <button class="btn btn-danger btn-sm"
-                onclick="eliminarRecibido(<?php echo $mostrar['idRecepcion']?>)">
-                <i class="fas fa-trash-alt"></i></button>
-            </td> 
+            
         </tr>
         <?php }?>
     </tbody>
