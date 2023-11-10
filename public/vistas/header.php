@@ -103,6 +103,22 @@
                             <a class="nav-link" href="reportes.php">
                             <i class="fas fa-file-alt"></i> Reportes</a>
                         </li>
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-building"></i> Auditoria
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="adquisicionAuditoria.php">
+                                    <i class="fas fa-box-open"></i> Adquisición</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="recibidosAuditoria.php">
+                                    <i class="fas fa-exchange-alt"></i> Recibidos</a>
+                                </li>
+                            </ul>
+                        </li>
                     <?php }?>
                     <li class="nav-item dropdown" >
                         <a style="color:red" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"

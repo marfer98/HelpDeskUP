@@ -1,7 +1,6 @@
 <?php
     if(!isset($_SESSION)){
         session_start();
-
     }
     require_once "Conexion.php";
     require_once "Articulos.php";
@@ -163,12 +162,14 @@
         public static function auditoriaAdquisiones($datos,$tipoOperacion,$getId=false){
             $sql = '
                     INSERT INTO t_adquisiciones_auditoria (
+                        id_adquisicion,
                         id_articulo, 
                         id_proveedor, 
                         cantidad,
                         id_usuario,
                         tipo_operacion
                     ) VALUES (
+                        :id_adquisicion,
                         :id_articulo, 
                         :id_proveedor, 
                         :cantidad,
@@ -176,13 +177,15 @@
                         :tipo_operacion
                     )';
                 $datos = [
+                    ':id_adquisicion' => $datos['id_adquisicion'],
                     ':id_articulo'   => $datos['id_articulo'],
                     ':id_proveedor'  => $datos['id_proveedor'],
                     ':cantidad'      => $datos['cantidad'],
                     ':id_usuario'    => $_SESSION['usuario']['id'],
                     'tipo_operacion' => $tipoOperacion,
                 ];
-                $respuesta = !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
+
+                return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }
 
         public static function obtenerDatosAdquisicionesAuditoria($where=null){
