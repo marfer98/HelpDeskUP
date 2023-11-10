@@ -6,8 +6,8 @@ class Conexion {
     public static function conectar(){
         $host   = "sql211.infinityfree.com";
         $bbdd   = "if0_35387711_helpdesk";
-        $user   = "if0_35387711";
-        $pass   = 'hrKn5rlTg4E';
+        $user   = "";
+        $pass   = '';
         $puerto = '3306';
         $opcionesPDO = [];
         $driver = 'mysql';
