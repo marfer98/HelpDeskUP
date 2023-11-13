@@ -2,7 +2,7 @@
 require_once '../../../clases/Usuarios.php';
 require_once '../../../clases/Roles.php';
 
-if(isset($_SESSION)){
+if(!isset($_SESSION)){
     session_start();
 }
 
