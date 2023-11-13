@@ -1,7 +1,11 @@
 <?php
 require_once '../../../clases/Usuarios.php';
 require_once '../../../clases/Roles.php';
-session_start();
+
+if(isset($_SESSION)){
+    session_start();
+}
+
 $idUsuarioActual = $_SESSION['usuario']['id'];
 $usuario = new Usuarios;
 $respuesta = $usuario->obtenerDatosUsuarios();

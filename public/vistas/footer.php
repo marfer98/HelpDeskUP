@@ -1,3 +1,21 @@
+<footer id="footer" class="bg-dark" style="overflow: hidden;">
+    <div class="container my-3">
+        <div class="row justify-content-center" style="">
+            <div class="col-12 ">
+                <a class="mx-auto  navbar-brand" href="inicio.php" style="justify-content: center;display: flex;">
+                    <img src="../img//logoicono.ico" width="" style="height: 50px;">
+                </a>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col text-center text-white">
+                <p>© Copiright 2023 | Marcos Fernández</p>
+            </div>
+            <hr>
+        </div>	
+    </div>	
+</footer>
 <script src="../../public/jquery/jquery-3.6.0.min.js"></script> 
 <script src="../../public/bootstrap/popper.min.js"></script>
 <script src="../../public/bootstrap/bootstrap.min.js"></script>
