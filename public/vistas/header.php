@@ -95,15 +95,39 @@
                             </ul>
                         </li>
                        
-                        <li class="nav-item">
-                            <a class="nav-link" href="recibidos.php">
-                            <i class="fas fa-exchange-alt"></i> Recibidos</a>
+
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-file-alt"></i> Reportes
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="recibidos.php">
+                                    <i class="fas fa-exchange-alt"></i> Trabajos realizados</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="reportes.php">
+                                    <i class="fas fa-file-alt"></i> Gestionar reportes de usuarios</a>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="reportes.php">
-                            <i class="fas fa-file-alt"></i> Reportes</a>
+                        <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                <i class="fas fa-box"></i> Auditorías
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="adquisicionAuditoria.php">
+                                    <i class="fas fa-box-open"></i> Adquisición</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item" href="recibidosAuditoria.php">
+                                    <i class="fas fa-exchange-alt"></i> Trabajos realizados</a>
+                                </li>
+                            </ul>
                         </li>
-                        
                     <?php }?>
                     <li class="nav-item dropdown" >
                         <a style="color:red" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -114,15 +138,6 @@
                             <!-- ssssssssssssssssss<li><a class="dropdown-item" href="#">
                             <i class="fas fa-user-edit"></i> Editar Datos</a></li> -->
                             <!-- donde nos lleva la opcion salir -->
-                            
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="adquisicionAuditoria.php">
-                                <i class="fas fa-box-open"></i> Adquisición</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="dropdown-item" href="recibidosAuditoria.php">
-                                <i class="fas fa-exchange-alt"></i> Recibidos</a>
-                            </li>
                             <li><a style="color:red" class="dropdown-item" href="../../procesos/usuarios/login/salir.php">
                             <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
                         </ul>

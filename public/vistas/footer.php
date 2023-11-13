@@ -1,4 +1,4 @@
-<footer id="footer" class="bg-dark" style="overflow: hidden;">
+<footer id="footer" class="bg-dark" style="bottom: 0;overflow: hidden;position: absolute;width: 100%;">
     <div class="container my-3">
         <div class="row justify-content-center" style="">
             <div class="col-12 ">
