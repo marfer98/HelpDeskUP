@@ -4,7 +4,10 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="
+    position: relative;
+    min-height: 100vh;
+">
 
 <head>
     <meta charset="UTF-8">
