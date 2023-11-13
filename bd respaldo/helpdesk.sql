@@ -2,8 +2,8 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: sql110.ezyro.com
--- Tiempo de generación: 30-10-2023 a las 11:44:42
+-- Servidor: sql211.infinityfree.com
+-- Tiempo de generación: 13-11-2023 a las 13:15:16
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.2.22
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `ezyro_35208593_helpdesk`
+-- Base de datos: `if0_35387711_helpdesk`
 --
 
 -- --------------------------------------------------------
@@ -58,6 +58,31 @@ INSERT INTO `t_adquisiciones` (`id_adquisicion`, `id_articulo`, `id_proveedor`, 
 (15, 8, 2, 50, '2023-10-24 07:14:52'),
 (16, 24, 1, 0, '2023-10-24 07:14:52'),
 (17, 16, 2, 86, '2023-10-24 07:14:52');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_adquisiciones_auditoria`
+--
+
+CREATE TABLE `t_adquisiciones_auditoria` (
+  `id_adquisicion` int(11) NOT NULL,
+  `id_articulo` int(11) NOT NULL,
+  `id_proveedor` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `tipo_operacion` varchar(50) NOT NULL,
+  `fecha_insert` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_usuario` int(11) DEFAULT NULL,
+  `id_adquisicion_auditoria` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `t_adquisiciones_auditoria`
+--
+
+INSERT INTO `t_adquisiciones_auditoria` (`id_adquisicion`, `id_articulo`, `id_proveedor`, `cantidad`, `tipo_operacion`, `fecha_insert`, `id_usuario`, `id_adquisicion_auditoria`) VALUES
+(0, 10, 1, 20, 'update', '2023-11-10 14:28:51', 1, 1),
+(0, 10, 1, 20, 'update', '2023-11-10 14:29:27', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -296,6 +321,35 @@ INSERT INTO `t_recepcion` (`id_recepcion`, `id_equipo`, `nombre_equipo`, `fecha_
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `t_recepcion_auditoria`
+--
+
+CREATE TABLE `t_recepcion_auditoria` (
+  `id_recepcion` int(11) NOT NULL,
+  `id_equipo` int(11) NOT NULL,
+  `nombre_equipo` varchar(255) DEFAULT NULL,
+  `fecha_recepcion` datetime NOT NULL DEFAULT current_timestamp(),
+  `rotulado` varchar(255) DEFAULT NULL,
+  `numero_serie` varchar(255) DEFAULT NULL,
+  `ciudad` varchar(255) DEFAULT NULL,
+  `procedencia` varchar(255) DEFAULT NULL,
+  `descripcion_problema` varchar(255) DEFAULT NULL,
+  `recibido` varchar(255) DEFAULT NULL,
+  `responsable` varchar(255) DEFAULT NULL,
+  `descripcion_solucion` varchar(255) DEFAULT NULL,
+  `fecha_entrega` varchar(255) DEFAULT NULL,
+  `estatus` int(11) NOT NULL,
+  `nombre_tecnico` varchar(255) NOT NULL,
+  `informe_tecnico` varchar(255) DEFAULT NULL,
+  `id_usuario` int(11) DEFAULT NULL,
+  `tipo_operacion` varchar(255) DEFAULT NULL,
+  `fecha_insert` datetime NOT NULL DEFAULT current_timestamp(),
+  `id_recepcion_auditoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `t_reportes`
 --
 
@@ -398,6 +452,12 @@ ALTER TABLE `t_adquisiciones`
   ADD KEY `fk_id_proveedor` (`id_proveedor`);
 
 --
+-- Indices de la tabla `t_adquisiciones_auditoria`
+--
+ALTER TABLE `t_adquisiciones_auditoria`
+  ADD PRIMARY KEY (`id_adquisicion_auditoria`);
+
+--
 -- Indices de la tabla `t_articulos`
 --
 ALTER TABLE `t_articulos`
@@ -454,6 +514,12 @@ ALTER TABLE `t_recepcion`
   ADD KEY `FK_equipo` (`id_equipo`);
 
 --
+-- Indices de la tabla `t_recepcion_auditoria`
+--
+ALTER TABLE `t_recepcion_auditoria`
+  ADD PRIMARY KEY (`id_recepcion_auditoria`);
+
+--
 -- Indices de la tabla `t_reportes`
 --
 ALTER TABLE `t_reportes`
@@ -487,6 +553,12 @@ ALTER TABLE `t_usuarios`
 --
 ALTER TABLE `t_adquisiciones`
   MODIFY `id_adquisicion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `t_adquisiciones_auditoria`
+--
+ALTER TABLE `t_adquisiciones_auditoria`
+  MODIFY `id_adquisicion_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `t_articulos`
@@ -535,6 +607,12 @@ ALTER TABLE `t_proveedores`
 --
 ALTER TABLE `t_recepcion`
   MODIFY `id_recepcion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `t_recepcion_auditoria`
+--
+ALTER TABLE `t_recepcion_auditoria`
+  MODIFY `id_recepcion_auditoria` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `t_reportes`
