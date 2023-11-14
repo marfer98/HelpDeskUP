@@ -69,8 +69,8 @@
         }
 
         public function obtenerDatosReportes($where=null){
-            $sql = "
-                SELECT reporte.id_reporte           AS idReporte,
+            $sql = "/*v_reportes*/
+                SELECT * FROM (SELECT reporte.id_reporte           AS idReporte,
                         reporte.id_usuario           AS idUsuario,
                         oficina.nombre               AS nombreOficina,
                         equipo.id_equipo             AS idEquipo,
@@ -90,9 +90,13 @@
                                 ON reporte.id_equipo = equipo.id_equipo
                         INNER JOIN t_cat_roles tcr
                                 ON tcr.id_rol = usuario.id_rol
+                ORDER  BY 
+                    reporte.estatus DESC, 
+                    usuario.prioridad DESC,
+                    reporte.fecha DESC
+                )reporte
                 $where
-                ORDER  BY reporte.estatus DESC, usuario.prioridad DESC,
-                            reporte.fecha DESC";
+                ";
             return Conexion::select($sql);
         }
     }

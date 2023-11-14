@@ -11,16 +11,17 @@
     error_reporting(E_ALL);
 
     if(isset($_POST['filtro'])){
+        unset($_POST['filtro']);
         // Iterar sobre el array $_POST
         foreach ($_POST as $campo => $valor) {
-            unset($_POST['filtro']);
             // Si el valor es vacío, eliminarlo del array
-            if (empty($valor)) {
+            if (empty($valor) && $valor !== '0') {
                 unset($_POST[$campo]);
             }
         }
 
         if(count($_POST)){
+
             foreach ($_POST as $campo => $valor) {
                 // Si el nombre del campo termina en _hasta, agregar un where con la condición between
                 if (preg_match('/_hasta$/', $campo)) {
@@ -33,6 +34,7 @@
                 } else {
                     if(!array_key_exists($campo.'_hasta', $_POST)){
                         // Crear un where con la key y el value
+                        $key = strtotime($valor) ? "date($campo)" : $campo; 
                         $where[] = "{$campo} = '{$valor}'";
                     }
                 }
@@ -43,7 +45,6 @@
         }
         
     }
-
 
     $respuesta = $reporte->obtenerDatosReportes($where);
     $respuesta = $respuesta ? : [];
@@ -263,11 +264,6 @@
                         extend : 'pdf', 
                         className : 'btn btn-outline-danger', 
                         text : '<i class="fas fa-file-pdf"></i> Pdf'
-                    },
-                    {
-                        extend : 'print', 
-                        className : 'btn btn-outline-dark', 
-                        text : '<i class="fas fa-print"></i> Imprimir'
                     }
                 ],
                 dom: {
@@ -277,5 +273,33 @@
                 }
             }
         });
+
+        checkDTButtons(); // Call the function to start the process
     });
+
+    function checkDTButtons() {
+        let myIntervalId; // Rename intervalId to myIntervalId
+
+        if ($('.dt-buttons').length) {
+            if(!$('#btn-imprimir').length){
+                $('.dt-buttons').append(`
+                    <button id="btn-imprimir" class="btn buttons-print btn-outline-dark" tabindex="0" aria-controls="tablaReporteAdminDataTable" type="button">
+                        <a target="_blank" href="./reportesAdmin/pdf-reportes-admin-completo.php<?php echo ($_POST ? "?".(http_build_query($_POST)) : '') ?>" style="color: inherit !important;text-decoration: none !important;">   
+                            <span>
+                                <i class="fas fa-print"></i> Imprimir
+                            </span>
+                        </a>
+                    </button>
+                `);
+            }
+            
+
+            clearInterval(myIntervalId);
+        } else {
+            setTimeout(checkDTButtons, 1000);
+        }
+    }
+
+    
+
 </script>
