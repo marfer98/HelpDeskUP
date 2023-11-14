@@ -148,7 +148,7 @@ require_once "../../clases/Articulos.php";
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-success">Asignar</button>
+                        <button class="btn btn-success">Actualizar</button>
                     </div>
                 </div>
             </div>
@@ -271,7 +271,7 @@ require_once "../../clases/Articulos.php";
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button class="btn btn-success">Asignar</button>
+                        <button class="btn btn-success">Adquirir</button>
                     </div>
                 </div>
             </div>
