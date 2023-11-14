@@ -107,7 +107,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="recibidos.php">
-                                    <i class="fas fa-wrench"></i> Recibidos Para Reparación</a>
+                                    <i class="fas fa-wrench"></i> Recibidos para reparación</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="reportes.php">
@@ -127,7 +127,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="recibidosAuditoria.php">
-                                    <i class="fas fa-wrench"></i> Recibidos Para Reparación</a>
+                                    <i class="fas fa-wrench"></i> Recibidos para reparación</a>
                                 </li>
                             </ul>
                         </li>

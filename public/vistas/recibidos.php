@@ -11,7 +11,7 @@
 <div class="container">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h1 class="fw_light">Recibidos Para Reparación</h1>
+            <h1 class="fw_light">Recibidos para reparación</h1>
             <p class="lead">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarRecibido">
                 <i class="fas fa-plus-circle"></i> Agregar equipo recibido</button>
