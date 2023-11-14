@@ -58,6 +58,14 @@
                 ':idRecepcion' => $idRecepcion
             ];
 
+            $datosRecibido = self::obtenerDatosRecepcion("WHERE id_recepcion = $idRecepcion");
+            
+            if($datosRecibido){
+                $datosRecibido = $datosRecibido[0];
+                $datosRecibido['id_recepcion'] = $idRecepcion;
+                self::agregarNuevaRecepcionAuditoria($datosRecibido,'delete');
+            }
+
             return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }
 
