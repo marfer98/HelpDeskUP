@@ -1,4 +1,8 @@
 <?php
+/* ini_set('display_errors',1);
+ ini_set('display_startup_errors',1);
+ error_reporting(E_ALL);
+*/
     if(!isset($_SESSION)){
         session_start();
     }
@@ -68,9 +72,13 @@
                     ':cantidad' => $datos['cantidad']
                 ];
                 
+                $id = Conexion::execute_id($sql,$datos);
+
+                $datosAuditoria['id_adquisicion'] = $id;
+
                 self::auditoriaAdquisiones($datosAuditoria,'insert');
 
-                $respuesta = !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
+                $respuesta = !$getId ? !!$id : $id;
             }else{
                 $respuesta = 'Esta adquisición ya se ha realizado.';
             }

@@ -5,6 +5,7 @@
     require_once "Conexion.php"; //se incluye la conexion a la bd
     class Recibidos{
         public function agregarNuevaRecepcion($datos,$getId=false){
+            $datosRecepcion = $datos;
             $sql = "INSERT INTO t_recepcion (   
                         id_equipo,
                         nombre_equipo,
@@ -40,7 +41,13 @@
                         ':responsable'          => $datos['responsable'],
                         ':estatus'              => $datos['estado']
                     ];
-            return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
+            
+            $id = Conexion::execute_id($sql,$datos);
+            $datosRecepcion['id_recepcion'] = $id;
+
+            self::agregarNuevaRecepcionAuditoria($datosRecepcion,'insert');
+
+            return !$getId ? !!$id : $id;
 
         } 
 
@@ -96,7 +103,9 @@
                         ':informeTecnico'       => $datos['informeTecnico'],
                         ':idRecepcion'          => $datos['idRecepcion']
                     ];
-            
+            $datosRecibido['id_recepcion'] = $datosRecibido['idRecepcion'];
+            unset($datosRecibido['idRecepcion']);
+
             self::auditoriaRecibidos($datosRecibido,'update');
 
             return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);

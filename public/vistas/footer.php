@@ -1,8 +1,8 @@
         <div class="d-block" style="margin-top: 200px">
 
         </div>
-        <footer id="footer" class="bg-dark" style="left: 0;bottom: 0;overflow: hidden;position: absolute;width: 100%;">
-            <div class="container my-3">
+        <footer id="footer" class="bg-dark" style="left: 0;bottom: 0;overflow: hidden;position: absolute;width: 100%;background: #495057 !important">
+            <div class="container mt-2">
                 <div class="row justify-content-center" style="">
                     <div class="col-12 ">
                         <a class="mx-auto  navbar-brand" href="inicio.php" style="justify-content: center;display: flex;">
@@ -13,7 +13,7 @@
                 </div>
                 <div class="row">
                     <div class="col text-center text-white">
-                        <p>© Copiright 2023 | Marcos Fernández</p>
+                        <p class="m-0">© Copiright 2023 | Marcos Fernández</p>
                     </div>
                     <hr>
                 </div>	

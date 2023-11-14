@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: sql211.infinityfree.com
--- Tiempo de generación: 13-11-2023 a las 13:15:16
+-- Tiempo de generación: 14-11-2023 a las 09:15:10
 -- Versión del servidor: 10.4.17-MariaDB
 -- Versión de PHP: 7.2.22
 
@@ -57,7 +57,8 @@ INSERT INTO `t_adquisiciones` (`id_adquisicion`, `id_articulo`, `id_proveedor`, 
 (14, 14, 2, 6, '2023-10-24 07:14:52'),
 (15, 8, 2, 50, '2023-10-24 07:14:52'),
 (16, 24, 1, 0, '2023-10-24 07:14:52'),
-(17, 16, 2, 86, '2023-10-24 07:14:52');
+(17, 16, 2, 86, '2023-10-24 07:14:52'),
+(18, 33, 2, 50, '2023-11-13 15:45:11');
 
 -- --------------------------------------------------------
 
@@ -82,7 +83,8 @@ CREATE TABLE `t_adquisiciones_auditoria` (
 
 INSERT INTO `t_adquisiciones_auditoria` (`id_adquisicion`, `id_articulo`, `id_proveedor`, `cantidad`, `tipo_operacion`, `fecha_insert`, `id_usuario`, `id_adquisicion_auditoria`) VALUES
 (0, 10, 1, 20, 'update', '2023-11-10 14:28:51', 1, 1),
-(0, 10, 1, 20, 'update', '2023-11-10 14:29:27', 1, 2);
+(0, 10, 1, 20, 'update', '2023-11-10 14:29:27', 1, 2),
+(18, 33, 2, 50, 'insert', '2023-11-13 15:45:11', 1, 3);
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,11 @@ INSERT INTO `t_articulos` (`id_articulo`, `id_equipo`, `id_proveedor`, `nombreEq
 (18, 9, 0, 'APE2SE006', '', 'Marca', 'GT547', '4A185048W', '', '', '', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
 (19, 6, 0, 'nombre equipo', 'ram', 'marca', 'modelo', 'tag', '', '', 'ram', '', '', 'Windows 10 32 bits', '2023-10-14 09:16:53'),
 (20, 2, 0, 'nombre equipo', 'DD4', 'CANNON', 'GT547', 'tag', '', '3GB', 'DD4', 'disco duro', 'i3', 'Windows 7 64 bits', '2023-10-14 09:16:53'),
-(24, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:00:38');
+(24, 2, 1, 'Asus GN-545', '', 'ASUS', 'GN-545', '', '', '8GB', NULL, NULL, 'I3 5000', 'Windows 10 64 bits', '2023-10-23 10:00:38'),
+(30, 5, 2, 'Monitor GKT 450', '', 'GKT', '450', '', '60Hz', '', NULL, NULL, '', '', '2023-11-13 15:43:19'),
+(31, 5, 2, 'Monitor GKT 450', '', 'GKT', '450', '', '60Hz', '', NULL, NULL, '', '', '2023-11-13 15:43:24'),
+(32, 5, 2, 'Monitor GKT 450', '', 'GKT', '450', '', '60Hz', '', NULL, NULL, '', '', '2023-11-13 15:44:29'),
+(33, 5, 2, 'Monitor GKT 450', '', 'GKT', '450', '', '60Hz', '', NULL, NULL, '', '', '2023-11-13 15:45:11');
 
 -- --------------------------------------------------------
 
@@ -552,19 +558,19 @@ ALTER TABLE `t_usuarios`
 -- AUTO_INCREMENT de la tabla `t_adquisiciones`
 --
 ALTER TABLE `t_adquisiciones`
-  MODIFY `id_adquisicion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_adquisicion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `t_adquisiciones_auditoria`
 --
 ALTER TABLE `t_adquisiciones_auditoria`
-  MODIFY `id_adquisicion_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_adquisicion_auditoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `t_articulos`
 --
 ALTER TABLE `t_articulos`
-  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_articulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `t_asignacion`
