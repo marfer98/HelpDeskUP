@@ -195,19 +195,6 @@
                 
                 </div>
             </div>
-
-            <script>
-                //datatable 
-                $(document).ready(function () {
-                    $('#tablaReporteAdminDataTable').DataTable({
-                        language :{ //esto es una propiedad 
-                            url: "../datatable/es_es.json"
-                        },
-                        dom: 'Bfrtip', 
-                    });
-                });
-            </script>
-
         </div>
     </body>
     <script>
