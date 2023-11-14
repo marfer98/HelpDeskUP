@@ -77,28 +77,26 @@
         }
 
         public function obtenerDatosRecepcion($id_recepcion){
-            $sql = "SELECT descripcion_solucion, estatus, fecha_entrega, nombre_tecnico, informe_tecnico
+            $sql = "SELECT 
+                        id_equipo,
+                        nombre_equipo as nombre_equipo,
+                        nombre_equipo as nombreEquipo,
+                        rotulado,
+                        numero_serie as numero_serie,
+                        numero_serie as numeroSerie,
+                        ciudad,
+                        procedencia,
+                        descripcion_problema,
+                        descripcion_problema as problema,
+                        recibido,
+                        responsable,
+                        estatus
                     FROM   t_recepcion
                     WHERE  id_recepcion = :id_recepcion";
-            $respuesta = Conexion::select($sql,[
+            return Conexion::select($sql,[
                 ':id_recepcion' => $id_recepcion
             ]);
 
-            var_dump($sql);
-            var_dump($id_recepcion);
-
-            $recepcion = $respuesta[0];
-
-            $datos = array(
-                "id_recepcion"         => $id_recepcion,
-                "solucion"            => $recepcion['descripcion_solucion'],
-                "fechaEntrega"        => $recepcion['fecha_entrega'], // $recepcion['fecha_entrega'] agarra como esta en la base de datos 
-                "estado"              => $recepcion['estatus'],
-                "tecnico"             => $recepcion['nombre_tecnico'],
-                "informeTecnico"      => $recepcion['informe_tecnico'],
-                
-            );
-            return $datos;
         } 
 
         public function actualizarRecepcion($datos,$getId=false){
@@ -121,15 +119,15 @@
                         ':informeTecnico'       => $datos['informeTecnico'],
                         ':id_recepcion'          => $datos['id_recepcion']
                     ];
-            
+
             $datosRecibidoResult = self::obtenerDatosRecepcion($datosRecibido['id_recepcion']);
             
-            if($datosRecibido){
-                $datosRecibido = $datosRecibido[0];
-                $datosRecibido['id_recepcion'] = $id_recepcion;
-                $datosRecibido = array_merge($datosRecibidoResult, $datosRecibido, function ($a, $b) {
-                    return $b;
-                });
+
+            if($datosRecibidoResult){
+                $datosRecibidoResult = $datosRecibidoResult[0];
+
+                $datosRecibido = array_merge($datosRecibido, $datosRecibidoResult);
+
                 self::agregarNuevaRecepcionAuditoria($datosRecibido,'delete');
             }
 
