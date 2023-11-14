@@ -11,7 +11,7 @@
                 recepcion.numero_serie AS numeroSerie,
                 recepcion.procedencia AS procedencia,
                 recepcion.fecha_recepcion AS fechaRecepcion,
-                equipo.id_equipo AS idEquipo,
+                equipo.id_equipo AS id_equipo,
                 recepcion.descripcion_problema AS descripcionProblema,
                 recepcion.recibido AS recibido,
                 recepcion.responsable AS responsable,

@@ -12,20 +12,20 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <label for="idEquipo">Tipo de Equipo</label>
+                    <label for="id_equipo">Tipo de Equipo</label>
                     <?php
                         //$idUsuario = $_SESSION['usuario']['id'];//pasa el id usuario que inicio sesion 
                         $sql ="SELECT
-                                    t_cat_equipos.id_equipo AS idEquipo,
+                                    t_cat_equipos.id_equipo AS id_equipo,
                                     t_cat_equipos.nombre AS tipoEquipo
                               FROM
                                     t_cat_equipos";
                         $respuesta = Conexion::select($sql);
                     ?>
-                    <select name="idEquipo" id="idEquipo" class="form-control" required>
+                    <select name="id_equipo" id="id_equipo" class="form-control" required>
                     <option value="">Seleciona un dispositivo</option>
                         <?php foreach ($respuesta as $mostrar ){?>
-                            <option value="<?php echo $mostrar ['idEquipo'];?>"><?php echo $mostrar ['tipoEquipo']; ?></option>
+                            <option value="<?php echo $mostrar ['id_equipo'];?>"><?php echo $mostrar ['tipoEquipo']; ?></option>
                         <?php }?>
                     </select>
 

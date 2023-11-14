@@ -11,13 +11,13 @@
                     </button>
             </div>
             <div class="modal-body">
-                <label for="idEquipo">Mis Dispositivos</label>
+                <label for="id_equipo">Mis Dispositivos</label>
 
                 <?php
                 $idUsuario = $_SESSION['usuario']['id'];//pasa el id usuario que inicio sesion 
                     $sql="SELECT
                             asignacion.id_asignacion AS id_asignacion,
-                            equipo.id_equipo AS idEquipo,
+                            equipo.id_equipo AS id_equipo,
                             equipo.nombre AS nombreEquipo
                             
                         FROM
@@ -40,10 +40,10 @@
 
                ?>
                 
-                <select name="idEquipo" id="idEquipo" class="form-control" required>
+                <select name="id_equipo" id="id_equipo" class="form-control" required>
                     <option value="">Seleciona un dispositivo</option>
                     <?php foreach ($respuesta as $mostrar){?>
-                        <option value="<?php echo $mostrar ['idEquipo'];?>"><?php echo $mostrar ['nombreEquipo']; ?></option>
+                        <option value="<?php echo $mostrar ['id_equipo'];?>"><?php echo $mostrar ['nombreEquipo']; ?></option>
                     <?php }?>
                 </select>
                 <label for="problema">Describe un problema</label>

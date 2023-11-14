@@ -7,11 +7,11 @@
                                             descripcion_problema)
                     VALUES (
                         :idUsuario,
-                        :idEquipo,
+                        :id_equipo,
                         :problema)";
             $respuesta = Conexion::execute($sql,[
                 ":idUsuario"    => $datos['idUsuario'],
-                ":idEquipo"     => $datos['idEquipo'],
+                ":id_equipo"     => $datos['id_equipo'],
                 ":problema"     => $datos['problema'],
             ]);
 
@@ -73,7 +73,7 @@
                 SELECT * FROM (SELECT reporte.id_reporte           AS idReporte,
                         reporte.id_usuario           AS idUsuario,
                         oficina.nombre               AS nombreOficina,
-                        equipo.id_equipo             AS idEquipo,
+                        equipo.id_equipo             AS id_equipo,
                         equipo.nombre                AS nombreEquipo,
                         reporte.usuario_tecnico      AS usuarioTecnico,
                         reporte.descripcion_problema AS problema,

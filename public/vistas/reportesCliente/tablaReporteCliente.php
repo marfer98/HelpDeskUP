@@ -9,7 +9,7 @@
                     reporte.id_reporte AS idReporte,
                     reporte.id_usuario AS idUsuario,
                     oficina.nombre AS nombreOficina,
-                    equipo.id_equipo AS idEquipo,
+                    equipo.id_equipo AS id_equipo,
                     equipo.nombre AS nombreEquipo,
                     reporte.descripcion_problema AS problema ,
                     reporte.solucion_problema AS solucion,

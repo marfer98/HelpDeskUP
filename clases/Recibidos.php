@@ -37,7 +37,7 @@
                         :estatus
                     )";
             $datos = [
-                        ':id_equipo'            => $datos['idEquipo'],
+                        ':id_equipo'            => $datos['id_equipo'],
                         ':nombre_equipo'        => $datos['nombreEquipo'],
                         ':rotulado'             => $datos['rotulado'],
                         ':numero_serie'         => $datos['numeroSerie'],
@@ -84,6 +84,9 @@
                 ':id_recepcion' => $id_recepcion
             ]);
 
+            var_dump($sql);
+            var_dump($id_recepcion);
+
             $recepcion = $respuesta[0];
 
             $datos = array(
@@ -118,10 +121,17 @@
                         ':informeTecnico'       => $datos['informeTecnico'],
                         ':id_recepcion'          => $datos['id_recepcion']
                     ];
-            $datosRecibido['id_recepcion'] = $datosRecibido['id_recepcion'];
-            unset($datosRecibido['id_recepcion']);
-
-            self::agregarNuevaRecepcionAuditoria($datosRecibido,'update');
+            
+            $datosRecibidoResult = self::obtenerDatosRecepcion($datosRecibido['id_recepcion']);
+            
+            if($datosRecibido){
+                $datosRecibido = $datosRecibido[0];
+                $datosRecibido['id_recepcion'] = $id_recepcion;
+                $datosRecibido = array_merge($datosRecibidoResult, $datosRecibido, function ($a, $b) {
+                    return $b;
+                });
+                self::agregarNuevaRecepcionAuditoria($datosRecibido,'delete');
+            }
 
             return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }

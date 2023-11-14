@@ -20,7 +20,7 @@
         $sql = " SELECT
                 oficina.id_oficina AS id_oficina,
                 oficina.nombre AS nombreOficina,
-                equipo.id_equipo AS idEquipo,
+                equipo.id_equipo AS id_equipo,
                 equipo.nombre AS nombreEquipo,
                 asignacion.id_asignacion AS id_asignacion,
                 a.nombreEquipoA AS nombreEquipoA,

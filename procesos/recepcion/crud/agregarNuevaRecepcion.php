@@ -1,7 +1,7 @@
 <?php 
     //print_r ($_POST);
       $datos = array( //Array donde va lo que almacenaremos de usuario
-         "idEquipo"        => $_POST['idEquipo'],//indica los datos que seran insertados
+         "id_equipo"        => $_POST['id_equipo'],//indica los datos que seran insertados
          "nombreEquipo"    => $_POST['nombreEquipo'],
          "rotulado"        => $_POST['rotulado'],
          "numeroSerie"     => $_POST['numeroSerie'], 
