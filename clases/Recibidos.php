@@ -2,6 +2,13 @@
     if(!isset($_SESSION)){
         session_start();
     }
+
+
+    ini_set('display_errors',1);
+    ini_set('display_startup_errors',1);
+    error_reporting(E_ALL);
+
+
     require_once "Conexion.php"; //se incluye la conexion a la bd
     class Recibidos{
         public function agregarNuevaRecepcion($datos,$getId=false){
@@ -51,36 +58,36 @@
 
         } 
 
-        public function eliminarRecibido($idRecepcion,$getId=false){
-            $sql = "DELETE FROM t_recepcion WHERE id_recepcion = :idRecepcion";
+        public function eliminarRecibido($id_recepcion,$getId=false){
+            $sql = "DELETE FROM t_recepcion WHERE id_recepcion = :id_recepcion";
             
             $datos = [
-                ':idRecepcion' => $idRecepcion
+                ':id_recepcion' => $id_recepcion
             ];
 
-            $datosRecibido = self::obtenerDatosRecepcion("WHERE id_recepcion = $idRecepcion");
+            $datosRecibido = self::obtenerDatosRecepcion("WHERE id_recepcion = $id_recepcion");
             
             if($datosRecibido){
                 $datosRecibido = $datosRecibido[0];
-                $datosRecibido['id_recepcion'] = $idRecepcion;
+                $datosRecibido['id_recepcion'] = $id_recepcion;
                 self::agregarNuevaRecepcionAuditoria($datosRecibido,'delete');
             }
 
             return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }
 
-        public function obtenerDatosRecepcion($idRecepcion){
+        public function obtenerDatosRecepcion($id_recepcion){
             $sql = "SELECT descripcion_solucion, estatus, fecha_entrega, nombre_tecnico, informe_tecnico
                     FROM   t_recepcion
-                    WHERE  id_recepcion = :idRecepcion";
+                    WHERE  id_recepcion = :id_recepcion";
             $respuesta = Conexion::select($sql,[
-                ':idRecepcion' => $idRecepcion
+                ':id_recepcion' => $id_recepcion
             ]);
 
             $recepcion = $respuesta[0];
 
             $datos = array(
-                "idRecepcion"         => $idRecepcion,
+                "id_recepcion"         => $id_recepcion,
                 "solucion"            => $recepcion['descripcion_solucion'],
                 "fechaEntrega"        => $recepcion['fecha_entrega'], // $recepcion['fecha_entrega'] agarra como esta en la base de datos 
                 "estado"              => $recepcion['estatus'],
@@ -102,19 +109,19 @@
                         nombre_tecnico          = :tecnico,
                         informe_tecnico         = :informeTecnico
                     WHERE
-                        id_recepcion = :idRecepcion";
+                        id_recepcion = :id_recepcion";
             $datos = [
                         ':descripcionSolucion'  => $datos['descripcionSolucion'],
                         ':fechaEntrega'         => $datos['fechaEntrega'],
                         ':estado'               => $datos['estado'],
                         ':tecnico'              => $datos['tecnico'],
                         ':informeTecnico'       => $datos['informeTecnico'],
-                        ':idRecepcion'          => $datos['idRecepcion']
+                        ':id_recepcion'          => $datos['id_recepcion']
                     ];
-            $datosRecibido['id_recepcion'] = $datosRecibido['idRecepcion'];
-            unset($datosRecibido['idRecepcion']);
+            $datosRecibido['id_recepcion'] = $datosRecibido['id_recepcion'];
+            unset($datosRecibido['id_recepcion']);
 
-            self::auditoriaRecibidos($datosRecibido,'update');
+            self::agregarNuevaRecepcionAuditoria($datosRecibido,'update');
 
             return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos);
         }
@@ -151,8 +158,8 @@
                         :tipo_operacion
                     )";
             $datos = [
-                        ':id_recepcion'         => $datos['idRecepcion'], 
-                        ':id_equipo'            => $datos['idEquipo'],
+                        ':id_recepcion'         => $datos['id_recepcion'], 
+                        ':id_equipo'            => $datos['id_equipo'],
                         ':nombre_equipo'        => $datos['nombreEquipo'],
                         ':rotulado'             => $datos['rotulado'],
                         ':numero_serie'         => $datos['numeroSerie'],
@@ -170,19 +177,19 @@
 
         } 
 
-        public function obtenerDatosRecepcionAuditoria($idRecepcion){
+        public function obtenerDatosRecepcionAuditoria($id_recepcion){
             $sql = "SELECT id_recepcion, descripcion_solucion, estatus, fecha_entrega, nombre_tecnico, informe_tecnico
                     FROM   t_recepcion_auditoria
-                    WHERE  id_recepcion = :idRecepcion";
+                    WHERE  id_recepcion = :id_recepcion";
 
             $respuesta = Conexion::select($sql,[
-                ':idRecepcion' => $idRecepcion
+                ':id_recepcion' => $id_recepcion
             ]);
 
             $recepcion = $respuesta[0];
 
             $datos = array(
-                "idRecepcion"         => $idRecepcion,
+                "id_recepcion"         => $id_recepcion,
                 "solucion"            => $recepcion['descripcion_solucion'],
                 "fechaEntrega"        => $recepcion['fecha_entrega'],
                 "estado"              => $recepcion['estatus'],

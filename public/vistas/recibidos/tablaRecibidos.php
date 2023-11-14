@@ -2,7 +2,7 @@
     require_once "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
     $con = new Conexion();
     $sql = "SELECT
-                recepcion.id_recepcion AS idRecepcion,
+                recepcion.id_recepcion AS id_recepcion,
                 recepcion.ciudad AS ciudad,
                 equipo.nombre AS tipoEquipo,
                 recepcion.nombre_equipo AS nombreEquipo,
@@ -109,20 +109,20 @@
             </th> 
             <td>
                 <button class="btn btn-warning btn-sm"
-                    onclick= "descargarInformePDF(<?php echo $mostrar ['idRecepcion']?>)"> 
+                    onclick= "descargarInformePDF(<?php echo $mostrar ['id_recepcion']?>)"> 
                     <i class="fa fa-file-pdf"></i>
                 </button>
             </td>
             <td>
                 <button class="btn btn-warning btn-sm"
-                onclick ="obtenerDatosRecebido('<?php echo $mostrar['idRecepcion'];?>')"
+                onclick ="obtenerDatosRecebido('<?php echo $mostrar['id_recepcion'];?>')"
                 data-toggle="modal" 
                 data-target= "#modalActualizarRecibido">
                 <i class="fas fa-edit"></i></button>
             </td> 
             <td>
                 <button class="btn btn-danger btn-sm"
-                onclick="eliminarRecibido(<?php echo $mostrar['idRecepcion']?>)">
+                onclick="eliminarRecibido(<?php echo $mostrar['id_recepcion']?>)">
                 <i class="fas fa-trash-alt"></i></button>
             </td> 
         </tr>

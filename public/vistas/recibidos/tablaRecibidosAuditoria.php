@@ -2,7 +2,7 @@
     require_once "../../../clases/Conexion.php"; //ponemos las relaciones de la bd para luego insertar datos en las tablas
     $con = new Conexion();
     $sql = "SELECT
-                recepcion.id_recepcion AS idRecepcion,
+                recepcion.id_recepcion AS id_recepcion,
                 recepcion.ciudad AS ciudad,
                 equipo.nombre AS tipoEquipo,
                 recepcion.nombre_equipo AS nombreEquipo,

@@ -9,7 +9,7 @@ require_once '../../../clases/Recibidos.php';
 if(isset($_GET['id_recibido'])){
 
     $sql = "SELECT DISTINCT * FROM (SELECT
-                recepcion.id_recepcion AS idRecepcion,
+                recepcion.id_recepcion AS id_recepcion,
                 recepcion.ciudad AS ciudad,
                 equipo.nombre AS tipoEquipo,
                 recepcion.nombre_equipo AS nombreEquipo,
@@ -31,7 +31,7 @@ if(isset($_GET['id_recibido'])){
             INNER JOIN t_cat_equipos AS equipo
             ON
                 recepcion.id_equipo = equipo.id_equipo)V_TMP ".
-            'WHERE idRecepcion='. $_GET['id_recibido'];
+            'WHERE id_recepcion='. $_GET['id_recibido'];
     $mostrar = Conexion::select($sql);
     $mostrar = $mostrar [0];
 
@@ -68,7 +68,7 @@ if(isset($_GET['id_recibido'])){
             ">
             </a>
                 <div class="col-12 titulopie" style="">
-                    <h4>INFORMÁTICA N°: <?php echo $mostrar['idRecepcion'] ?></h4>
+                    <h4>INFORMÁTICA N°: <?php echo $mostrar['id_recepcion'] ?></h4>
                 </div>
                 <div class="col-12 titulopie" style="margin-bottom:50px">
                     <h4>SEÑOR/A ENCARGADO/A</h4>

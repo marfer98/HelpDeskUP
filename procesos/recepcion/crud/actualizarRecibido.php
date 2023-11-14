@@ -1,7 +1,7 @@
 <?php
 //print_r ($_POST);
      $datos = array(
-        'idRecepcion'           => $_POST['idRecepcion'],    
+        'id_recepcion'           => $_POST['id_recepcion'],    
         'descripcionSolucion'   => $_POST['descripcionSolucion'],
         'fechaEntrega'          => $_POST['fechaEntrega'],
         'estado'                => $_POST['estado'],

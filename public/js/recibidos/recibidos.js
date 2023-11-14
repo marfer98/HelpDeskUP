@@ -29,7 +29,7 @@ function agregarNuevaRecepcion(){
 }
 
 
-function eliminarRecibido(idRecepcion){//la funcion trae un id de reporte
+function eliminarRecibido(id_recepcion){//la funcion trae un id de reporte
     Swal.fire({
         title: '¿Estas seguro de eliminar?',
         text: "Una vez eliminado no podrá ser recuperado",
@@ -42,7 +42,7 @@ function eliminarRecibido(idRecepcion){//la funcion trae un id de reporte
         if (result.isConfirmed) {
             $.ajax({
                 type: "POST",
-                data: "idRecepcion=" + idRecepcion,//manda,os como dato el id del reporte que queremos eliminar 
+                data: "id_recepcion=" + id_recepcion,//manda,os como dato el id del reporte que queremos eliminar 
                 url: "../../procesos/recepcion/crud/eliminarRecibido.php",
                 success:function(respuesta){
                     //console.log(respuesta);
@@ -65,18 +65,18 @@ function eliminarRecibido(idRecepcion){//la funcion trae un id de reporte
       })
     return false //para que no recargue la función 
 }
-function obtenerDatosRecebido(idRecepcion){
-  //  alert(idRecepcion);
+function obtenerDatosRecebido(id_recepcion){
+  //  alert(id_recepcion);
     $.ajax({
         type: "POST",
-        data: "idRecepcion=" + idRecepcion,
+        data: "id_recepcion=" + id_recepcion,
         url:"../../procesos/recepcion/crud/obtenerDatosRecepcion.php",
         success:function(respuesta){
            console.log(respuesta);
            respuesta = jQuery.parseJSON(respuesta);
-           console.log(respuesta['idRecepcion']);
+           console.log(respuesta['id_recepcion']);
            //referencia de la clase Recibidos.php del array de la funcion obtenerSolucion         
-           $('#idRecepcion').val(respuesta['idRecepcion']);
+           $('#id_recepcion').val(respuesta['id_recepcion']);
            $('#solucion').val(respuesta['solucion']);
            $('#fechaEntrega').val(respuesta['fechaEntrega']);
            $('#estado').val(respuesta['estado']); 

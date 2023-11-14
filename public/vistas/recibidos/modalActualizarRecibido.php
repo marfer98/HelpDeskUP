@@ -12,13 +12,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                <input type="text" id ="idRecepcion" name="idRecepcion" hidden>
+                <input type="text" id ="id_recepcion" name="id_recepcion" hidden>
 
                     <label for="descripcionSolucion"> Solución</label>
                     <textarea type="text" class="form-control" id="descripcionSolucion" name="descripcionSolucion" required></textarea>
 
                     <label for="fechaEntrega"> Fecha de Entrega</label>
-                    <input type="text" class="form-control" id="fechaEntrega" name="fechaEntrega">
+                    <input type="date" class="form-control" id="fechaEntrega" name="fechaEntrega">
 
                     <label for="estado"> Estado</label>
                     <select name="estado" id="estado" class="form-control" required>
