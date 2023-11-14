@@ -8,7 +8,7 @@
 <div class="container">
     <div class="card border-0 shadow my-5">
         <div class="card-body p-5">
-            <h1 class="fw_light">Administrar Prestamos</h1>
+            <h1 class="fw_light">Prestamos de Equipos</h1>
             <p class="lead">
                 <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarPrestamos">
                     <i class="fas fa-plus-circle"></i>

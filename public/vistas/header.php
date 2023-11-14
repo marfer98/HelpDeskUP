@@ -80,7 +80,7 @@
                         <li class="nav-item dropdown" >
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-building"></i> Artículos
+                                <i class="fas fa-dolly-flatbed"></i> Equipos
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
@@ -118,7 +118,7 @@
                         <li class="nav-item dropdown" >
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-expanded="false">
-                                <i class="fas fa-box"></i> Auditorías
+                                <i class="fas fa-newspaper"></i> Auditorías
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
