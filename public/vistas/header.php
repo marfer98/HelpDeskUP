@@ -107,11 +107,11 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="recibidos.php">
-                                    <i class="fas fa-exchange-alt"></i> Trabajos realizados</a>
+                                    <i class="fas fa-wrench"></i> Trabajos realizados</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="reportes.php">
-                                    <i class="fas fa-file-alt"></i> Gestionar reportes de usuarios</a>
+                                    <i class="fas fa-briefcase"></i> Gestionar reportes de usuarios</a>
                                 </li>
                             </ul>
                         </li>
@@ -127,7 +127,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="dropdown-item" href="recibidosAuditoria.php">
-                                    <i class="fas fa-exchange-alt"></i> Trabajos realizados</a>
+                                    <i class="fas fa-wrench"></i> Trabajos realizados</a>
                                 </li>
                             </ul>
                         </li>
