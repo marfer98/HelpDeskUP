@@ -171,7 +171,7 @@
         } 
 
         public function obtenerDatosRecepcionAuditoria($idRecepcion){
-            $sql = "SELECT descripcion_solucion, estatus, fecha_entrega, nombre_tecnico, informe_tecnico
+            $sql = "SELECT id_recepcion, descripcion_solucion, estatus, fecha_entrega, nombre_tecnico, informe_tecnico
                     FROM   t_recepcion_auditoria
                     WHERE  id_recepcion = :idRecepcion";
 

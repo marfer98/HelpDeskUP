@@ -19,6 +19,8 @@ $respuesta = Adquisiciones::obtenerDatosAdquisicionesAuditoria();
             <th>Procesador</th>
             <th>Sistema operativo</th>
             <th>Cantidad</th>
+            <th>Usuario</th>
+            <th>Tipo Operación</th>
        </thead>
        <tbody>
          <?php foreach ($respuesta as $mostrar) { ?>
@@ -37,7 +39,8 @@ $respuesta = Adquisiciones::obtenerDatosAdquisicionesAuditoria();
                 <td><?php echo $mostrar['procesador']; ?></td>
                 <td><?php echo $mostrar['sistema_operativo']; ?></td>
                 <td><?php echo $mostrar['cantidad']; ?></td>
-                
+                <th><?php echo $mostrar ['usuario']; ?></th> 
+                <th><?php echo $mostrar ['tipo_operacion']; ?></th> 
            </tr>
          <?php } ?>
        </tbody>

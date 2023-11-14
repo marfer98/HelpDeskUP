@@ -18,9 +18,13 @@
                 recepcion.descripcion_solucion AS descripcionSolucion,
                 recepcion.fecha_entrega AS fechaEntrega,
                 recepcion.nombre_tecnico AS tecnico,
-                recepcion.informe_tecnico AS informeTecnico
+                recepcion.informe_tecnico AS informeTecnico,
+                u.id_usuario,
+                u.usuario,
+                recepcion.tipo_operacion
             FROM
                 t_recepcion_auditoria AS recepcion
+            JOIN t_usuarios u ON recepcion.id_usuario = u.id_usuario
             LEFT JOIN t_cat_equipos AS equipo
             ON
                 recepcion.id_equipo = equipo.id_equipo
@@ -46,6 +50,8 @@
         <th>Fecha de Entrega</th>
         <th>Nombre Técnico</th>
         <th>Informe Técnico</th>
+        <th>Usuario</th>
+        <th>Tipo Operación</th>
     </thead>
     <tbody>
         <?php
@@ -105,7 +111,12 @@
             <th>
                 <?php echo $mostrar ['informeTecnico']; ?>
             </th> 
-            
+            <th>
+                <?php echo $mostrar ['usuario']; ?>
+            </th> 
+            <th>
+                <?php echo $mostrar ['tipo_operacion']; ?>
+            </th> 
         </tr>
         <?php }?>
     </tbody>
