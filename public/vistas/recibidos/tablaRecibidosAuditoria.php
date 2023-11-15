@@ -28,7 +28,7 @@
             LEFT JOIN t_cat_equipos AS equipo
             ON
                 recepcion.id_equipo = equipo.id_equipo
-            ORDER BY recepcion.id_recepcion DESC";
+            ORDER BY recepcion.id_recepcion_auditoria DESC";
     $respuesta = Conexion::select($sql);
 
 ?>
