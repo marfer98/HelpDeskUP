@@ -228,7 +228,7 @@ error_reporting(E_ALL);
                     left JOIN t_articulos a ON a.id_articulo = ad.id_articulo
                     left JOIN t_cat_equipos e ON a.id_equipo = e.id_equipo
                     left JOIN t_proveedores p ON ad.id_proveedor = p.id_proveedor
-                ORDER BY id_adquisiciones_auditoria DESC
+                ORDER BY id_adquisicion_auditoria DESC
             )tmp
             '.$where;
             return Conexion::select($sql); 
