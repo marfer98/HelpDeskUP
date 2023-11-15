@@ -21,7 +21,8 @@
                 recepcion.informe_tecnico AS informeTecnico,
                 u.id_usuario,
                 u.usuario,
-                recepcion.tipo_operacion
+                recepcion.tipo_operacion,
+                fecha_insert_auditoria
             FROM
                 t_recepcion_auditoria AS recepcion
             JOIN t_usuarios u ON recepcion.id_usuario = u.id_usuario
@@ -52,6 +53,7 @@
         <th>Informe Técnico</th>
         <th>Usuario</th>
         <th>Tipo Operación</th>
+        <th>Fecha de auditoría</th>
     </thead>
     <tbody>
         <?php
@@ -116,6 +118,9 @@
             </th> 
             <th>
                 <?php echo $mostrar ['tipo_operacion']; ?>
+            </th> 
+            <th>
+                <?php echo $mostrar ['fecha_insert_auditoria']; ?>
             </th> 
         </tr>
         <?php }?>

@@ -21,6 +21,7 @@ $respuesta = Adquisiciones::obtenerDatosAdquisicionesAuditoria();
             <th>Cantidad</th>
             <th>Usuario</th>
             <th>Tipo Operación</th>
+            <th>Fecha de auditoría</th>
        </thead>
        <tbody>
          <?php foreach ($respuesta as $mostrar) { ?>
@@ -41,6 +42,7 @@ $respuesta = Adquisiciones::obtenerDatosAdquisicionesAuditoria();
                 <td><?php echo $mostrar['cantidad']; ?></td>
                 <th><?php echo $mostrar ['usuario']; ?></th> 
                 <th><?php echo $mostrar ['tipo_operacion']; ?></th> 
+                <th><?php echo $mostrar ['fecha_insert_auditoria']; ?></th> 
            </tr>
          <?php } ?>
        </tbody>
