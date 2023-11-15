@@ -77,48 +77,47 @@ if(isset($_GET['id_recibido'])){
             <div class="row">
                 <div class="col-xs-8 titulopie">
                     <h4 class="">Presente</h4>
-                    <p>EL DEPARTAMENTO DE INFOMÁTICA DE LA CIRCUNSCRIPCIÓN JUDICIAL CENTRAL DE SAN LORENZO
-                    <p>le hace entrega de su equipo <?php echo $mostrar['nombreEquipo'] ?> reparado</p>
+                    <p>El DEPARTAMENTO DE INFOMÁTICA le hace entrega de su equipo <?php echo $mostrar['nombreEquipo'] ?> con las siguientes características</p>
                 </div>
             </div>
             
             <table class="table table-bordered">
                 <thead>
-                <tr class="text-center">
+                    <tr class="text-center">
                         <th><h4 class="titulo">Equipo</h4></th>
                         <th><h4 class="titulo">Nro. Serie</h4></th>
                         <th><h4 class="titulo">Patrimonial</h4></th>
                         <th><h4 class="titulo">Origen</h4></th>
                         <th><h4 class="titulo">Estado</h4></th>
-                </tr>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th>
-                        <?php echo $mostrar ['tipoEquipo']; ?>
-                    </th>
-                    <th>
-                        <?php echo $mostrar ['numeroSerie']; ?>
-                    </th>
-                    <th>
-                        <?php echo $mostrar ['rotulado']; ?>
-                    </th>
-                    <th>
-                        <?php echo $mostrar ['procedencia'].' '.$mostrar ['ciudad']; ?>
-                    </th>
-                    <th>
-                    <?php 
-                            $estado = $mostrar['estado'];
-                            $cadenaEstatus ='<span class="badge bg-warning">Abierto</span>';
-                            if ($estado == 0){
-                                $cadenaEstatus ='<span class="badge bg-success">Entregado</span>';
-                            }if ($estado == 2){
-                                $cadenaEstatus ='<span class="badge bg-danger">De Baja</span>';}
-                            echo $cadenaEstatus;
-                        ?>
-                    </th>
-                    
-                </tr>
+                    <tr>
+                        <th>
+                            <?php echo $mostrar ['tipoEquipo']; ?>
+                        </th>
+                        <th>
+                            <?php echo $mostrar ['numeroSerie']; ?>
+                        </th>
+                        <th>
+                            <?php echo $mostrar ['rotulado']; ?>
+                        </th>
+                        <th>
+                            <?php echo $mostrar ['procedencia'].' '.$mostrar ['ciudad']; ?>
+                        </th>
+                        <th>
+                        <?php 
+                                $estado = $mostrar['estado'];
+                                $cadenaEstatus ='<span class="badge bg-warning">Abierto</span>';
+                                if ($estado == 0){
+                                    $cadenaEstatus ='<span class="badge bg-success">Entregado</span>';
+                                }if ($estado == 2){
+                                    $cadenaEstatus ='<span class="badge bg-danger">De Baja</span>';}
+                                echo $cadenaEstatus;
+                            ?>
+                        </th>
+                        
+                    </tr>
                 </tbody>
             </table>
 

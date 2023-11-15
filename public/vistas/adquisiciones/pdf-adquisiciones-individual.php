@@ -46,31 +46,30 @@ if(isset($_GET['id_adquisicion'])){
         <div class="row">
             <div class="col-xs-8 titulopie">
                 <h4 class="">Presente</h4>
-                <p>EL DEPARTAMENTO DE INFOMÁTICA DE LA CIRCUNSCRIPCIÓN JUDICIAL CENTRAL DE SAN LORENZO
-                <p>le hace entrega de su equipo <?php echo $mostrar['nombreEquipoA'] ?> </p>
+                <p>El DEPARTAMENTO DE INFOMÁTICA le hace entrega de su equipo <?php echo $mostrar['nombreEquipoA'] ?> con las siguientes características</p>
             </div>
         </div>
         
         <table class="table table-bordered">
             <thead>
-            <tr class="text-center">
-                <th><h4>Tipo de equipo</h4></th>
-                <th><h4>Marca</h4></th>
-                <th><h4>Modelo</h4></th>
-                <th><h4>Memoria</h4></th>
-                <th><h4>Disco duro</h4></th>
-                <th><h4>Cantidad</h4></th>
-            </tr>
+                <tr class="text-center">
+                    <th><h4>Tipo de equipo</h4></th>
+                    <th><h4>Marca</h4></th>
+                    <th><h4>Modelo</h4></th>
+                    <th><h4>Memoria</h4></th>
+                    <th><h4>Disco duro</h4></th>
+                    <th><h4>Cantidad</h4></th>
+                </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><?php echo $mostrar['nombre_equipo']; ?></td>
-                <td><?php echo $mostrar['marca']; ?></td>
-                <td><?php echo $mostrar['modelo']; ?></td>
-                <td><?php echo $mostrar['tipo_ram']; ?></td>
-                <td><?php echo $mostrar['disco_duro']; ?></td>
-                <td><?php echo $mostrar['cantidad']; ?></td>
-            </tr>
+                <tr>
+                    <td><?php echo $mostrar['nombre_equipo']; ?></td>
+                    <td><?php echo $mostrar['marca']; ?></td>
+                    <td><?php echo $mostrar['modelo']; ?></td>
+                    <td><?php echo $mostrar['tipo_ram']; ?></td>
+                    <td><?php echo $mostrar['disco_duro']; ?></td>
+                    <td><?php echo $mostrar['cantidad']; ?></td>
+                </tr>
             </tbody>
         </table>
 
