@@ -160,5 +160,29 @@
                 }
             }
         });
+        checkDTButtons(); // Call the function to start the process
     });
+
+    function checkDTButtons() {
+        let myIntervalId; // Rename intervalId to myIntervalId
+
+        if ($('.dt-buttons').length) {
+            if(!$('#btn-imprimir').length){
+                $('.dt-buttons').append(`
+                    <button id="btn-imprimir" class="btn buttons-print btn-outline-dark" tabindex="0" aria-controls="tablaReporteAdminDataTable" type="button">
+                        <a target="_blank" href="./recibidos/pdf-recibidos-auditoria-completo.php<?php echo ($_POST ? "?".(http_build_query($_POST)) : '') ?>" style="color: inherit !important;text-decoration: none !important;">   
+                            <span>
+                                <i class="fas fa-print"></i> Imprimir
+                            </span>
+                        </a>
+                    </button>
+                `);
+            }
+            
+
+            clearInterval(myIntervalId);
+        } else {
+            setTimeout(checkDTButtons, 1000);
+        }
+    }
 </script>
