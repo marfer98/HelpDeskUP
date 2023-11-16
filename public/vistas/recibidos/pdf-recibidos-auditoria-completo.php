@@ -83,7 +83,7 @@ if($respuesta){
                 <th>Procedencia</th>
                 <th>Problema</th>
                 <th>Recibido por</th>
-                <th>Responsable/Telèfono</th>
+                <th>Responsable / Teléfono</th>
                 <th>Solución</th>
                 <th>Fecha de Entrega</th>
                 <th>Nombre Técnico</th>
