@@ -182,9 +182,9 @@ function cambioRolUsuario(idUsuario, rol){
             respuesta = respuesta.trim();
             if(respuesta == 1){
                 $("#tablaUsuariosLoad").load("usuarios/tablaUsuarios.php");
-                Swal.fire(":D","Cambio de estado con EXITO","success");
+                Swal.fire(":D","Cambio de rol con EXITO","success");
             }else{
-                Swal.fire(":(","ERROR AL CAMBIAR ESTADO" + respuesta, "error");
+                Swal.fire(":(","ERROR AL CAMBIAR ROL" + respuesta, "error");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -201,3 +201,5 @@ $('#frmActualizarUsuario #id_oficina').on('change', function(e,o) {
 
    obtenerDatosOficina(id_oficina,'#frmActualizarUsuario')
 });
+
+
