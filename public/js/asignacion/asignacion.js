@@ -75,9 +75,10 @@ function actualizarAsignacion(){
             // console.log(respuesta);
             respuesta = respuesta.trim();
             if(respuesta == 1){
-                $("#tablaAsignacionLoad").load("asignacion/tablaAsignacion.php");//recarga del formulario
+                $('#tablaAsignacionesLoad').load("asignacion/tablaAsignacion.php");//recarga del formulario
                 $('#modalActualizarAsignacion').modal('hide');
                 Swal.fire(":D","Actualizado con EXITO","success");
+                $('#modalActualizarAsignacion').modal('hide'); // Práctica xd
             }else{
                 Swal.fire(":(","ERROR AL ACTUALIZAR" + respuesta, "error"); //sweet aler 2
             }
