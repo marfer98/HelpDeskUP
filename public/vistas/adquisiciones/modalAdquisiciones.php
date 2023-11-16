@@ -117,12 +117,12 @@ require_once "../../clases/Articulos.php";
                                 <input type="text" name="memoria" id="memoria" class="form-control">
                             </div>
                             <div class="col-sm-4">
-                                <label for="tipoRam">Tipo de Ram</label>
-                                <input type="text" name="tipoRam" id="tipoRam" class="form-control">
+                                <label for="tipo_ram">Tipo de Ram</label>
+                                <input type="text" name="tipo_ram" id="tipo_ram" class="form-control">
                             </div>
                             <div class="col-sm-4">
-                                <label for="discoDuro">Disco Duro</label>
-                                <input type="text" name="discoDuro" id="discoDuro" class="form-control">
+                                <label for="disco_duro">Disco Duro</label>
+                                <input type="text" name="disco_duro" id="disco_duro" class="form-control">
                             </div>
                         </div>
                         <div class="row">
