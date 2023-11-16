@@ -46,8 +46,7 @@ if(isset($_GET['id_prestamo'])){
         <div class="row">
             <div class="col-xs-8 titulopie">
                 <h4 class="">Presente</h4>
-                <p>EL DEPARTAMENTO DE INFOMÁTICA DE LA CIRCUNSCRIPCIÓN JUDICIAL CENTRAL DE SAN LORENZO
-                <p>le hace entrega de su equipo <?php echo $mostrar['nombreEquipoA'] ?> </p>
+                <p>El DEPARTAMENTO DE INFOMÁTICA le hace entrega de su equipo <?php echo $mostrar['nombreEquipoA'] ?> en caracter de préstamo </p>
             </div>
         </div>
         
@@ -57,6 +56,7 @@ if(isset($_GET['id_prestamo'])){
                 <th><h4>Oficina origen</h4></th>
                 <th><h4>Oficina destino</h4></th>
                 <th><h4>Cantidad</h4></th>
+                <th><h4>Estado</h4></th>
             </tr>
             </thead>
             <tbody>
@@ -64,6 +64,11 @@ if(isset($_GET['id_prestamo'])){
                 <td><?php echo $mostrar['nombre_oficina_origen']; ?></td>
                 <td><?php echo $mostrar['nombre_oficina_destino']; ?></td>
                 <td><?php echo $mostrar['cantidad']; ?></td>
+                <td><?php 
+                    echo ($mostrar['estado'] == 1) ? 
+                        '<span class="badge bg-success">Confirmado</span>' :
+                        ( ($mostrar['estado'] == 0) ?'<span class="badge bg-danger">Rechazado</span>' :'<span class="badge bg-warning">Pendiente</span>' );?>
+                </td>
             </tr>
             </tbody>
         </table>
