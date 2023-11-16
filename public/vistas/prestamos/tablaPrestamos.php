@@ -2,6 +2,7 @@
     require_once "../../../clases/Prestamos.php";
     
     $respuesta = Prestamos::obtenerDatosPrestamos();
+    $respuesta = $respuesta ? : [];
     ?>
     <table class="table table-sm table-bordered dt-responsive nowrap" id="tablaPrestamosDataTable" style="width:100%">
        <thead>
