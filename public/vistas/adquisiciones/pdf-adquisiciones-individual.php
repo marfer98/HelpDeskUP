@@ -46,7 +46,7 @@ if(isset($_GET['id_adquisicion'])){
         <div class="row">
             <div class="col-xs-8 titulopie">
                 <h4 class="">Presente</h4>
-                <p>El DEPARTAMENTO DE INFOMÁTICA le hace entrega de su equipo <?php echo $mostrar['nombreEquipoA'] ?> con las siguientes características</p>
+                <p>El DEPARTAMENTO DE INFOMÁTICA expide el siguiente informe detallando las características de la asquisición</p>
             </div>
         </div>
         
