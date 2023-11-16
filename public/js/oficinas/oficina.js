@@ -55,15 +55,17 @@ function actualizarOficina(){
       data: $('#frmActualizarOficina').serialize(),
       url: "../../procesos/oficina/actualizarOficina.php",
       success:function(respuesta){
-          // console.log(respuesta);
-          respuesta = respuesta.trim();
-          if(respuesta == 1){
-              $("#tablaOficinaLoad").load("oficina/tablaOficina.php");//recarga del formulario
-              $('#modalActualizarOficina').modal('hide');
-              Swal.fire(":D","Actualizado con EXITO","success");
-          }else{
-              Swal.fire(":(","ERROR AL ACTUALIZAR: " + respuesta, "error"); //sweet aler 2
-          }
+            // console.log(respuesta);
+            respuesta = respuesta.trim();
+            if(respuesta == 1){
+                $("#tablaOficinaLoad").load("oficina/tablaOficina.php");//recarga del formulario
+                $('#modalActualizarOficina').modal('hide');
+                Swal.fire(":D","Actualizado con EXITO","success");
+                $('#modalActualizarOficina').modal('hide'); // Prácticas xd por falta de tiempo
+                $('#modalActualizarOficina').modal('hide');
+            }else{
+                Swal.fire(":(","ERROR AL ACTUALIZAR: " + respuesta, "error"); //sweet aler 2
+            }
       },
       error: function(jqXHR, textStatus, errorThrown) {
           console.error(jqXHR);
