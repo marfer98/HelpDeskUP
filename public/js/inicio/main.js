@@ -57,10 +57,25 @@ function validar(form) {
         return false;
       }
     }
+
+    // Si el campo es requerido y es un input file
+    if ($(field).attr("required") && $(field).attr("type") === "file") {
+      // Verificamos que tenga un archivo seleccionado
+      if (!$(field)[0].files.length) {
+        // Mostramos un mensaje de error
+        $(field).addClass("is-invalid");
+        error = true
+        return false;
+      }
+    }
+
   });
 
+
+  
   // Todos los campos son válidos
   console.log(error)
+  echo($(form).attr('afterValidate'))
   eval($(form).attr('afterValidate'))();
   return false;
 }

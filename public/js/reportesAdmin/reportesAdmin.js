@@ -63,31 +63,31 @@ function obtenerDatosSolucion(idReporte){
     });
 }
 function agregarSolucionReporte(){
-
-    //const imagen = convertirBlob('imagen_solucion');//document.querySelector('#imagen_solucion').files[0];
-
     $.ajax({
         type: "POST",
-        data: $('#frmAgregarSolucionReporte').serialize(),//+'&imagen_solucion_blob='+imagen,//new FormData(document.getElementById("frmAgregarSolucionReporte")),
-        url:"../../procesos/reportesAdmin/actualizarSolucion.php",
-        success:function(respuesta){
-            console.log(respuesta);
-            respuesta = respuesta.trim();//quita los espacios
-            if(respuesta == 1){
-                Swal.fire(":D","Agregado con EXITO","success");
-                $('#modalAgregarSolucion').modal('hide');
-                $("#tablaReporteAdminLoad").load("reportesAdmin/tablaReportesAdmin.php");
-            }else{
-                Swal.fire(":(","ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
-            }
-
+        data: new FormData(document.getElementById("frmAgregarSolucionReporte")),
+        url: "../../procesos/reportesAdmin/actualizarSolucion.php",
+        processData: false,
+        contentType: false,
+        success: function(respuesta) {
+          console.log(respuesta);
+          respuesta = respuesta.trim();//quita los espacios
+          if (respuesta == 1) {
+            Swal.fire(":D", "Agregado con EXITO", "success");
+            $('#modalAgregarSolucion').modal('hide');
+            $("#tablaReporteAdminLoad").load("reportesAdmin/tablaReportesAdmin.php");
+            $('#modalAgregarSolucion').modal('hide');// Mala práctica
+          } else {
+            Swal.fire(":(", "ERROR AL AGREGAR: " + respuesta, "error"); //sweet aler 2
+          }
         },
         error: function(jqXHR, textStatus, errorThrown) {
-            console.error(jqXHR);
-            console.error(textStatus);
-            console.error(errorThrown);
+          console.error(jqXHR);
+          console.error(textStatus);
+          console.error(errorThrown);
         }
-    });
+      });
+      
     return false;
 }
 
