@@ -46,6 +46,8 @@
         }
 
         public function actualizarSolucion($datos){ //ESTO ES UN METODO
+            $solucion = obtenerSolucion($datos['idReporte']);
+            
             $sql ="UPDATE
                         t_reportes
                     SET
@@ -63,7 +65,7 @@
                 ":estatus"          => $datos['estatus'],
                 ":usuarioTecnico"   => $datos['usuarioTecnico'],
                 ":idReporte"        => $datos['idReporte'],
-                ':imagen_solucion'  => $datos['imagen_solucion'],
+                ':imagen_solucion'  => $datos['imagen_solucion'] ? : $solucion['imagen_solucion'],
             ]);
             return $respuesta;
         }

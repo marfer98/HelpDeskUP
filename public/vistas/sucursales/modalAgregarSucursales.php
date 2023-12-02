@@ -1,3 +1,4 @@
+<!--- Aquí se encuentra el formulario actualizar tanto como el agregar de Sucursales--->
 <form id="frmAgregarSucursales" method="POST" onsubmit="return agregarSucursales()">
     <div class="modal fade" id="modalAgregarSucursales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

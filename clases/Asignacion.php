@@ -42,7 +42,8 @@
                         cantidad >= ".$datos['cantidad']."
                 ");
             }
-           
+            
+            // Resta de cantidad de Adquisición
             if($adquisicion || !$validarAdquisicion){
                 if($validarAdquisicion){
                     $adquisicion = $adquisicion[0];
@@ -97,6 +98,7 @@
                     id_asignacion = ".$datos['id_asignacion']." 
             ");
         
+            // Devuelve a adquisición en caso de seleccionar Oficina distinta y con menor cantidad de equipos
             Adquisiciones::devolverStockAquisiciones($datos);
 
             $datos['cantidad'] = $asignacion ? $asignacion[0]['cantidad'] + $datos['cantidad'] : $datos['cantidad'];

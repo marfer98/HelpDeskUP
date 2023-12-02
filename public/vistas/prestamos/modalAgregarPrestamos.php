@@ -73,7 +73,7 @@
                         </div>			
                         <div class="col-sm-12">
                             <label for="cantidad">Cantidad</label>
-                            <input type="text" name="cantidad" id="cantidad" class="form-control" required>
+                            <input type="number" name="cantidad" id="cantidad" class="form-control" required>
                         </div>		
                         <div class="col-sm-6 d-none">
                             <label for="estado">Estado</label>
