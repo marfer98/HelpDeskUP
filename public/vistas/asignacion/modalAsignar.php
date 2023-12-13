@@ -35,7 +35,7 @@ require_once "../../clases/Articulos.php";
                         <div class="col-sm-6">
                             <label>Articulo</label>
                             <?php //agarra el ID de Articulos 
-                                $respuesta = Articulos::obtenerDatosArticulosParaSelect('WHERE asg.cantidad > 0');
+                                $respuesta = Articulos::obtenerDatosArticulosParaSelect('WHERE ad.cantidad > 0');
                             ?>
                             <select name="id_articulo" id="id_articulo" class="form-control" required>
                                 <option value="">Seleccione una opción</option>

@@ -49,7 +49,7 @@ $respuesta = $usuario->obtenerDatosUsuarios();
             <?php
                 if( $mostrar ['idUsuario'] != $idUsuarioActual){
                 ?>
-                    <button class="btn btn-warning btn-sm" onclick="cambioRolUsuario(<?php echo $mostrar['idUsuario'] ?>,  <?php echo $mostrar ['rol']; ?>)">
+                    <button class="btn btn-warning btn-sm" onclick="cambioRolUsuario(<?php echo $mostrar['idUsuario'] ?>,  <?php echo $mostrar ['id_rol']; ?>)">
                         <i class=" fas fa-exchange-alt"></i>
                     </button>
                 <?php } ?>

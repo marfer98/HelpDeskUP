@@ -37,7 +37,7 @@ require_once "../../clases/Articulos.php";
                                 <label>Proveedor</label>
                                 <?php //agarra el ID de la oficina 
                                     $sql = "SELECT  id_proveedor, nombre
-                                    FROM t_proveedores ORDER BY nombre";
+                                    FROM t_proveedores where estado = 1 ORDER BY nombre";
                                     $respuesta = Conexion::select($sql)
                                 ?>
                                 <select name="id_proveedor" id="id_proveedor" class="form-control" required>
@@ -187,7 +187,7 @@ require_once "../../clases/Articulos.php";
                                 <label>Proveedor</label>
                                 <?php //agarra el ID de la oficina 
                                     $sql = "SELECT  id_proveedor, nombre
-                                    FROM t_proveedores ORDER BY nombre";
+                                    FROM t_proveedores where estado = 1 ORDER BY nombre";
                                     $respuesta = Conexion::select($sql)
                                 ?>
                                 <select name="id_proveedor" id="id_proveedor" class="form-control" required>

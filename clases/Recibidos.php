@@ -77,7 +77,8 @@
         }
 
         public function obtenerDatosRecepcion($id_recepcion){
-            $sql = "SELECT 
+            $sql = "SELECT
+                        id_recepcion, 
                         id_equipo,
                         nombre_equipo as nombre_equipo,
                         nombre_equipo as nombreEquipo,

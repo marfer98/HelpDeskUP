@@ -1,7 +1,7 @@
 <?php
     // Delete Proveedores
     $datos = [
-        'id_proveedor ' => $_POST['id_proveedor']
+        'id_proveedor' => $_POST['id_proveedor']
     ];
 
     include "../../clases/Proveedores.php";

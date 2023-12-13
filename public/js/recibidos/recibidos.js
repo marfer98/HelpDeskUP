@@ -65,7 +65,7 @@ function eliminarRecibido(id_recepcion){//la funcion trae un id de reporte
       })
     return false //para que no recargue la función 
 }
-function obtenerDatosRecebido(id_recepcion){
+function obtenerDatosRecebido(id_recepcion,elementoPadre='#frmActualizarRecibido'){
   //  alert(id_recepcion);
     $.ajax({
         type: "POST",
@@ -73,15 +73,15 @@ function obtenerDatosRecebido(id_recepcion){
         url:"../../procesos/recepcion/crud/obtenerDatosRecepcion.php",
         success:function(respuesta){
            console.log(respuesta);
-           respuesta = jQuery.parseJSON(respuesta);
+           respuesta = jQuery.parseJSON(respuesta)[0];
            console.log(respuesta['id_recepcion']);
            //referencia de la clase Recibidos.php del array de la funcion obtenerSolucion         
-           $('#id_recepcion').val(respuesta['id_recepcion']);
-           $('#solucion').val(respuesta['solucion']);
-           $('#fechaEntrega').val(respuesta['fechaEntrega']);
-           $('#estado').val(respuesta['estado']); 
-           $('#tecnico').val(respuesta['tecnico']); 
-           $('#informeTecnico').val(respuesta['informeTecnico']); 
+           $(elementoPadre+' #id_recepcion').val(respuesta['id_recepcion']);
+           $(elementoPadre+' #descripcionSolucion').val(respuesta['solucion']);
+           $(elementoPadre+' #fechaEntrega').val(respuesta['fechaEntrega']);
+           $(elementoPadre+' #estado').val(respuesta['estado']); 
+           $(elementoPadre+' #tecnico').val(respuesta['tecnico']); 
+           $(elementoPadre+' #informeTecnico').val(respuesta['informeTecnico']); 
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.error(jqXHR);

@@ -3,12 +3,13 @@
     class Proveedores{
         public static function obtenerDatosProveedores($where=null){
             $sql = '
-            SELECT 
+            select * from (SELECT 
                 id_proveedor,
                 nombre,
                 direccion,
                 telefono
             FROM t_proveedores
+            where estado = 1) as t_proveedores
             '.$where;
             return Conexion::select($sql); 
         }
@@ -50,12 +51,25 @@
         }
      
         public static function eliminarProveedores($id){
+            /*
             $sql = '
-            DELETE FROM t_proveedores
-            WHERE id_proveedor = :id_proveedor';
+                DELETE FROM t_proveedores
+                WHERE id_proveedor = :id_proveedor';
             $datos = [
                 ':id_proveedor' => $id['id_proveedor']
             ];
+            */
+            
+            $sql = '
+                UPDATE t_proveedores 
+                SET 
+                    estado = 0
+                WHERE id_proveedor = :id_proveedor';
+            $datos = [
+        
+                ':id_proveedor' => $id['id_proveedor']
+            ];
+
             return Conexion::execute($sql,$datos);
         }
     }
