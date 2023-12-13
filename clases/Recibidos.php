@@ -91,7 +91,14 @@
                         descripcion_problema as problema,
                         recibido,
                         responsable,
-                        estatus
+                        estatus,
+                        descripcion_solucion as descripcionProblema, 
+                        descripcion_solucion as solucion, 
+                        descripcion_solucion, 
+                        fecha_entrega as fechaEntrega, 
+                        nombre_tecnico, 
+                        nombre_tecnico as tecnico, 
+                        informe_tecnico as informeTecnico
                     FROM   t_recepcion
                     WHERE  id_recepcion = :id_recepcion";
             return Conexion::select($sql,[
