@@ -92,6 +92,7 @@
                         recibido,
                         responsable,
                         estatus,
+                        estatus as estado,
                         descripcion_solucion as descripcionProblema, 
                         descripcion_solucion as solucion, 
                         descripcion_solucion, 

@@ -17,13 +17,17 @@ class Prestamos extends Asignacion{
                 p.id_oficina_destino,
                 o2.nombre as nombre_oficina_destino,
                 p.cantidad,
-                p.estado
+                p.estado,
+                p.fecha_insert
             FROM t_prestamos p
             JOIN t_articulos a ON a.id_articulo = p.id_articulo
             JOIN t_oficina o1 ON p.id_oficina_origen = o1.id_oficina
             JOIN t_oficina o2 ON p.id_oficina_destino = o2.id_oficina
+            ORDER BY p.fecha_insert
         )v_prestamos
-        '.$where;
+        '.$where.'
+        ORDER BY estado , fecha_insert desc
+        ';
         return Conexion::select($sql); 
     }
  
@@ -55,7 +59,7 @@ class Prestamos extends Asignacion{
     public static function actualizarPrestamos($datos,$getId = false){
         $prestado = true;
 
-        if($datos['estado']){
+        if($datos['estado'] == 1){
             // Baja el stock actual
             $asignacion = self::obtenerDatosAsignacion("
                 WHERE 
@@ -63,39 +67,40 @@ class Prestamos extends Asignacion{
                     id_articulo = ".$datos['id_articulo']." AND
                     cantidad >= ".$datos['cantidad']." 
             ");
-
+//var_dump($asignacion);
             if($asignacion){
                 $asignacion = $asignacion[0];
                 Asignacion::actualizarAsignacionPrestamos([
                     'id_asignacion' => $asignacion['id_asignacion'],
                     'id_oficina' => $datos['id_oficina_origen'],
                     'id_articulo' => $datos['id_articulo'],
-                    'cantidad' => $asignacion['cantidad']- $datos['cantidad'],
+                    'cantidad' => $asignacion['cantidad'] - $datos['cantidad'],
                 ]);
 
                 $asignacionDestino = self::obtenerDatosAsignacion("
                     WHERE 
                         id_oficina = ".$datos['id_oficina_destino']." AND
-                        id_articulo = ".$datos['id_articulo']." AND
-                        cantidad >= ".$datos['cantidad']." 
+                        id_articulo = ".$datos['id_articulo']." 
                 ");
-
+//var_dump( $asignacionDestino);
                 if($asignacionDestino){
                     $asignacionDestino = $asignacionDestino[0];
-                    Asignacion::actualizarAsignacionPrestamos([
+                    $asignacionNueva = Asignacion::actualizarAsignacionPrestamos([
                         'id_asignacion' => $asignacionDestino['id_asignacion'],
                         'id_oficina' => $datos['id_oficina_destino'],
                         'id_articulo' => $datos['id_articulo'],
-                        'cantidad' => $asignacionDestino['cantidad'] + $datos['cantidad'],
+                        'cantidad' => $datos['cantidad'],
                     ]);
                 }else{
-                    Asignacion::agregarAsignacion([
+                    $asignacionNueva = Asignacion::agregarAsignacion([
                         'id_oficina' => $datos['id_oficina_destino'],
                         'id_articulo' => $datos['id_articulo'],
                         'cantidad' => $asignacion['cantidad'] + $datos['cantidad'],
                     ],false,false);
                     
                 }
+
+//var_dump($asignacionNueva);
 
             }else{
                 return false;
