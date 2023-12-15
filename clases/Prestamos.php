@@ -67,7 +67,9 @@ class Prestamos extends Asignacion{
                     id_articulo = ".$datos['id_articulo']." AND
                     cantidad >= ".$datos['cantidad']." 
             ");
-//var_dump($asignacion);
+            //var_dump($asignacion);
+            //var_dump($datos);
+
             if($asignacion){
                 $asignacion = $asignacion[0];
                 Asignacion::actualizarAsignacionPrestamos([
@@ -82,25 +84,26 @@ class Prestamos extends Asignacion{
                         id_oficina = ".$datos['id_oficina_destino']." AND
                         id_articulo = ".$datos['id_articulo']." 
                 ");
-//var_dump( $asignacionDestino);
+
+                //var_dump( $asignacionDestino);
                 if($asignacionDestino){
                     $asignacionDestino = $asignacionDestino[0];
                     $asignacionNueva = Asignacion::actualizarAsignacionPrestamos([
                         'id_asignacion' => $asignacionDestino['id_asignacion'],
                         'id_oficina' => $datos['id_oficina_destino'],
                         'id_articulo' => $datos['id_articulo'],
-                        'cantidad' => $datos['cantidad'],
+                        'cantidad' =>  $asignacionDestino['cantidad'] + $datos['cantidad'],
                     ]);
                 }else{
                     $asignacionNueva = Asignacion::agregarAsignacion([
                         'id_oficina' => $datos['id_oficina_destino'],
                         'id_articulo' => $datos['id_articulo'],
-                        'cantidad' => $asignacion['cantidad'] + $datos['cantidad'],
+                        'cantidad' => $datos['cantidad'],
                     ],false,false);
                     
                 }
 
-//var_dump($asignacionNueva);
+            //var_dump($asignacionNueva);
 
             }else{
                 return false;

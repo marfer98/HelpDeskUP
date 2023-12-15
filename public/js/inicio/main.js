@@ -121,7 +121,7 @@ window.onload = (event) => {
   
 };
 
-const toCamelCase = (snakeCaseString) => {
+var toCamelCase = (snakeCaseString) => {
   return snakeCaseString
      .split('_')
      .map((word) => word[0].toUpperCase() + word.substring(1))

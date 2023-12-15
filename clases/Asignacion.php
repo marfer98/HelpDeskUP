@@ -34,6 +34,7 @@
 
         public static function agregarAsignacion($datos,$getId = false,$validarAdquisicion=true){
             $adquisicion = false;
+            $asignacionDestino = false;
 
             if($validarAdquisicion){
                 $adquisicion = Adquisiciones::obtenerDatosAdquisiciones("
@@ -55,23 +56,62 @@
                     ],false,false);
                 }
 
-                $sql ="
-                    INSERT INTO t_asignacion (
-                        id_oficina, 
-                        id_articulo,
-                        cantidad)
-                    VALUES (
-                        :id_oficina, 
-                        :id_articulo,
-                        :cantidad
-                        )";
-        
+                if(!$validarAdquisicion){
+                    $asignacionDestino = self::obtenerDatosAsignacion("
+                        WHERE 
+                            id_oficina = ".$datos['id_oficina']." AND
+                            id_articulo = ".$datos['id_articulo']." 
+                    ");
+                }
+                
+                if($asignacionDestino){
+                    $sql = '
+                        UPDATE t_asignacion 
+                        SET 
+                            id_oficina = :id_oficina,
+                            id_articulo = :id_articulo,
+                            cantidad = :cantidad 
+                        WHERE id_asignacion = :id_asignacion';
+
+                    $datos = [
+                        ':id_oficina' => $datos['id_oficina'],
+                        ':id_articulo' => $datos['id_articulo'],
+                        ':id_asignacion' => $datos['id_asignacion'],
+                        ':cantidad' =>  $asignacionDestino['cantidad'] + $datos['cantidad'],
+                    ];
+
+                }else{
+                    $sql ="
+                        INSERT INTO t_asignacion (
+                            id_oficina, 
+                            id_articulo,
+                            cantidad)
+                        VALUES (
+                            :id_oficina, 
+                            :id_articulo,
+                            :cantidad
+                            )
+                    ";
+
+                    $datosInsertar = [
+                        ':id_oficina'    => $datos['id_oficina'], 
+                        ':id_articulo'  => $datos['id_articulo'],
+                        ':cantidad'     => $datos['cantidad'],
+                    ];
+
+                    $datos = $datosInsertar;
+
+                }
+               
+              
+                /*
                 //VIENE DEL PROCESO asignar.php
                 $respuesta = Conexion::execute($sql,[
                     ':id_oficina'    => $datos['id_oficina'], 
                     ':id_articulo'  => $datos['id_articulo'],
                     ':cantidad'     => $datos['cantidad'],
                 ]);
+                */
                 return !$getId ? Conexion::execute($sql,$datos) : Conexion::execute_id($sql,$datos); 
             }else{
                 return ' Equipo con cantidad insuficiente';
@@ -101,7 +141,29 @@
             // Devuelve a adquisición en caso de seleccionar Oficina distinta y con menor cantidad de equipos
             Adquisiciones::devolverStockAquisiciones($datos);
 
-            $datos['cantidad'] = $asignacion ? $asignacion[0]['cantidad'] + $datos['cantidad'] : $datos['cantidad'];
+            if($asignacion[0]['cantidad'] < $datos['cantidad'] ){
+                $adquisicion = Adquisiciones::obtenerDatosAdquisiciones("
+                    WHERE 
+                        id_articulo = ".$datos['id_articulo']." AND
+                        cantidad >= ".$datos['cantidad']."
+                ");
+            
+                // Resta de cantidad de Adquisición
+                if($adquisicion){
+                    $adquisicion = $adquisicion[0];
+                    Adquisiciones::actualizarAdquisiciones([
+                        'cantidad'          => $adquisicion['cantidad'] - $datos['cantidad'],
+                        'id_adquisicion'   => $adquisicion['id_adquisicion'], 
+                        'id_articulo'      => $adquisicion['id_articulo'],
+                        'id_proveedor'     => $adquisicion['id_proveedor'],
+                    ],false,false);
+                }else{
+                    return ' No hay suficientes equipos adquiridos para asignarlo';
+                }
+                
+            }
+
+            //$datos['cantidad'] = $asignacion ? $asignacion[0]['cantidad'] + $datos['cantidad'] : $datos['cantidad'];
 
             $sql = '
                 UPDATE t_asignacion 
@@ -128,7 +190,7 @@
         
             //Adquisiciones::devolverStockAquisiciones($datos);
 
-            $datos['cantidad'] = $asignacion ? $asignacion[0]['cantidad'] + $datos['cantidad'] : $datos['cantidad'];
+            //$datos['cantidad'] = $asignacion ? $asignacion[0]['cantidad'] + $datos['cantidad'] : $datos['cantidad'];
 
             $sql = '
                 UPDATE t_asignacion 
